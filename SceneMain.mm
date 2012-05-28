@@ -8,7 +8,28 @@
 
 #import "SceneMain.h"
 
+// シングルトン
+static SceneMain* scene_ = nil;
 
 @implementation SceneMain
 
+/**
+ * シングルトンを取得する
+ */
++ (SceneMain*)sharedInstance
+{
+    if (scene_ == nil) {
+        scene_ = [SceneMain node];
+    }
+    
+    return scene_;
+}
+
+/**
+ * インスタンスを解放する
+ */
++ (void)releaseInstance
+{
+    scene_ = nil;
+}
 @end

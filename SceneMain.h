@@ -10,8 +10,14 @@
 #import "cocos2d.h"
 #import "IScene.h"
 
+/**
+ * ゲームメインのシーン
+ */
 @interface SceneMain : IScene {
     
 }
+
++ (SceneMain*)sharedInstance;
++ (void)releaseInstance;
 
 @end
