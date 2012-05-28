@@ -10,8 +10,12 @@
 
 #import "AppDelegate.h"
 #import "GameConfig.h"
-#import "HelloWorldLayer.h"
 #import "RootViewController.h"
+#import "System.h"
+#import "SceneMain.h"
+#import "SceneManager.h"
+#import "Sound.h"
+#import "SaveData.h"
 
 @implementation AppDelegate
 
@@ -108,9 +112,19 @@
 	
 	// Removes the startup flicker
 	[self removeStartupFlicker];
+    
+    // システム初期化
+    System_Init();
+    
+    // セーブデータ初期化
+    SaveData_Init();
+    
+    // サウンド初期化
+    Sound_Init();
+    
+    // シーン切り替え
+    SceneManager_Change(@"SceneMain");
 	
-	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [HelloWorldLayer scene]];
 }
 
 

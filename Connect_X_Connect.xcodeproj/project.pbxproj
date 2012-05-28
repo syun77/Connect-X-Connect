@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C70E3F3B15731075009BF0CB /* AsciiFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F2715731075009BF0CB /* AsciiFont.mm */; };
+		C70E3F3C15731075009BF0CB /* InterfaceLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F2915731075009BF0CB /* InterfaceLayer.mm */; };
+		C70E3F3D15731075009BF0CB /* IScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F2B15731075009BF0CB /* IScene.mm */; };
+		C70E3F3E15731075009BF0CB /* Math.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F2D15731075009BF0CB /* Math.mm */; };
+		C70E3F3F15731075009BF0CB /* SaveData.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F2F15731075009BF0CB /* SaveData.mm */; };
+		C70E3F4015731075009BF0CB /* SceneManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F3115731075009BF0CB /* SceneManager.mm */; };
+		C70E3F4115731075009BF0CB /* Sound.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F3315731075009BF0CB /* Sound.mm */; };
+		C70E3F4215731075009BF0CB /* System.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F3515731075009BF0CB /* System.mm */; };
+		C70E3F4315731075009BF0CB /* Token.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F3715731075009BF0CB /* Token.mm */; };
+		C70E3F4415731075009BF0CB /* TokenManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F3915731075009BF0CB /* TokenManager.mm */; };
+		C70E3F471573118A009BF0CB /* SceneMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F461573118A009BF0CB /* SceneMain.mm */; };
+		C7DBA881157313160096C068 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7DBA880157313160096C068 /* AppDelegate.mm */; };
 		C7FB2EF3157289EB00FB3381 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB2EF2157289EB00FB3381 /* QuartzCore.framework */; };
 		C7FB2EF5157289EB00FB3381 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB2EF4157289EB00FB3381 /* OpenGLES.framework */; };
 		C7FB2EF7157289EB00FB3381 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB2EF6157289EB00FB3381 /* OpenAL.framework */; };
@@ -119,12 +131,34 @@
 		C7FB304A157289ED00FB3381 /* ZAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FB3049157289ED00FB3381 /* ZAttributedString.m */; };
 		C7FB304E157289ED00FB3381 /* ZFont.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FB304D157289ED00FB3381 /* ZFont.m */; };
 		C7FB3053157289ED00FB3381 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FB3052157289ED00FB3381 /* main.m */; };
-		C7FB3056157289ED00FB3381 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FB3055157289ED00FB3381 /* AppDelegate.m */; };
 		C7FB3059157289ED00FB3381 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FB3058157289ED00FB3381 /* RootViewController.m */; };
-		C7FB305C157289ED00FB3381 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FB305B157289ED00FB3381 /* HelloWorldLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C70E3F2615731075009BF0CB /* AsciiFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsciiFont.h; sourceTree = "<group>"; };
+		C70E3F2715731075009BF0CB /* AsciiFont.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AsciiFont.mm; sourceTree = "<group>"; };
+		C70E3F2815731075009BF0CB /* InterfaceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceLayer.h; sourceTree = "<group>"; };
+		C70E3F2915731075009BF0CB /* InterfaceLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InterfaceLayer.mm; sourceTree = "<group>"; };
+		C70E3F2A15731075009BF0CB /* IScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IScene.h; sourceTree = "<group>"; };
+		C70E3F2B15731075009BF0CB /* IScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IScene.mm; sourceTree = "<group>"; };
+		C70E3F2C15731075009BF0CB /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
+		C70E3F2D15731075009BF0CB /* Math.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Math.mm; sourceTree = "<group>"; };
+		C70E3F2E15731075009BF0CB /* SaveData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveData.h; sourceTree = "<group>"; };
+		C70E3F2F15731075009BF0CB /* SaveData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveData.mm; sourceTree = "<group>"; };
+		C70E3F3015731075009BF0CB /* SceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneManager.h; sourceTree = "<group>"; };
+		C70E3F3115731075009BF0CB /* SceneManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SceneManager.mm; sourceTree = "<group>"; };
+		C70E3F3215731075009BF0CB /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
+		C70E3F3315731075009BF0CB /* Sound.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Sound.mm; sourceTree = "<group>"; };
+		C70E3F3415731075009BF0CB /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
+		C70E3F3515731075009BF0CB /* System.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = System.mm; sourceTree = "<group>"; };
+		C70E3F3615731075009BF0CB /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
+		C70E3F3715731075009BF0CB /* Token.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Token.mm; sourceTree = "<group>"; };
+		C70E3F3815731075009BF0CB /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenManager.h; sourceTree = "<group>"; };
+		C70E3F3915731075009BF0CB /* TokenManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TokenManager.mm; sourceTree = "<group>"; };
+		C70E3F3A15731075009BF0CB /* Vec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec.h; sourceTree = "<group>"; };
+		C70E3F451573118A009BF0CB /* SceneMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneMain.h; path = ../SceneMain.h; sourceTree = "<group>"; };
+		C70E3F461573118A009BF0CB /* SceneMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SceneMain.mm; path = ../SceneMain.mm; sourceTree = "<group>"; };
+		C7DBA880157313160096C068 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		C7FB2EEE157289EB00FB3381 /* Connect_X_Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connect_X_Connect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7FB2EF2157289EB00FB3381 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C7FB2EF4157289EB00FB3381 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -354,11 +388,8 @@
 		C7FB3051157289ED00FB3381 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		C7FB3052157289ED00FB3381 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C7FB3054157289ED00FB3381 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		C7FB3055157289ED00FB3381 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C7FB3057157289ED00FB3381 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		C7FB3058157289ED00FB3381 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		C7FB305A157289ED00FB3381 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		C7FB305B157289ED00FB3381 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		C7FB305D157289ED00FB3381 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -381,6 +412,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C70E3F2515731075009BF0CB /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C70E3F2615731075009BF0CB /* AsciiFont.h */,
+				C70E3F2715731075009BF0CB /* AsciiFont.mm */,
+				C70E3F2815731075009BF0CB /* InterfaceLayer.h */,
+				C70E3F2915731075009BF0CB /* InterfaceLayer.mm */,
+				C70E3F2A15731075009BF0CB /* IScene.h */,
+				C70E3F2B15731075009BF0CB /* IScene.mm */,
+				C70E3F2C15731075009BF0CB /* Math.h */,
+				C70E3F2D15731075009BF0CB /* Math.mm */,
+				C70E3F2E15731075009BF0CB /* SaveData.h */,
+				C70E3F2F15731075009BF0CB /* SaveData.mm */,
+				C70E3F3015731075009BF0CB /* SceneManager.h */,
+				C70E3F3115731075009BF0CB /* SceneManager.mm */,
+				C70E3F3215731075009BF0CB /* Sound.h */,
+				C70E3F3315731075009BF0CB /* Sound.mm */,
+				C70E3F3415731075009BF0CB /* System.h */,
+				C70E3F3515731075009BF0CB /* System.mm */,
+				C70E3F3615731075009BF0CB /* Token.h */,
+				C70E3F3715731075009BF0CB /* Token.mm */,
+				C70E3F3815731075009BF0CB /* TokenManager.h */,
+				C70E3F3915731075009BF0CB /* TokenManager.mm */,
+				C70E3F3A15731075009BF0CB /* Vec.h */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		C7FB2EE3157289EB00FB3381 = {
 			isa = PBXGroup;
 			children = (
@@ -417,12 +476,13 @@
 			isa = PBXGroup;
 			children = (
 				C7FB3054157289ED00FB3381 /* AppDelegate.h */,
-				C7FB3055157289ED00FB3381 /* AppDelegate.m */,
+				C7DBA880157313160096C068 /* AppDelegate.mm */,
 				C7FB3057157289ED00FB3381 /* RootViewController.h */,
 				C7FB3058157289ED00FB3381 /* RootViewController.m */,
-				C7FB305A157289ED00FB3381 /* HelloWorldLayer.h */,
-				C7FB305B157289ED00FB3381 /* HelloWorldLayer.m */,
 				C7FB305D157289ED00FB3381 /* GameConfig.h */,
+				C70E3F2515731075009BF0CB /* Common */,
+				C70E3F451573118A009BF0CB /* SceneMain.h */,
+				C70E3F461573118A009BF0CB /* SceneMain.mm */,
 				C7FB2F03157289EB00FB3381 /* Resources */,
 				C7FB2F17157289EB00FB3381 /* libs */,
 				C7FB3050157289ED00FB3381 /* Supporting Files */,
@@ -922,9 +982,19 @@
 				C7FB304A157289ED00FB3381 /* ZAttributedString.m in Sources */,
 				C7FB304E157289ED00FB3381 /* ZFont.m in Sources */,
 				C7FB3053157289ED00FB3381 /* main.m in Sources */,
-				C7FB3056157289ED00FB3381 /* AppDelegate.m in Sources */,
 				C7FB3059157289ED00FB3381 /* RootViewController.m in Sources */,
-				C7FB305C157289ED00FB3381 /* HelloWorldLayer.m in Sources */,
+				C70E3F3B15731075009BF0CB /* AsciiFont.mm in Sources */,
+				C70E3F3C15731075009BF0CB /* InterfaceLayer.mm in Sources */,
+				C70E3F3D15731075009BF0CB /* IScene.mm in Sources */,
+				C70E3F3E15731075009BF0CB /* Math.mm in Sources */,
+				C70E3F3F15731075009BF0CB /* SaveData.mm in Sources */,
+				C70E3F4015731075009BF0CB /* SceneManager.mm in Sources */,
+				C70E3F4115731075009BF0CB /* Sound.mm in Sources */,
+				C70E3F4215731075009BF0CB /* System.mm in Sources */,
+				C70E3F4315731075009BF0CB /* Token.mm in Sources */,
+				C70E3F4415731075009BF0CB /* TokenManager.mm in Sources */,
+				C70E3F471573118A009BF0CB /* SceneMain.mm in Sources */,
+				C7DBA881157313160096C068 /* AppDelegate.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
