@@ -15,6 +15,9 @@ static SceneMain* scene_ = nil;
 
 @synthesize baseLayer;
 @synthesize fontTest;
+@synthesize fontTest2;
+@synthesize fontTest3;
+@synthesize layer;
 
 /**
  * シングルトンを取得する
@@ -49,9 +52,23 @@ static SceneMain* scene_ = nil;
     
     self.fontTest = [AsciiFont node];
     [self.fontTest createFont:self.baseLayer length:24];
-    [self.fontTest setText:@"0123456789"];
     [self.fontTest setScale:3];
-    [self.fontTest setPos:5 y:10];
+    [self.fontTest setPos:5 y:16];
+    
+    self.fontTest2 = [AsciiFont node];
+    [self.fontTest2 createFont:self.baseLayer length:24];
+    [self.fontTest2 setScale:3];
+    [self.fontTest2 setPos:5 y:13];
+    
+    self.fontTest3 = [AsciiFont node];
+    [self.fontTest3 createFont:self.baseLayer length:24];
+    [self.fontTest3 setScale:3];
+    [self.fontTest3 setPos:5 y:10];
+    
+    [[self.layer = [Layer2D alloc] init] autorelease];
+    [self.layer create:7 h:7];
+    
+    [self.layer dump];
     
     [self scheduleUpdate];
     
@@ -64,6 +81,8 @@ static SceneMain* scene_ = nil;
  */
 - (void)dealloc {
     
+    self.layer = nil;
+    
     self.fontTest = nil;
     self.baseLayer = nil;
     
@@ -75,6 +94,8 @@ static SceneMain* scene_ = nil;
     static int s_cnt = 0;
     s_cnt++;
     [self.fontTest setText:[NSString stringWithFormat:@"%d", s_cnt]];
+    [self.fontTest2 setText:[NSString stringWithFormat:@"%06d", s_cnt]];
+    [self.fontTest3 setText:[NSString stringWithFormat:@"%09d", s_cnt]];
     
 }
 
