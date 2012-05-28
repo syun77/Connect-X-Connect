@@ -9,13 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "IScene.h"
+#import "AsciiFont.h"
 
 /**
  * ゲームメインのシーン
  */
 @interface SceneMain : IScene {
-    
+    CCLayer*        baseLayer;
+    AsciiFont*      fontTest;
 }
+
+@property (nonatomic, retain)CCLayer*   baseLayer;
+@property (nonatomic, retain)AsciiFont* fontTest;
 
 + (SceneMain*)sharedInstance;
 + (void)releaseInstance;

@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+/**
+ * ２次元配列管理クラス
+ */
 class Layer2D {
     
 };

@@ -20,6 +20,7 @@
 		C70E3F471573118A009BF0CB /* SceneMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F461573118A009BF0CB /* SceneMain.mm */; };
 		C7DBA881157313160096C068 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7DBA880157313160096C068 /* AppDelegate.mm */; };
 		C7DBA884157344740096C068 /* Layer2D.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7DBA883157344740096C068 /* Layer2D.mm */; };
+		C7F100791573CB86002D7E00 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = C7F100781573CB86002D7E00 /* font.png */; };
 		C7FB2EF3157289EB00FB3381 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB2EF2157289EB00FB3381 /* QuartzCore.framework */; };
 		C7FB2EF5157289EB00FB3381 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB2EF4157289EB00FB3381 /* OpenGLES.framework */; };
 		C7FB2EF7157289EB00FB3381 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB2EF6157289EB00FB3381 /* OpenAL.framework */; };
@@ -162,6 +163,7 @@
 		C7DBA880157313160096C068 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		C7DBA882157344740096C068 /* Layer2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layer2D.h; sourceTree = "<group>"; };
 		C7DBA883157344740096C068 /* Layer2D.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Layer2D.mm; sourceTree = "<group>"; };
+		C7F100781573CB86002D7E00 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font.png; path = Resources/font.png; sourceTree = "<group>"; };
 		C7FB2EEE157289EB00FB3381 /* Connect_X_Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connect_X_Connect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7FB2EF2157289EB00FB3381 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C7FB2EF4157289EB00FB3381 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -498,6 +500,7 @@
 		C7FB2F03157289EB00FB3381 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C7F100781573CB86002D7E00 /* font.png */,
 				C7FB2F04157289EB00FB3381 /* Default.png */,
 				C7FB2F06157289EB00FB3381 /* fps_images.png */,
 				C7FB2F08157289EB00FB3381 /* Icon-72.png */,
@@ -882,6 +885,7 @@
 				C7FB2F11157289EB00FB3381 /* Icon.png in Resources */,
 				C7FB2F13157289EB00FB3381 /* Icon@2x.png in Resources */,
 				C7FB2F16157289EB00FB3381 /* iTunesArtwork in Resources */,
+				C7F100791573CB86002D7E00 /* font.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
