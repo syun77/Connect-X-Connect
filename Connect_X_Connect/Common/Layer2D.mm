@@ -7,6 +7,7 @@
 //
 
 #import "Layer2D.h"
+#import "Math.h"
 
 @implementation Layer2D
 
@@ -97,6 +98,12 @@
 - (int)getHeight {
     
     return m_Height;
+}
+
+// インデックスの最大値を取得
+- (int)getIdxMax {
+    
+    return m_Width * m_Height;;
 }
 
 // インデックスに変換する
@@ -205,6 +212,17 @@
 - (int)getOut {
     return m_Out;
     
+}
+
+// ランダムで値を埋める
+- (void)random:(int)range {
+    
+    for (int i = 0; i < [self getIdxMax]; i++) {
+        
+        // ランダムで値を設定
+        int v = Math_Rand(range);
+        [self setFromIdx:i val:v];
+    }
 }
 
 // デバッグ出力

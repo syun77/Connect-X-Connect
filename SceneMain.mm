@@ -64,16 +64,19 @@ static SceneMain* scene_ = nil;
     [self.fontTest createFont:self.baseLayer length:24];
     [self.fontTest setScale:3];
     [self.fontTest setPos:5 y:16];
+    [self.fontTest setVisible:NO];
     
     self.fontTest2 = [AsciiFont node];
     [self.fontTest2 createFont:self.baseLayer length:24];
     [self.fontTest2 setScale:3];
     [self.fontTest2 setPos:5 y:13];
+    [self.fontTest2 setVisible:NO];
     
     self.fontTest3 = [AsciiFont node];
     [self.fontTest3 createFont:self.baseLayer length:24];
     [self.fontTest3 setScale:3];
     [self.fontTest3 setPos:5 y:10];
+    [self.fontTest3 setVisible:NO];
     
     self.mgrBlock = [TokenManager node];
     [self.mgrBlock create:self.baseLayer size:64 className:@"Block"];
@@ -81,7 +84,8 @@ static SceneMain* scene_ = nil;
     
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
-    [self.layer test];
+    [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
+    [self.layer random:5];
     [self.layer dump];
     
     
@@ -125,20 +129,17 @@ static SceneMain* scene_ = nil;
     if (s_cnt == 1) {
         
         // ブロック生成テスト
-        for (int j = 0; j < FIELD_BLOCK_COUNT_Y; j++) {
-            for (int i = 0; i < FIELD_BLOCK_COUNT_X; i++) {
-                int v = [self.layer get:i y:j];
-                if (v > 0) {
-                    int idx = i + j * FIELD_BLOCK_COUNT_Y;
-                    [Block addFromIdx:v idx:idx];
-                }
+        for (int i = 0; i < FIELD_BLOCK_COUNT_MAX; i++) {
+            int v = [self.layer getFromIdx:i];
+            if (v > 0) {
+                [Block addFromIdx:v idx:i];
             }
         }
     }
     
-    [self.fontTest setText:[NSString stringWithFormat:@"%d", s_cnt]];
-    [self.fontTest2 setText:[NSString stringWithFormat:@"%06d", s_cnt]];
-    [self.fontTest3 setText:[NSString stringWithFormat:@"%09d", s_cnt]];
+    //[self.fontTest setText:[NSString stringWithFormat:@"%d", s_cnt]];
+    //[self.fontTest2 setText:[NSString stringWithFormat:@"%06d", s_cnt]];
+    //[self.fontTest3 setText:[NSString stringWithFormat:@"%09d", s_cnt]];
     
     [self.layer copyWithLayer2D:self.layer2];
     

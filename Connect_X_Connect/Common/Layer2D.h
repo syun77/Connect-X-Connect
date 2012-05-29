@@ -35,6 +35,9 @@
 // 高さを取得
 - (int)getHeight;
 
+// インデックスの最大値を取得
+- (int)getIdxMax;
+
 // インデックスに変換する
 - (int)getIdx:(int)x y:(int)y;
 
@@ -58,6 +61,9 @@
 
 // 領域外の値を取得する
 - (int)getOut;
+
+// ランダムで値を埋める
+- (void)random:(int)range;
 
 // デバッグ出力
 - (void)dump;
