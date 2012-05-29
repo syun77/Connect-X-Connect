@@ -18,6 +18,7 @@ static SceneMain* scene_ = nil;
 @synthesize fontTest2;
 @synthesize fontTest3;
 @synthesize layer;
+@synthesize layer2;
 
 /**
  * シングルトンを取得する
@@ -47,6 +48,7 @@ static SceneMain* scene_ = nil;
         return self;
     }
     
+    // 描画関連
     self.baseLayer = [CCLayer node];
     [self addChild:self.baseLayer];
     
@@ -65,10 +67,15 @@ static SceneMain* scene_ = nil;
     [self.fontTest3 setScale:3];
     [self.fontTest3 setPos:5 y:10];
     
+    // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
-    [self.layer create:7 h:7];
-    
+    [self.layer test];
     [self.layer dump];
+    
+    
+    [[self.layer2 = [Layer2D alloc] init] autorelease];
+    [self.layer2 test];
+    [self.layer2 set:6 y:6 val:9];
     
     [self scheduleUpdate];
     
@@ -81,6 +88,7 @@ static SceneMain* scene_ = nil;
  */
 - (void)dealloc {
     
+    self.layer2 = nil;
     self.layer = nil;
     
     self.fontTest = nil;
@@ -96,6 +104,9 @@ static SceneMain* scene_ = nil;
     [self.fontTest setText:[NSString stringWithFormat:@"%d", s_cnt]];
     [self.fontTest2 setText:[NSString stringWithFormat:@"%06d", s_cnt]];
     [self.fontTest3 setText:[NSString stringWithFormat:@"%09d", s_cnt]];
+    
+    [self.layer copyWithLayer2D:self.layer2];
+    
     
 }
 

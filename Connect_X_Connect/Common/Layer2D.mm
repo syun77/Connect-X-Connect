@@ -10,9 +10,6 @@
 
 @implementation Layer2D
 
-@synthesize width = m_Width;
-@synthesize height = m_Height;
-
 /**
  * コンストラクタ
  */
@@ -26,7 +23,7 @@
     m_Default = 0; // 初期値
     m_Width = 0;
     m_Height = 0;
-    m_Data = nil;
+    m_pData = NULL;
     
     return self;
 }
@@ -35,7 +32,11 @@
  * デストラクタ
  */
 - (void)dealloc {
-    m_Data = nil;
+    
+    if (m_pData) {
+        free(m_pData);
+        m_pData = NULL;
+    }
     
     [super dealloc];
     
@@ -52,14 +53,15 @@
         
         // 同じサイズであれば作りなおさない
         // 要素は削除しておく
-        [m_Data removeAllObjects];
+        memset(m_pData, 0, sizeof(int) * m_Width * m_Height);
         return;
     }
     
     m_Width = w;
     m_Height = h;
-    
-    m_Data = [NSMutableDictionary dictionaryWithCapacity:m_Width * m_Height];
+
+    m_pData = (int*)malloc(sizeof(int) * m_Width * m_Height);
+    memset(m_pData, 0, sizeof(int) * m_Width * m_Height);
 }
 
 /**
@@ -69,15 +71,36 @@
 - (void)copyWithLayer2D:(Layer2D*)layer {
     
     // 作り直し
-    [self create:layer.width h:layer.height];
+    [self create:[layer getWidth] h:[layer getHeight]];
     
     // パラメータ受け渡し
     m_Default = [layer getDefault];
     m_Out     = [layer getOut];
     
-    NSDictionary* dictionary = [layer getData];
-    [m_Data addEntriesFromDictionary:dictionary];
+    for (int j = 0; j < m_Height; j++) {
+        
+        for (int i = 0; i < m_Width; i++) {
+            
+            int val = [layer get:i y:j];
+            if (val != m_Default) {
+                
+                // 初期値でなければ設定
+                [self set:i y:j val:val];
+            }
+        }
+    }
+}
+
+// 幅を取得
+- (int)getWidth {
     
+    return m_Width;
+}
+
+// 高さを取得
+- (int)getHeight {
+    
+    return m_Height;
 }
 
 /**
@@ -87,9 +110,9 @@
  * @return 設定されていれば「YES」
  */
 - (BOOL)has:(int)x y:(int)y {
-    if (m_Data) {
+    if (m_pData) {
         int key = [self getIdx:x y:y];
-        return [m_Data objectForKey:[NSNumber numberWithInt:key]] != nil;
+        return m_pData[key];
     }
     
     return NO;
@@ -104,9 +127,14 @@
 // 領域内かどうか
 - (BOOL)isRange:(int)x y:(int)y {
     
-    int idx = [self getIdx:x y:y];
+    if (x < 0 || x >= m_Width || y < 0 || y >= m_Height) {
+        
+        // 領域外
+        return NO;
+    }
     
-    return [self isRangeFromIdx:idx];
+    // 領域内
+    return YES;
 }
 
 // 領域内かどうか (インデックス指定)
@@ -141,7 +169,7 @@
     if ([self isRange:x y:y] == NO) {
         
         // 領域外
-        NSLog(@"Warning: Layer2D::se() Out of range. x=%d y=%d val=%d", x, y, val);
+        NSLog(@"Warning: Layer2D::set() Out of range. (x,y)=(%d,%d) val=%d", x, y, val);
         return;
     }
     
@@ -160,10 +188,7 @@
         return;
     }
     
-    NSNumber* key    = [NSNumber numberWithInt:idx];
-    NSNumber* number = [NSNumber numberWithInt:val];
-    
-    [m_Data setObject:number forKey:key];
+    m_pData[idx] = val;
 }
 
 /**
@@ -187,9 +212,7 @@
     }
     
     int idx = [self getIdx:x y:y];
-    NSNumber* number = [m_Data objectForKey:[NSNumber numberWithInt:idx]];
-    
-    return [number intValue];
+    return m_pData[idx];
 }
 
 
@@ -202,11 +225,6 @@
 - (int)getOut {
     return m_Out;
     
-}
-
-// ディクショナリを取得する (コピー用)
-- (NSDictionary*)getData {
-    return m_Data;
 }
 
 // デバッグ出力
@@ -222,6 +240,15 @@
         }
         fprintf(stdout, "\n");
     }
+}
+
+// テストデータ作成
+- (void)test {
+    [self create:7 h:7];
+    [self set:4 y:4 val:3];
+    [self set:0 y:0 val:1];
+    [self set:8 y:10 val:5]; // 領域外テスト
+    [self set:-1 y:5 val:3]; // 領域外テスト
 }
 
 

@@ -22,6 +22,7 @@
     AsciiFont*      fontTest3;
     
     Layer2D*        layer;
+    Layer2D*        layer2;
 }
 
 @property (nonatomic, retain)CCLayer*   baseLayer;
@@ -29,6 +30,7 @@
 @property (nonatomic, retain)AsciiFont* fontTest2;
 @property (nonatomic, retain)AsciiFont* fontTest3;
 @property (nonatomic, retain)Layer2D*   layer;
+@property (nonatomic, retain)Layer2D*   layer2;
 
 + (SceneMain*)sharedInstance;
 + (void)releaseInstance;

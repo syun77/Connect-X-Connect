@@ -9,20 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+
 /**
  * ２次元配列管理クラス
  */
 @interface Layer2D : NSObject {
-@private
     int                     m_Out;      // 領域外の値
     int                     m_Default;  // 初期値
     int                     m_Width;    // 幅
     int                     m_Height;   // 高さ
-    NSMutableDictionary*    m_Data;     // データ
+    int*                    m_pData;    // データ
 }
-
-@property (readonly)int width;
-@property (readonly)int height;
 
 // 生成
 - (void)create:(int)w h:(int)h;
@@ -32,6 +29,12 @@
 
 // コピー
 - (void)copyWithLayer2D:(Layer2D*)layer;
+
+// 幅を取得
+- (int)getWidth;
+
+// 高さを取得
+- (int)getHeight;
 
 // 値が設定されているかどうか
 - (BOOL)has:(int)x y:(int)y;
@@ -60,10 +63,10 @@
 // 領域外の値を取得する
 - (int)getOut;
 
-// ディクショナリを取得する (コピー用)
-- (NSDictionary*)getData;
-
 // デバッグ出力
 - (void)dump;
+
+// テストデータ作成
+- (void)test;
 
 @end
