@@ -15,7 +15,6 @@
  */
 @interface Layer2D : NSObject {
     int                     m_Out;      // 領域外の値
-    int                     m_Default;  // 初期値
     int                     m_Width;    // 幅
     int                     m_Height;   // 高さ
     int*                    m_pData;    // データ
@@ -36,9 +35,6 @@
 // 高さを取得
 - (int)getHeight;
 
-// 値が設定されているかどうか
-- (BOOL)has:(int)x y:(int)y;
-
 // インデックスに変換する
 - (int)getIdx:(int)x y:(int)y;
 
@@ -57,8 +53,8 @@
 // 値の取得
 - (int)get:(int)x y:(int)y;
 
-// 初期値を取得する
-- (int)getDefault;
+// 値の取得 (インデックス指定)
+- (int)getFromIdx:(int)idx;
 
 // 領域外の値を取得する
 - (int)getOut;

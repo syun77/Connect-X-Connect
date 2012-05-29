@@ -20,7 +20,6 @@
     }
     
     m_Out   = -1; // 領域外
-    m_Default = 0; // 初期値
     m_Width = 0;
     m_Height = 0;
     m_pData = NULL;
@@ -74,19 +73,16 @@
     [self create:[layer getWidth] h:[layer getHeight]];
     
     // パラメータ受け渡し
-    m_Default = [layer getDefault];
-    m_Out     = [layer getOut];
+    m_Out = [layer getOut];
     
     for (int j = 0; j < m_Height; j++) {
         
         for (int i = 0; i < m_Width; i++) {
             
             int val = [layer get:i y:j];
-            if (val != m_Default) {
-                
-                // 初期値でなければ設定
-                [self set:i y:j val:val];
-            }
+            
+            // 設定
+            [self set:i y:j val:val];
         }
     }
 }
@@ -101,21 +97,6 @@
 - (int)getHeight {
     
     return m_Height;
-}
-
-/**
- * 値が設定されているかどうか
- * @param x X座標
- * @param y Y座標
- * @return 設定されていれば「YES」
- */
-- (BOOL)has:(int)x y:(int)y {
-    if (m_pData) {
-        int key = [self getIdx:x y:y];
-        return m_pData[key];
-    }
-    
-    return NO;
 }
 
 // インデックスに変換する
@@ -205,20 +186,19 @@
         return m_Out;
     }
     
-    if ([self has:x y:y] == NO) {
-        
-        // 未設定
-        return m_Default;
-    }
-    
     int idx = [self getIdx:x y:y];
     return m_pData[idx];
 }
 
-
-// 初期値を取得する
-- (int)getDefault {
-    return m_Default;
+// 値の取得 (インデックス指定)
+- (int)getFromIdx:(int)idx {
+    if ([self isRangeFromIdx:idx] == NO) {
+        
+        // 領域外
+        return m_Out;
+    }
+    
+    return m_pData[idx];
 }
 
 // 領域外の値を取得する
@@ -230,7 +210,7 @@
 // デバッグ出力
 - (void)dump {
     NSLog(@"[Layer2D]");
-    NSLog(@"  (w,h)=(%d,%d) Default=%d Out=%d", m_Width, m_Height, m_Default, m_Out);
+    NSLog(@"  (w,h)=(%d,%d) Out=%d", m_Width, m_Height, m_Out);
     
     for (int j = 0; j < m_Height; j++) {
         
