@@ -11,15 +11,15 @@
 
 // ★ゲーム共通定数ヘッダ
 // ■フィールド関連
-static const int FIELD_OFS_X = 16;
+static const int FIELD_OFS_X = 20 + 20;
 static const int FIELD_OFS_Y = 64;
 
-// 7x7フィールド
+// 7x11フィールド
 static const int FIELD_BLOCK_COUNT_X = 7;
-static const int FIELD_BLOCK_COUNT_Y = 7;
+static const int FIELD_BLOCK_COUNT_Y = 11;
 static const int FIELD_BLOCK_COUNT_MAX = (FIELD_BLOCK_COUNT_X * FIELD_BLOCK_COUNT_Y);
 
 // ■ブロック関連
-static const int BLOCK_SiZE = 32;
+static const int BLOCK_SiZE = 40;
 
 #endif

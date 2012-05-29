@@ -36,6 +36,7 @@ enum eState {
     
     [self load:@"font.png"];
     
+    self._r = BLOCK_SiZE / 2;
     
     [self.m_pSprite setVisible:NO];
     
@@ -90,7 +91,8 @@ enum eState {
     [super visit];
     
     glColor4f(1, 1, 1, 1);
-    [self drawRect:self._x cy:self._y w:32 h:32 rot:0 scale:1];
+    float s = BLOCK_SiZE / 2;
+    [self drawRect:self._x cy:self._y w:s h:s rot:0 scale:1];
 }
 
 // 番号を設定する
@@ -119,7 +121,7 @@ enum eState {
 + (Block*)addFromIdx:(int)number idx:(int)idx {
     
     float x = FIELD_OFS_X + (idx % FIELD_BLOCK_COUNT_X) * BLOCK_SiZE;
-    float y = FIELD_OFS_Y + (idx / FIELD_BLOCK_COUNT_Y) * BLOCK_SiZE;
+    float y = FIELD_OFS_Y + (idx / FIELD_BLOCK_COUNT_X) * BLOCK_SiZE;
     
     return [Block add:number x:x y:y];
 }
