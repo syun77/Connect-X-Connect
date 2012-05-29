@@ -8,6 +8,13 @@
 
 #import "SceneMain.h"
 
+/**
+ * 描画プライオリティ
+ */
+enum ePrio {
+    ePrio_Block, // ブロック
+};
+
 // シングルトン
 static SceneMain* scene_ = nil;
 
@@ -17,6 +24,7 @@ static SceneMain* scene_ = nil;
 @synthesize fontTest;
 @synthesize fontTest2;
 @synthesize fontTest3;
+@synthesize mgrBlock;
 @synthesize layer;
 @synthesize layer2;
 
@@ -67,6 +75,10 @@ static SceneMain* scene_ = nil;
     [self.fontTest3 setScale:3];
     [self.fontTest3 setPos:5 y:10];
     
+    self.mgrBlock = [TokenManager node];
+    [self.mgrBlock create:self.baseLayer size:64 className:@"Block"];
+    [self.mgrBlock setPrio:ePrio_Block];
+    
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
     [self.layer test];
@@ -80,6 +92,8 @@ static SceneMain* scene_ = nil;
     [self scheduleUpdate];
     
     
+    
+    
     return self;
 }
 
@@ -88,9 +102,15 @@ static SceneMain* scene_ = nil;
  */
 - (void)dealloc {
     
+    // レイヤー
     self.layer2 = nil;
     self.layer = nil;
     
+    // ■描画オブジェクト
+    // トークン
+    self.mgrBlock = nil;
+    
+    // フォント
     self.fontTest = nil;
     self.baseLayer = nil;
     
@@ -101,6 +121,13 @@ static SceneMain* scene_ = nil;
     
     static int s_cnt = 0;
     s_cnt++;
+    
+    if (s_cnt == 1) {
+        
+        // ブロック生成テスト
+        [Block add:5 x:80 y:100];
+    }
+    
     [self.fontTest setText:[NSString stringWithFormat:@"%d", s_cnt]];
     [self.fontTest2 setText:[NSString stringWithFormat:@"%06d", s_cnt]];
     [self.fontTest3 setText:[NSString stringWithFormat:@"%09d", s_cnt]];

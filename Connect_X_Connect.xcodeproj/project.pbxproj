@@ -21,6 +21,7 @@
 		C7DBA881157313160096C068 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7DBA880157313160096C068 /* AppDelegate.mm */; };
 		C7DBA884157344740096C068 /* Layer2D.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7DBA883157344740096C068 /* Layer2D.mm */; };
 		C7F100791573CB86002D7E00 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = C7F100781573CB86002D7E00 /* font.png */; };
+		C7F1007D15746421002D7E00 /* Block.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F1007C15746421002D7E00 /* Block.mm */; };
 		C7FB2EF3157289EB00FB3381 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB2EF2157289EB00FB3381 /* QuartzCore.framework */; };
 		C7FB2EF5157289EB00FB3381 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB2EF4157289EB00FB3381 /* OpenGLES.framework */; };
 		C7FB2EF7157289EB00FB3381 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB2EF6157289EB00FB3381 /* OpenAL.framework */; };
@@ -164,6 +165,8 @@
 		C7DBA882157344740096C068 /* Layer2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layer2D.h; sourceTree = "<group>"; };
 		C7DBA883157344740096C068 /* Layer2D.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Layer2D.mm; sourceTree = "<group>"; };
 		C7F100781573CB86002D7E00 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font.png; path = Resources/font.png; sourceTree = "<group>"; };
+		C7F1007B15746421002D7E00 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
+		C7F1007C15746421002D7E00 /* Block.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Block.mm; sourceTree = "<group>"; };
 		C7FB2EEE157289EB00FB3381 /* Connect_X_Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connect_X_Connect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7FB2EF2157289EB00FB3381 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C7FB2EF4157289EB00FB3381 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -447,6 +450,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		C7F1007A15746401002D7E00 /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				C7F1007B15746421002D7E00 /* Block.h */,
+				C7F1007C15746421002D7E00 /* Block.mm */,
+			);
+			name = Token;
+			sourceTree = "<group>";
+		};
 		C7FB2EE3157289EB00FB3381 = {
 			isa = PBXGroup;
 			children = (
@@ -488,6 +500,7 @@
 				C7FB3058157289ED00FB3381 /* RootViewController.m */,
 				C7FB305D157289ED00FB3381 /* GameConfig.h */,
 				C70E3F2515731075009BF0CB /* Common */,
+				C7F1007A15746401002D7E00 /* Token */,
 				C70E3F451573118A009BF0CB /* SceneMain.h */,
 				C70E3F461573118A009BF0CB /* SceneMain.mm */,
 				C7FB2F03157289EB00FB3381 /* Resources */,
@@ -1005,6 +1018,7 @@
 				C70E3F471573118A009BF0CB /* SceneMain.mm in Sources */,
 				C7DBA881157313160096C068 /* AppDelegate.mm in Sources */,
 				C7DBA884157344740096C068 /* Layer2D.mm in Sources */,
+				C7F1007D15746421002D7E00 /* Block.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

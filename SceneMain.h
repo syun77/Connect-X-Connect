@@ -11,24 +11,32 @@
 #import "IScene.h"
 #import "AsciiFont.h"
 #import "Layer2D.h"
+#import "Block.h"
+#import "TokenManager.h"
 
 /**
  * ゲームメインのシーン
  */
 @interface SceneMain : IScene {
+    
+    // 描画オブジェクト
     CCLayer*        baseLayer;
     AsciiFont*      fontTest;
     AsciiFont*      fontTest2;
     AsciiFont*      fontTest3;
+    TokenManager*   mgrBlock;
     
+    // レイヤー
     Layer2D*        layer;
     Layer2D*        layer2;
 }
 
-@property (nonatomic, retain)CCLayer*   baseLayer;
-@property (nonatomic, retain)AsciiFont* fontTest;
-@property (nonatomic, retain)AsciiFont* fontTest2;
-@property (nonatomic, retain)AsciiFont* fontTest3;
+@property (nonatomic, retain)CCLayer*       baseLayer;
+@property (nonatomic, retain)AsciiFont*     fontTest;
+@property (nonatomic, retain)AsciiFont*     fontTest2;
+@property (nonatomic, retain)AsciiFont*     fontTest3;
+@property (nonatomic, retain)TokenManager*  mgrBlock;
+
 @property (nonatomic, retain)Layer2D*   layer;
 @property (nonatomic, retain)Layer2D*   layer2;
 
