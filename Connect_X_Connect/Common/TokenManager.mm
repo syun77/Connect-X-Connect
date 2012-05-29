@@ -40,6 +40,9 @@
             assert(0);
         }
         
+        // レイヤーの登録
+        [token attachLayer:layer];
+        
         // 要素番号の設定
         [token setIndex:i];
         

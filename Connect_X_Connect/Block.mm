@@ -23,6 +23,8 @@ enum eState {
  */
 @implementation Block
 
+@synthesize fontNumber;
+
 /**
  * コンストラクタ
  */
@@ -33,10 +35,32 @@ enum eState {
     }
     
     [self load:@"font.png"];
-    //[self create];
+    
+    
     [self.m_pSprite setVisible:NO];
     
     return self;
+}
+
+/**
+ * デストラクタ
+ */
+- (void)dealloc {
+    
+    self.fontNumber = nil;
+    
+    [super dealloc];
+}
+
+/**
+ * フォントの生成
+ */
+- (void)attachLayer:(CCLayer *)layer {
+    
+    self.fontNumber = [AsciiFont node];
+    [self.fontNumber createFont:layer length:2];
+    [self.fontNumber setAlign:eFontAlign_Center];
+    [self.fontNumber setScale:3];
 }
 
 /**
@@ -55,6 +79,8 @@ enum eState {
     
     // 速度固定
     [self move:1.0 / 60];
+    
+    [self.fontNumber setPosScreen:self._x y:self._y];
 }
 
 /**
@@ -70,6 +96,7 @@ enum eState {
 // 番号を設定する
 - (void)setNumber:(int)number {
     m_nNumber = number;
+    [self.fontNumber setText:[NSString stringWithFormat:@"%d", number]];
 }
 
 /**
@@ -81,6 +108,7 @@ enum eState {
     if (b) {
         
         [b set2:x y:y rot:0 speed:0 ax:0 ay:0];
+        [b setNumber:number];
         
     }
     

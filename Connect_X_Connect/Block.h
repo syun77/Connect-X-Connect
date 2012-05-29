@@ -9,15 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Token.h"
+#import "AsciiFont.h"
 
 /**
  * ブロック
  */
 @interface Block : Token {
-    int m_nNumber;  // 数値
-    int m_Timer;    // 汎用タイマー
-    int m_State;    // 状態
+    
+    AsciiFont*  fontNumber; // 数字フォント
+    int         m_nNumber;  // 数値
+    int         m_Timer;    // 汎用タイマー
+    int         m_State;    // 状態
 }
+
+@property (nonatomic, retain)AsciiFont* fontNumber;
 
 // 番号を設定する
 - (void)setNumber:(int)number;

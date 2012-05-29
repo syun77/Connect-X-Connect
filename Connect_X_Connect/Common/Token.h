@@ -28,6 +28,9 @@
     BOOL        m_isHit;    // 当たり判定が有効かどうか
 }
 
+// レイヤーにアタッチする
+- (void)attachLayer:(CCLayer*)layer;
+
 // 初期化
 - (void)initialize;
 

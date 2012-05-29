@@ -108,6 +108,14 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
 }
 
 /**
+ * レイヤーにアタッチする
+ */
+- (void)attachLayer:(CCLayer*)layer {
+    
+    // 特に何もしない（オーバーライド用）
+}
+
+/**
  * 初期化
  */
 - (void)initialize {
