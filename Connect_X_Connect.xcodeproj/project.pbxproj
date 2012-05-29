@@ -161,6 +161,7 @@
 		C70E3F3A15731075009BF0CB /* Vec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec.h; sourceTree = "<group>"; };
 		C70E3F451573118A009BF0CB /* SceneMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneMain.h; path = ../SceneMain.h; sourceTree = "<group>"; };
 		C70E3F461573118A009BF0CB /* SceneMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SceneMain.mm; path = ../SceneMain.mm; sourceTree = "<group>"; };
+		C7B9F8E9157488C30023646A /* gamecommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gamecommon.h; sourceTree = "<group>"; };
 		C7DBA880157313160096C068 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		C7DBA882157344740096C068 /* Layer2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layer2D.h; sourceTree = "<group>"; };
 		C7DBA883157344740096C068 /* Layer2D.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Layer2D.mm; sourceTree = "<group>"; };
@@ -506,6 +507,7 @@
 				C7FB2F03157289EB00FB3381 /* Resources */,
 				C7FB2F17157289EB00FB3381 /* libs */,
 				C7FB3050157289ED00FB3381 /* Supporting Files */,
+				C7B9F8E9157488C30023646A /* gamecommon.h */,
 			);
 			path = Connect_X_Connect;
 			sourceTree = "<group>";

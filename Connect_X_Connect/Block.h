@@ -25,4 +25,7 @@
 // ブロックを追加する
 + (Block*)add:(int)number x:(float)x y:(float)y;
 
+// ブロックを追加する (インデックス指定)
++ (Block*)addFromIdx:(int)number idx:(int)idx;
+
 @end

@@ -11,6 +11,7 @@
 #import "IScene.h"
 #import "AsciiFont.h"
 #import "Layer2D.h"
+#import "gamecommon.h"
 #import "Block.h"
 #import "TokenManager.h"
 

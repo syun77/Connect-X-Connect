@@ -125,7 +125,15 @@ static SceneMain* scene_ = nil;
     if (s_cnt == 1) {
         
         // ブロック生成テスト
-        [Block add:5 x:80 y:100];
+        for (int j = 0; j < FIELD_BLOCK_COUNT_Y; j++) {
+            for (int i = 0; i < FIELD_BLOCK_COUNT_X; i++) {
+                int v = [self.layer get:i y:j];
+                if (v > 0) {
+                    int idx = i + j * FIELD_BLOCK_COUNT_Y;
+                    [Block addFromIdx:v idx:idx];
+                }
+            }
+        }
     }
     
     [self.fontTest setText:[NSString stringWithFormat:@"%d", s_cnt]];

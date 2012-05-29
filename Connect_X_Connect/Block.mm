@@ -52,6 +52,8 @@ enum eState {
  * 更新
  */
 - (void)update:(ccTime)dt {
+    
+    // 速度固定
     [self move:1.0 / 60];
 }
 
@@ -83,6 +85,15 @@ enum eState {
     }
     
     return b;
+}
+
+// ブロックを追加する (インデックス指定)
++ (Block*)addFromIdx:(int)number idx:(int)idx {
+    
+    float x = FIELD_OFS_X + (idx % FIELD_BLOCK_COUNT_X) * BLOCK_SiZE;
+    float y = FIELD_OFS_Y + (idx / FIELD_BLOCK_COUNT_Y) * BLOCK_SiZE;
+    
+    return [Block add:number x:x y:y];
 }
 
 @end
