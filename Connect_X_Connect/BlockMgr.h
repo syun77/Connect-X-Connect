@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "Block.h"
 
 /**
  * ブロック管理クラス
@@ -18,5 +19,8 @@
 
 // 落下要求を送る
 + (void)requestFall;
+
+// ブロックの当たり判定をチェックする
++ (BOOL)checkHitBlock:(Block*)block;
 
 @end

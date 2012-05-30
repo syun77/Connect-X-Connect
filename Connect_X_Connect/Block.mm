@@ -9,6 +9,7 @@
 #import "Block.h"
 #import "SceneMain.h"
 #import "FieldMgr.h"
+#import "BlockMgr.h"
 
 /**
  * 状態
@@ -38,7 +39,7 @@ enum eState {
     
     [self load:@"font.png"];
     
-    self._r = BLOCK_SiZE / 2;
+    self._r = BLOCK_SiZE / 2 - 2;
     
     [self.m_pSprite setVisible:NO];
     
@@ -93,6 +94,9 @@ enum eState {
     int y = (int)self._y;
     y -= FIELD_OFS_Y;
     int n = y/BLOCK_SiZE;
+    if (y - (n * BLOCK_SiZE) > BLOCK_SiZE/2) {
+        n += 1;
+    }
 
     self._y = FIELD_OFS_Y + n * BLOCK_SiZE;
 }
@@ -118,6 +122,17 @@ enum eState {
     
     // 下にブロックがあるかどうかチェック
     if ([FieldMgr isBottomOut:self] == YES) {
+        
+        // 落下待機状態へ
+        m_State = eState_FallWait;
+        [self fitGrid];
+        self._vy = 0;
+        self._y = FIELD_OFS_Y;
+        
+        return;
+    }
+    
+    if ([BlockMgr checkHitBlock:self]) {
         
         // 落下待機状態へ
         m_State = eState_FallWait;

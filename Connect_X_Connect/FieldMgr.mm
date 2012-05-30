@@ -130,24 +130,4 @@
     return YES;
 }
 
-/**
- * ブロックに落下要求を送る
- */
-+ (void)requestFallBlock {
-    
-    TokenManager* mgr = [FieldMgr getManager];
-    
-    for (Block* b in mgr.m_Pool) {
-        
-        if ([b isExist] == NO) {
-            
-            continue;
-        }
-        
-        // 落下要求
-        [b requestFall];
-        
-    }
-}
-
 @end

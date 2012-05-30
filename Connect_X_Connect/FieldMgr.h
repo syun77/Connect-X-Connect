@@ -48,9 +48,5 @@
  */
 + (BOOL)isBlock:(int)idx;
 
-/**
- * ブロックに落下要求を送る
- */
-+ (void)requestFallBlock;
 
 @end

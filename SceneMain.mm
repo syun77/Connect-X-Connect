@@ -8,6 +8,7 @@
 
 #import "SceneMain.h"
 #import "FieldMgr.h"
+#import "BlockMgr.h"
 
 /**
  * 描画プライオリティ
@@ -145,8 +146,9 @@ static SceneMain* scene_ = nil;
     if (s_cnt == 1) {
         
         // ブロック生成テスト
-//        [self.layer random:5];
+        [self.layer random:5];
         [self.layer set:2 y:5 val:5];
+        [self.layer set:2 y:2 val:3];
         [self.layer set:1 y:0 val:1];
         [self.layer dump];
         
@@ -158,7 +160,7 @@ static SceneMain* scene_ = nil;
         }
         
         // 落下要求を送る
-        [FieldMgr requestFallBlock];
+        [BlockMgr requestFall];
     }
     
     
