@@ -18,7 +18,7 @@
  * フィールドレイヤーを取得する
  * @return レイヤー
  */
-+ (Layer2D*)getFieldLayer;
++ (Layer2D*)getLayer;
 
 /**
  * 指定の座標にブロックがあるかどうか 

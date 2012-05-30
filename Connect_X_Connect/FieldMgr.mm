@@ -16,7 +16,7 @@
  * フィールドレイヤーを取得する
  * @return レイヤー
  */
-+ (Layer2D*)getFieldLayer {
++ (Layer2D*)getLayer {
     SceneMain* scene = [SceneMain sharedInstance];
     return scene.layer;
 }
@@ -27,7 +27,7 @@
  * @return ブロックがあれば「YES」
  */
 + (BOOL)isBlock:(int)idx {
-    Layer2D* layer = [FieldMgr getFieldLayer];
+    Layer2D* layer = [FieldMgr getLayer];
     
     int v = [layer getFromIdx:idx];
     

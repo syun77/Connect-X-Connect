@@ -71,6 +71,7 @@ enum eState {
     m_State = eState_Standby;
     m_Timer = 0;
     m_nNumber = 1;
+    m_ReqFall = NO;
 }
 
 /**
@@ -124,6 +125,12 @@ enum eState {
     int y = [self getChipY];
     
     return x + y * BLOCK_SiZE;
+}
+
+// 落下要求を送る
+- (void)requestFall {
+    
+    m_ReqFall = YES;
 }
 
 /**

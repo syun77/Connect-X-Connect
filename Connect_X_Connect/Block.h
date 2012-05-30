@@ -20,6 +20,7 @@
     int         m_nNumber;  // 数値
     int         m_Timer;    // 汎用タイマー
     int         m_State;    // 状態
+    BOOL        m_ReqFall;  // 落下要求フラグ
 }
 
 @property (nonatomic, retain)AsciiFont* fontNumber;
@@ -35,6 +36,9 @@
 
 // チップ座標の取得 (インデックス)
 - (int)getChipIdx;
+
+// 落下要求を送る
+- (void)requestFall;
 
 // ブロックを追加する
 + (Block*)add:(int)number x:(float)x y:(float)y;
