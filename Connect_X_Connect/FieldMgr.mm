@@ -77,7 +77,7 @@
     
     int val = [layer getFromIdx:idx];
     
-    if (val == BLOCK_INVALID) {
+    if (val <= FIELD_OUT) {
         
         // 領域外
         return YES;

@@ -145,7 +145,9 @@ static SceneMain* scene_ = nil;
     if (s_cnt == 1) {
         
         // ブロック生成テスト
-        [self.layer random:5];
+//        [self.layer random:5];
+        [self.layer set:2 y:5 val:5];
+        [self.layer set:1 y:0 val:1];
         [self.layer dump];
         
         for (int i = 0; i < FIELD_BLOCK_COUNT_MAX; i++) {

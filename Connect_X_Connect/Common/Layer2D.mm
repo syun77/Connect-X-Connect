@@ -109,6 +109,12 @@
 // インデックスに変換する
 - (int)getIdx:(int)x y:(int)y {
     
+    if ([self isRange:x y:y] == NO) {
+        
+        // 領域外
+        return -1;
+    }
+    
     return x + y * m_Width;
 }
 

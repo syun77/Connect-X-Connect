@@ -19,6 +19,8 @@ static const int FIELD_BLOCK_COUNT_X = 7;
 static const int FIELD_BLOCK_COUNT_Y = 10;
 static const int FIELD_BLOCK_COUNT_MAX = (FIELD_BLOCK_COUNT_X * FIELD_BLOCK_COUNT_Y);
 
+static const int FIELD_OUT = -1; // 領域外
+
 // ■ブロック関連
 static const int BLOCK_SiZE = 40;
 static const int BLOCK_INVALID = 0; // 無効なブロック

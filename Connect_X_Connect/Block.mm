@@ -87,6 +87,17 @@ enum eState {
 // private
 
 /**
+ * グリッド内に収まるようにする
+ */
+- (void)fitGrid {
+    int y = (int)self._y;
+    y -= FIELD_OFS_Y;
+    int n = y/BLOCK_SiZE;
+
+    self._y = FIELD_OFS_Y + n * BLOCK_SiZE;
+}
+
+/**
  * 更新・待機中
  */
 - (void)_updateStandby {
@@ -110,13 +121,14 @@ enum eState {
         
         // 落下待機状態へ
         m_State = eState_FallWait;
+        [self fitGrid];
         self._vy = 0;
         
         return;
     }
     
     // 落下処理
-    self._vy -= 0;
+    self._vy -= 10;
 }
 
 /**
@@ -184,14 +196,29 @@ enum eState {
  * チップ座標の取得 (X座標)
  */
 - (int)getChipX {
-    return (int)self._x / FIELD_BLOCK_COUNT_X;
+    
+    int x = (int)self._x - FIELD_OFS_X;
+    int ret = (int)(x / BLOCK_SiZE);
+    
+    if (x%BLOCK_SiZE > 0) {
+        ret++;
+    }
+    return ret;
 }
 
 /**
  * チップ座標の取得 (Y座標)
  */
 - (int)getChipY {
-    return (int)self._y / FIELD_BLOCK_COUNT_Y;
+    
+    int y = (int)self._y - FIELD_OFS_Y;
+    
+    int ret = (int)(y / BLOCK_SiZE);
+    
+    if (y%BLOCK_SiZE > 0) {
+        ret++;
+    }
+    return ret;
 }
 
 /**
