@@ -74,6 +74,13 @@ enum eState {
     m_Timer = 0;
     m_nNumber = 1;
     m_ReqFall = NO;
+    [self.fontNumber setVisible:YES];
+}
+
+- (void)vanish {
+    [self.fontNumber setVisible:NO];
+    
+    [super vanish];
 }
 
 // --------------------------------------------------------
@@ -109,7 +116,7 @@ enum eState {
     }
     
     // 落下処理
-    self._vy -= 1;
+    self._vy -= 0;
 }
 
 /**
