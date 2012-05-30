@@ -8,14 +8,16 @@
 
 #import "Block.h"
 #import "SceneMain.h"
+#import "FieldMgr.h"
 
 /**
  * 状態
  */
 enum eState {
-    eState_Standby, // 待機中
-    eState_Fall,    // 落下中
-    eState_Vanish,  // 消滅中
+    eState_Standby,     // 待機中
+    eState_Fall,        // 落下中
+    eState_FallWait,    // 落下停止中
+    eState_Vanish,      // 消滅中
 };
 
 /**
@@ -74,6 +76,55 @@ enum eState {
     m_ReqFall = NO;
 }
 
+// --------------------------------------------------------
+// private
+
+/**
+ * 更新・待機中
+ */
+- (void)_updateStandby {
+    
+    if (m_ReqFall) {
+        
+        // 落下要求を処理
+        m_State = eState_Fall;
+        
+        m_ReqFall = NO;
+    }
+}
+
+/**
+ * 更新・落下中
+ */
+- (void)_updateFall {
+    
+    // 下にブロックがあるかどうかチェック
+    if ([FieldMgr isBottomOut:self] == YES) {
+        
+        // 落下待機状態へ
+        m_State = eState_FallWait;
+        self._vy = 0;
+        
+        return;
+    }
+    
+    // 落下処理
+    self._vy -= 1;
+}
+
+/**
+ * 更新・消滅中
+ */
+- (void)_updateVanish {
+    
+}
+
+
+
+
+// --------------------------------------------------------
+// public
+
 /**
  * 更新
  */
@@ -83,6 +134,26 @@ enum eState {
     [self move:1.0 / 60];
     
     [self.fontNumber setPosScreen:self._x y:self._y];
+    
+    switch (m_State) {
+        case eState_Standby:
+            [self _updateStandby];
+            break;
+            
+        case eState_Fall:
+            [self _updateFall];
+            break;
+            
+        case eState_FallWait:
+            break;
+            
+        case eState_Vanish:
+            [self _updateVanish];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 /**
@@ -131,6 +202,12 @@ enum eState {
 - (void)requestFall {
     
     m_ReqFall = YES;
+}
+
+// 落下停止中かどうか
+- (BOOL)isFallWait {
+    
+    return m_State == eState_FallWait;
 }
 
 /**

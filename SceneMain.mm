@@ -7,6 +7,7 @@
 //
 
 #import "SceneMain.h"
+#import "FieldMgr.h"
 
 /**
  * 描画プライオリティ
@@ -20,6 +21,7 @@ static SceneMain* scene_ = nil;
 
 @implementation SceneMain
 
+@synthesize interfaceLayer;
 @synthesize baseLayer;
 @synthesize fontTest;
 @synthesize fontTest2;
@@ -56,9 +58,15 @@ static SceneMain* scene_ = nil;
         return self;
     }
     
-    // 描画関連
+    // 基準レイヤー
     self.baseLayer = [CCLayer node];
     [self addChild:self.baseLayer];
+    
+    // 入力受け取り
+    self.interfaceLayer = [InterfaceLayer node];
+    [self.baseLayer addChild:self.interfaceLayer];
+    
+    // 描画関連
     
     self.fontTest = [AsciiFont node];
     [self.fontTest createFont:self.baseLayer length:24];
@@ -85,8 +93,6 @@ static SceneMain* scene_ = nil;
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
     [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
-    [self.layer random:5];
-    [self.layer dump];
     
     
     [[self.layer2 = [Layer2D alloc] init] autorelease];
@@ -116,6 +122,9 @@ static SceneMain* scene_ = nil;
     
     // フォント
     self.fontTest = nil;
+    
+    self.interfaceLayer = nil;
+    
     self.baseLayer = nil;
     
     [super dealloc];
@@ -126,16 +135,30 @@ static SceneMain* scene_ = nil;
     static int s_cnt = 0;
     s_cnt++;
     
+    if ([self.interfaceLayer isTouch]) {
+        s_cnt = 0;
+        
+        // すべて消す
+        [self.mgrBlock vanishAll];
+    }
+    
     if (s_cnt == 1) {
         
         // ブロック生成テスト
+        [self.layer random:5];
+        [self.layer dump];
+        
         for (int i = 0; i < FIELD_BLOCK_COUNT_MAX; i++) {
             int v = [self.layer getFromIdx:i];
             if (v > 0) {
                 [Block addFromIdx:v idx:i];
             }
         }
+        
+        // 落下要求を送る
+        [FieldMgr requestFallBlock];
     }
+    
     
     //[self.fontTest setText:[NSString stringWithFormat:@"%d", s_cnt]];
     //[self.fontTest2 setText:[NSString stringWithFormat:@"%06d", s_cnt]];

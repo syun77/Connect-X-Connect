@@ -172,6 +172,23 @@
     }
 }
 
+/**
+ * トークンを全て削除する
+ */
+- (void)vanishAll {
+    
+    for (Token* t in self.m_Pool) {
+        
+        if ([t isExist] == NO) {
+            
+            // 消滅済み
+            continue;
+        }
+        
+        // 消滅
+        [t vanish];
+    }
+}
 
 /**
  * 描画プライオリティの設定

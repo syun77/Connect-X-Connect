@@ -22,6 +22,96 @@
 }
 
 /**
+ * ブロック管理オブジェクトを取得
+ * @return ブロック管理オブジェクト
+ */
++ (TokenManager*)getManager {
+    SceneMain* scene = [SceneMain sharedInstance];
+    return scene.mgrBlock;
+}
+
+/**
+ * 他のブロックに当たっているかどうか調べる
+ */
++ (BOOL)isHitBlock:(Block*)block {
+    
+    TokenManager* mgr = [FieldMgr getManager];
+    
+    for (Block* b in mgr.m_Pool) {
+        
+        if ([b isExist] == NO) {
+            
+            // 存在しない
+            continue;
+        }
+        
+        if ([b getIndex] == [block getIndex]) {
+            
+            // インデックスが一致している
+            continue;
+        }
+        
+        if ([b isHit2:block]) {
+            
+            // 当たっている
+            return YES;
+        }
+    }
+    
+    // 当たっていない
+    return NO;
+}
+
+/**
+ * 下が領域外かどうか
+ */
++ (BOOL)isBottomOut:(Block*)block {
+    int x = [block getChipX];
+    int y = [block getChipY];
+    
+    // 一つ下
+    y -= 1;
+    
+    Layer2D* layer = [FieldMgr getLayer];
+    int idx = [layer getIdx:x y:y];
+    
+    int val = [layer getFromIdx:idx];
+    
+    if (val == BLOCK_INVALID) {
+        
+        // 領域外
+        return YES;
+    }
+    
+    // 領域内
+    return NO;
+    
+}
+
+/**
+ * １つ下にブロックがあるかどうか調べる
+ */
++ (BOOL)isBlockBottom:(Block*)block {
+    int x = [block getChipX];
+    int y = [block getChipY];
+    
+    // 一つ下
+    y -= 1;
+    
+    Layer2D* layer = [FieldMgr getLayer];
+    int idx = [layer getIdx:x y:y];
+    
+    if ([FieldMgr isBlock:idx] == YES) {
+        
+        // ブロックがある
+        return YES;
+    }
+    
+    // ブロックがない
+    return NO;
+}
+
+/**
  * 指定の座標にブロックがあるかどうか 
  * @param idx インデックス
  * @return ブロックがあれば「YES」
@@ -38,6 +128,26 @@
     }
     
     return YES;
+}
+
+/**
+ * ブロックに落下要求を送る
+ */
++ (void)requestFallBlock {
+    
+    TokenManager* mgr = [FieldMgr getManager];
+    
+    for (Block* b in mgr.m_Pool) {
+        
+        if ([b isExist] == NO) {
+            
+            continue;
+        }
+        
+        // 落下要求
+        [b requestFall];
+        
+    }
 }
 
 @end

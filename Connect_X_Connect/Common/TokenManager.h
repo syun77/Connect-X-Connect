@@ -69,6 +69,11 @@
 - (void)addAll;
 
 /**
+ * トークンを全て削除する
+ */
+- (void)vanishAll;
+
+/**
  * 描画プライオリティの設定
  */
 - (void)setPrio:(NSInteger)Prio;

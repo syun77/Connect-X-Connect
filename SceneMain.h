@@ -14,11 +14,15 @@
 #import "gamecommon.h"
 #import "Block.h"
 #import "TokenManager.h"
+#import "InterfaceLayer.h"
 
 /**
  * ゲームメインのシーン
  */
 @interface SceneMain : IScene {
+    
+    // 入力受け取り
+    InterfaceLayer* interfaceLayer;
     
     // 描画オブジェクト
     CCLayer*        baseLayer;
@@ -32,11 +36,12 @@
     Layer2D*        layer2;
 }
 
-@property (nonatomic, retain)CCLayer*       baseLayer;
-@property (nonatomic, retain)AsciiFont*     fontTest;
-@property (nonatomic, retain)AsciiFont*     fontTest2;
-@property (nonatomic, retain)AsciiFont*     fontTest3;
-@property (nonatomic, retain)TokenManager*  mgrBlock;
+@property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
+@property (nonatomic, retain)CCLayer*           baseLayer;
+@property (nonatomic, retain)AsciiFont*         fontTest;
+@property (nonatomic, retain)AsciiFont*         fontTest2;
+@property (nonatomic, retain)AsciiFont*         fontTest3;
+@property (nonatomic, retain)TokenManager*      mgrBlock;
 
 @property (nonatomic, retain)Layer2D*   layer;
 @property (nonatomic, retain)Layer2D*   layer2;

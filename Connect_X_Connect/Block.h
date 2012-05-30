@@ -40,6 +40,9 @@
 // 落下要求を送る
 - (void)requestFall;
 
+// 落下停止中かどうか
+- (BOOL)isFallWait;
+
 // ブロックを追加する
 + (Block*)add:(int)number x:(float)x y:(float)y;
 

@@ -21,10 +21,36 @@
 + (Layer2D*)getLayer;
 
 /**
+ * ブロック管理オブジェクトを取得
+ * @return ブロック管理オブジェクト
+ */
++ (TokenManager*)getManager;
+
+/**
+ * 他のブロックに当たっているかどうか調べる
+ */
++ (BOOL)isHitBlock:(Block*)block;
+
+/**
+ * 下が領域外かどうか
+ */
++ (BOOL)isBottomOut:(Block*)block;
+
+/**
+ * １つ下にブロックがあるかどうか調べる
+ */
++ (BOOL)isBlockBottom:(Block*)block;
+
+/**
  * 指定の座標にブロックがあるかどうか 
  * @param idx インデックス
  * @return ブロックがあれば「YES」
  */
 + (BOOL)isBlock:(int)idx;
+
+/**
+ * ブロックに落下要求を送る
+ */
++ (void)requestFallBlock;
 
 @end
