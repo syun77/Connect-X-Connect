@@ -15,10 +15,15 @@
  */
 @implementation BlockMgr
 
++ (TokenManager*)_getTokenManager {
+    
+    return [SceneMain sharedInstance].mgrBlock;
+}
+
 // 落下要求を送る
 + (void)requestFall {
     
-    TokenManager* mgr = [SceneMain sharedInstance].mgrBlock;
+    TokenManager* mgr = [BlockMgr _getTokenManager];
     
     for (Block* b in mgr.m_Pool) {
         
@@ -31,10 +36,37 @@
     }
 }
 
+// 落下が全て完了したかどうか
++ (BOOL)isFallWaitAll {
+    
+    TokenManager* mgr = [BlockMgr _getTokenManager];
+    
+    for (Block* b in mgr.m_Pool) {
+        
+        if ([b isExist] == NO) {
+            
+            // 存在しないのでチェック不要
+            continue;
+        }
+        
+        if ([b isFallWait]) {
+            
+            // 落下待ちになっている
+            continue;
+        }
+        
+        // 落下待ちになっていない
+        return NO;
+    }
+    
+    // 全て落下待ちになった
+    return YES; 
+}
+
 // ブロックの当たり判定をチェックする
 + (BOOL)checkHitBlock:(Block*)block {
     
-    TokenManager* mgr = [SceneMain sharedInstance].mgrBlock;
+    TokenManager* mgr = [BlockMgr _getTokenManager];
     
     for (Block* b in mgr.m_Pool) {
         

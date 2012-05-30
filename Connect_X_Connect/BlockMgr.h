@@ -20,6 +20,9 @@
 // 落下要求を送る
 + (void)requestFall;
 
+// 落下が全て完了したかどうか
++ (BOOL)isFallWaitAll;
+
 // ブロックの当たり判定をチェックする
 + (BOOL)checkHitBlock:(Block*)block;
 

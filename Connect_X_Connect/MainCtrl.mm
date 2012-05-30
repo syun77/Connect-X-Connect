@@ -17,7 +17,8 @@
 enum eState {
     eState_Standby,
     eState_Fall,
-    eState_Vanish,
+    eState_VanishCheck,
+    eState_VanishExec,
     eState_End,
 };
 
@@ -88,6 +89,10 @@ enum eState {
         
         // 落下要求を送る
         [BlockMgr requestFall];
+        
+        
+        // 落下状態へ遷移
+        m_State = eState_Fall;
  
     }
  
@@ -95,8 +100,18 @@ enum eState {
 
 - (void)_updateFall {
     
+    if ([BlockMgr isFallWaitAll]) {
+        
+        // 消去判定
+        m_State = eState_VanishCheck;
+    }
 }
-- (void)_updateVanish {
+
+- (void)_updateVanishCheck {
+    
+}
+
+- (void)_updateVanishExec {
     
 }
 
@@ -116,8 +131,12 @@ enum eState {
             [self _updateFall];
             break;
             
-        case eState_Vanish:
-            [self _updateVanish];
+        case eState_VanishCheck:
+            [self _updateVanishCheck];
+            break;
+            
+        case eState_VanishExec:
+            [self _updateVanishExec];
             break;
             
         default:
