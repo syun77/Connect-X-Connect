@@ -17,6 +17,12 @@ enum ePrio {
     ePrio_Block, // ブロック
 };
 
+enum eState {
+    eState_Init,
+    eState_Main,
+    eState_End,
+};
+
 // シングルトン
 static SceneMain* scene_ = nil;
 
@@ -30,6 +36,7 @@ static SceneMain* scene_ = nil;
 @synthesize mgrBlock;
 @synthesize layer;
 @synthesize layer2;
+@synthesize ctrl;
 
 /**
  * シングルトンを取得する
@@ -100,10 +107,16 @@ static SceneMain* scene_ = nil;
     [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
     [self.layer2 set:6 y:6 val:9];
     
+    // ゲーム制御
+    self.ctrl = [MainCtrl node];
+    
+    // 変数初期化
+    m_State = eState_Init;
+    m_Timer = 0;
+    
+    
+    // ■更新開始
     [self scheduleUpdate];
-    
-    
-    
     
     return self;
 }
@@ -112,6 +125,9 @@ static SceneMain* scene_ = nil;
  * デストラクタ
  */
 - (void)dealloc {
+    
+    // ゲーム制御
+    self.ctrl = nil;
     
     // レイヤー
     self.layer2 = nil;
@@ -133,36 +149,24 @@ static SceneMain* scene_ = nil;
 
 - (void)update:(ccTime)dt {
     
-    static int s_cnt = 0;
-    s_cnt++;
-    
-    if ([self.interfaceLayer isTouch]) {
-        s_cnt = 0;
-        
-        // すべて消す
-        [self.mgrBlock vanishAll];
-    }
-    
-    if (s_cnt == 1) {
-        
-        // ブロック生成テスト
-        [self.layer random:5];
-        [self.layer set:2 y:5 val:5];
-        [self.layer set:2 y:2 val:3];
-        [self.layer set:1 y:0 val:1];
-        [self.layer dump];
-        
-        for (int i = 0; i < FIELD_BLOCK_COUNT_MAX; i++) {
-            int v = [self.layer getFromIdx:i];
-            if (v > 0) {
-                [Block addFromIdx:v idx:i];
+    switch (m_State) {
+        case eState_Init:
+            m_State = eState_Main;
+            break;
+            
+        case eState_Main:
+            
+            [self.ctrl update:dt];
+            if ([self.ctrl isEnd]) {
+                m_State = eState_End;
             }
-        }
-        
-        // 落下要求を送る
-        [BlockMgr requestFall];
+            
+        case eState_End:
+            break;
+            
+        default:
+            break;
     }
-    
     
     //[self.fontTest setText:[NSString stringWithFormat:@"%d", s_cnt]];
     //[self.fontTest2 setText:[NSString stringWithFormat:@"%06d", s_cnt]];

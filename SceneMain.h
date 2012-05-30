@@ -15,6 +15,7 @@
 #import "Block.h"
 #import "TokenManager.h"
 #import "InterfaceLayer.h"
+#import "MainCtrl.h"
 
 /**
  * ゲームメインのシーン
@@ -34,6 +35,13 @@
     // レイヤー
     Layer2D*        layer;
     Layer2D*        layer2;
+    
+    // ゲーム状態管理
+    MainCtrl*       ctrl;
+    
+    // 変数
+    int             m_State;    // 状態
+    int             m_Timer;    // タイマー
 }
 
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
@@ -45,6 +53,8 @@
 
 @property (nonatomic, retain)Layer2D*   layer;
 @property (nonatomic, retain)Layer2D*   layer2;
+
+@property (nonatomic, retain)MainCtrl*  ctrl;
 
 + (SceneMain*)sharedInstance;
 + (void)releaseInstance;
