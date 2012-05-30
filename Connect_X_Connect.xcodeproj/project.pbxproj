@@ -18,6 +18,7 @@
 		C70E3F4315731075009BF0CB /* Token.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F3715731075009BF0CB /* Token.mm */; };
 		C70E3F4415731075009BF0CB /* TokenManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F3915731075009BF0CB /* TokenManager.mm */; };
 		C70E3F471573118A009BF0CB /* SceneMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F461573118A009BF0CB /* SceneMain.mm */; };
+		C7B9F8EC15759A080023646A /* gamecommon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7B9F8EB15759A080023646A /* gamecommon.mm */; };
 		C7DBA881157313160096C068 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7DBA880157313160096C068 /* AppDelegate.mm */; };
 		C7DBA884157344740096C068 /* Layer2D.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7DBA883157344740096C068 /* Layer2D.mm */; };
 		C7F100791573CB86002D7E00 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = C7F100781573CB86002D7E00 /* font.png */; };
@@ -162,6 +163,7 @@
 		C70E3F451573118A009BF0CB /* SceneMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneMain.h; path = ../SceneMain.h; sourceTree = "<group>"; };
 		C70E3F461573118A009BF0CB /* SceneMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SceneMain.mm; path = ../SceneMain.mm; sourceTree = "<group>"; };
 		C7B9F8E9157488C30023646A /* gamecommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gamecommon.h; sourceTree = "<group>"; };
+		C7B9F8EB15759A080023646A /* gamecommon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = gamecommon.mm; sourceTree = "<group>"; };
 		C7DBA880157313160096C068 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		C7DBA882157344740096C068 /* Layer2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layer2D.h; sourceTree = "<group>"; };
 		C7DBA883157344740096C068 /* Layer2D.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Layer2D.mm; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 				C7FB2F17157289EB00FB3381 /* libs */,
 				C7FB3050157289ED00FB3381 /* Supporting Files */,
 				C7B9F8E9157488C30023646A /* gamecommon.h */,
+				C7B9F8EB15759A080023646A /* gamecommon.mm */,
 			);
 			path = Connect_X_Connect;
 			sourceTree = "<group>";
@@ -1021,6 +1024,7 @@
 				C7DBA881157313160096C068 /* AppDelegate.mm in Sources */,
 				C7DBA884157344740096C068 /* Layer2D.mm in Sources */,
 				C7F1007D15746421002D7E00 /* Block.mm in Sources */,
+				C7B9F8EC15759A080023646A /* gamecommon.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -102,6 +102,31 @@ enum eState {
 }
 
 /**
+ * チップ座標の取得 (X座標)
+ */
+- (int)getChipX {
+    return (int)self._x / FIELD_BLOCK_COUNT_X;
+}
+
+/**
+ * チップ座標の取得 (Y座標)
+ */
+- (int)getChipY {
+    return (int)self._y / FIELD_BLOCK_COUNT_Y;
+}
+
+/**
+ * チップ座標の取得 (インデックス)
+ */
+- (int)getChipIdx {
+    
+    int x = [self getChipX];
+    int y = [self getChipY];
+    
+    return x + y * BLOCK_SiZE;
+}
+
+/**
  * ブロックの追加
  */
 + (Block*)add:(int)number x:(float)x y:(float)y {

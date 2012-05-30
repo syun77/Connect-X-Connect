@@ -27,6 +27,15 @@
 // 番号を設定する
 - (void)setNumber:(int)number;
 
+// チップ座標の取得 (X座標)
+- (int)getChipX;
+
+// チップ座標の取得 (Y座標)
+- (int)getChipY;
+
+// チップ座標の取得 (インデックス)
+- (int)getChipIdx;
+
 // ブロックを追加する
 + (Block*)add:(int)number x:(float)x y:(float)y;
 
