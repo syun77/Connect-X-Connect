@@ -100,6 +100,32 @@
     return NO;
 }
 
+// 指定の座標にあるブロックに消去要求を送る
++ (void)requestVanish:(int)x y:(int)y {
+    
+    TokenManager* mgr = [BlockMgr _getTokenManager];
+    
+    for (Block* b in mgr.m_Pool) {
+        
+        if ([b isExist] == NO) {
+            
+            // 存在しないのでチェックしない
+            continue;
+        }
+        
+        int px = [b getChipX];
+        int py = [b getChipY];
+        
+        if (px == x && py == y) {
+            
+            // 消去要求を送る
+            [b requestVanish];
+            
+            break;
+        }
+    }
+}
+
 // 消滅処理が全て完了したかどうか
 + (BOOL)isEndVanishingAll {
     

@@ -26,6 +26,9 @@
 // ブロックの当たり判定をチェックする
 + (BOOL)checkHitBlock:(Block*)block;
 
+// 指定の座標にあるブロックに消去要求を送る
++ (void)requestVanish:(int)x y:(int)y;
+
 // 消滅処理が全て完了したかどうか
 + (BOOL)isEndVanishingAll;
 

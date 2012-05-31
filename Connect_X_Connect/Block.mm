@@ -297,6 +297,12 @@ enum eState {
     return m_State == eState_FallWait;
 }
 
+// 消去要求を送る
+- (void)requestVanish {
+    
+    m_ReqVanish = YES;
+}
+
 // 消滅演出中かどうか
 - (BOOL)isVanishing {
     

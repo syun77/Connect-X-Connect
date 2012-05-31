@@ -47,6 +47,9 @@
 // 落下停止中かどうか
 - (BOOL)isFallWait;
 
+// 消去要求を送る
+- (void)requestVanish;
+
 // 消滅演出中かどうか
 - (BOOL)isVanishing;
 
