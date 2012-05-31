@@ -12,6 +12,7 @@
 #import "BlockMgr.h"
 
 static const int TIMER_VANISH = 30;
+static const float SPEED_FALL = 50; // ブロック落下速度
 
 /**
  * 状態
@@ -148,7 +149,7 @@ enum eState {
     }
     
     // 落下処理
-    self._vy -= 10;
+    self._vy -= SPEED_FALL;
 }
 
 /**
@@ -174,10 +175,12 @@ enum eState {
     if (m_Timer%4 < 2) {
         
         [self setVisible:NO];
+        [self.fontNumber setVisible:NO];
     }
     else {
         
         [self setVisible:YES];
+        [self.fontNumber setVisible:YES];
     }
     
     if (m_Timer < 1) {
@@ -307,6 +310,12 @@ enum eState {
 - (BOOL)isVanishing {
     
     return m_State == eState_Vanish;
+}
+
+// 待機状態にする
+- (void)changeStandby {
+    
+    m_State = eState_Standby;
 }
 
 /**

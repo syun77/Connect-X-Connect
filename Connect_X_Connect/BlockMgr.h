@@ -32,4 +32,7 @@
 // 消滅処理が全て完了したかどうか
 + (BOOL)isEndVanishingAll;
 
+// 待機状態にする
++ (void)changeStandbyAll;
+
 @end

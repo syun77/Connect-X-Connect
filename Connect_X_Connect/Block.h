@@ -53,6 +53,9 @@
 // 消滅演出中かどうか
 - (BOOL)isVanishing;
 
+// 待機状態にする
+- (void)changeStandby;
+
 // ブロックを追加する
 + (Block*)add:(int)number x:(float)x y:(float)y;
 

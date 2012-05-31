@@ -209,6 +209,9 @@ enum eState {
     [layerVanish clear];
     Layer2D* layer = [FieldMgr getLayer];
     
+    // 消去できた数
+    int nVanish = 0;
+    
     for (int j = 0; j < FIELD_BLOCK_COUNT_Y; j++) {
         
         for (int i = 0; i < FIELD_BLOCK_COUNT_X; i++) {
@@ -217,16 +220,25 @@ enum eState {
             if (val > 0) {
                 
                 // ブロックが存在する
-                [self _checkVanish1:i y:j dx:0 dy:0 val:val cnt:0];
+                int cnt = [self _checkVanish1:i y:j dx:0 dy:0 val:val cnt:0];
+                
+                if (cnt >= val) {
+                    
+                    // 消去できた
+                    nVanish++;
+                }
             }
         }
     }
     
 //    [self.layerVanish dump];
-    if ([layerVanish count:0] == [layer getIdxMax]) {
+    if (nVanish == 0) {
         
         // 消去できるものはない
         m_State = eState_Standby;
+        
+        // ブロックを待機状態にする
+        [BlockMgr changeStandbyAll];
         return;
     }
     
@@ -236,7 +248,7 @@ enum eState {
         
         for (int i = 0; i < FIELD_BLOCK_COUNT_X; i++) {
         
-            int val = [layer get:i y:j];
+            int val = [layerVanish get:i y:j];
             if (val > 0) {
                 // 消去要求を出す
                 [BlockMgr requestVanish:i y:j];
@@ -251,6 +263,9 @@ enum eState {
 - (void)_updateVanishExec {
     
     if ([BlockMgr isEndVanishingAll]) {
+        
+        // 待機状態にする
+        [BlockMgr changeStandbyAll];
         
         // 落下要求を送る
         [BlockMgr requestFall];

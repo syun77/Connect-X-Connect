@@ -152,4 +152,21 @@
  
 }
 
+// 待機状態にする
++ (void)changeStandbyAll {
+    
+    TokenManager* mgr = [BlockMgr _getTokenManager];
+    
+    for (Block* b in mgr.m_Pool) {
+        
+        if ([b isExist] == NO) {
+            
+            continue;
+        }
+        
+        // 待機状態にする
+        [b changeStandby];
+    }
+}
+
 @end
