@@ -26,4 +26,7 @@
 // ブロックの当たり判定をチェックする
 + (BOOL)checkHitBlock:(Block*)block;
 
+// 消滅処理が全て完了したかどうか
++ (BOOL)isEndVanishingAll;
+
 @end

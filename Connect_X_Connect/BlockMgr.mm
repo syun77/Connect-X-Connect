@@ -100,4 +100,30 @@
     return NO;
 }
 
+// 消滅処理が全て完了したかどうか
++ (BOOL)isEndVanishingAll {
+    
+    TokenManager* mgr = [BlockMgr _getTokenManager];
+    
+    for (Block* b in mgr.m_Pool) {
+        
+        if ([b isExist] == NO) {
+            
+            // 存在しないのでチェック不要
+            continue;
+        }
+        
+        if ([b isVanishing]) {
+            
+            // 消滅演出中のものがある
+            return NO;
+        }
+        
+    }
+    
+    // 消滅演出完了
+    return YES; 
+ 
+}
+
 @end

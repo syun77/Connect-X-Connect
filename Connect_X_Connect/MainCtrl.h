@@ -8,16 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "Layer2D.h"
 
 /**
  * ゲームメインのコントローラー
  */
 @interface MainCtrl : CCNode {
     
+    Layer2D* layerVanish;   // 消去判定用レイヤー
+    
     int m_State;
     int m_Timer;
     
 }
+
+@property (nonatomic, retain)Layer2D* layerVanish;
 
 - (void)update:(ccTime)dt;
 - (BOOL)isEnd;

@@ -27,6 +27,8 @@ enum eState {
  */
 @implementation MainCtrl
 
+@synthesize layerVanish;
+
 /**
  * コンストラクタ
  */
@@ -38,10 +40,23 @@ enum eState {
         return self;
     }
     
+    self.layerVanish = [[[Layer2D alloc] init] autorelease];
+    [self.layerVanish create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
+    
     m_State = eState_Standby;
     m_Timer = 0;
     
     return self;
+}
+
+/**
+ * デストラクタ
+ */
+- (void)dealloc {
+    
+    self.layerVanish = nil;
+    
+    [super dealloc];
 }
 
 // -----------------------------------------------------
@@ -107,16 +122,135 @@ enum eState {
     }
 }
 
+- (int)_checkVanish2:(int)x y:(int)y dx:(int)dx dy:(int)dy val:(int)val cnt:(int)cnt {
+    
+    x += dx;
+    y += dy;
+    
+    if ([self.layerVanish get:x y:y] != 0) {
+        
+        // チェック済み・領域外
+        return cnt;
+    }
+    
+    Layer2D* layer = [FieldMgr getLayer];
+    
+    
+    int v = [layer get:x y:y];
+    if (v == val) {
+        
+        // 指定の番号に一致した
+        [self.layerVanish set:x y:y val:val];
+        cnt++;
+        cnt = [self _checkVanish2:x y:y dx:-1 dy: 0 val:val cnt:cnt];
+        cnt = [self _checkVanish2:x y:y dx: 0 dy:-1 val:val cnt:cnt];
+        cnt = [self _checkVanish2:x y:y dx:+1 dy: 0 val:val cnt:cnt];
+        cnt = [self _checkVanish2:x y:y dx: 0 dy:+1 val:val cnt:cnt];
+        
+        if (cnt >= val) {
+            
+            // 消去可能
+            [self.layerVanish set:x y:y val:val];
+        }
+        else {
+            
+            // 消去できないのでクリアする
+            [self.layerVanish set:x y:y val:0];
+        }
+        return cnt;
+    }
+    
+    // 繋がっていなかった
+    return cnt;
+}
+
+- (int)_checkVanish1:(int)x y:(int)y dx:(int)dx dy:(int)dy val:(int)val cnt:(int)cnt {
+    
+    x += dx;
+    y += dy;
+    
+    if ([self.layerVanish get:x y:y] != 0) {
+        
+        // チェック済み・領域外
+        return cnt;
+    }
+    
+    // 開始ポイント
+    cnt++;
+    
+    // チェック済みにしておく
+    [self.layerVanish set:x y:y val:val];
+    
+    cnt = [self _checkVanish2:x y:y dx:-1 dy: 0 val:val cnt:cnt];
+    cnt = [self _checkVanish2:x y:y dx: 0 dy:-1 val:val cnt:cnt];
+    cnt = [self _checkVanish2:x y:y dx:+1 dy: 0 val:val cnt:cnt];
+    cnt = [self _checkVanish2:x y:y dx: 0 dy:+1 val:val cnt:cnt];
+    
+    if (cnt >= val) {
+        
+        // 消去可能
+        //[self.layerVanish set:x y:y val:val];
+    }
+    else {
+        
+        // 消去できないのでクリア
+        [self.layerVanish set:x y:y val:0];
+    }
+    
+    return cnt;
+}
+
+
 - (void)_updateVanishCheck {
     
     [FieldMgr copyBlockToLayer];
     
+    // 消去判定
+    [layerVanish clear];
+    Layer2D* layer = [FieldMgr getLayer];
+    
+    for (int j = 0; j < FIELD_BLOCK_COUNT_Y; j++) {
+        
+        for (int i = 0; i < FIELD_BLOCK_COUNT_X; i++) {
+            
+            int val = [layer get:i y:j];
+            if (val > 0) {
+                
+                // ブロックが存在する
+                [self _checkVanish1:i y:j dx:0 dy:0 val:val cnt:0];
+            }
+        }
+    }
+    
+    [self.layerVanish dump];
+    
+    
     // 消去実行
+    for (int j = 0; j < FIELD_BLOCK_COUNT_Y; j++) {
+        
+        for (int i = 0; i < FIELD_BLOCK_COUNT_X; i++) {
+        
+            // 消去要求を出す
+            //[BlockMgr requestVanish:i y:j];
+        }
+    }
+    
     m_State = eState_VanishExec;
 }
 
 - (void)_updateVanishExec {
     
+    if ([BlockMgr isEndVanishingAll]) {
+        
+        // 消滅演出完了
+        if (NO) {
+            
+            // TODO: 再チェックをする
+        }
+        
+        // TODO: とりあえず待機状態に戻す
+        m_State = eState_Standby;
+    }
 }
 
 // -----------------------------------------------------

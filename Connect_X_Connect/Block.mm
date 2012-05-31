@@ -11,6 +11,8 @@
 #import "FieldMgr.h"
 #import "BlockMgr.h"
 
+static const int TIMER_VANISH = 30;
+
 /**
  * 状態
  */
@@ -71,11 +73,14 @@ enum eState {
  * 初期化
  */
 - (void)initialize {
-    m_State = eState_Standby;
-    m_Timer = 0;
-    m_nNumber = 1;
-    m_ReqFall = NO;
+    
+    m_State         = eState_Standby;
+    m_Timer         = 0;
+    m_nNumber       = 1;
+    m_ReqFall       = NO;
+    m_ReqVanish     = NO;
     [self.fontNumber setVisible:YES];
+    [self setVisible:YES];
 }
 
 - (void)vanish {
@@ -147,10 +152,37 @@ enum eState {
 }
 
 /**
+ * 更新・落下完了
+ */
+- (void)_updateFallWait {
+    
+    if (m_ReqVanish) {
+        
+        // 消滅要求を処理
+        m_State = eState_Vanish;
+        m_Timer = TIMER_VANISH;
+        
+        m_ReqVanish = NO;
+    }
+}
+
+/**
  * 更新・消滅中
  */
 - (void)_updateVanish {
+    m_Timer--;
+    if (m_Timer%4 < 2) {
+        
+        [self setVisible:NO];
+    }
+    else {
+        
+        [self setVisible:YES];
+    }
     
+    if (m_Timer < 1) {
+        [self vanish];
+    }
 }
 
 
@@ -179,6 +211,7 @@ enum eState {
             break;
             
         case eState_FallWait:
+            [self _updateFallWait];
             break;
             
         case eState_Vanish:
@@ -262,6 +295,12 @@ enum eState {
 - (BOOL)isFallWait {
     
     return m_State == eState_FallWait;
+}
+
+// 消滅演出中かどうか
+- (BOOL)isVanishing {
+    
+    return m_State == eState_Vanish;
 }
 
 /**

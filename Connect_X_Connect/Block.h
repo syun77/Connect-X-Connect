@@ -16,11 +16,12 @@
  */
 @interface Block : Token {
     
-    AsciiFont*  fontNumber; // 数字フォント
-    int         m_nNumber;  // 数値
-    int         m_Timer;    // 汎用タイマー
-    int         m_State;    // 状態
-    BOOL        m_ReqFall;  // 落下要求フラグ
+    AsciiFont*  fontNumber;     // 数字フォント
+    int         m_nNumber;      // 数値
+    int         m_Timer;        // 汎用タイマー
+    int         m_State;        // 状態
+    BOOL        m_ReqFall;      // 落下要求フラグ
+    BOOL        m_ReqVanish;    // 消滅要求フラグ
 }
 
 @property (nonatomic, retain)AsciiFont* fontNumber;
@@ -45,6 +46,9 @@
 
 // 落下停止中かどうか
 - (BOOL)isFallWait;
+
+// 消滅演出中かどうか
+- (BOOL)isVanishing;
 
 // ブロックを追加する
 + (Block*)add:(int)number x:(float)x y:(float)y;
