@@ -37,6 +37,7 @@ enum eTouchState {
 @implementation MainCtrl
 
 @synthesize layerVanish;
+@synthesize layerTmp;
 
 /**
  * コンストラクタ
@@ -51,6 +52,8 @@ enum eTouchState {
     
     self.layerVanish = [[[Layer2D alloc] init] autorelease];
     [self.layerVanish create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
+    self.layerTmp = [[[Layer2D alloc] init] autorelease];
+    [self.layerTmp create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
     
     // 変数の初期化
     m_State = eState_Standby;
@@ -132,7 +135,7 @@ enum eTouchState {
 
 - (void)_updateStandby {
     
-//    InterfaceLayer* interface   = [self _getInterfaceLayer];
+    InterfaceLayer* interface   = [self _getInterfaceLayer];
     TokenManager*   mgrBlock    = [self _getManagerBlock];
     Layer2D*        layer       = [FieldMgr getLayer];
     Cursor*         cursor      = [SceneMain sharedInstance].cursor;
@@ -149,8 +152,8 @@ enum eTouchState {
     static int s_cnt = 0;
     s_cnt++;
   
-    if (NO) {
-//    if ([interface isTouch]) {
+//    if (NO) {
+    if ([interface isTouch]) {
         
         // すべて消す
         [mgrBlock vanishAll];
@@ -161,11 +164,11 @@ enum eTouchState {
     if (s_cnt == 1) {
         
         // ブロック生成テスト
-        [layer random:5];
+        [layer random:6];
         [layer set:2 y:5 val:5];
         [layer set:2 y:2 val:3];
         [layer set:1 y:0 val:1];
-        [layer dump];
+//        [layer dump];
         
         for (int i = 0; i < FIELD_BLOCK_COUNT_MAX; i++) {
             int v = [layer getFromIdx:i];
@@ -194,14 +197,39 @@ enum eTouchState {
     }
 }
 
-- (int)_checkVanish2:(int)x y:(int)y dx:(int)dx dy:(int)dy val:(int)val cnt:(int)cnt {
+- (void)_setLayerVanish {
+    
+    for (int j = 0; j < FIELD_BLOCK_COUNT_Y; j++) {
+        
+        for (int i = 0; i < FIELD_BLOCK_COUNT_X; i++) {
+            
+            int val = [self.layerTmp get:i y:j];
+            if (val > 0) {
+                
+                // 消去対象に入れておく
+                [self.layerVanish set:i y:j val:val];
+            }
+        }
+    }
+}
+
+/**
+ * 再帰で消去チェック
+ */
+- (int)_checkVanish:(int)x y:(int)y dx:(int)dx dy:(int)dy val:(int)val cnt:(int)cnt {
     
     x += dx;
     y += dy;
     
     if ([self.layerVanish get:x y:y] != 0) {
         
-        // チェック済み・領域外
+        // 消去対象 or 領域外
+        return cnt;
+    }
+    
+    if ([self.layerTmp get:x y:y] != 0) {
+        
+        // チェック済み
         return cnt;
     }
     
@@ -209,69 +237,23 @@ enum eTouchState {
     
     
     int v = [layer get:x y:y];
-    if (v == val) {
+    if (v != val) {
         
-        // 指定の番号に一致した
-        [self.layerVanish set:x y:y val:val];
-        cnt++;
-        cnt = [self _checkVanish2:x y:y dx:-1 dy: 0 val:val cnt:cnt];
-        cnt = [self _checkVanish2:x y:y dx: 0 dy:-1 val:val cnt:cnt];
-        cnt = [self _checkVanish2:x y:y dx:+1 dy: 0 val:val cnt:cnt];
-        cnt = [self _checkVanish2:x y:y dx: 0 dy:+1 val:val cnt:cnt];
-        
-        if (cnt >= val) {
-            
-            // 消去可能
-            [self.layerVanish set:x y:y val:val];
-        }
-        else {
-            
-            // 消去できないのでクリアする
-            [self.layerVanish set:x y:y val:0];
-        }
+        // 消去対象とならない
         return cnt;
     }
-    
-    // 繋がっていなかった
-    return cnt;
-}
-
-- (int)_checkVanish1:(int)x y:(int)y dx:(int)dx dy:(int)dy val:(int)val cnt:(int)cnt {
-    
-    x += dx;
-    y += dy;
-    
-    if ([self.layerVanish get:x y:y] != 0) {
         
-        // チェック済み・領域外
-        return cnt;
-    }
-    
-    // 開始ポイント
+    // 指定の番号に一致した
+    // 消去対象に入れておく
+    [self.layerTmp set:x y:y val:1];
     cnt++;
-    
-    // チェック済みにしておく
-    [self.layerVanish set:x y:y val:val];
-    
-    cnt = [self _checkVanish2:x y:y dx:-1 dy: 0 val:val cnt:cnt];
-    cnt = [self _checkVanish2:x y:y dx: 0 dy:-1 val:val cnt:cnt];
-    cnt = [self _checkVanish2:x y:y dx:+1 dy: 0 val:val cnt:cnt];
-    cnt = [self _checkVanish2:x y:y dx: 0 dy:+1 val:val cnt:cnt];
-    
-    if (cnt >= val) {
-        
-        // 消去可能
-        //[self.layerVanish set:x y:y val:val];
-    }
-    else {
-        
-        // 消去できないのでクリア
-        [self.layerVanish set:x y:y val:0];
-    }
+    cnt = [self _checkVanish:x y:y dx:-1 dy: 0 val:val cnt:cnt];
+    cnt = [self _checkVanish:x y:y dx: 0 dy:-1 val:val cnt:cnt];
+    cnt = [self _checkVanish:x y:y dx:+1 dy: 0 val:val cnt:cnt];
+    cnt = [self _checkVanish:x y:y dx: 0 dy:+1 val:val cnt:cnt];
     
     return cnt;
 }
-
 
 - (void)_updateVanishCheck {
     
@@ -288,22 +270,25 @@ enum eTouchState {
         
         for (int i = 0; i < FIELD_BLOCK_COUNT_X; i++) {
             
+            [layerTmp clear];
             int val = [layer get:i y:j];
             if (val > 0) {
                 
                 // ブロックが存在する
-                int cnt = [self _checkVanish1:i y:j dx:0 dy:0 val:val cnt:0];
+                int cnt = [self _checkVanish:i y:j dx:0 dy:0 val:val cnt:0];
                 
                 if (cnt >= val) {
                     
                     // 消去できた
+                    [self _setLayerVanish];
+                    
                     nVanish++;
                 }
             }
         }
     }
     
-//    [self.layerVanish dump];
+    [self.layerVanish dump];
     if (nVanish == 0) {
         
         // 消去できるものはない

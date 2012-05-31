@@ -16,6 +16,7 @@
 @interface MainCtrl : CCNode {
     
     Layer2D* layerVanish;   // 消去判定用レイヤー
+    Layer2D* layerTmp;      // 計算用テンポラリ
     
     int     m_State;        // 状態
     int     m_Timer;        // タイマー
@@ -28,6 +29,7 @@
 }
 
 @property (nonatomic, retain)Layer2D* layerVanish;
+@property (nonatomic, retain)Layer2D* layerTmp;
 
 - (void)update:(ccTime)dt;
 - (BOOL)isEnd;
