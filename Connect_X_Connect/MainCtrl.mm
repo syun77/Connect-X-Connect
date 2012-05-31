@@ -109,6 +109,10 @@ enum eState {
 
 - (void)_updateVanishCheck {
     
+    [FieldMgr copyBlockToLayer];
+    
+    // 消去実行
+    m_State = eState_VanishExec;
 }
 
 - (void)_updateVanishExec {

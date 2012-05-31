@@ -130,4 +130,30 @@
     return YES;
 }
 
+/**
+ * ブロックの情報をレイヤーにコピーする
+ */
++ (void)copyBlockToLayer {
+    
+    Layer2D* layer = [FieldMgr getLayer];
+    [layer clear];
+    
+    TokenManager* mgr = [FieldMgr getManager];
+    for (Block* b in mgr.m_Pool) {
+        if ([b isExist] == NO) {
+            
+            // 存在しない
+            continue;
+        }
+        
+        int x = [b getChipX];
+        int y = [b getChipY];
+        
+        [layer set:x y:y val:[b getNumber]];
+    }
+    
+    [layer dump];
+}
+
+
 @end

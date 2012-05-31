@@ -28,6 +28,9 @@
 // 番号を設定する
 - (void)setNumber:(int)number;
 
+// 番号を取得する
+- (int)getNumber;
+
 // チップ座標の取得 (X座標)
 - (int)getChipX;
 

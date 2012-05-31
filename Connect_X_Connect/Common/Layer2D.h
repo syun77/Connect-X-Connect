@@ -62,6 +62,12 @@
 // 領域外の値を取得する
 - (int)getOut;
 
+// 初期値で初期化する
+- (void)clear;
+
+// 指定の値で全部埋める
+- (void)fill:(int)v;
+
 // ランダムで値を埋める
 - (void)random:(int)range;
 

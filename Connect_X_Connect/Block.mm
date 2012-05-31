@@ -207,6 +207,11 @@ enum eState {
     [self.fontNumber setText:[NSString stringWithFormat:@"%d", number]];
 }
 
+// 番号を取得する
+- (int)getNumber {
+    return m_nNumber;
+}
+
 /**
  * チップ座標の取得 (X座標)
  */

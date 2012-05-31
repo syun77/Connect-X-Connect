@@ -48,5 +48,10 @@
  */
 + (BOOL)isBlock:(int)idx;
 
+/**
+ * ブロックの情報をレイヤーにコピーする
+ */
++ (void)copyBlockToLayer;
+
 
 @end

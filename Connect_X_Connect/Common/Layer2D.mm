@@ -220,6 +220,16 @@
     
 }
 
+// 初期値で初期化する
+- (void)clear {
+    [self fill:0];
+}
+
+// 指定の値で全部埋める
+- (void)fill:(int)v {
+    memset(m_pData, v, sizeof(int) * [self getIdxMax]);
+}
+
 // ランダムで値を埋める
 - (void)random:(int)range {
     
