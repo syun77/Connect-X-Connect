@@ -222,7 +222,13 @@ enum eState {
         }
     }
     
-    [self.layerVanish dump];
+//    [self.layerVanish dump];
+    if ([layerVanish count:0] == [layer getIdxMax]) {
+        
+        // 消去できるものはない
+        m_State = eState_Standby;
+        return;
+    }
     
     
     // 消去実行
@@ -230,11 +236,15 @@ enum eState {
         
         for (int i = 0; i < FIELD_BLOCK_COUNT_X; i++) {
         
-            // 消去要求を出す
-            //[BlockMgr requestVanish:i y:j];
+            int val = [layer get:i y:j];
+            if (val > 0) {
+                // 消去要求を出す
+                [BlockMgr requestVanish:i y:j];
+            }
         }
     }
     
+    // 消去演出中
     m_State = eState_VanishExec;
 }
 
@@ -242,14 +252,12 @@ enum eState {
     
     if ([BlockMgr isEndVanishingAll]) {
         
-        // 消滅演出完了
-        if (NO) {
-            
-            // TODO: 再チェックをする
-        }
+        // 落下要求を送る
+        [BlockMgr requestFall];
         
-        // TODO: とりあえず待機状態に戻す
-        m_State = eState_Standby;
+        
+        // 落下状態へ遷移
+        m_State = eState_Fall;
     }
 }
 

@@ -68,6 +68,9 @@
 // 指定の値で全部埋める
 - (void)fill:(int)v;
 
+// 指定の値がどれだけあるかをカウントする
+- (int)count:(int)v;
+
 // ランダムで値を埋める
 - (void)random:(int)range;
 

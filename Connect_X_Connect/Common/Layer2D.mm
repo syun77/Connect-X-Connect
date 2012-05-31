@@ -230,6 +230,24 @@
     memset(m_pData, v, sizeof(int) * [self getIdxMax]);
 }
 
+// 指定の値で全て埋められているかどうか
+- (int)count:(int)v {
+    
+    int ret = 0;
+    
+    for (int i = 0; i < [self getIdxMax]; i++) {
+        
+        int val = [self getFromIdx:i];
+        if (val == v) {
+            
+            // 一致した
+            ret++;
+        }
+    }
+
+    return ret;
+}
+
 // ランダムで値を埋める
 - (void)random:(int)range {
     
