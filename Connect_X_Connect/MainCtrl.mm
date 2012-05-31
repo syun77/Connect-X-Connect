@@ -23,6 +23,15 @@ enum eState {
 };
 
 /**
+ * タッチ状態
+ */
+enum eTouchState {
+    eTouchState_Standby,    // タッチしていない
+    eTouchState_Press,      // タッチ中
+    eTouchState_Release,    // タッチを離した
+};
+
+/**
  * ゲームメインのコントローラー実装
  */
 @implementation MainCtrl
@@ -43,8 +52,14 @@ enum eState {
     self.layerVanish = [[[Layer2D alloc] init] autorelease];
     [self.layerVanish create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
     
+    // 変数の初期化
     m_State = eState_Standby;
     m_Timer = 0;
+    m_TouchState = eState_Standby;
+    m_TouchX = 0;
+    m_TouchY = 0;
+    m_ChipX  = 0;
+    
     
     return self;
 }
@@ -61,6 +76,51 @@ enum eState {
 
 // -----------------------------------------------------
 // private
+
+- (int)touchToChip:(float)p {
+    int v = (int)(p - FIELD_OFS_X);
+    int n = v / BLOCK_SIZE;
+    int d = v - n * BLOCK_SIZE;
+    if (d > BLOCK_SIZE/2) {
+        n += 1;
+    }
+    
+    if (n > FIELD_BLOCK_COUNT_X-1) {
+        n = FIELD_BLOCK_COUNT_X-1;
+    }
+    
+    return n;
+}
+
+// タッチ開始コールバック
+- (void)cbTouchStart:(float)x y:(float)y {
+    
+    // タッチ中
+    m_TouchState = eTouchState_Press;
+    m_TouchX = x;
+    m_TouchY = y;
+    
+}
+
+// タッチ移動中
+- (void)cbTouchMove:(float)x y:(float)y {
+    
+    m_TouchX = x;
+    m_TouchY = y;
+
+}
+
+// タッチ終了コールバック
+- (void)cbTouchEnd:(float)x y:(float)y {
+    
+    // タッチを離した
+    m_TouchState = eTouchState_Release;
+    m_TouchX = x;
+    m_TouchY = y;
+
+}
+
+
 - (InterfaceLayer*)_getInterfaceLayer {
 
     return [SceneMain sharedInstance].interfaceLayer;
@@ -72,14 +132,25 @@ enum eState {
 
 - (void)_updateStandby {
     
-    InterfaceLayer* interface   = [self _getInterfaceLayer];
+//    InterfaceLayer* interface   = [self _getInterfaceLayer];
     TokenManager*   mgrBlock    = [self _getManagerBlock];
     Layer2D*        layer       = [FieldMgr getLayer];
+    Cursor*         cursor      = [SceneMain sharedInstance].cursor;
+    
+    m_ChipX = [self touchToChip:m_TouchX];
+    if (m_TouchState == eTouchState_Press) {
+        
+        [cursor setDraw:YES chipX:m_ChipX];
+    }
+    else {
+        [cursor setDraw:NO chipX:m_ChipX];
+    }
     
     static int s_cnt = 0;
     s_cnt++;
-    
-    if ([interface isTouch]) {
+  
+    if (NO) {
+//    if ([interface isTouch]) {
         
         // すべて消す
         [mgrBlock vanishAll];
@@ -88,6 +159,7 @@ enum eState {
     }
     
     if (s_cnt == 1) {
+        
         // ブロック生成テスト
         [layer random:5];
         [layer set:2 y:5 val:5];

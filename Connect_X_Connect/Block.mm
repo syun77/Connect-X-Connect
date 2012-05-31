@@ -42,7 +42,7 @@ enum eState {
     
     [self load:@"font.png"];
     
-    self._r = BLOCK_SiZE / 2 - 2;
+    self._r = BLOCK_SIZE / 2 - 2;
     
     [self.m_pSprite setVisible:NO];
     
@@ -65,9 +65,11 @@ enum eState {
 - (void)attachLayer:(CCLayer *)layer {
     
     self.fontNumber = [AsciiFont node];
+    [self.fontNumber setPrio:1];
     [self.fontNumber createFont:layer length:2];
     [self.fontNumber setAlign:eFontAlign_Center];
     [self.fontNumber setScale:3];
+    
 }
 
 /**
@@ -99,12 +101,12 @@ enum eState {
 - (void)fitGrid {
     int y = (int)self._y;
     y -= FIELD_OFS_Y;
-    int n = y/BLOCK_SiZE;
-    if (y - (n * BLOCK_SiZE) > BLOCK_SiZE/2) {
+    int n = y/BLOCK_SIZE;
+    if (y - (n * BLOCK_SIZE) > BLOCK_SIZE/2) {
         n += 1;
     }
 
-    self._y = FIELD_OFS_Y + n * BLOCK_SiZE;
+    self._y = FIELD_OFS_Y + n * BLOCK_SIZE;
 }
 
 /**
@@ -233,7 +235,7 @@ enum eState {
     [super visit];
     
     glColor4f(1, 1, 1, 1);
-    float s = BLOCK_SiZE / 2;
+    float s = BLOCK_SIZE / 2;
     [self drawRect:self._x cy:self._y w:s h:s rot:0 scale:1];
 }
 
@@ -254,9 +256,9 @@ enum eState {
 - (int)getChipX {
     
     int x = (int)self._x - FIELD_OFS_X;
-    int ret = (int)(x / BLOCK_SiZE);
+    int ret = (int)(x / BLOCK_SIZE);
     
-    if (x%BLOCK_SiZE > 0) {
+    if (x%BLOCK_SIZE > 0) {
         ret++;
     }
     return ret;
@@ -269,9 +271,9 @@ enum eState {
     
     int y = (int)self._y - FIELD_OFS_Y;
     
-    int ret = (int)(y / BLOCK_SiZE);
+    int ret = (int)(y / BLOCK_SIZE);
     
-    if (y%BLOCK_SiZE > 0) {
+    if (y%BLOCK_SIZE > 0) {
         ret++;
     }
     return ret;
@@ -285,7 +287,7 @@ enum eState {
     int x = [self getChipX];
     int y = [self getChipY];
     
-    return x + y * BLOCK_SiZE;
+    return x + y * BLOCK_SIZE;
 }
 
 // 落下要求を送る
@@ -337,8 +339,8 @@ enum eState {
 // ブロックを追加する (インデックス指定)
 + (Block*)addFromIdx:(int)number idx:(int)idx {
     
-    float x = FIELD_OFS_X + (idx % FIELD_BLOCK_COUNT_X) * BLOCK_SiZE;
-    float y = FIELD_OFS_Y + (idx / FIELD_BLOCK_COUNT_X) * BLOCK_SiZE;
+    float x = FIELD_OFS_X + (idx % FIELD_BLOCK_COUNT_X) * BLOCK_SIZE;
+    float y = FIELD_OFS_Y + (idx / FIELD_BLOCK_COUNT_X) * BLOCK_SIZE;
     
     return [Block add:number x:x y:y];
 }

@@ -16,6 +16,7 @@
 #import "TokenManager.h"
 #import "InterfaceLayer.h"
 #import "MainCtrl.h"
+#import "Cursor.h"
 
 /**
  * ゲームメインのシーン
@@ -31,6 +32,7 @@
     AsciiFont*      fontTest2;
     AsciiFont*      fontTest3;
     TokenManager*   mgrBlock;
+    Cursor*         cursor;
     
     // レイヤー
     Layer2D*        layer;
@@ -50,6 +52,7 @@
 @property (nonatomic, retain)AsciiFont*         fontTest2;
 @property (nonatomic, retain)AsciiFont*         fontTest3;
 @property (nonatomic, retain)TokenManager*      mgrBlock;
+@property (nonatomic, retain)Cursor*            cursor;
 
 @property (nonatomic, retain)Layer2D*   layer;
 @property (nonatomic, retain)Layer2D*   layer2;

@@ -92,6 +92,23 @@
 @implementation AsciiFont
 
 /**
+ * コンストラクタ
+ */
+- (id)init {
+    
+    self = [super init];
+    
+    if (self == nil) {
+        return self;
+    }
+    
+    // 描画プライオリティを大きめにする
+    [super setPrio:PRIO_ASCIIFONT];
+    
+    return self;
+}
+
+/**
  * フォントの生成
  * @param layer 描画レイヤー
  * @param length 最大文字列長
@@ -101,8 +118,6 @@
     // 管理トークンの生成
     [super create:layer size:length className:@"AsciiObj"];
     
-    // 描画プライオリティを大きめにする
-    [super setPrio:PRIO_ASCIIFONT];
     
     // 表示を有効にする
     [super addAll];

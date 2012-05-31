@@ -14,7 +14,9 @@
  * 描画プライオリティ
  */
 enum ePrio {
-    ePrio_Block, // ブロック
+    ePrio_Block,  // ブロック
+    ePrio_Number, // ブロックの数字
+    ePrio_Cursor, // カーソル
 };
 
 enum eState {
@@ -34,9 +36,11 @@ static SceneMain* scene_ = nil;
 @synthesize fontTest2;
 @synthesize fontTest3;
 @synthesize mgrBlock;
+@synthesize cursor;
 @synthesize layer;
 @synthesize layer2;
 @synthesize ctrl;
+
 
 /**
  * シングルトンを取得する
@@ -98,6 +102,9 @@ static SceneMain* scene_ = nil;
     [self.mgrBlock create:self.baseLayer size:64 className:@"Block"];
     [self.mgrBlock setPrio:ePrio_Block];
     
+    self.cursor = [Cursor node];
+    [self.baseLayer addChild:self.cursor];
+    
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
     [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
@@ -109,6 +116,7 @@ static SceneMain* scene_ = nil;
     
     // ゲーム制御
     self.ctrl = [MainCtrl node];
+    [self.interfaceLayer addCB:self.ctrl];
     
     // 変数初期化
     m_State = eState_Init;
@@ -126,8 +134,13 @@ static SceneMain* scene_ = nil;
  */
 - (void)dealloc {
     
+    // コールバックから削除
+    [self.interfaceLayer delCB];
+    
     // ゲーム制御
     self.ctrl = nil;
+    
+    self.cursor = nil;
     
     // レイヤー
     self.layer2 = nil;
