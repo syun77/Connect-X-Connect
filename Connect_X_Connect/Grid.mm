@@ -9,6 +9,7 @@
 #import "Grid.h"
 #import "gamecommon.h"
 #import "Math.h"
+#import "SceneMain.h"
 
 
 @implementation Grid
@@ -72,14 +73,17 @@
         y += BLOCK_SIZE;
     }
     
+    MainCtrl* ctrl = [SceneMain sharedInstance].ctrl;
+    float ratio = [ctrl getHpRatio];
     x = 0;
     y = FIELD_OFS_Y + BLOCK_SIZE * FIELD_BLOCK_COUNT_Y - BLOCK_SIZE / 2;
     
     glColor4f(1-c, 0, 0, 1);
     CGPoint origin = CGPointMake(x, y);
-    CGPoint destination = CGPointMake(320, y);
-    glLineWidth(2);
+    CGPoint destination = CGPointMake(320*ratio, y);
+    glLineWidth(8);
     ccDrawLine(origin, destination);
+    glLineWidth(1);
     
     System_SetBlend(eBlend_Add);
     System_SetBlend(eBlend_Normal);

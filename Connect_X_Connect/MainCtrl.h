@@ -21,6 +21,8 @@
     int     m_State;            // 状態
     int     m_Timer;            // タイマー
     
+    int     m_Hp;               // 残りHP
+    
     int     m_TouchState;       // タッチしているかどうか
     float   m_TouchX;           // タッチ座標 (X)
     float   m_TouchY;           // タッチ座標 (Y)
@@ -37,5 +39,7 @@
 
 - (void)update:(ccTime)dt;
 - (BOOL)isEnd;
+- (int)getHp;
+- (float)getHpRatio;
 
 @end

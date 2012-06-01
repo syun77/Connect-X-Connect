@@ -12,6 +12,9 @@
 #import "FieldMgr.h"
 #import "Math.h"
 
+// HPの最大値
+static const int HP_MAX = 100;
+
 /**
  * 状態
  */
@@ -63,6 +66,7 @@ enum eTouchState {
     // 変数の初期化
     m_State = eState_Standby;
     m_Timer = 0;
+    m_Hp = HP_MAX;
     m_TouchState = eState_Standby;
     m_TouchX = 0;
     m_TouchY = 0;
@@ -435,6 +439,7 @@ enum eTouchState {
         
         // ダメージあり
         m_State = eState_DamageExec;
+        m_Hp -= cnt * 10;
         return;
     }
     
@@ -515,6 +520,22 @@ enum eTouchState {
 - (BOOL)isEnd {
     
     return m_State == eState_End;
+}
+
+/**
+ * HPを取得する
+ * @return HP
+ */
+- (int)getHp {
+    return m_Hp;
+}
+
+/**
+ * HPの割合を取得する
+ */
+- (float)getHpRatio {
+    
+    return (float)m_Hp / HP_MAX;
 }
 
 @end
