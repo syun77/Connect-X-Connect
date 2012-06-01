@@ -35,4 +35,10 @@
 // 待機状態にする
 + (void)changeStandbyAll;
 
+/**
+ * フィールド外にあるブロックを削除する
+ * @return 削除した数
+ */
++ (int)vanishOutOfField;
+
 @end

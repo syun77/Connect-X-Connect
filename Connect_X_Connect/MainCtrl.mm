@@ -22,6 +22,8 @@ enum eState {
     eState_Fall,            // 落下中
     eState_VanishCheck,     // 消去チェック
     eState_VanishExec,      // 消去実行
+    eState_DamageCheck,     // ダメージチェック
+    eState_DamageExec,      // ダメージ実行
     eState_End,             // おしまい
 };
 
@@ -200,8 +202,8 @@ enum eTouchState {
     
     m_ChipXPrev = 0;
     
-    Block* b1 = [Block addFromChip:num1 chipX:3 chipY:BLOCK_APPEAR_Y1];
-    Block* b2 = [Block addFromChip:num2 chipX:3 chipY:BLOCK_APPEAR_Y2];
+    Block* b1 = [Block addFromChip:num1 chipX:BLOCK_APPEAR_X chipY:BLOCK_APPEAR_Y1];
+    Block* b2 = [Block addFromChip:num2 chipX:BLOCK_APPEAR_X chipY:BLOCK_APPEAR_Y2];
     
     m_BlockHandler1 = [b1 getIndex];
     m_BlockHandler2 = [b2 getIndex];
@@ -383,10 +385,8 @@ enum eTouchState {
     if (nVanish == 0) {
         
         // 消去できるものはない
-        m_State = eState_AppearBlock;
-        
-        // ブロックを待機状態にする
-        [BlockMgr changeStandbyAll];
+        // ダメージチェックへ
+        m_State = eState_DamageCheck;
         return;
     }
     
@@ -424,6 +424,44 @@ enum eTouchState {
     }
 }
 
+/**
+ * ダメージチェック
+ */
+- (void)_updateDamageCheck {
+    
+    int cnt = [BlockMgr vanishOutOfField];
+    
+    if (cnt > 0) {
+        
+        // ダメージあり
+        m_State = eState_DamageExec;
+        return;
+    }
+    
+    // ブロック出現
+    m_State = eState_AppearBlock;
+    
+    // ブロックを待機状態にする
+    [BlockMgr changeStandbyAll];
+    
+}
+
+/**
+ * ダメージ実行
+ */
+- (void)_updateDamageExec {
+
+    if ([BlockMgr isEndVanishingAll]) {
+        
+        // ブロック出現
+        m_State = eState_AppearBlock;
+        
+        // ブロックを待機状態にする
+        [BlockMgr changeStandbyAll];
+        
+    }
+}
+
 // -----------------------------------------------------
 // public
 /**
@@ -455,6 +493,14 @@ enum eTouchState {
             
         case eState_VanishExec:
             [self _updateVanishExec];
+            break;
+            
+        case eState_DamageCheck:
+            [self _updateDamageCheck];
+            break;
+            
+        case eState_DamageExec:
+            [self _updateDamageExec];
             break;
             
         default:

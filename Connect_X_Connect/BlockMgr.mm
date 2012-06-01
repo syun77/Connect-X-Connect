@@ -169,4 +169,31 @@
     }
 }
 
+/**
+ * フィールド外にあるブロックを削除する
+ * @return 削除した数
+ */
++ (int)vanishOutOfField {
+    
+    int ret = 0;
+    TokenManager* mgr = [BlockMgr _getTokenManager];
+    
+    for (Block* b in mgr.m_Pool) {
+        
+        if ([b isExist] == NO) {
+            
+            continue;
+        }
+        
+        if ([b getChipY] >= FIELD_BLOCK_COUNT_Y) {
+            
+            // 領域外
+            [b requestVanish];
+            ret++;
+        }
+    }
+    
+    return ret;
+}
+
 @end
