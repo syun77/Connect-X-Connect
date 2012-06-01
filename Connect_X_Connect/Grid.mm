@@ -8,6 +8,7 @@
 
 #import "Grid.h"
 #import "gamecommon.h"
+#import "Math.h"
 
 
 @implementation Grid
@@ -21,6 +22,9 @@
     
     [self load:@"font.png"];
     [self.m_pSprite setVisible:NO];
+    [self create];
+    
+    m_tPast = 0;
     
     return self;
 }
@@ -30,7 +34,7 @@
  */
 - (void)update:(ccTime)dt {
     
-    // 特に何もしない
+    m_tPast++;
 }
 
 /**
@@ -41,7 +45,8 @@
     [super visit];
     
     System_SetBlend(eBlend_Normal);
-    glColor4f(0.6, 0.6, 0.6, 0.5);
+    float c = 0.3 * Math_SinEx(m_tPast%180) + 0.3;
+    glColor4f(c, c, c, 0.5);
     
     int x = FIELD_OFS_X - BLOCK_SIZE / 2;
     int y = FIELD_OFS_Y - BLOCK_SIZE / 2;
@@ -66,6 +71,18 @@
         
         y += BLOCK_SIZE;
     }
+    
+    x = 0;
+    y = FIELD_OFS_Y + BLOCK_SIZE * FIELD_BLOCK_COUNT_Y - BLOCK_SIZE / 2;
+    
+    glColor4f(1-c, 0, 0, 1);
+    CGPoint origin = CGPointMake(x, y);
+    CGPoint destination = CGPointMake(320, y);
+    glLineWidth(2);
+    ccDrawLine(origin, destination);
+    
+    System_SetBlend(eBlend_Add);
+    System_SetBlend(eBlend_Normal);
     
 }
 

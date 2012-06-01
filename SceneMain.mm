@@ -107,6 +107,7 @@ static SceneMain* scene_ = nil;
     
     self.cursor = [Cursor node];
     [self.baseLayer addChild:self.cursor z:ePrio_Cursor];
+    [self.cursor setDraw:NO chipX:3];
     
     self.grid = [Grid node];
     [self.baseLayer addChild:self.grid z:ePrio_Grid];

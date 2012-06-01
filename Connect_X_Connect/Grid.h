@@ -14,7 +14,7 @@
  * グリッド描画
  */
 @interface Grid : Token {
-    
+    int m_tPast;    // 経過タイマー
 }
 
 @end

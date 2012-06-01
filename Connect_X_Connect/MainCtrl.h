@@ -25,6 +25,7 @@
     float   m_TouchX;           // タッチ座標 (X)
     float   m_TouchY;           // タッチ座標 (Y)
     int     m_ChipX;            // タッチ座標 (チップ座標X)
+    int     m_ChipXPrev;        // タッチ座標 (チップ座標X) １つ前
     
     int     m_BlockHandler1;    // 追加中のブロックのハンドラ
     int     m_BlockHandler2;    // 追加中のブロックのハンドラ２

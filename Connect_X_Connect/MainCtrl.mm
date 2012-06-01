@@ -65,6 +65,7 @@ enum eTouchState {
     m_TouchX = 0;
     m_TouchY = 0;
     m_ChipX  = 0;
+    m_ChipXPrev = 0;
     
     m_BlockHandler1 = -1;
     m_BlockHandler2 = -1;
@@ -102,21 +103,35 @@ enum eTouchState {
     return n;
 }
 
+// タッチ座標を更新
+- (void)setTouchPos:(float)x y:(float)y {
+    
+    m_TouchX = x;
+    m_TouchY = y;
+    
+    int chipX = [self touchToChip:m_TouchX];
+    if (m_ChipX != chipX) {
+        
+        // タッチしている座標を更新
+        m_ChipXPrev = m_ChipX;
+        m_ChipX = chipX;
+    }
+}
+
 // タッチ開始コールバック
 - (void)cbTouchStart:(float)x y:(float)y {
     
     // タッチ中
     m_TouchState = eTouchState_Press;
-    m_TouchX = x;
-    m_TouchY = y;
+    
+    [self setTouchPos:x y:y];
     
 }
 
 // タッチ移動中
 - (void)cbTouchMove:(float)x y:(float)y {
     
-    m_TouchX = x;
-    m_TouchY = y;
+    [self setTouchPos:x y:y];
 
 }
 
@@ -125,8 +140,8 @@ enum eTouchState {
     
     // タッチを離した
     m_TouchState = eTouchState_Release;
-    m_TouchX = x;
-    m_TouchY = y;
+    
+    [self setTouchPos:x y:y];
 
 }
 
@@ -170,15 +185,37 @@ enum eTouchState {
     Cursor*         cursor      = [SceneMain sharedInstance].cursor;
     
     [cursor setDraw:NO chipX:m_ChipX];
-    m_ChipX = [self touchToChip:m_TouchX];
     if (m_TouchState == eTouchState_Press) {
         
         // ブロック移動
         [cursor setDraw:YES chipX:m_ChipX];
+        
+        // ブロック１
         Block* b1 = (Block*)[mgrBlock getFromIdx:m_BlockHandler1];
-        [b1 setPosFromChip:m_ChipX chipY:[b1 getChipY]];
+        [b1 setPosFromChip:m_ChipX chipY:BLOCK_APPEAR_Y1];
+        
+        // ブロック２
         Block* b2 = (Block*)[mgrBlock getFromIdx:m_BlockHandler2];
-        [b2 setPosFromChip:m_ChipX chipY:[b2 getChipY]];
+        int chipX = m_ChipX;
+        int chipY = BLOCK_APPEAR_Y2;
+        
+        if ([layer get:chipX y:chipY] != 0) {
+            
+            // ブロックが重なっている
+            if (m_ChipX - m_ChipXPrev > 0) {
+                
+                // 以前の移動方向が＋
+                chipX -= 1;
+            }
+            else {
+                
+                // 以前の移動方向がー
+                chipX += 1;
+            }
+            chipY += 1;
+        }
+        
+        [b2 setPosFromChip:chipX chipY:chipY];
     }
     else if(m_TouchState == eTouchState_Release) {
         
@@ -210,7 +247,7 @@ enum eTouchState {
     if (s_cnt == 1) {
         
         // ブロック生成テスト
-        [layer random:7];
+        [layer random:9];
         [layer set:2 y:5 val:5];
         [layer set:2 y:2 val:3];
         [layer set:1 y:0 val:1];
