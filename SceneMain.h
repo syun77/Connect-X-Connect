@@ -17,6 +17,7 @@
 #import "InterfaceLayer.h"
 #import "MainCtrl.h"
 #import "Cursor.h"
+#import "Grid.h"
 
 /**
  * ゲームメインのシーン
@@ -33,6 +34,7 @@
     AsciiFont*      fontTest3;
     TokenManager*   mgrBlock;
     Cursor*         cursor;
+    Grid*           grid;
     
     // レイヤー
     Layer2D*        layer;
@@ -53,6 +55,7 @@
 @property (nonatomic, retain)AsciiFont*         fontTest3;
 @property (nonatomic, retain)TokenManager*      mgrBlock;
 @property (nonatomic, retain)Cursor*            cursor;
+@property (nonatomic, retain)Grid*              grid;
 
 @property (nonatomic, retain)Layer2D*   layer;
 @property (nonatomic, retain)Layer2D*   layer2;

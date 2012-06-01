@@ -39,6 +39,7 @@ static SceneMain* scene_ = nil;
 @synthesize fontTest3;
 @synthesize mgrBlock;
 @synthesize cursor;
+@synthesize grid;
 @synthesize layer;
 @synthesize layer2;
 @synthesize ctrl;
@@ -105,7 +106,10 @@ static SceneMain* scene_ = nil;
     [self.mgrBlock setPrio:ePrio_Block];
     
     self.cursor = [Cursor node];
-    [self.baseLayer addChild:self.cursor];
+    [self.baseLayer addChild:self.cursor z:ePrio_Cursor];
+    
+    self.grid = [Grid node];
+    [self.baseLayer addChild:self.grid z:ePrio_Grid];
     
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
@@ -142,6 +146,7 @@ static SceneMain* scene_ = nil;
     // ゲーム制御
     self.ctrl = nil;
     
+    self.grid = nil;
     self.cursor = nil;
     
     // レイヤー

@@ -16,12 +16,13 @@
  * 状態
  */
 enum eState {
-    eState_AddBlock,    // ブロック追加
-    eState_Standby,     // 待機中
-    eState_Fall,        // 落下中
-    eState_VanishCheck, // 消去チェック
-    eState_VanishExec,  // 消去実行
-    eState_End,         // おしまい
+    eState_AppearBottom,    // ブロック出現 (下から)
+    eState_AppearBlock,     // ブロック出現
+    eState_Standby,         // 待機中
+    eState_Fall,            // 落下中
+    eState_VanishCheck,     // 消去チェック
+    eState_VanishExec,      // 消去実行
+    eState_End,             // おしまい
 };
 
 /**
@@ -85,6 +86,7 @@ enum eTouchState {
 // -----------------------------------------------------
 // private
 
+// タッチ座標をチップ座標に変換する
 - (int)touchToChip:(float)p {
     int v = (int)(p - FIELD_OFS_X);
     int n = v / BLOCK_SIZE;
@@ -138,14 +140,21 @@ enum eTouchState {
     return [SceneMain sharedInstance].mgrBlock;
 }
 
-- (void)_updateAddBlock {
+- (void)_updateAppearBottom {
+    
+    // TODO: 下から出現
+    
+    m_State = eState_AppearBlock;
+}
+
+- (void)_updateAppearBlock {
     
     // ブロック追加
     int num1 = Math_RandInt(2, 5);
     int num2 = Math_RandInt(2, 5);
     
-    Block* b1 = [Block addFromChip:num1 chipX:3 chipY:10];
-    Block* b2 = [Block addFromChip:num2 chipX:3 chipY:9];
+    Block* b1 = [Block addFromChip:num1 chipX:3 chipY:BLOCK_APPEAR_Y1];
+    Block* b2 = [Block addFromChip:num2 chipX:3 chipY:BLOCK_APPEAR_Y2];
     
     m_BlockHandler1 = [b1 getIndex];
     m_BlockHandler2 = [b2 getIndex];
@@ -329,8 +338,7 @@ enum eTouchState {
     if (nVanish == 0) {
         
         // 消去できるものはない
-//        m_State = eState_Standby;
-        m_State = eState_AddBlock;
+        m_State = eState_AppearBlock;
         
         // ブロックを待機状態にする
         [BlockMgr changeStandbyAll];
@@ -380,8 +388,12 @@ enum eTouchState {
     
     switch (m_State) {
             
-        case eState_AddBlock:
-            [self _updateAddBlock];
+        case eState_AppearBottom:
+            [self _updateAppearBottom];
+            break;
+            
+        case eState_AppearBlock:
+            [self _updateAppearBlock];
             break;
             
         case eState_Standby:

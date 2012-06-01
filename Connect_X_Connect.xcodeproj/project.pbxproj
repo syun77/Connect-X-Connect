@@ -19,6 +19,7 @@
 		C70E3F4415731075009BF0CB /* TokenManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F3915731075009BF0CB /* TokenManager.mm */; };
 		C70E3F471573118A009BF0CB /* SceneMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F461573118A009BF0CB /* SceneMain.mm */; };
 		C783FD241577C1DA00AAACAE /* Cursor.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD231577C1DA00AAACAE /* Cursor.mm */; };
+		C783FD28157879D700AAACAE /* Grid.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD27157879D700AAACAE /* Grid.mm */; };
 		C7B9F8EC15759A080023646A /* gamecommon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7B9F8EB15759A080023646A /* gamecommon.mm */; };
 		C7B9F8F515759F4D0023646A /* FieldMgr.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7B9F8F415759F4D0023646A /* FieldMgr.mm */; };
 		C7B9F8F81575A2470023646A /* BlockMgr.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7B9F8F71575A2470023646A /* BlockMgr.mm */; };
@@ -168,6 +169,8 @@
 		C70E3F461573118A009BF0CB /* SceneMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SceneMain.mm; path = ../SceneMain.mm; sourceTree = "<group>"; };
 		C783FD221577C1DA00AAACAE /* Cursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cursor.h; sourceTree = "<group>"; };
 		C783FD231577C1DA00AAACAE /* Cursor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Cursor.mm; sourceTree = "<group>"; };
+		C783FD26157879D700AAACAE /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
+		C783FD27157879D700AAACAE /* Grid.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Grid.mm; sourceTree = "<group>"; };
 		C7B9F8E9157488C30023646A /* gamecommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gamecommon.h; sourceTree = "<group>"; };
 		C7B9F8EB15759A080023646A /* gamecommon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = gamecommon.mm; sourceTree = "<group>"; };
 		C7B9F8F315759F4D0023646A /* FieldMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldMgr.h; sourceTree = "<group>"; };
@@ -483,6 +486,8 @@
 				C7F1007C15746421002D7E00 /* Block.mm */,
 				C783FD221577C1DA00AAACAE /* Cursor.h */,
 				C783FD231577C1DA00AAACAE /* Cursor.mm */,
+				C783FD26157879D700AAACAE /* Grid.h */,
+				C783FD27157879D700AAACAE /* Grid.mm */,
 			);
 			name = Token;
 			sourceTree = "<group>";
@@ -1057,6 +1062,7 @@
 				C7B9F8F81575A2470023646A /* BlockMgr.mm in Sources */,
 				C7B9F8FB1576D7860023646A /* MainCtrl.mm in Sources */,
 				C783FD241577C1DA00AAACAE /* Cursor.mm in Sources */,
+				C783FD28157879D700AAACAE /* Grid.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
