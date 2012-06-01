@@ -21,6 +21,15 @@ static const int FIELD_BLOCK_COUNT_MAX = (FIELD_BLOCK_COUNT_X * FIELD_BLOCK_COUN
 
 static const int FIELD_OUT = -1; // 領域外
 
+// スクリーン座標からチップ座標への変換
+int GameCommon_ScreenXToChipX(int screenX);
+int GameCommon_ScreenYToChipY(int screenY);
+
+// チップ座標からスクリーン座標への変換
+int GameCommon_ChipXToScreenX(int chipX);
+int GameCommon_ChipYToScreenY(int chipY);
+
+
 // ■ブロック関連
 static const int BLOCK_SIZE = 40;
 static const int BLOCK_INVALID = 0; // 無効なブロック

@@ -10,16 +10,18 @@
 #import "SceneMain.h"
 #import "BlockMgr.h"
 #import "FieldMgr.h"
+#import "Math.h"
 
 /**
  * 状態
  */
 enum eState {
-    eState_Standby,
-    eState_Fall,
-    eState_VanishCheck,
-    eState_VanishExec,
-    eState_End,
+    eState_AddBlock,    // ブロック追加
+    eState_Standby,     // 待機中
+    eState_Fall,        // 落下中
+    eState_VanishCheck, // 消去チェック
+    eState_VanishExec,  // 消去実行
+    eState_End,         // おしまい
 };
 
 /**
@@ -62,6 +64,8 @@ enum eTouchState {
     m_TouchX = 0;
     m_TouchY = 0;
     m_ChipX  = 0;
+    
+    m_BlockHandler = -1;
     
     
     return self;
@@ -133,27 +137,54 @@ enum eTouchState {
     return [SceneMain sharedInstance].mgrBlock;
 }
 
+- (void)_updateAddBlock {
+    
+    // ブロック追加
+    int num = Math_RandInt(1, 5);
+    
+    Block* b = [Block addFromChip:num chipX:4 chipY:10];
+    
+    m_BlockHandler = [b getIndex];
+    
+    m_State = eState_Standby;
+}
+
 - (void)_updateStandby {
     
-    InterfaceLayer* interface   = [self _getInterfaceLayer];
+//    InterfaceLayer* interface   = [self _getInterfaceLayer];
     TokenManager*   mgrBlock    = [self _getManagerBlock];
     Layer2D*        layer       = [FieldMgr getLayer];
     Cursor*         cursor      = [SceneMain sharedInstance].cursor;
     
+    [cursor setDraw:NO chipX:m_ChipX];
     m_ChipX = [self touchToChip:m_TouchX];
     if (m_TouchState == eTouchState_Press) {
         
+        // ブロック移動
         [cursor setDraw:YES chipX:m_ChipX];
+        Block* b = (Block*)[mgrBlock getFromIdx:m_BlockHandler];
+        [b setPosFromChip:m_ChipX chipY:[b getChipY]];
+    }
+    else if(m_TouchState == eTouchState_Release) {
+        
+        // タッチを離した
+        m_TouchState = eTouchState_Standby;
+        // 落下要求を送る
+        [BlockMgr requestFall];
+        
+        
+        // 落下状態へ遷移
+        m_State = eState_Fall;
     }
     else {
-        [cursor setDraw:NO chipX:m_ChipX];
+        
     }
     
     static int s_cnt = 0;
     s_cnt++;
   
-//    if (NO) {
-    if ([interface isTouch]) {
+    if (NO) {
+//    if ([interface isTouch]) {
         
         // すべて消す
         [mgrBlock vanishAll];
@@ -292,7 +323,8 @@ enum eTouchState {
     if (nVanish == 0) {
         
         // 消去できるものはない
-        m_State = eState_Standby;
+//        m_State = eState_Standby;
+        m_State = eState_AddBlock;
         
         // ブロックを待機状態にする
         [BlockMgr changeStandbyAll];
@@ -341,6 +373,11 @@ enum eTouchState {
 - (void)update:(ccTime)dt {
     
     switch (m_State) {
+            
+        case eState_AddBlock:
+            [self _updateAddBlock];
+            break;
+            
         case eState_Standby:
             [self _updateStandby];
             break;

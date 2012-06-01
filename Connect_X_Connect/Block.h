@@ -41,6 +41,9 @@
 // チップ座標の取得 (インデックス)
 - (int)getChipIdx;
 
+// 座標の設定
+- (void)setPosFromChip:(int)chipX chipY:(int)chipY;
+
 // 落下要求を送る
 - (void)requestFall;
 
@@ -61,5 +64,8 @@
 
 // ブロックを追加する (インデックス指定)
 + (Block*)addFromIdx:(int)number idx:(int)idx;
+
+// ブロックを追加する (チップ座標指定)
++ (Block*)addFromChip:(int)number chipX:(int)chipX chipY:(int)chipY;
 
 @end

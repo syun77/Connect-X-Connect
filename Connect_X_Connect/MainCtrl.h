@@ -26,6 +26,8 @@
     float   m_TouchY;       // タッチ座標 (Y)
     int     m_ChipX;        // タッチ座標 (チップ座標X)
     
+    int     m_BlockHandler; // 追加中のブロックのハンドラ
+    
 }
 
 @property (nonatomic, retain)Layer2D* layerVanish;

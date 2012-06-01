@@ -152,6 +152,9 @@ enum eState {
     
     // 落下処理
     self._vy -= SPEED_FALL;
+    if (self._vy < -1000) {
+        self._vy = -1000;
+    }
 }
 
 /**
@@ -290,6 +293,13 @@ enum eState {
     return x + y * BLOCK_SIZE;
 }
 
+// 座標の設定
+- (void)setPosFromChip:(int)chipX chipY:(int)chipY {
+    
+    self._x = GameCommon_ChipXToScreenX(chipX);
+    self._y = GameCommon_ChipYToScreenY(chipY);
+}
+
 // 落下要求を送る
 - (void)requestFall {
     
@@ -345,4 +355,12 @@ enum eState {
     return [Block add:number x:x y:y];
 }
 
+// ブロックを追加する (チップ座標指定)
++ (Block*)addFromChip:(int)number chipX:(int)chipX chipY:(int)chipY {
+    
+    float x = GameCommon_ChipXToScreenX(chipX);
+    float y = GameCommon_ChipYToScreenY(chipY);
+    
+    return [Block add:number x:x y:y];
+}
 @end
