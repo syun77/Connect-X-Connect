@@ -18,6 +18,7 @@
 #import "MainCtrl.h"
 #import "Cursor.h"
 #import "Grid.h"
+#import "HpGauge.h"
 
 /**
  * ゲームメインのシーン
@@ -35,6 +36,7 @@
     TokenManager*   mgrBlock;
     Cursor*         cursor;
     Grid*           grid;
+    HpGauge*        hpGauge;
     
     // レイヤー
     Layer2D*        layer;
@@ -56,6 +58,7 @@
 @property (nonatomic, retain)TokenManager*      mgrBlock;
 @property (nonatomic, retain)Cursor*            cursor;
 @property (nonatomic, retain)Grid*              grid;
+@property (nonatomic, retain)HpGauge*           hpGauge;
 
 @property (nonatomic, retain)Layer2D*   layer;
 @property (nonatomic, retain)Layer2D*   layer2;

@@ -19,6 +19,7 @@ static const int HP_MAX = 100;
  * 状態
  */
 enum eState {
+    eState_Init,            // 初期化
     eState_AppearBottom,    // ブロック出現 (下から)
     eState_AppearBlock,     // ブロック出現
     eState_Standby,         // 待機中
@@ -64,7 +65,7 @@ enum eTouchState {
     [self.layerTmp create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
     
     // 変数の初期化
-    m_State = eState_Standby;
+    m_State = eState_Init;
     m_Timer = 0;
     m_Hp = HP_MAX;
     m_TouchState = eState_Standby;
@@ -100,6 +101,10 @@ enum eTouchState {
 - (TokenManager*)_getManagerBlock {
     
     return [SceneMain sharedInstance].mgrBlock;
+}
+- (HpGauge*)_getHpGauge {
+    
+    return [SceneMain sharedInstance].hpGauge;
 }
 
 // タッチ座標をチップ座標に変換する
@@ -190,6 +195,14 @@ enum eTouchState {
 
 }
 
+- (void)_updateInit {
+    
+    HpGauge* hpGauge = [self _getHpGauge];
+    [hpGauge initHp:[self getHpRatio]];
+    
+    m_State = eState_Standby;
+    
+}
 
 - (void)_updateAppearBottom {
     
@@ -440,6 +453,9 @@ enum eTouchState {
         // ダメージあり
         m_State = eState_DamageExec;
         m_Hp -= cnt * 10;
+        
+        HpGauge* hpGauge = [self _getHpGauge];
+        [hpGauge setHp:[self getHpRatio]];
         return;
     }
     
@@ -475,6 +491,10 @@ enum eTouchState {
 - (void)update:(ccTime)dt {
     
     switch (m_State) {
+            
+        case eState_Init:
+            [self _updateInit];
+            break;
             
         case eState_AppearBottom:
             [self _updateAppearBottom];

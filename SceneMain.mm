@@ -19,6 +19,7 @@ enum ePrio {
     ePrio_Block,    // ブロック
     ePrio_Number,   // ブロックの数字
     ePrio_Cursor,   // カーソル
+    ePrio_HpGauge,  // HPゲージ
 };
 
 enum eState {
@@ -40,6 +41,7 @@ static SceneMain* scene_ = nil;
 @synthesize mgrBlock;
 @synthesize cursor;
 @synthesize grid;
+@synthesize hpGauge;
 @synthesize layer;
 @synthesize layer2;
 @synthesize ctrl;
@@ -112,6 +114,9 @@ static SceneMain* scene_ = nil;
     self.grid = [Grid node];
     [self.baseLayer addChild:self.grid z:ePrio_Grid];
     
+    self.hpGauge = [HpGauge node];
+    [self.baseLayer addChild:self.hpGauge z:ePrio_HpGauge];
+    
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
     [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
@@ -146,6 +151,8 @@ static SceneMain* scene_ = nil;
     
     // ゲーム制御
     self.ctrl = nil;
+    
+    self.hpGauge = nil;
     
     self.grid = nil;
     self.cursor = nil;
