@@ -87,6 +87,15 @@ enum eTouchState {
 // -----------------------------------------------------
 // private
 
+- (InterfaceLayer*)_getInterfaceLayer {
+    
+    return [SceneMain sharedInstance].interfaceLayer;
+}
+- (TokenManager*)_getManagerBlock {
+    
+    return [SceneMain sharedInstance].mgrBlock;
+}
+
 // タッチ座標をチップ座標に変換する
 - (int)touchToChip:(float)p {
     int v = (int)(p - FIELD_OFS_X);
@@ -116,6 +125,36 @@ enum eTouchState {
         m_ChipXPrev = m_ChipX;
         m_ChipX = chipX;
     }
+    
+    TokenManager*   mgrBlock    = [self _getManagerBlock];
+    Layer2D*        layer       = [FieldMgr getLayer];
+    
+    // ブロック１
+    Block* b1 = (Block*)[mgrBlock getFromIdx:m_BlockHandler1];
+    [b1 setPosFromChip:m_ChipX chipY:BLOCK_APPEAR_Y1];
+    
+    // ブロック２
+    Block* b2 = (Block*)[mgrBlock getFromIdx:m_BlockHandler2];
+    chipX = m_ChipX;
+    int chipY = BLOCK_APPEAR_Y2;
+    
+    if ([layer get:chipX y:chipY] != 0) {
+        
+        // ブロックが重なっている
+        if (m_ChipX - m_ChipXPrev > 0) {
+            
+            // 以前の移動方向が＋
+            chipX -= 1;
+        }
+        else {
+            
+            // 以前の移動方向がー
+            chipX += 1;
+        }
+        chipY += 1;
+    }
+    
+    [b2 setPosFromChip:chipX chipY:chipY];
 }
 
 // タッチ開始コールバック
@@ -146,15 +185,6 @@ enum eTouchState {
 }
 
 
-- (InterfaceLayer*)_getInterfaceLayer {
-
-    return [SceneMain sharedInstance].interfaceLayer;
-}
-- (TokenManager*)_getManagerBlock {
-    
-    return [SceneMain sharedInstance].mgrBlock;
-}
-
 - (void)_updateAppearBottom {
     
     // TODO: 下から出現
@@ -168,11 +198,15 @@ enum eTouchState {
     int num1 = Math_RandInt(2, 5);
     int num2 = Math_RandInt(2, 5);
     
+    m_ChipXPrev = 0;
+    
     Block* b1 = [Block addFromChip:num1 chipX:3 chipY:BLOCK_APPEAR_Y1];
     Block* b2 = [Block addFromChip:num2 chipX:3 chipY:BLOCK_APPEAR_Y2];
     
     m_BlockHandler1 = [b1 getIndex];
     m_BlockHandler2 = [b2 getIndex];
+    
+    [self setTouchPos:GameCommon_ChipXToScreenX(BLOCK_APPEAR_X) y:0];
     
     m_State = eState_Standby;
 }
@@ -190,32 +224,6 @@ enum eTouchState {
         // ブロック移動
         [cursor setDraw:YES chipX:m_ChipX];
         
-        // ブロック１
-        Block* b1 = (Block*)[mgrBlock getFromIdx:m_BlockHandler1];
-        [b1 setPosFromChip:m_ChipX chipY:BLOCK_APPEAR_Y1];
-        
-        // ブロック２
-        Block* b2 = (Block*)[mgrBlock getFromIdx:m_BlockHandler2];
-        int chipX = m_ChipX;
-        int chipY = BLOCK_APPEAR_Y2;
-        
-        if ([layer get:chipX y:chipY] != 0) {
-            
-            // ブロックが重なっている
-            if (m_ChipX - m_ChipXPrev > 0) {
-                
-                // 以前の移動方向が＋
-                chipX -= 1;
-            }
-            else {
-                
-                // 以前の移動方向がー
-                chipX += 1;
-            }
-            chipY += 1;
-        }
-        
-        [b2 setPosFromChip:chipX chipY:chipY];
     }
     else if(m_TouchState == eTouchState_Release) {
         
