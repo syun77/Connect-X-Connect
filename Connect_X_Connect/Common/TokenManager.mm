@@ -196,6 +196,11 @@
 - (void)setPrio:(NSInteger)Prio {
     
     m_Prio = Prio;
+    
+    for (Token* t in self.m_Pool) {
+        
+        [t setPrio:Prio];
+    }
 }
 
 /**

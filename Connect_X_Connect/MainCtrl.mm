@@ -65,7 +65,8 @@ enum eTouchState {
     m_TouchY = 0;
     m_ChipX  = 0;
     
-    m_BlockHandler = -1;
+    m_BlockHandler1 = -1;
+    m_BlockHandler2 = -1;
     
     
     return self;
@@ -140,11 +141,14 @@ enum eTouchState {
 - (void)_updateAddBlock {
     
     // ブロック追加
-    int num = Math_RandInt(1, 5);
+    int num1 = Math_RandInt(2, 5);
+    int num2 = Math_RandInt(2, 5);
     
-    Block* b = [Block addFromChip:num chipX:4 chipY:10];
+    Block* b1 = [Block addFromChip:num1 chipX:3 chipY:10];
+    Block* b2 = [Block addFromChip:num2 chipX:3 chipY:9];
     
-    m_BlockHandler = [b getIndex];
+    m_BlockHandler1 = [b1 getIndex];
+    m_BlockHandler2 = [b2 getIndex];
     
     m_State = eState_Standby;
 }
@@ -162,8 +166,10 @@ enum eTouchState {
         
         // ブロック移動
         [cursor setDraw:YES chipX:m_ChipX];
-        Block* b = (Block*)[mgrBlock getFromIdx:m_BlockHandler];
-        [b setPosFromChip:m_ChipX chipY:[b getChipY]];
+        Block* b1 = (Block*)[mgrBlock getFromIdx:m_BlockHandler1];
+        [b1 setPosFromChip:m_ChipX chipY:[b1 getChipY]];
+        Block* b2 = (Block*)[mgrBlock getFromIdx:m_BlockHandler2];
+        [b2 setPosFromChip:m_ChipX chipY:[b2 getChipY]];
     }
     else if(m_TouchState == eTouchState_Release) {
         
@@ -195,7 +201,7 @@ enum eTouchState {
     if (s_cnt == 1) {
         
         // ブロック生成テスト
-        [layer random:6];
+        [layer random:7];
         [layer set:2 y:5 val:5];
         [layer set:2 y:2 val:3];
         [layer set:1 y:0 val:1];

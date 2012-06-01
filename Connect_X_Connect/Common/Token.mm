@@ -90,6 +90,8 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
     self._h = 32;
     self._r = 32;
     
+    m_Prio = 0;
+    
     [self setHitEnabled:YES];
     
     return self;
@@ -186,6 +188,16 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
 }
 - (void)setSize2:(float)r {
     self._r = r;
+}
+
+// 描画プライオリティの設定
+- (void)setPrio:(int)prio {
+    m_Prio = prio;
+}
+
+// 描画プライオリティの取得
+- (int)getPrio {
+    return m_Prio;
 }
 
 /**

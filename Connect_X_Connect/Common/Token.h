@@ -26,6 +26,7 @@
     BOOL        m_isCreate; // 生成フラグ
     CCSprite*   m_pSprite;  // スプライト
     BOOL        m_isHit;    // 当たり判定が有効かどうか
+    int         m_Prio;     // 描画プライオリティ
 }
 
 // レイヤーにアタッチする
@@ -45,6 +46,12 @@
 // サイズを設定する
 - (void)setSize:(float)w h:(float)h;
 - (void)setSize2:(float)r;
+
+// 描画プライオリティの設定
+- (void)setPrio:(int)prio;
+
+// 描画プライオリティの取得
+- (int)getPrio;
 
 // 画面外に出たかどうか
 - (BOOL)isOut;

@@ -14,9 +14,11 @@
  * 描画プライオリティ
  */
 enum ePrio {
-    ePrio_Block,  // ブロック
-    ePrio_Number, // ブロックの数字
-    ePrio_Cursor, // カーソル
+    ePrio_Back,     // 背景
+    ePrio_Grid,     // グリッド線
+    ePrio_Block,    // ブロック
+    ePrio_Number,   // ブロックの数字
+    ePrio_Cursor,   // カーソル
 };
 
 enum eState {

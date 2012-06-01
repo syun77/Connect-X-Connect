@@ -15,18 +15,19 @@
  */
 @interface MainCtrl : CCNode {
     
-    Layer2D* layerVanish;   // 消去判定用レイヤー
-    Layer2D* layerTmp;      // 計算用テンポラリ
+    Layer2D* layerVanish;       // 消去判定用レイヤー
+    Layer2D* layerTmp;          // 計算用テンポラリ
     
-    int     m_State;        // 状態
-    int     m_Timer;        // タイマー
+    int     m_State;            // 状態
+    int     m_Timer;            // タイマー
     
-    int     m_TouchState;   // タッチしているかどうか
-    float   m_TouchX;       // タッチ座標 (X)
-    float   m_TouchY;       // タッチ座標 (Y)
-    int     m_ChipX;        // タッチ座標 (チップ座標X)
+    int     m_TouchState;       // タッチしているかどうか
+    float   m_TouchX;           // タッチ座標 (X)
+    float   m_TouchY;           // タッチ座標 (Y)
+    int     m_ChipX;            // タッチ座標 (チップ座標X)
     
-    int     m_BlockHandler; // 追加中のブロックのハンドラ
+    int     m_BlockHandler1;    // 追加中のブロックのハンドラ
+    int     m_BlockHandler2;    // 追加中のブロックのハンドラ２
     
 }
 

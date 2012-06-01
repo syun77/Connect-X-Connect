@@ -13,6 +13,7 @@
 
 static const int TIMER_VANISH = 30;
 static const float SPEED_FALL = 50; // ブロック落下速度
+static const float SPEED_FALL_MAX = 1000; // 落下速度の最大値
 
 /**
  * 状態
@@ -64,8 +65,10 @@ enum eState {
  */
 - (void)attachLayer:(CCLayer *)layer {
     
+    int prio = [self getPrio];
+    
     self.fontNumber = [AsciiFont node];
-    [self.fontNumber setPrio:1];
+    [self.fontNumber setPrio:prio + 1];
     [self.fontNumber createFont:layer length:2];
     [self.fontNumber setAlign:eFontAlign_Center];
     [self.fontNumber setScale:3];
@@ -152,8 +155,8 @@ enum eState {
     
     // 落下処理
     self._vy -= SPEED_FALL;
-    if (self._vy < -1000) {
-        self._vy = -1000;
+    if (self._vy < -SPEED_FALL_MAX) {
+        self._vy = -SPEED_FALL_MAX;
     }
 }
 
