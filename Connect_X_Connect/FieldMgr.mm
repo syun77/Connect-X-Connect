@@ -145,6 +145,11 @@
             // 存在しない
             continue;
         }
+        if ([b isShield]) {
+            
+            // シールド有効時は消せない
+            continue;
+        }
         
         int x = [b getChipX];
         int y = [b getChipY];

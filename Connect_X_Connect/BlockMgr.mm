@@ -196,4 +196,24 @@
     return ret;
 }
 
+// チップ座標を指定してブロックを取得する
++ (Block*)getFromChip:(int)chipX chipY:(int)chipY {
+    
+    TokenManager* mgr = [BlockMgr _getTokenManager];
+    
+    for (Block* b in mgr.m_Pool) {
+        
+        if ([b isExist] == NO) {
+            
+            continue;
+        }
+        
+        if ([b getChipX] == chipX && [b getChipY] == chipY) {
+            return b;
+        }
+    }
+    
+    // 該当のブロックはなし
+    return nil;
+}
 @end

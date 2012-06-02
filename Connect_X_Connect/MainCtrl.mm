@@ -274,7 +274,7 @@ enum eTouchState {
     if (s_cnt == 1) {
         
         // ブロック生成テスト
-        [layer random:9];
+        [layer random:5];
         [layer set:2 y:5 val:5];
         [layer set:2 y:2 val:3];
         [layer set:1 y:0 val:1];
@@ -283,7 +283,11 @@ enum eTouchState {
         for (int i = 0; i < FIELD_BLOCK_COUNT_MAX; i++) {
             int v = [layer getFromIdx:i];
             if (v > 0) {
-                [Block addFromIdx:v idx:i];
+                Block* b = [Block addFromIdx:v idx:i];
+                
+                if (Math_Rand(5) == 0) {
+                    [b setShield:2];
+                }
             }
         }
         
@@ -417,6 +421,25 @@ enum eTouchState {
             if (val > 0) {
                 // 消去要求を出す
                 [BlockMgr requestVanish:i y:j];
+                
+                // 上下左右にあるブロックのシールドを減らす
+                int tblX[] = {
+                    -1, 0, 1, 0,
+                };
+                int tblY[] = {
+                    0, -1, 0, 1,
+                };
+                for (int k = 0; k < 4; k++) {
+                    int dx = tblX[k];
+                    int dy = tblY[k];
+                    
+                    Block* b = [BlockMgr getFromChip:i+dx chipY:j+dy];
+                    if (b) {
+                        
+                        // シールドを減らす
+                        [b decShield];
+                    }
+                }
             }
         }
     }

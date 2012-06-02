@@ -22,6 +22,8 @@
     int         m_State;        // 状態
     BOOL        m_ReqFall;      // 落下要求フラグ
     BOOL        m_ReqVanish;    // 消滅要求フラグ
+    
+    int         m_nShield;      // 固ぷよカウンタ
 }
 
 @property (nonatomic, retain)AsciiFont* fontNumber;
@@ -31,6 +33,15 @@
 
 // 番号を取得する
 - (int)getNumber;
+
+// 固ぷよカウンタを設定
+- (void)setShield:(int)v;
+
+// 固ぷよカウンタを減らす
+- (void)decShield;
+
+// 固ぷよカウンタが有効かどうか
+- (BOOL)isShield;
 
 // チップ座標の取得 (X座標)
 - (int)getChipX;

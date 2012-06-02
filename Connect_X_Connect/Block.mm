@@ -104,82 +104,82 @@ enum eState {
     
     int a = 0x30;
     
-//    switch (m_nNumber) {
-//        case 1:
-//            glColor4ub(197, 197, 197, a); // 白
-//            break;
-//            
-//        case 2:
-//            glColor4ub(218, 38, 38, a); // 赤
-//            break;
-//            
-//        case 3:
-//            glColor4ub(218, 128, 38, a); // オレンジ
-//            break;
-//            
-//        case 4:
-//            glColor4ub(218, 218, 38, a); // 黄色
-//            break;
-//            
-//        case 5:
-//            glColor4ub(38, 218, 38, a); // 緑
-//            break;
-//            
-//        case 6:
-//            glColor4ub(218, 218, 132, a); // 水色
-//            break;
-//            
-//        case 7:
-//            glColor4ub(80, 80, 226, a); // 青
-//            break;
-//            
-//        case 8:
-//            glColor4ub(226, 80, 226, a); // 紫
-//            break;
-//            
-//        case 9:
-//        default:
-//            glColor4ub(141, 141, 141, a); // 灰色
-//            break;
-//    }
     switch (m_nNumber) {
         case 1:
             glColor4ub(197, 197, 197, a); // 白
             break;
             
         case 2:
-            glColor4ub(165, 31, 31, a); // 赤
+            glColor4ub(218, 38, 38, a); // 赤
             break;
             
         case 3:
-            glColor4ub(165, 98, 31, a); // オレンジ
+            glColor4ub(218, 128, 38, a); // オレンジ
             break;
             
         case 4:
-            glColor4ub(142, 142, 26, a); // 黄色
+            glColor4ub(218, 218, 38, a); // 黄色
             break;
             
         case 5:
-            glColor4ub(26, 142, 26, a); // 緑
+            glColor4ub(38, 218, 38, a); // 緑
             break;
             
         case 6:
-            glColor4ub(26, 142, 142, a); // 水色
+            glColor4ub(218, 218, 132, a); // 水色
             break;
             
         case 7:
-            glColor4ub(31, 31, 165, a); // 青
+            glColor4ub(80, 80, 226, a); // 青
             break;
             
         case 8:
-            glColor4ub(165, 31, 165, a); // 紫
+            glColor4ub(226, 80, 226, a); // 紫
             break;
             
         case 9:
         default:
-            glColor4ub(85, 85, 85, a); // 灰色
+            glColor4ub(141, 141, 141, a); // 灰色
             break;
     }
+//    switch (m_nNumber) {
+//        case 1:
+//            glColor4ub(197, 197, 197, a); // 白
+//            break;
+//            
+//        case 2:
+//            glColor4ub(165, 31, 31, a); // 赤
+//            break;
+//            
+//        case 3:
+//            glColor4ub(165, 98, 31, a); // オレンジ
+//            break;
+//            
+//        case 4:
+//            glColor4ub(142, 142, 26, a); // 黄色
+//            break;
+//            
+//        case 5:
+//            glColor4ub(26, 142, 26, a); // 緑
+//            break;
+//            
+//        case 6:
+//            glColor4ub(26, 142, 142, a); // 水色
+//            break;
+//            
+//        case 7:
+//            glColor4ub(31, 31, 165, a); // 青
+//            break;
+//            
+//        case 8:
+//            glColor4ub(165, 31, 165, a); // 紫
+//            break;
+//            
+//        case 9:
+//        default:
+//            glColor4ub(85, 85, 85, a); // 灰色
+//            break;
+//    }
 }
 
 /**
@@ -329,8 +329,25 @@ enum eState {
     }
     
     System_SetBlend(eBlend_Normal);
-    [self setGlColor];
     float s = BLOCK_SIZE / 2;
+    if ([self isShield]) {
+        
+        // シールド有効
+        if (m_nShield == 1) {
+            glColor4ub(0x60, 0x60, 0x60, 0x40);
+        }
+        else {
+            
+            // 数字は不可視
+            glColor4ub(0x60, 0x60, 0x60, 0xFF);
+        }
+    }
+    else {
+        
+        // 通常状態
+        [self setGlColor];
+    }
+    
     [self fillRect:self._x cy:self._y w:s h:s rot:0 scale:1];
     
     glColor4f(1, 1, 1, 1);
@@ -347,6 +364,25 @@ enum eState {
 // 番号を取得する
 - (int)getNumber {
     return m_nNumber;
+}
+
+// 固ぷよカウンタを設定
+- (void)setShield:(int)v {
+    
+    m_nShield = v;
+}
+
+// 固ぷよカウンタを減らす
+- (void)decShield {
+    if (m_nShield > 0) {
+        m_nShield--;
+    }
+}
+
+// 固ぷよカウンタが有効かどうか
+- (BOOL)isShield {
+    
+    return m_nShield > 0;
 }
 
 /**

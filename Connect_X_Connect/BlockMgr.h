@@ -41,4 +41,7 @@
  */
 + (int)vanishOutOfField;
 
+// チップ座標を指定してブロックを取得する
++ (Block*)getFromChip:(int)chipX chipY:(int)chipY;
+
 @end
