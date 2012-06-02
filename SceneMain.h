@@ -40,7 +40,6 @@
     
     // レイヤー
     Layer2D*        layer;
-    Layer2D*        layer2;
     
     // ゲーム状態管理
     MainCtrl*       ctrl;
@@ -61,7 +60,6 @@
 @property (nonatomic, retain)HpGauge*           hpGauge;
 
 @property (nonatomic, retain)Layer2D*   layer;
-@property (nonatomic, retain)Layer2D*   layer2;
 
 @property (nonatomic, retain)MainCtrl*  ctrl;
 

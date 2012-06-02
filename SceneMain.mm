@@ -43,7 +43,6 @@ static SceneMain* scene_ = nil;
 @synthesize grid;
 @synthesize hpGauge;
 @synthesize layer;
-@synthesize layer2;
 @synthesize ctrl;
 
 
@@ -121,11 +120,6 @@ static SceneMain* scene_ = nil;
     [[self.layer = [Layer2D alloc] init] autorelease];
     [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
     
-    
-    [[self.layer2 = [Layer2D alloc] init] autorelease];
-    [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
-    [self.layer2 set:6 y:6 val:9];
-    
     // ゲーム制御
     self.ctrl = [MainCtrl node];
     [self.interfaceLayer addCB:self.ctrl];
@@ -158,7 +152,6 @@ static SceneMain* scene_ = nil;
     self.cursor = nil;
     
     // レイヤー
-    self.layer2 = nil;
     self.layer = nil;
     
     // ■描画オブジェクト
@@ -199,9 +192,6 @@ static SceneMain* scene_ = nil;
     //[self.fontTest setText:[NSString stringWithFormat:@"%d", s_cnt]];
     //[self.fontTest2 setText:[NSString stringWithFormat:@"%06d", s_cnt]];
     //[self.fontTest3 setText:[NSString stringWithFormat:@"%09d", s_cnt]];
-    
-    //[self.layer copyWithLayer2D:self.layer2];
-    
     
 }
 

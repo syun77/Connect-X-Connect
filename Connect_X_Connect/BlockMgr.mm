@@ -215,7 +215,7 @@
             continue;
         }
         
-        if ([b getChipY] >= FIELD_BLOCK_COUNT_Y) {
+        if ([b getChipY] >= FIELD_BLOCK_COUNT_Y-1) {
             
             // 領域外
             [b requestVanish];

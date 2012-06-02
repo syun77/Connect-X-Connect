@@ -61,7 +61,7 @@ static const int TIMER_DECREASE = 60;
     
     System_SetBlend(eBlend_Add);
     int x = 8;
-    int y = FIELD_OFS_Y + BLOCK_SIZE * FIELD_BLOCK_COUNT_Y - BLOCK_SIZE / 2;
+    int y = FIELD_OFS_Y + BLOCK_SIZE * (FIELD_BLOCK_COUNT_Y-1) - BLOCK_SIZE / 2;
     
     float c = 0.3 * Math_SinEx(m_tPast%180);
     

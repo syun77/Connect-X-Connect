@@ -236,6 +236,13 @@ enum eTouchState {
 - (void)_updateAppearBottomCheck {
     
     // TODO: 下から出現チェック
+    Layer2D* layer = [FieldMgr getLayer];
+    if ([layer count:0] < 5 * 5) {
+        // TODO: 色々埋まっていたら出現しない
+        m_Timer = 1;
+    }
+    
+    
     if (m_Timer > 0) {
         
         // 出現しないので、ブロック出現
@@ -277,7 +284,7 @@ enum eTouchState {
 - (void)_updateAppearBlock {
     
     // ブロック追加
-    int num1 = Math_RandInt(2, 5);
+    int num1 = Math_RandInt(2, 4);
     
     m_ChipXPrev = 0;
     
@@ -337,18 +344,14 @@ enum eTouchState {
         // タッチを離した
         m_TouchState = eTouchState_Standby;
         
-        Block* b1 = (Block*)[mgrBlock getFromIdx:m_BlockHandler1];
-        if ([layer get:[b1 getChipX] y:[b1 getChipY]-1] == 0) {
+        // 下にブロックがなければ置ける
+        // 落下要求を送る
+        [BlockMgr requestFall];
+        
+        
+        // 落下状態へ遷移
+        m_State = eState_Fall;
             
-            // 下にブロックがなければ置ける
-            // 落下要求を送る
-            [BlockMgr requestFall];
-            
-            
-            // 落下状態へ遷移
-            m_State = eState_Fall;
-            
-        }
     }
     else {
         
