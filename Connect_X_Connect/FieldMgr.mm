@@ -145,14 +145,16 @@
             // 存在しない
             continue;
         }
-        if ([b isShield]) {
-            
-            // シールド有効時は消せない
-            continue;
-        }
         
         int x = [b getChipX];
         int y = [b getChipY];
+        
+        if ([b isShield]) {
+            
+            // シールド有効時は消せない
+            [layer set:x y:y val:100];
+            continue;
+        }
         
         [layer set:x y:y val:[b getNumber]];
     }

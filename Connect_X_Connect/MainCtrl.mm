@@ -12,6 +12,8 @@
 #import "FieldMgr.h"
 #import "Math.h"
 
+#define SIMGLE_FALL_ENABLE // １つずつ落下させるモード
+
 // HPの最大値
 static const int HP_MAX = 100;
 
@@ -140,12 +142,15 @@ enum eTouchState {
     }
     
     TokenManager*   mgrBlock    = [self _getManagerBlock];
+#ifndef SIMGLE_FALL_ENABLE
     Layer2D*        layer       = [FieldMgr getLayer];
+#endif
     
     // ブロック１
     Block* b1 = (Block*)[mgrBlock getFromIdx:m_BlockHandler1];
     [b1 setPosFromChip:m_ChipX chipY:BLOCK_APPEAR_Y1];
     
+#ifndef SIMGLE_FALL_ENABLE
     // ブロック２
     Block* b2 = (Block*)[mgrBlock getFromIdx:m_BlockHandler2];
     chipX = m_ChipX;
@@ -168,32 +173,54 @@ enum eTouchState {
     }
     
     [b2 setPosFromChip:chipX chipY:chipY];
+#endif
 }
 
 // タッチ開始コールバック
 - (void)cbTouchStart:(float)x y:(float)y {
     
-    // タッチ中
-    m_TouchState = eTouchState_Press;
-    
-    [self setTouchPos:x y:y];
+    switch (m_State) {
+        case eState_Standby:
+            // タッチ中
+            m_TouchState = eTouchState_Press;
+            
+            [self setTouchPos:x y:y];
+            break;
+            
+        default:
+            break;
+    }
     
 }
 
 // タッチ移動中
 - (void)cbTouchMove:(float)x y:(float)y {
-    
-    [self setTouchPos:x y:y];
+
+    switch (m_State) {
+        case eState_Standby:
+            [self setTouchPos:x y:y];
+            break;
+            
+        default:
+            break;
+    }
 
 }
 
 // タッチ終了コールバック
 - (void)cbTouchEnd:(float)x y:(float)y {
     
-    // タッチを離した
-    m_TouchState = eTouchState_Release;
-    
-    [self setTouchPos:x y:y];
+    switch (m_State) {
+        case eState_Standby:
+            // タッチを離した
+            m_TouchState = eTouchState_Release;
+            
+            [self setTouchPos:x y:y];
+            break;
+            
+        default:
+            break;
+    }
 
 }
 
@@ -209,8 +236,7 @@ enum eTouchState {
 - (void)_updateAppearBottomCheck {
     
     // TODO: 下から出現チェック
-//    if (m_Timer > 0) {
-    {
+    if (m_Timer > 0) {
         
         // 出現しないので、ブロック出現
         m_State = eState_AppearBlock;
@@ -224,7 +250,7 @@ enum eTouchState {
         int number = Math_RandInt(1, 5);
         Block* b = [Block addFromChip:number chipX:i chipY:-1];
         if (b) {
-            [b setShield:2];
+            [b setShield:1];
         }
     }
     
@@ -247,6 +273,28 @@ enum eTouchState {
     }
 }
 
+#ifdef SIMGLE_FALL_ENABLE
+- (void)_updateAppearBlock {
+    
+    // ブロック追加
+    int num1 = Math_RandInt(2, 5);
+    
+    m_ChipXPrev = 0;
+    
+    Block* b1 = [Block addFromChip:num1 chipX:BLOCK_APPEAR_X chipY:BLOCK_APPEAR_Y1];
+    
+    m_BlockHandler1 = [b1 getIndex];
+    
+    [self setTouchPos:GameCommon_ChipXToScreenX(BLOCK_APPEAR_X) y:0];
+    
+    // ブロックを待機状態にする
+    [BlockMgr changeStandbyAll];
+    
+    [FieldMgr copyBlockToLayer];
+    
+    m_State = eState_Standby;
+}
+#else
 - (void)_updateAppearBlock {
     
     // ブロック追加
@@ -268,6 +316,7 @@ enum eTouchState {
     
     m_State = eState_Standby;
 }
+#endif
 
 - (void)_updateStandby {
     
@@ -287,12 +336,19 @@ enum eTouchState {
         
         // タッチを離した
         m_TouchState = eTouchState_Standby;
-        // 落下要求を送る
-        [BlockMgr requestFall];
         
-        
-        // 落下状態へ遷移
-        m_State = eState_Fall;
+        Block* b1 = (Block*)[mgrBlock getFromIdx:m_BlockHandler1];
+        if ([layer get:[b1 getChipX] y:[b1 getChipY]-1] == 0) {
+            
+            // 下にブロックがなければ置ける
+            // 落下要求を送る
+            [BlockMgr requestFall];
+            
+            
+            // 落下状態へ遷移
+            m_State = eState_Fall;
+            
+        }
     }
     else {
         
