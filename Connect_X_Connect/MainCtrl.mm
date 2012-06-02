@@ -254,7 +254,7 @@ enum eTouchState {
     // 下から出現
     for(int i = 0; i < FIELD_BLOCK_COUNT_X; i++)
     {
-        int number = Math_RandInt(1, 5);
+        int number = Math_RandInt(1, 4);
         Block* b = [Block addFromChip:number chipX:i chipY:-1];
         if (b) {
             [b setShield:1];

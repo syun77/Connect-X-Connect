@@ -226,7 +226,7 @@ enum eState {
         
         return;
     }
-    
+   
     if ([BlockMgr checkHitBlock:self]) {
         
         // 落下待機状態へ

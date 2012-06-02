@@ -97,6 +97,7 @@
             
             // 当たった
             block._vy = 0;
+            block._y = y2 + block._r;
             
             if ([b isFallWait]) {
                 
