@@ -72,6 +72,8 @@ enum eState {
     [self.fontNumber createFont:layer length:2];
     [self.fontNumber setAlign:eFontAlign_Center];
     [self.fontNumber setScale:3];
+    int c = 0xFF;
+    [self.fontNumber setColor:ccc3(c, c, c)];
     
 }
 
@@ -97,6 +99,88 @@ enum eState {
 
 // --------------------------------------------------------
 // private
+
+- (void)setGlColor {
+    
+    int a = 0x30;
+    
+//    switch (m_nNumber) {
+//        case 1:
+//            glColor4ub(197, 197, 197, a); // 白
+//            break;
+//            
+//        case 2:
+//            glColor4ub(218, 38, 38, a); // 赤
+//            break;
+//            
+//        case 3:
+//            glColor4ub(218, 128, 38, a); // オレンジ
+//            break;
+//            
+//        case 4:
+//            glColor4ub(218, 218, 38, a); // 黄色
+//            break;
+//            
+//        case 5:
+//            glColor4ub(38, 218, 38, a); // 緑
+//            break;
+//            
+//        case 6:
+//            glColor4ub(218, 218, 132, a); // 水色
+//            break;
+//            
+//        case 7:
+//            glColor4ub(80, 80, 226, a); // 青
+//            break;
+//            
+//        case 8:
+//            glColor4ub(226, 80, 226, a); // 紫
+//            break;
+//            
+//        case 9:
+//        default:
+//            glColor4ub(141, 141, 141, a); // 灰色
+//            break;
+//    }
+    switch (m_nNumber) {
+        case 1:
+            glColor4ub(197, 197, 197, a); // 白
+            break;
+            
+        case 2:
+            glColor4ub(165, 31, 31, a); // 赤
+            break;
+            
+        case 3:
+            glColor4ub(165, 98, 31, a); // オレンジ
+            break;
+            
+        case 4:
+            glColor4ub(142, 142, 26, a); // 黄色
+            break;
+            
+        case 5:
+            glColor4ub(26, 142, 26, a); // 緑
+            break;
+            
+        case 6:
+            glColor4ub(26, 142, 142, a); // 水色
+            break;
+            
+        case 7:
+            glColor4ub(31, 31, 165, a); // 青
+            break;
+            
+        case 8:
+            glColor4ub(165, 31, 165, a); // 紫
+            break;
+            
+        case 9:
+        default:
+            glColor4ub(85, 85, 85, a); // 灰色
+            break;
+    }
+}
 
 /**
  * グリッド内に収まるようにする
@@ -240,9 +324,18 @@ enum eState {
 - (void)visit {
     [super visit];
     
-    glColor4f(1, 1, 1, 1);
+    if (self.visible == NO) {
+        return;
+    }
+    
+    System_SetBlend(eBlend_Normal);
+    [self setGlColor];
     float s = BLOCK_SIZE / 2;
+    [self fillRect:self._x cy:self._y w:s h:s rot:0 scale:1];
+    
+    glColor4f(1, 1, 1, 1);
     [self drawRect:self._x cy:self._y w:s h:s rot:0 scale:1];
+    [self drawRect:self._x cy:self._y w:s-1 h:s-1 rot:0 scale:1];
 }
 
 // 番号を設定する
