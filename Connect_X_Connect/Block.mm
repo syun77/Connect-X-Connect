@@ -43,7 +43,7 @@ enum eState {
     
     [self load:@"font.png"];
     
-    self._r = BLOCK_SIZE / 2 - 2;
+    self._r = BLOCK_SIZE / 2;
     
     [self.m_pSprite setVisible:NO];
     
@@ -460,6 +460,12 @@ enum eState {
 - (void)changeStandby {
     
     m_State = eState_Standby;
+}
+
+// 落下待機待ちにする
+- (void)changeFallWait {
+    
+    m_State = eState_FallWait;
 }
 
 /**

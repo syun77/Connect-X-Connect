@@ -104,7 +104,7 @@ static SceneMain* scene_ = nil;
     [self.fontTest3 setVisible:NO];
     
     self.mgrBlock = [TokenManager node];
-    [self.mgrBlock create:self.baseLayer size:FIELD_BLOCK_COUNT_X*FIELD_BLOCK_COUNT_Y+2 className:@"Block"];
+    [self.mgrBlock create:self.baseLayer size:FIELD_BLOCK_COUNT_X*(FIELD_BLOCK_COUNT_Y+2) className:@"Block"];
     [self.mgrBlock setPrio:ePrio_Block];
     
     self.cursor = [Cursor node];

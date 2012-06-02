@@ -19,16 +19,18 @@ static const int HP_MAX = 100;
  * 状態
  */
 enum eState {
-    eState_Init,            // 初期化
-    eState_AppearBottom,    // ブロック出現 (下から)
-    eState_AppearBlock,     // ブロック出現
-    eState_Standby,         // 待機中
-    eState_Fall,            // 落下中
-    eState_VanishCheck,     // 消去チェック
-    eState_VanishExec,      // 消去実行
-    eState_DamageCheck,     // ダメージチェック
-    eState_DamageExec,      // ダメージ実行
-    eState_End,             // おしまい
+    eState_Init,                // 初期化
+    eState_AppearBottomCheck,   // ブロック出現（下から）チェック
+    eState_AppearBottomExec,    // ブロック出現（下から）実行
+    eState_AppearBlock,         // ブロック出現
+    eState_Standby,             // 待機中
+    eState_Fall,                // 落下中
+    eState_VanishCheck,         // 消去チェック
+    eState_VanishExec,          // 消去実行
+    eState_DamageCheck,         // ダメージチェック
+    eState_DamageExec,          // ダメージ実行
+    eState_Gameover,            // ゲームオーバー
+    eState_End,                 // おしまい
 };
 
 /**
@@ -204,11 +206,45 @@ enum eTouchState {
     
 }
 
-- (void)_updateAppearBottom {
+- (void)_updateAppearBottomCheck {
     
-    // TODO: 下から出現
+    // TODO: 下から出現チェック
+//    if (m_Timer > 0) {
+    {
+        
+        // 出現しないので、ブロック出現
+        m_State = eState_AppearBlock;
+        m_Timer = 0;
+        return;
+    }
     
-    m_State = eState_AppearBlock;
+    // 下から出現
+    for(int i = 0; i < FIELD_BLOCK_COUNT_X; i++)
+    {
+        int number = Math_RandInt(1, 5);
+        Block* b = [Block addFromChip:number chipX:i chipY:-1];
+        if (b) {
+            [b setShield:2];
+        }
+    }
+    
+    [BlockMgr changeFallWaitAll];
+    
+    m_State = eState_AppearBottomExec;
+    m_Timer = 0;
+}
+
+- (void)_updateAppearBottomExec {
+    
+    [BlockMgr shiftUpAll:2];
+    m_Timer += 2;
+    
+    if (m_Timer >= BLOCK_SIZE) {
+        
+        // 消滅チェック
+        [FieldMgr copyBlockToLayer];
+        m_State = eState_VanishCheck;
+    }
 }
 
 - (void)_updateAppearBlock {
@@ -226,6 +262,9 @@ enum eTouchState {
     m_BlockHandler2 = [b2 getIndex];
     
     [self setTouchPos:GameCommon_ChipXToScreenX(BLOCK_APPEAR_X) y:0];
+    
+    // ブロックを待機状態にする
+    [BlockMgr changeStandbyAll];
     
     m_State = eState_Standby;
 }
@@ -423,12 +462,8 @@ enum eTouchState {
                 [BlockMgr requestVanish:i y:j];
                 
                 // 上下左右にあるブロックのシールドを減らす
-                int tblX[] = {
-                    -1, 0, 1, 0,
-                };
-                int tblY[] = {
-                    0, -1, 0, 1,
-                };
+                int tblX[] = { -1,  0, 1, 0 };
+                int tblY[] = {  0, -1, 0, 1 };
                 for (int k = 0; k < 4; k++) {
                     int dx = tblX[k];
                     int dy = tblY[k];
@@ -482,11 +517,8 @@ enum eTouchState {
         return;
     }
     
-    // ブロック出現
-    m_State = eState_AppearBlock;
-    
-    // ブロックを待機状態にする
-    [BlockMgr changeStandbyAll];
+    // ブロック出現 (下) チェック
+    m_State = eState_AppearBottomCheck;
     
 }
 
@@ -497,11 +529,8 @@ enum eTouchState {
 
     if ([BlockMgr isEndVanishingAll]) {
         
-        // ブロック出現
-        m_State = eState_AppearBlock;
-        
-        // ブロックを待機状態にする
-        [BlockMgr changeStandbyAll];
+        // ブロック出現 (下) チェック
+        m_State = eState_AppearBottomCheck;
         
     }
 }
@@ -519,8 +548,12 @@ enum eTouchState {
             [self _updateInit];
             break;
             
-        case eState_AppearBottom:
-            [self _updateAppearBottom];
+        case eState_AppearBottomCheck:
+            [self _updateAppearBottomCheck];
+            break;
+            
+        case eState_AppearBottomExec:
+            [self _updateAppearBottomExec];
             break;
             
         case eState_AppearBlock:

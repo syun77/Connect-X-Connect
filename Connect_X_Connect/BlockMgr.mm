@@ -80,7 +80,20 @@
             continue;
         }
         
-        if ([b isHit2:block]) {
+        if (block._y < b._y) {
+            
+            // 下にいたら判定不要
+            continue;
+        }
+        
+        int x1 = b._x;
+        int x2 = block._x;
+        int y1 = block._y - block._r;   // 下を見る
+        int y2 = b._y + b._r;           // 上を見る
+        int y3 = block._y + block._r;   // 上を見る
+        int y4 = b._y - b._r;           // 下を見る
+
+        if (x1 == x2 && y1 <= y2 && y3 >= y4) {
             
             // 当たった
             block._vy = 0;
@@ -169,6 +182,23 @@
     }
 }
 
+// 全て落下後の待機状態にする
++ (void)changeFallWaitAll {
+    
+    TokenManager* mgr = [BlockMgr _getTokenManager];
+    
+    for (Block* b in mgr.m_Pool) {
+        
+        if ([b isExist] == NO) {
+            
+            continue;
+        }
+        
+        // 落下待機状態にする
+        [b changeFallWait];
+    }
+}
+
 /**
  * フィールド外にあるブロックを削除する
  * @return 削除した数
@@ -216,4 +246,22 @@
     // 該当のブロックはなし
     return nil;
 }
+
+// 全てのブロックを上に移動する
++ (void)shiftUpAll:(int)dy {
+    
+    TokenManager* mgr = [BlockMgr _getTokenManager];
+    
+    for (Block* b in mgr.m_Pool) {
+        
+        if ([b isExist] == NO) {
+            
+            continue;
+        }
+        
+        // 座標を移動させる
+        b._y += dy;
+    }
+}
+
 @end

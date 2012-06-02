@@ -35,6 +35,9 @@
 // 待機状態にする
 + (void)changeStandbyAll;
 
+// 全て落下後の待機状態にする
++ (void)changeFallWaitAll;
+
 /**
  * フィールド外にあるブロックを削除する
  * @return 削除した数
@@ -43,5 +46,8 @@
 
 // チップ座標を指定してブロックを取得する
 + (Block*)getFromChip:(int)chipX chipY:(int)chipY;
+
+// 全てのブロックを上に移動する
++ (void)shiftUpAll:(int)dy;
 
 @end

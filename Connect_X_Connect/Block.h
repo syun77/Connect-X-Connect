@@ -70,6 +70,9 @@
 // 待機状態にする
 - (void)changeStandby;
 
+// 落下待機待ちにする
+- (void)changeFallWait;
+
 // ブロックを追加する
 + (Block*)add:(int)number x:(float)x y:(float)y;
 
