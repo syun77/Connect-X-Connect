@@ -73,6 +73,7 @@ enum eTouchState {
     m_Timer = 0;
     m_Hp = HP_MAX;
     m_TouchState = eState_Standby;
+    m_TouchStartY = 0;
     m_TouchX = 0;
     m_TouchY = 0;
     m_ChipX  = 0;
@@ -80,6 +81,8 @@ enum eTouchState {
     
     m_BlockHandler1 = -1;
     m_BlockHandler2 = -1;
+    
+    m_NumberPrev = 1;
     
     
     return self;
@@ -118,7 +121,7 @@ enum eTouchState {
     if (p < FIELD_OFS_X - s || p > FIELD_OFS_X + FIELD_BLOCK_COUNT_X * BLOCK_SIZE - s) {
         
         // 非選択状態にする
-        m_TouchState = eState_Standby;
+        m_TouchState = eTouchState_Standby;
     }
     
     int v = (int)(p - FIELD_OFS_X);
@@ -187,6 +190,8 @@ enum eTouchState {
 // タッチ開始コールバック
 - (void)cbTouchStart:(float)x y:(float)y {
     
+    m_TouchStartY = y;
+    
     switch (m_State) {
         case eState_Standby:
             // タッチ中
@@ -206,12 +211,16 @@ enum eTouchState {
 
     switch (m_State) {
         case eState_Standby:
-            [self setTouchPos:x y:y];
+            if (m_TouchState == eTouchState_Press) {
+                
+                [self setTouchPos:x y:y];
+            }
             break;
             
         default:
             break;
     }
+    
 
 }
 
@@ -221,7 +230,7 @@ enum eTouchState {
     switch (m_State) {
         case eState_Standby:
             
-            if (m_TouchState == eState_Standby) {
+            if (m_TouchState == eTouchState_Standby) {
                 
                 // 非選択状態の場合何もしない
                 break;
@@ -248,6 +257,9 @@ enum eTouchState {
     
 }
 
+/**
+ * ブロックが下から出現 (チェック)
+ */
 - (void)_updateAppearBottomCheck {
     
     // TODO: 下から出現チェック
@@ -282,6 +294,9 @@ enum eTouchState {
     m_Timer = 0;
 }
 
+/**
+ * ブロックが下から出現 (実行)
+ */
 - (void)_updateAppearBottomExec {
     
     [BlockMgr shiftUpAll:2];
@@ -295,11 +310,17 @@ enum eTouchState {
     }
 }
 
+/**
+ * 操作ブロック出現
+ */
 #ifdef SIMGLE_FALL_ENABLE
 - (void)_updateAppearBlock {
     
     // ブロック追加
     int num1 = Math_RandInt(2, 4);
+    
+    // 出現番号を保存
+    m_NumberPrev = num1;
     
     m_ChipXPrev = 0;
     
@@ -314,6 +335,10 @@ enum eTouchState {
     
     [FieldMgr copyBlockToLayer];
     
+    // タッチ状態をクリア
+    m_TouchState = eTouchState_Standby;
+    
+    // タッチ入力待ちへ
     m_State = eState_Standby;
 }
 #else
