@@ -3,7 +3,7 @@
 //  Connect_X_Connect
 //
 //  Created by OzekiSyunsuke on 12/06/03.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012年 2dgame.jp. All rights reserved.
 //
 
 #import "Vec.h"

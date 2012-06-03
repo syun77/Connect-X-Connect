@@ -3,7 +3,7 @@
 //  Connect_X_Connect
 //
 //  Created by OzekiSyunsuke on 12/05/29.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012年 2dgame.jp. All rights reserved.
 //
 
 #ifndef Connect_X_Connect_gamecommon_h

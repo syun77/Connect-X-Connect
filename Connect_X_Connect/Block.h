@@ -3,7 +3,7 @@
 //  Connect_X_Connect
 //
 //  Created by OzekiSyunsuke on 12/05/29.
-//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright 2012年 2dgame.jp. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -72,6 +72,9 @@
 
 // 落下待機待ちにする
 - (void)changeFallWait;
+
+// 数値のカウントダウンをする
+- (void)countDown;
 
 // ブロックを追加する
 + (Block*)add:(int)number x:(float)x y:(float)y;

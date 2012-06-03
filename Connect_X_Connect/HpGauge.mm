@@ -3,7 +3,7 @@
 //  Connect_X_Connect
 //
 //  Created by OzekiSyunsuke on 12/06/02.
-//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright 2012年 2dgame.jp. All rights reserved.
 //
 
 #import "HpGauge.h"

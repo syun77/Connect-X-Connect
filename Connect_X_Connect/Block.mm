@@ -3,7 +3,7 @@
 //  Connect_X_Connect
 //
 //  Created by OzekiSyunsuke on 12/05/29.
-//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright 2012年 2dgame.jp. All rights reserved.
 //
 
 #import "Block.h"
@@ -466,6 +466,23 @@ enum eState {
 - (void)changeFallWait {
     
     m_State = eState_FallWait;
+}
+
+// 数値のカウントダウンをする
+- (void)countDown {
+    
+    if ([self isShield]) {
+        
+        // シールドがあればシールド破壊
+        [self decShield];
+        return;
+    }
+    
+    if (m_nNumber > 1) {
+        
+        // 数値を減らす
+        m_nNumber--;
+    }
 }
 
 /**
