@@ -113,6 +113,14 @@ enum eTouchState {
 
 // タッチ座標をチップ座標に変換する
 - (int)touchToChip:(float)p {
+    
+    int s = BLOCK_SIZE/2;
+    if (p < FIELD_OFS_X - s || p > FIELD_OFS_X + FIELD_BLOCK_COUNT_X * BLOCK_SIZE - s) {
+        
+        // 非選択状態にする
+        m_TouchState = eState_Standby;
+    }
+    
     int v = (int)(p - FIELD_OFS_X);
     int n = v / BLOCK_SIZE;
     int d = v - n * BLOCK_SIZE;
@@ -212,6 +220,13 @@ enum eTouchState {
     
     switch (m_State) {
         case eState_Standby:
+            
+            if (m_TouchState == eState_Standby) {
+                
+                // 非選択状態の場合何もしない
+                break;
+            }
+            
             // タッチを離した
             m_TouchState = eTouchState_Release;
             
