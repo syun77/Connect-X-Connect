@@ -11,7 +11,8 @@
 #import "Block.h"
 #import "Layer2D.h"
 
-@interface FieldMgr {
+@interface FieldMgr : NSObject {
+    int m_Timer;
 }
 
 /**

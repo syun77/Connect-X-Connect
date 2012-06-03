@@ -13,8 +13,8 @@
 /**
  * ブロック管理クラス
  */
-@interface BlockMgr {
-    
+@interface BlockMgr : NSObject {
+    int m_Timer;
 }
 
 // 落下要求を送る
