@@ -578,7 +578,17 @@ enum eTouchState {
     if ([BlockMgr isEndVanishingAll]) {
         
         // ブロック出現 (下) チェック
-        m_State = eState_AppearBottomCheck;
+//        m_State = eState_AppearBottomCheck;
+        // 待機状態にする
+        [BlockMgr changeStandbyAll];
+        
+        // 落下要求を送る
+        [BlockMgr requestFall];
+        
+        
+        // 落下状態へ遷移
+        m_State = eState_Fall;
+ 
         
     }
 }

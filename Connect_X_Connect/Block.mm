@@ -482,6 +482,7 @@ enum eState {
         
         // 数値を減らす
         m_nNumber--;
+        [self setNumber:m_nNumber];
     }
 }
 

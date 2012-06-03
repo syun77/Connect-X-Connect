@@ -201,6 +201,35 @@
 }
 
 /**
+ * カウントダウン要求を送る
+ */
++ (void)countDonwBlock:(Block*)block {
+    
+    TokenManager* mgr = [BlockMgr _getTokenManager];
+    
+    for (Block* b in mgr.m_Pool) {
+        
+        if ([b isExist] == NO) {
+            
+            continue;
+        }
+        
+        if ([b getNumber] != [block getNumber]) {
+            
+            // 番号が違う
+            continue;
+        }
+        
+        if ([b getChipY] < FIELD_BLOCK_COUNT_Y) {
+            
+            // 領域内
+            // カウントダウンさせる
+            [b countDown];
+        }
+    }
+}
+
+/**
  * フィールド外にあるブロックを削除する
  * @return 削除した数
  */
@@ -219,6 +248,9 @@
         if ([b getChipY] >= FIELD_BLOCK_COUNT_Y-1) {
             
             // 領域外
+            // 他のブロックをカウントダウンさせる
+            [BlockMgr countDonwBlock:b];
+            
             [b requestVanish];
             ret++;
         }
