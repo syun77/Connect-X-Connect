@@ -12,8 +12,6 @@
 #import "FieldMgr.h"
 #import "Math.h"
 
-#define SIMGLE_FALL_ENABLE // １つずつ落下させるモード
-
 // HPの最大値
 static const int HP_MAX = 100;
 
@@ -80,7 +78,6 @@ enum eTouchState {
     m_ChipXPrev = 0;
     
     m_BlockHandler1 = -1;
-    m_BlockHandler2 = -1;
     
     m_NumberPrev = 1;
     
@@ -153,38 +150,11 @@ enum eTouchState {
     }
     
     TokenManager*   mgrBlock    = [self _getManagerBlock];
-#ifndef SIMGLE_FALL_ENABLE
-    Layer2D*        layer       = [FieldMgr getLayer];
-#endif
     
     // ブロック１
     Block* b1 = (Block*)[mgrBlock getFromIdx:m_BlockHandler1];
     [b1 setPosFromChip:m_ChipX chipY:BLOCK_APPEAR_Y1];
     
-#ifndef SIMGLE_FALL_ENABLE
-    // ブロック２
-    Block* b2 = (Block*)[mgrBlock getFromIdx:m_BlockHandler2];
-    chipX = m_ChipX;
-    int chipY = BLOCK_APPEAR_Y2;
-    
-    if ([layer get:chipX y:chipY] != 0) {
-        
-        // ブロックが重なっている
-        if (m_ChipX - m_ChipXPrev > 0) {
-            
-            // 以前の移動方向が＋
-            chipX -= 1;
-        }
-        else {
-            
-            // 以前の移動方向がー
-            chipX += 1;
-        }
-        chipY += 1;
-    }
-    
-    [b2 setPosFromChip:chipX chipY:chipY];
-#endif
 }
 
 // タッチ開始コールバック
@@ -313,7 +283,6 @@ enum eTouchState {
 /**
  * 操作ブロック出現
  */
-#ifdef SIMGLE_FALL_ENABLE
 - (void)_updateAppearBlock {
     
     // ブロック追加
@@ -341,30 +310,10 @@ enum eTouchState {
     // タッチ入力待ちへ
     m_State = eState_Standby;
 }
-#else
-- (void)_updateAppearBlock {
-    
-    // ブロック追加
-    int num1 = Math_RandInt(2, 5);
-    int num2 = Math_RandInt(2, 5);
-    
-    m_ChipXPrev = 0;
-    
-    Block* b1 = [Block addFromChip:num1 chipX:BLOCK_APPEAR_X chipY:BLOCK_APPEAR_Y1];
-    Block* b2 = [Block addFromChip:num2 chipX:BLOCK_APPEAR_X chipY:BLOCK_APPEAR_Y2];
-    
-    m_BlockHandler1 = [b1 getIndex];
-    m_BlockHandler2 = [b2 getIndex];
-    
-    [self setTouchPos:GameCommon_ChipXToScreenX(BLOCK_APPEAR_X) y:0];
-    
-    // ブロックを待機状態にする
-    [BlockMgr changeStandbyAll];
-    
-    m_State = eState_Standby;
-}
-#endif
 
+/**
+ * 更新・待機中
+ */
 - (void)_updateStandby {
     
 //    InterfaceLayer* interface   = [self _getInterfaceLayer];

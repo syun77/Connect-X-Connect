@@ -31,7 +31,6 @@
     int     m_ChipXPrev;        // タッチ座標 (チップ座標X) １つ前
     
     int     m_BlockHandler1;    // 追加中のブロックのハンドラ
-    int     m_BlockHandler2;    // 追加中のブロックのハンドラ２
     
     int     m_NumberPrev;       // 出現したブロックの数値
     
