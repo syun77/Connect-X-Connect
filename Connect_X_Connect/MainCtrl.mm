@@ -149,7 +149,7 @@ enum eTouchState {
         m_ChipX = chipX;
     }
     
-    TokenManager*   mgrBlock    = [self _getManagerBlock];
+    TokenManager* mgrBlock = [self _getManagerBlock];
     
     // ブロック１
     Block* b1 = (Block*)[mgrBlock getFromIdx:m_BlockHandler1];
@@ -168,6 +168,10 @@ enum eTouchState {
             m_TouchState = eTouchState_Press;
             
             [self setTouchPos:x y:y];
+            break;
+            
+        case eState_Gameover:
+            m_TouchState = eTouchState_Press;
             break;
             
         default:
@@ -212,6 +216,13 @@ enum eTouchState {
             [self setTouchPos:x y:y];
             break;
             
+        case eState_Gameover:
+            if (m_TouchState == eTouchState_Press) {
+                
+                m_TouchState = eTouchState_Release;
+            }
+            break;
+            
         default:
             break;
     }
@@ -234,9 +245,21 @@ enum eTouchState {
     
     // TODO: 下から出現チェック
     Layer2D* layer = [FieldMgr getLayer];
+    
+    static int s_tmp = 0;
     if ([layer count:0] < 5 * 5) {
         // TODO: 色々埋まっていたら出現しない
         m_Timer = 1;
+        
+        if (s_tmp == 0) {
+            s_tmp = 1;
+        }
+        else {
+            
+            // やっぱり出す
+            s_tmp = 0;
+            m_Timer = 0;
+        }
     }
     
     
@@ -251,7 +274,7 @@ enum eTouchState {
     // 下から出現
     for(int i = 0; i < FIELD_BLOCK_COUNT_X; i++)
     {
-        int number = Math_RandInt(1, 4);
+        int number = Math_RandInt(1, 7);
         Block* b = [Block addFromChip:number chipX:i chipY:-1];
         if (b) {
             [b setShield:1];
@@ -286,7 +309,7 @@ enum eTouchState {
 - (void)_updateAppearBlock {
     
     // ブロック追加
-    int num1 = Math_RandInt(2, 4);
+    int num1 = Math_RandInt(2, 7);
     
     // 出現番号を保存
     m_NumberPrev = num1;
@@ -361,7 +384,7 @@ enum eTouchState {
     if (s_cnt == 1) {
         
         // ブロック生成テスト
-        [layer random:5];
+        [layer random:6];
         [layer set:2 y:5 val:5];
         [layer set:2 y:2 val:3];
         [layer set:1 y:0 val:1];
@@ -484,12 +507,21 @@ enum eTouchState {
                     [self _setLayerVanish];
                     
                     nVanish++;
+                    
+                    // HPを増やす
+                    m_Hp += cnt * val / 3 + 1;
+                    if (m_Hp > HP_MAX) {
+                        m_Hp = HP_MAX;
+                    }
+                    HpGauge* hpGauge = [self _getHpGauge];
+                    [hpGauge initHp:[self getHpRatio]];
+
                 }
             }
         }
     }
     
-    [self.layerVanish dump];
+//    [self.layerVanish dump];
     if (nVanish == 0) {
         
         // 消去できるものはない
@@ -575,7 +607,16 @@ enum eTouchState {
  */
 - (void)_updateDamageExec {
 
-    if ([BlockMgr isEndVanishingAll]) {
+    if ([BlockMgr isEndVanishingAll] && [[SceneMain sharedInstance].mgrCountDownEffect count] == 0) {
+        
+        if (m_Hp < 1) {
+            
+            // ゲームオーバーへ
+            m_State = eState_Gameover;
+            m_TouchState = eTouchState_Standby;
+            [[SceneMain sharedInstance].fontGameover setVisible:YES];
+            return;
+        }
         
         // ブロック出現 (下) チェック
 //        m_State = eState_AppearBottomCheck;
@@ -590,6 +631,51 @@ enum eTouchState {
         m_State = eState_Fall;
  
         
+    }
+}
+
+- (void)_updateGameover {
+    
+    if (m_TouchState == eTouchState_Release) {
+        
+        [[SceneMain sharedInstance].fontGameover setVisible:NO];
+        
+        // すべて消す
+        TokenManager* mgrBlock = [self _getManagerBlock];
+        [mgrBlock vanishAll];
+        
+        m_Hp = HP_MAX;
+        HpGauge* hpGauge = [self _getHpGauge];
+        [hpGauge initHp:[self getHpRatio]];
+        
+        
+        // 初期化に戻る
+        Layer2D* layer = [FieldMgr getLayer];
+        
+        // ブロック生成テスト
+        [layer random:6];
+        [layer set:2 y:5 val:5];
+        [layer set:2 y:2 val:3];
+        [layer set:1 y:0 val:1];
+//        [layer dump];
+        
+        for (int i = 0; i < FIELD_BLOCK_COUNT_MAX; i++) {
+            int v = [layer getFromIdx:i];
+            if (v > 0) {
+                Block* b = [Block addFromIdx:v idx:i];
+                
+                if (Math_Rand(5) == 0) {
+                    [b setShield:2];
+                }
+            }
+        }
+        
+        // 落下要求を送る
+        [BlockMgr requestFall];
+        
+        
+        // 落下状態へ遷移
+        m_State = eState_Fall;
     }
 }
 
@@ -640,6 +726,10 @@ enum eTouchState {
             
         case eState_DamageExec:
             [self _updateDamageExec];
+            break;
+            
+        case eState_Gameover:
+            [self _updateGameover];
             break;
             
         default:

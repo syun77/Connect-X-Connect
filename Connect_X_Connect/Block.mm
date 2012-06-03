@@ -85,6 +85,7 @@ enum eState {
     m_State         = eState_Standby;
     m_Timer         = 0;
     m_nNumber       = 1;
+    m_nShield       = 0;
     m_ReqFall       = NO;
     m_ReqVanish     = NO;
     [self.fontNumber setVisible:YES];

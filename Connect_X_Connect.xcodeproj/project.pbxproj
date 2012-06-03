@@ -19,6 +19,9 @@
 		C70E3F4415731075009BF0CB /* TokenManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F3915731075009BF0CB /* TokenManager.mm */; };
 		C70E3F471573118A009BF0CB /* SceneMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F461573118A009BF0CB /* SceneMain.mm */; };
 		C7750C24157A768C00F78387 /* Vec.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C23157A768C00F78387 /* Vec.mm */; };
+		C7750C28157B1D2100F78387 /* CountDownEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C27157B1D2100F78387 /* CountDownEffect.mm */; };
+		C7750C2A157BA9B300F78387 /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7750C29157BA9B300F78387 /* all.png */; };
+		C7750C2D157BA9D400F78387 /* Exerinya.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C2C157BA9D400F78387 /* Exerinya.mm */; };
 		C783FD241577C1DA00AAACAE /* Cursor.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD231577C1DA00AAACAE /* Cursor.mm */; };
 		C783FD28157879D700AAACAE /* Grid.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD27157879D700AAACAE /* Grid.mm */; };
 		C783FD2B157917E400AAACAE /* HpGauge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD2A157917E400AAACAE /* HpGauge.mm */; };
@@ -170,6 +173,11 @@
 		C70E3F451573118A009BF0CB /* SceneMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneMain.h; path = ../SceneMain.h; sourceTree = "<group>"; };
 		C70E3F461573118A009BF0CB /* SceneMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SceneMain.mm; path = ../SceneMain.mm; sourceTree = "<group>"; };
 		C7750C23157A768C00F78387 /* Vec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Vec.mm; sourceTree = "<group>"; };
+		C7750C26157B1D2100F78387 /* CountDownEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownEffect.h; sourceTree = "<group>"; };
+		C7750C27157B1D2100F78387 /* CountDownEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CountDownEffect.mm; sourceTree = "<group>"; };
+		C7750C29157BA9B300F78387 /* all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = all.png; path = Resources/all.png; sourceTree = "<group>"; };
+		C7750C2B157BA9D400F78387 /* Exerinya.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exerinya.h; sourceTree = "<group>"; };
+		C7750C2C157BA9D400F78387 /* Exerinya.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Exerinya.mm; sourceTree = "<group>"; };
 		C783FD221577C1DA00AAACAE /* Cursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cursor.h; sourceTree = "<group>"; };
 		C783FD231577C1DA00AAACAE /* Cursor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Cursor.mm; sourceTree = "<group>"; };
 		C783FD26157879D700AAACAE /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
@@ -477,6 +485,8 @@
 		C7B9F8F215759F240023646A /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				C7750C2B157BA9D400F78387 /* Exerinya.h */,
+				C7750C2C157BA9D400F78387 /* Exerinya.mm */,
 				C7B9F8F315759F4D0023646A /* FieldMgr.h */,
 				C7B9F8F415759F4D0023646A /* FieldMgr.mm */,
 				C7B9F8F61575A2470023646A /* BlockMgr.h */,
@@ -490,6 +500,8 @@
 			children = (
 				C7F1007B15746421002D7E00 /* Block.h */,
 				C7F1007C15746421002D7E00 /* Block.mm */,
+				C7750C26157B1D2100F78387 /* CountDownEffect.h */,
+				C7750C27157B1D2100F78387 /* CountDownEffect.mm */,
 				C783FD221577C1DA00AAACAE /* Cursor.h */,
 				C783FD231577C1DA00AAACAE /* Cursor.mm */,
 				C783FD26157879D700AAACAE /* Grid.h */,
@@ -559,6 +571,7 @@
 		C7FB2F03157289EB00FB3381 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C7750C29157BA9B300F78387 /* all.png */,
 				C7F100781573CB86002D7E00 /* font.png */,
 				C7FB2F04157289EB00FB3381 /* Default.png */,
 				C7FB2F06157289EB00FB3381 /* fps_images.png */,
@@ -945,6 +958,7 @@
 				C7FB2F13157289EB00FB3381 /* Icon@2x.png in Resources */,
 				C7FB2F16157289EB00FB3381 /* iTunesArtwork in Resources */,
 				C7F100791573CB86002D7E00 /* font.png in Resources */,
+				C7750C2A157BA9B300F78387 /* all.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1073,6 +1087,8 @@
 				C783FD28157879D700AAACAE /* Grid.mm in Sources */,
 				C783FD2B157917E400AAACAE /* HpGauge.mm in Sources */,
 				C7750C24157A768C00F78387 /* Vec.mm in Sources */,
+				C7750C28157B1D2100F78387 /* CountDownEffect.mm in Sources */,
+				C7750C2D157BA9D400F78387 /* Exerinya.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

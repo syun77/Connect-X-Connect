@@ -19,6 +19,7 @@
 #import "Cursor.h"
 #import "Grid.h"
 #import "HpGauge.h"
+#import "CountDownEffect.h"
 
 /**
  * ゲームメインのシーン
@@ -30,10 +31,12 @@
     
     // 描画オブジェクト
     CCLayer*        baseLayer;
+    AsciiFont*      fontGameover;
     AsciiFont*      fontTest;
     AsciiFont*      fontTest2;
     AsciiFont*      fontTest3;
     TokenManager*   mgrBlock;
+    TokenManager*   mgrCountDownEffect;
     Cursor*         cursor;
     Grid*           grid;
     HpGauge*        hpGauge;
@@ -51,10 +54,12 @@
 
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
 @property (nonatomic, retain)CCLayer*           baseLayer;
+@property (nonatomic, retain)AsciiFont*         fontGameover;
 @property (nonatomic, retain)AsciiFont*         fontTest;
 @property (nonatomic, retain)AsciiFont*         fontTest2;
 @property (nonatomic, retain)AsciiFont*         fontTest3;
 @property (nonatomic, retain)TokenManager*      mgrBlock;
+@property (nonatomic, retain)TokenManager*      mgrCountDownEffect;
 @property (nonatomic, retain)Cursor*            cursor;
 @property (nonatomic, retain)Grid*              grid;
 @property (nonatomic, retain)HpGauge*           hpGauge;

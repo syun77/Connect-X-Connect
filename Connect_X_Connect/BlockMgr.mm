@@ -220,11 +220,18 @@
             continue;
         }
         
-        if ([b getChipY] < FIELD_BLOCK_COUNT_Y) {
+        if ([b getIndex] == [block getIndex]) {
+            
+            // 自分自身
+            continue;
+        }
+        
+        if ([b getChipY] < FIELD_BLOCK_COUNT_Y-1) {
             
             // 領域内
             // カウントダウンさせる
-            [b countDown];
+//            [b countDown];
+            [CountDownEffect add:[b getIndex] x:block._x y:block._y frame:60];
         }
     }
 }

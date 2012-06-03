@@ -18,6 +18,7 @@ enum ePrio {
     ePrio_Grid,     // グリッド線
     ePrio_Block,    // ブロック
     ePrio_Number,   // ブロックの数字
+    ePrio_CountEffect, // カウントダウンエフェクト
     ePrio_Cursor,   // カーソル
     ePrio_HpGauge,  // HPゲージ
 };
@@ -35,10 +36,12 @@ static SceneMain* scene_ = nil;
 
 @synthesize interfaceLayer;
 @synthesize baseLayer;
+@synthesize fontGameover;
 @synthesize fontTest;
 @synthesize fontTest2;
 @synthesize fontTest3;
 @synthesize mgrBlock;
+@synthesize mgrCountDownEffect;
 @synthesize cursor;
 @synthesize grid;
 @synthesize hpGauge;
@@ -102,9 +105,21 @@ static SceneMain* scene_ = nil;
     [self.fontTest3 setPos:5 y:10];
     [self.fontTest3 setVisible:NO];
     
+    self.fontGameover = [AsciiFont node];
+    [self.fontGameover createFont:self.baseLayer length:24];
+    [self.fontGameover setScale:3];
+    [self.fontGameover setPos:18 y:3];
+    [self.fontGameover setAlign:eFontAlign_Center];
+    [self.fontGameover setText:@"GAME OVER"];
+    [self.fontGameover setVisible:NO];
+    
     self.mgrBlock = [TokenManager node];
     [self.mgrBlock create:self.baseLayer size:FIELD_BLOCK_COUNT_X*(FIELD_BLOCK_COUNT_Y+2) className:@"Block"];
     [self.mgrBlock setPrio:ePrio_Block];
+    
+    self.mgrCountDownEffect = [TokenManager node];
+    [self.mgrCountDownEffect create:self.baseLayer size:512 className:@"CountDownEffect"];
+    [self.mgrCountDownEffect setPrio:ePrio_CountEffect];
     
     self.cursor = [Cursor node];
     [self.baseLayer addChild:self.cursor z:ePrio_Cursor];
@@ -156,6 +171,7 @@ static SceneMain* scene_ = nil;
     
     // ■描画オブジェクト
     // トークン
+    self.mgrCountDownEffect = nil;
     self.mgrBlock = nil;
     
     // フォント
