@@ -58,17 +58,17 @@ static const int TIMER_DECREASE = 60;
 - (void)visit {
     [super visit];
     
-    return;
-    
-    const int WIDTH = 320 - 16;
+    const int WIDTH = 80;
+    const int HEIGHT = 4;
     
     System_SetBlend(eBlend_Add);
-    int x = 8;
-    int y = FIELD_OFS_Y + BLOCK_SIZE * (FIELD_BLOCK_COUNT_Y-1) - BLOCK_SIZE / 2;
+    
+    int x = m_BaseX;
+    int y = m_BaseY;
     
     float c = 0.3 * Math_SinEx(m_tPast%180);
     
-    glLineWidth(8);
+    glLineWidth(HEIGHT);
     {
         glColor4f(1, 1, 0, 1);
         float px1 = x + WIDTH * m_Now;
@@ -87,6 +87,18 @@ static const int TIMER_DECREASE = 60;
     
     System_SetBlend(eBlend_Normal);
     
+}
+
+// ----------------------------------------------------
+// public
+
+/**
+ * 描画座標を設定
+ */
+- (void)setPos:(int)x y:(int)y {
+    
+    m_BaseX = x;
+    m_BaseY = y;
 }
 
 // HP初期値の設定

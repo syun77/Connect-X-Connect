@@ -24,6 +24,9 @@
     float   m_Prev;     // 以前のHP
 }
 
+// 描画座標を設定
+- (void)setPos:(int)x y:(int)y;
+
 // HP初期値の設定
 - (void)initHp:(float)v;
 

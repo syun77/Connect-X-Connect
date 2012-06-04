@@ -80,6 +80,9 @@ static const int PLAYER_POS_Y = 480 - 80;
     m_HpMax = HP_MAX;
     HpGauge* hpGauge = [self _getGauge];
     [hpGauge initHp:[self getHpRatio]];
+    
+    // 描画座標を設定
+    [hpGauge setPos:32 y:480-128];
 }
 
 /**
