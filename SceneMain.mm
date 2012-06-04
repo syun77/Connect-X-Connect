@@ -47,7 +47,9 @@ static SceneMain* scene_ = nil;
 @synthesize cursor;
 @synthesize grid;
 @synthesize hpGauge;
+@synthesize hpGaugeEnemy;
 @synthesize player;
+@synthesize enemy;
 @synthesize layer;
 @synthesize ctrl;
 
@@ -134,8 +136,14 @@ static SceneMain* scene_ = nil;
     self.hpGauge = [HpGauge node];
     [self.baseLayer addChild:self.hpGauge z:ePrio_HpGauge];
     
+    self.hpGaugeEnemy = [HpGauge node];
+    [self.baseLayer addChild:self.hpGaugeEnemy z:ePrio_HpGauge];
+    
     self.player = [Player node];
     [self.baseLayer addChild:self.player z:ePrio_Player];
+    
+    self.enemy = [Enemy node];
+    [self.baseLayer addChild:self.enemy z:ePrio_Enemy];
     
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
@@ -167,7 +175,9 @@ static SceneMain* scene_ = nil;
     // ゲーム制御
     self.ctrl = nil;
     
+    self.enemy = nil;
     self.player = nil;
+    self.hpGaugeEnemy = nil;
     self.hpGauge = nil;
     
     self.grid = nil;

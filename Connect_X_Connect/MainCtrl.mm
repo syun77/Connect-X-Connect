@@ -106,6 +106,9 @@ enum eTouchState {
 - (Player*)_getPlayer {
     return [SceneMain sharedInstance].player;
 }
+- (Enemy*)_getEnemy {
+    return [SceneMain sharedInstance].enemy;
+}
 
 // タッチ座標をチップ座標に変換する
 - (int)touchToChip:(float)p {
@@ -233,6 +236,9 @@ enum eTouchState {
     // HPの初期化
     Player* player = [self _getPlayer];
     [player initHp];
+    
+    Enemy* enemy = [self _getEnemy];
+    [enemy initHp];
     
     m_State = eState_Standby;
     

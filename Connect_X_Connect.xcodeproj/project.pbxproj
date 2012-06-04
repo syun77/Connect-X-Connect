@@ -23,6 +23,7 @@
 		C7750C2A157BA9B300F78387 /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7750C29157BA9B300F78387 /* all.png */; };
 		C7750C2D157BA9D400F78387 /* Exerinya.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C2C157BA9D400F78387 /* Exerinya.mm */; };
 		C7750C30157C492F00F78387 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C2F157C492E00F78387 /* Player.mm */; };
+		C7750C33157D06E400F78387 /* Enemy.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C32157D06E400F78387 /* Enemy.mm */; };
 		C783FD241577C1DA00AAACAE /* Cursor.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD231577C1DA00AAACAE /* Cursor.mm */; };
 		C783FD28157879D700AAACAE /* Grid.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD27157879D700AAACAE /* Grid.mm */; };
 		C783FD2B157917E400AAACAE /* HpGauge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD2A157917E400AAACAE /* HpGauge.mm */; };
@@ -181,6 +182,8 @@
 		C7750C2C157BA9D400F78387 /* Exerinya.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Exerinya.mm; sourceTree = "<group>"; };
 		C7750C2E157C492E00F78387 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		C7750C2F157C492E00F78387 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
+		C7750C31157D06E400F78387 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		C7750C32157D06E400F78387 /* Enemy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Enemy.mm; sourceTree = "<group>"; };
 		C783FD221577C1DA00AAACAE /* Cursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cursor.h; sourceTree = "<group>"; };
 		C783FD231577C1DA00AAACAE /* Cursor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Cursor.mm; sourceTree = "<group>"; };
 		C783FD26157879D700AAACAE /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
@@ -507,6 +510,8 @@
 				C7750C27157B1D2100F78387 /* CountDownEffect.mm */,
 				C783FD221577C1DA00AAACAE /* Cursor.h */,
 				C783FD231577C1DA00AAACAE /* Cursor.mm */,
+				C7750C31157D06E400F78387 /* Enemy.h */,
+				C7750C32157D06E400F78387 /* Enemy.mm */,
 				C783FD26157879D700AAACAE /* Grid.h */,
 				C783FD27157879D700AAACAE /* Grid.mm */,
 				C783FD29157917E400AAACAE /* HpGauge.h */,
@@ -1095,6 +1100,7 @@
 				C7750C28157B1D2100F78387 /* CountDownEffect.mm in Sources */,
 				C7750C2D157BA9D400F78387 /* Exerinya.mm in Sources */,
 				C7750C30157C492F00F78387 /* Player.mm in Sources */,
+				C7750C33157D06E400F78387 /* Enemy.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
