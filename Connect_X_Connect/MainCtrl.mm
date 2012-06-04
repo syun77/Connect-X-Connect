@@ -613,10 +613,6 @@ enum eTouchState {
         
         // ブロック生成テスト
         [layer random:6];
-        [layer set:2 y:5 val:5];
-        [layer set:2 y:2 val:3];
-        [layer set:1 y:0 val:1];
-//        [layer dump];
         
         for (int i = 0; i < FIELD_BLOCK_COUNT_MAX; i++) {
             int v = [layer getFromIdx:i];

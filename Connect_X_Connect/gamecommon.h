@@ -12,11 +12,11 @@
 // ★ゲーム共通定数ヘッダ
 // ■フィールド関連
 static const int FIELD_OFS_X = 20 + 20;
-static const int FIELD_OFS_Y = 64;
+static const int FIELD_OFS_Y = 24;
 
 // 7x11フィールド
 static const int FIELD_BLOCK_COUNT_X = 7;
-static const int FIELD_BLOCK_COUNT_Y = 11;
+static const int FIELD_BLOCK_COUNT_Y = 8;
 static const int FIELD_BLOCK_COUNT_MAX = (FIELD_BLOCK_COUNT_X * FIELD_BLOCK_COUNT_Y);
 
 static const int FIELD_OUT = -1; // 領域外
@@ -41,7 +41,7 @@ static const int BLOCK_INVALID = 0; // 無効なブロック
 // X座標
 static const int BLOCK_APPEAR_X = 3;
 // Y座標
-static const int BLOCK_APPEAR_Y1 = 10; // １つ目
+static const int BLOCK_APPEAR_Y1 = FIELD_BLOCK_COUNT_Y-1; // １つ目
 static const int BLOCK_APPEAR_Y2 = 9;  // ２つ目
 
 
