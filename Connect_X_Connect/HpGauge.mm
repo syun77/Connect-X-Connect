@@ -58,6 +58,8 @@ static const int TIMER_DECREASE = 60;
 - (void)visit {
     [super visit];
     
+    return;
+    
     const int WIDTH = 320 - 16;
     
     System_SetBlend(eBlend_Add);

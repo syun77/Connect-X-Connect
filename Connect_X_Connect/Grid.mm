@@ -73,6 +73,24 @@
         y += BLOCK_SIZE;
     }
     
+    // 危険バー
+    const int WIDTH = 320 - 16;
+    
+    System_SetBlend(eBlend_Add);
+    x = 8;
+    y = FIELD_OFS_Y + BLOCK_SIZE * (FIELD_BLOCK_COUNT_Y-1) - BLOCK_SIZE / 2;
+    
+    c = 0.3 * Math_SinEx((m_tPast*3)%180);
+    
+    glLineWidth(8);
+    {
+        glColor4f(1-c, 0, 0, 1);
+        CGPoint origin = CGPointMake(x, y);
+        CGPoint destination = CGPointMake(WIDTH, y);
+        ccDrawLine(origin, destination);
+    }
+    glLineWidth(1);
+    
 }
 
 @end
