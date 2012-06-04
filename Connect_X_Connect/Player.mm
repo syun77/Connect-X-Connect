@@ -8,6 +8,10 @@
 
 #import "Player.h"
 #import "SceneMain.h"
+#import "Exerinya.h"
+
+static const int PLAYER_POS_X = 64;
+static const int PLAYER_POS_Y = 480 - 80;
 
 /**
  * プレイヤーの実装
@@ -24,7 +28,12 @@
     }
     
     [self load:@"all.png"];
-    [self setVisible:NO];
+    [self create];
+    self._x = PLAYER_POS_X;
+    self._y = PLAYER_POS_Y;
+    CGRect r = Exerinya_GetRect(eExerinyaRect_Player1);
+    [self setTexRect:r];
+    [self setScale:0.5f];
     
     m_Hp = HP_MAX;
     
@@ -36,6 +45,17 @@
  */
 - (void)update:(ccTime)dt {
     
+    [self move:0];
+    
+    m_tPast++;
+    if (m_tPast%64 < 32) {
+        CGRect r = Exerinya_GetRect(eExerinyaRect_Player1);
+        [self setTexRect:r];
+    }
+    else {
+        CGRect r = Exerinya_GetRect(eExerinyaRect_Player2);
+        [self setTexRect:r];
+    }
 }
 
 // ----------------------------------------------------

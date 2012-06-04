@@ -15,6 +15,9 @@
  */
 @interface HpGauge : Token {
     
+    int     m_BaseX;    // 基準座標 (X)
+    int     m_BaseY;    // 基準座標 (Y)
+    
     int     m_tPast;    // 経過時間
     int     m_Timer;    // タイマー
     float   m_Now;      // 現在のHP
