@@ -20,6 +20,7 @@
 #import "Grid.h"
 #import "HpGauge.h"
 #import "CountDownEffect.h"
+#import "Player.h"
 
 /**
  * ゲームメインのシーン
@@ -40,6 +41,7 @@
     Cursor*         cursor;
     Grid*           grid;
     HpGauge*        hpGauge;
+    Player*         player;
     
     // レイヤー
     Layer2D*        layer;
@@ -63,6 +65,7 @@
 @property (nonatomic, retain)Cursor*            cursor;
 @property (nonatomic, retain)Grid*              grid;
 @property (nonatomic, retain)HpGauge*           hpGauge;
+@property (nonatomic, retain)Player*            player;
 
 @property (nonatomic, retain)Layer2D*   layer;
 

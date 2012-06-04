@@ -12,9 +12,6 @@
 #import "FieldMgr.h"
 #import "Math.h"
 
-// HPの最大値
-static const int HP_MAX = 100;
-
 /**
  * 状態
  */
@@ -106,9 +103,8 @@ enum eTouchState {
     
     return [SceneMain sharedInstance].mgrBlock;
 }
-- (HpGauge*)_getHpGauge {
-    
-    return [SceneMain sharedInstance].hpGauge;
+- (Player*)_getPlayer {
+    return [SceneMain sharedInstance].player;
 }
 
 // タッチ座標をチップ座標に変換する
@@ -231,8 +227,9 @@ enum eTouchState {
 
 - (void)_updateInit {
     
-    HpGauge* hpGauge = [self _getHpGauge];
-    [hpGauge initHp:[self getHpRatio]];
+    // HPの初期化
+    Player* player = [self _getPlayer];
+    [player initHp];
     
     m_State = eState_Standby;
     
@@ -339,10 +336,7 @@ enum eTouchState {
  */
 - (void)_updateStandby {
     
-//    InterfaceLayer* interface   = [self _getInterfaceLayer];
-    TokenManager*   mgrBlock    = [self _getManagerBlock];
-    Layer2D*        layer       = [FieldMgr getLayer];
-    Cursor*         cursor      = [SceneMain sharedInstance].cursor;
+    Cursor* cursor = [SceneMain sharedInstance].cursor;
     
     [cursor setDraw:NO chipX:m_ChipX];
     if (m_TouchState == eTouchState_Press) {
@@ -369,47 +363,6 @@ enum eTouchState {
         
     }
     
-    static int s_cnt = 0;
-    s_cnt++;
-  
-    if (NO) {
-//    if ([interface isTouch]) {
-        
-        // すべて消す
-        [mgrBlock vanishAll];
-        
-        s_cnt = 0;
-    }
-    
-    if (s_cnt == 1) {
-        
-        // ブロック生成テスト
-        [layer random:6];
-        [layer set:2 y:5 val:5];
-        [layer set:2 y:2 val:3];
-        [layer set:1 y:0 val:1];
-//        [layer dump];
-        
-        for (int i = 0; i < FIELD_BLOCK_COUNT_MAX; i++) {
-            int v = [layer getFromIdx:i];
-            if (v > 0) {
-                Block* b = [Block addFromIdx:v idx:i];
-                
-                if (Math_Rand(5) == 0) {
-                    [b setShield:2];
-                }
-            }
-        }
-        
-        // 落下要求を送る
-        [BlockMgr requestFall];
-        
-        
-        // 落下状態へ遷移
-        m_State = eState_Fall;
- 
-    }
- 
 }
 
 - (void)_updateFall {
@@ -486,6 +439,7 @@ enum eTouchState {
     // 消去判定
     [layerVanish clear];
     Layer2D* layer = [FieldMgr getLayer];
+    Player* player = [self _getPlayer];
     
     // 消去できた数
     int nVanish = 0;
@@ -509,13 +463,9 @@ enum eTouchState {
                     nVanish++;
                     
                     // HPを増やす
-                    m_Hp += cnt * val / 3 + 1;
-                    if (m_Hp > HP_MAX) {
-                        m_Hp = HP_MAX;
-                    }
-                    HpGauge* hpGauge = [self _getHpGauge];
-                    [hpGauge initHp:[self getHpRatio]];
-
+                    int v = cnt * val / 3 + 1;
+                    [player addHp:v];
+                    
                 }
             }
         }
@@ -590,10 +540,11 @@ enum eTouchState {
         
         // ダメージあり
         m_State = eState_DamageExec;
-        m_Hp -= cnt * 10;
         
-        HpGauge* hpGauge = [self _getHpGauge];
-        [hpGauge setHp:[self getHpRatio]];
+        Player* player = [self _getPlayer];
+        int v = cnt * 10;
+        [player damage:v];
+        
         return;
     }
     
@@ -644,10 +595,9 @@ enum eTouchState {
         TokenManager* mgrBlock = [self _getManagerBlock];
         [mgrBlock vanishAll];
         
-        m_Hp = HP_MAX;
-        HpGauge* hpGauge = [self _getHpGauge];
-        [hpGauge initHp:[self getHpRatio]];
-        
+        // HPの初期化
+        Player* player = [self _getPlayer];
+        [player initHp];
         
         // 初期化に戻る
         Layer2D* layer = [FieldMgr getLayer];

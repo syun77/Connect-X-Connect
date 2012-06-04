@@ -14,13 +14,15 @@
  * 描画プライオリティ
  */
 enum ePrio {
-    ePrio_Back,     // 背景
-    ePrio_Grid,     // グリッド線
-    ePrio_Block,    // ブロック
-    ePrio_Number,   // ブロックの数字
-    ePrio_CountEffect, // カウントダウンエフェクト
-    ePrio_Cursor,   // カーソル
-    ePrio_HpGauge,  // HPゲージ
+    ePrio_Back,         // 背景
+    ePrio_Grid,         // グリッド線
+    ePrio_Block,        // ブロック
+    ePrio_Number,       // ブロックの数字
+    ePrio_CountEffect,  // カウントダウンエフェクト
+    ePrio_Cursor,       // カーソル
+    ePrio_Player,       // プレイヤー
+    ePrio_Enemy,        // 敵
+    ePrio_HpGauge,      // HPゲージ
 };
 
 enum eState {
@@ -45,6 +47,7 @@ static SceneMain* scene_ = nil;
 @synthesize cursor;
 @synthesize grid;
 @synthesize hpGauge;
+@synthesize player;
 @synthesize layer;
 @synthesize ctrl;
 
@@ -131,6 +134,9 @@ static SceneMain* scene_ = nil;
     self.hpGauge = [HpGauge node];
     [self.baseLayer addChild:self.hpGauge z:ePrio_HpGauge];
     
+    self.player = [Player node];
+    [self.baseLayer addChild:self.player z:ePrio_Player];
+    
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
     [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
@@ -161,6 +167,7 @@ static SceneMain* scene_ = nil;
     // ゲーム制御
     self.ctrl = nil;
     
+    self.player = nil;
     self.hpGauge = nil;
     
     self.grid = nil;

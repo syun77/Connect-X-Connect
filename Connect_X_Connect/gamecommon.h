@@ -21,6 +21,9 @@ static const int FIELD_BLOCK_COUNT_MAX = (FIELD_BLOCK_COUNT_X * FIELD_BLOCK_COUN
 
 static const int FIELD_OUT = -1; // 領域外
 
+// ■ステータス
+static const int HP_MAX = 100;
+
 // スクリーン座標からチップ座標への変換
 int GameCommon_ScreenXToChipX(int screenX);
 int GameCommon_ScreenYToChipY(int screenY);
