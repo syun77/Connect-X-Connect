@@ -78,12 +78,16 @@ static const int TIMER_DECREASE = 60;
         ccDrawLine(origin, destination);
     }
     {
-        glColor4f(1-c, 0, 0, 1);
+        glColor4f(0, 1-c, 0, 1);
         CGPoint origin = CGPointMake(x, y);
         CGPoint destination = CGPointMake(x + WIDTH*m_Now, y);
         ccDrawLine(origin, destination);
     }
     glLineWidth(1);
+    {
+        glColor4f(1, 1, 1, 1);
+        [self drawRectLT:x y:y-2 w:WIDTH h:4 rot:0 scale:1];
+    }
     
     System_SetBlend(eBlend_Normal);
     

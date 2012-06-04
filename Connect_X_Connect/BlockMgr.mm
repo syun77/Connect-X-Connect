@@ -231,7 +231,7 @@
             // 領域内
             // カウントダウンさせる
 //            [b countDown];
-            [CountDownEffect add:[b getIndex] x:block._x y:block._y frame:60];
+            [BezierEffect add:[b getIndex] x:block._x y:block._y frame:60];
         }
     }
 }

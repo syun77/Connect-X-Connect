@@ -43,7 +43,7 @@ static SceneMain* scene_ = nil;
 @synthesize fontTest2;
 @synthesize fontTest3;
 @synthesize mgrBlock;
-@synthesize mgrCountDownEffect;
+@synthesize mgrBezierEffect;
 @synthesize cursor;
 @synthesize grid;
 @synthesize hpGauge;
@@ -122,9 +122,9 @@ static SceneMain* scene_ = nil;
     [self.mgrBlock create:self.baseLayer size:FIELD_BLOCK_COUNT_X*(FIELD_BLOCK_COUNT_Y+2) className:@"Block"];
     [self.mgrBlock setPrio:ePrio_Block];
     
-    self.mgrCountDownEffect = [TokenManager node];
-    [self.mgrCountDownEffect create:self.baseLayer size:512 className:@"CountDownEffect"];
-    [self.mgrCountDownEffect setPrio:ePrio_CountEffect];
+    self.mgrBezierEffect = [TokenManager node];
+    [self.mgrBezierEffect create:self.baseLayer size:512 className:@"BezierEffect"];
+    [self.mgrBezierEffect setPrio:ePrio_CountEffect];
     
     self.cursor = [Cursor node];
     [self.baseLayer addChild:self.cursor z:ePrio_Cursor];
@@ -188,7 +188,7 @@ static SceneMain* scene_ = nil;
     
     // ■描画オブジェクト
     // トークン
-    self.mgrCountDownEffect = nil;
+    self.mgrBezierEffect = nil;
     self.mgrBlock = nil;
     
     // フォント

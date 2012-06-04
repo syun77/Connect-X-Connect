@@ -573,7 +573,7 @@ enum eTouchState {
  */
 - (void)_updateDamageExec {
 
-    if ([BlockMgr isEndVanishingAll] && [CountDownEffect countExist] == 0) {
+    if ([BlockMgr isEndVanishingAll] && [BezierEffect countExist] == 0) {
         
         if (m_Hp < 1) {
             
