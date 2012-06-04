@@ -47,6 +47,9 @@
 // チップ座標を指定してブロックを取得する
 + (Block*)getFromChip:(int)chipX chipY:(int)chipY;
 
+// インデックス指定でブロック取得
++ (Block*)getFromIndex:(int)index;
+
 // 全てのブロックを上に移動する
 + (void)shiftUpAll:(int)dy;
 

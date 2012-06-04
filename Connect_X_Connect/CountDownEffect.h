@@ -20,6 +20,9 @@
 
 - (void)setParam:(int)handle frame:(int)frame;
 
+// 生存数をカウントする
++ (int)countExist;
+
 // エフェクト追加
 + (CountDownEffect*)add:(int)handle x:(float)x y:(float)y frame:(int)frame;
 + (CountDownEffect*)addFromChip:(int)handle chipX:(int)chipX chipY:(int)chipY frame:(int)frame;

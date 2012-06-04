@@ -225,6 +225,9 @@ enum eTouchState {
 
 }
 
+/**
+ * 更新・初期化
+ */
 - (void)_updateInit {
     
     // HPの初期化
@@ -365,6 +368,9 @@ enum eTouchState {
     
 }
 
+/**
+ * 更新・落下中
+ */
 - (void)_updateFall {
     
     if ([BlockMgr isFallWaitAll]) {
@@ -432,6 +438,9 @@ enum eTouchState {
     return cnt;
 }
 
+/**
+ * 更新・消去チェック
+ */
 - (void)_updateVanishCheck {
     
     [FieldMgr copyBlockToLayer];
@@ -558,7 +567,7 @@ enum eTouchState {
  */
 - (void)_updateDamageExec {
 
-    if ([BlockMgr isEndVanishingAll] && [[SceneMain sharedInstance].mgrCountDownEffect count] == 0) {
+    if ([BlockMgr isEndVanishingAll] && [CountDownEffect countExist] == 0) {
         
         if (m_Hp < 1) {
             

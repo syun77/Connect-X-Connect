@@ -10,6 +10,7 @@
 #import "SceneMain.h"
 #import "Math.h"
 
+// HPの減少アニメ時間
 static const int TIMER_DECREASE = 60;
 
 @implementation HpGauge

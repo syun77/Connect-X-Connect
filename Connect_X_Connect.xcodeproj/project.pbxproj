@@ -508,11 +508,11 @@
 				C783FD221577C1DA00AAACAE /* Cursor.h */,
 				C783FD231577C1DA00AAACAE /* Cursor.mm */,
 				C783FD26157879D700AAACAE /* Grid.h */,
-				C7750C2E157C492E00F78387 /* Player.h */,
-				C7750C2F157C492E00F78387 /* Player.mm */,
 				C783FD27157879D700AAACAE /* Grid.mm */,
 				C783FD29157917E400AAACAE /* HpGauge.h */,
 				C783FD2A157917E400AAACAE /* HpGauge.mm */,
+				C7750C2E157C492E00F78387 /* Player.h */,
+				C7750C2F157C492E00F78387 /* Player.mm */,
 			);
 			name = Token;
 			sourceTree = "<group>";

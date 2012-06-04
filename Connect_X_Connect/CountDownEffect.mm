@@ -13,6 +13,11 @@
 
 @implementation CountDownEffect
 
++ (TokenManager*)_getTokenManager {
+    
+    return [SceneMain sharedInstance].mgrCountDownEffect;
+}
+
 /**
  * コンストラクタ
  */
@@ -41,7 +46,7 @@
     
     if (m_Timer >= m_Frame) {
         
-        Block* b = (Block*)[[SceneMain sharedInstance].mgrBlock getFromIdx:m_hTarget];
+        Block* b = [BlockMgr getFromIndex:m_hTarget];
         if (b) {
             
             [b countDown];
@@ -67,7 +72,7 @@
     m_Frame = frame;
     
     // ベジェ曲線の作成
-    Block* b = (Block*)[[SceneMain sharedInstance].mgrBlock getFromIdx:m_hTarget];
+    Block* b = [BlockMgr getFromIndex:m_hTarget];
     float x3 = b._x;
     float y3 = b._y;
     float y1 = Math_Randf(480);
@@ -77,10 +82,19 @@
 
 // ----------------------------------------------------
 // static public
+/**
+ * 生存数をカウントする
+ */
++ (int)countExist {
+    
+    TokenManager* mgr = [CountDownEffect _getTokenManager];
+    
+    return [mgr count];
+}
 
 + (CountDownEffect*) add:(int)handle x:(float)x y:(float)y frame:(int)frame {
     
-    TokenManager* mgr = [SceneMain sharedInstance].mgrCountDownEffect;
+    TokenManager* mgr = [CountDownEffect _getTokenManager];
     
     CountDownEffect* c = (CountDownEffect*)[mgr add];
     if (c) {

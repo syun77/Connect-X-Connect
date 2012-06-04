@@ -279,11 +279,36 @@
         }
         
         if ([b getChipX] == chipX && [b getChipY] == chipY) {
+            
+            // 見つかった
             return b;
         }
     }
     
     // 該当のブロックはなし
+    return nil;
+}
+
+// インデックス指定でブロック取得
++ (Block*)getFromIndex:(int)index {
+    
+    TokenManager* mgr = [BlockMgr _getTokenManager];
+    
+    for (Block* b in mgr.m_Pool) {
+        
+        if ([b isExist] == NO) {
+            
+            continue;
+        }
+        
+        if ([b getIndex] == index) {
+            
+            // 見つかった
+            return b;
+        }
+    }
+    
+    // 該当のブロックなし
     return nil;
 }
 
