@@ -30,15 +30,15 @@ enum eBezierEffect {
     Vec2D           m_vList[60];    // ベジェ曲線用のベクトル配列
     int             m_Timer;        // 経過時間
     int             m_Frame;        // 移動フレーム数
-    int             m_Val;          // 汎用変数
+    int             m_Damage;       // ダメージ量
 }
 
-- (void)setParam:(int)handle frame:(int)frame;
+- (void)setParamCountDown:(int)handle frame:(int)frame;
 
 // 生存数をカウントする
 + (int)countExist;
 
 // エフェクト追加
-+ (BezierEffect*)add:(int)handle x:(float)x y:(float)y frame:(int)frame;
-+ (BezierEffect*)addFromChip:(int)handle chipX:(int)chipX chipY:(int)chipY frame:(int)frame;
++ (BezierEffect*)add:(float)x y:(float)y;
++ (BezierEffect*)addFromChip:(int)chipX chipY:(int)chipY;
 @end

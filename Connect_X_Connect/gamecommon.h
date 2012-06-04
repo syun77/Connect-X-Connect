@@ -44,5 +44,7 @@ static const int BLOCK_APPEAR_X = 3;
 static const int BLOCK_APPEAR_Y1 = FIELD_BLOCK_COUNT_Y-1; // １つ目
 static const int BLOCK_APPEAR_Y2 = 9;  // ２つ目
 
+// ■ベジェ曲線エフェクト
+static const int BEZIEREFFECT_FRAME = 60; // 出現フレーム数
 
 #endif

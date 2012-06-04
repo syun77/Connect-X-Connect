@@ -69,10 +69,15 @@
 
 // ----------------------------------------------------
 // public
-- (void)setParam:(int)handle frame:(int)frame {
+/**
+ * 送信パラメータ設定 (カウントダウン)
+ */
+- (void)setParamCountDown:(int)handle frame:(int)frame {
+    
+    m_Type    = eBezierEffect_Block;
     m_hTarget = handle;
-    m_Timer = 0;
-    m_Frame = frame;
+    m_Timer   = 0;
+    m_Frame   = frame;
     
     // ベジェ曲線の作成
     Block* b = [BlockMgr getFromIndex:m_hTarget];
@@ -95,25 +100,24 @@
     return [mgr count];
 }
 
-+ (BezierEffect*) add:(int)handle x:(float)x y:(float)y frame:(int)frame {
++ (BezierEffect*) add:(float)x y:(float)y {
     
     TokenManager* mgr = [BezierEffect _getTokenManager];
     
     BezierEffect* c = (BezierEffect*)[mgr add];
     if (c) {
         [c set2:x y:y rot:0 speed:0 ax:0 ay:0];
-        [c setParam:handle frame:frame];
     }
     
     return c;
 }
 
-+ (BezierEffect*) addFromChip:(int)handle chipX:(int)chipX chipY:(int)chipY frame:(int)frame {
++ (BezierEffect*) addFromChip:(int)chipX chipY:(int)chipY {
     
     float x = GameCommon_ChipXToScreenX(chipX);
     float y = GameCommon_ChipYToScreenY(chipY);
     
-    return [BezierEffect add:handle x:x y:y frame:frame];
+    return [BezierEffect add:x y:y];
 }
 
 @end

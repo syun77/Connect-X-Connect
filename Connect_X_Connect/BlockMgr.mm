@@ -231,7 +231,10 @@
             // 領域内
             // カウントダウンさせる
 //            [b countDown];
-            [BezierEffect add:[b getIndex] x:block._x y:block._y frame:60];
+            BezierEffect* eft = [BezierEffect add:block._x y:block._y];
+            if (eft) {
+                [eft setParamCountDown:[b getIndex] frame:BEZIEREFFECT_FRAME];
+            }
         }
     }
 }
