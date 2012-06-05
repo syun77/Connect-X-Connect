@@ -9,6 +9,8 @@
 #import "FontEffect.h"
 #import "SceneMain.h"
 
+static int TIMER_DAMAGE = 70;
+
 @implementation FontEffect
 
 @synthesize m_pFont;
@@ -60,7 +62,7 @@
  */
 - (void)initialize {
     [self.m_pFont setVisible:YES];
-    m_Timer = 60;
+    m_Timer = TIMER_DAMAGE;
     [self.m_pFont setScale:2];
 }
 
@@ -69,7 +71,27 @@
  */
 - (void)update:(ccTime)dt {
     
+    [self move:dt];
+    [self.m_pFont setPosScreen:self._x y:self._y];
+    if (self._y < m_StartY) {
+        self._y = m_StartY;
+        self._vy = 0;
+        self._ay = 0;
+    }
+    
     m_Timer--;
+    if (m_Timer < 20) {
+        
+        if (m_Timer%8 < 4) {
+            
+            [self.m_pFont setVisible:YES];
+        }
+        else {
+            
+            [self.m_pFont setVisible:NO];
+        }
+    }
+    
     if (m_Timer < 1) {
         
         [self.m_pFont setVisible:NO];
@@ -88,6 +110,10 @@
     m_Type = type;
     [self.m_pFont setText:text];
     [self.m_pFont setPosScreen:self._x y:self._y];
+    
+    m_StartY = self._y;
+    self._vy = 220;
+    self._ay = -12;
 }
 
 // -------------------------------------------------------

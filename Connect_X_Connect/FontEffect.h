@@ -23,6 +23,7 @@ enum eFontEffect {
  */
 @interface FontEffect : Token {
     
+    float       m_StartY;
     AsciiFont*  m_pFont;
     
     eFontEffect m_Type;
