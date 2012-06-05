@@ -13,6 +13,8 @@
 static const int ENEMY_POS_X = 320-64;
 static const int ENEMY_POS_Y = 480-80;
 
+static const int TIMER_DAMAGE = 30;
+
 /**
  * 敵の実装
  */
@@ -51,6 +53,19 @@ static const int ENEMY_POS_Y = 480-80;
     
     float rot = 15 * Math_SinEx(m_tPast/2);
     [self setRotation:rot];
+    
+    [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
+    if (m_tDamage > 0) {
+        
+        m_tDamage--;
+        m_tPast = 0;
+        
+        if (m_tDamage%8 < 4) {
+            
+            // ダメージ演出
+            [self setColor:ccc3(0xFF, 0, 0)];
+        }
+    }
 }
 
 // -------------------------------------------------
@@ -114,6 +129,9 @@ static const int ENEMY_POS_Y = 480-80;
     
     HpGauge* hpGauge = [self _getGauge];
     [hpGauge setHp:[self getHpRatio]];
+    
+    // ダメージ演出開始
+    m_tDamage = TIMER_DAMAGE;
 }
 
 

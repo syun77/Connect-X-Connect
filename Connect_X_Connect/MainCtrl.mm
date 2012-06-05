@@ -481,12 +481,22 @@ enum eTouchState {
                     int v = cnt * val / 3 + 1;
                     [player addHp:v];
                     
+                    // 敵にダメージを与える
+                    
+                    BezierEffect* eft = [BezierEffect addFromChip:i chipY:j];
+                    if (eft) {
+                        
+                        int frame  = BEZIEREFFECT_FRAME;
+                        int damage = cnt * val;
+                        
+                        [eft setParamDamage:eBezierEffect_Enemy frame:frame damage:damage];
+                    }
+                    
                 }
             }
         }
     }
     
-//    [self.layerVanish dump];
     if (nVanish == 0) {
         
         // 消去できるものはない
@@ -555,10 +565,6 @@ enum eTouchState {
         
         // ダメージあり
         m_State = eState_DamageExec;
-        
-        Player* player = [self _getPlayer];
-        int v = cnt * 10;
-        [player damage:v];
         
         return;
     }

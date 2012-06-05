@@ -18,10 +18,10 @@ enum ePrio {
     ePrio_Grid,         // グリッド線
     ePrio_Block,        // ブロック
     ePrio_Number,       // ブロックの数字
-    ePrio_CountEffect,  // カウントダウンエフェクト
     ePrio_Cursor,       // カーソル
     ePrio_Player,       // プレイヤー
     ePrio_Enemy,        // 敵
+    ePrio_Effect,       // エフェクト
     ePrio_HpGauge,      // HPゲージ
 };
 
@@ -124,7 +124,7 @@ static SceneMain* scene_ = nil;
     
     self.mgrBezierEffect = [TokenManager node];
     [self.mgrBezierEffect create:self.baseLayer size:512 className:@"BezierEffect"];
-    [self.mgrBezierEffect setPrio:ePrio_CountEffect];
+    [self.mgrBezierEffect setPrio:ePrio_Effect];
     
     self.cursor = [Cursor node];
     [self.baseLayer addChild:self.cursor z:ePrio_Cursor];

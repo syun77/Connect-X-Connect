@@ -12,6 +12,7 @@
 
 static const int PLAYER_POS_X = 64;
 static const int PLAYER_POS_Y = 480 - 80;
+static const int TIMER_DAMAGE = 30;
 
 /**
  * プレイヤーの実装
@@ -54,6 +55,14 @@ static const int PLAYER_POS_Y = 480 - 80;
     }
     else {
         CGRect r = Exerinya_GetRect(eExerinyaRect_Player2);
+        [self setTexRect:r];
+    }
+    
+    if (m_tDamage > 0) {
+        
+        // ダメージ中
+        m_tDamage--;
+        CGRect r = Exerinya_GetRect(eExerinyaRect_PlayerDamage);
         [self setTexRect:r];
     }
 }
@@ -118,5 +127,8 @@ static const int PLAYER_POS_Y = 480 - 80;
     
     HpGauge* hpGauge = [self _getGauge];
     [hpGauge setHp:[self getHpRatio]];
+    
+    // ダメージ演出開始
+    m_tDamage = TIMER_DAMAGE;
 }
 @end

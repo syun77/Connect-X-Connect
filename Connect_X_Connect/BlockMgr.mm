@@ -261,6 +261,18 @@
             // 他のブロックをカウントダウンさせる
             [BlockMgr countDonwBlock:b];
             
+            // ダメージ処理を行う
+            int chipX = [b getChipX];
+            int chipY = [b getChipY];
+            int frame = BEZIEREFFECT_FRAME;
+            int damage = [b getNumber] * 3;
+            BezierEffect* eft = [BezierEffect addFromChip:chipX chipY:chipY];
+            if (eft) {
+                
+                // エフェクト生成
+                [eft setParamDamage:eBezierEffect_Player frame:frame damage:damage];
+            }
+            
             [b requestVanish];
             ret++;
         }

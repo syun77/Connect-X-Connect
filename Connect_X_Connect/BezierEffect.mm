@@ -43,16 +43,74 @@
     
 }
 
+// ----------------------------------------------------
+// private
+
+- (Player*)_getPlayer {
+    return [SceneMain sharedInstance].player;
+}
+- (Enemy*)_getEnemy {
+    return [SceneMain sharedInstance].enemy;
+}
+
+/**
+ * フレーム数を指定
+ */
+- (void)_setFrame:(int)frame {
+    
+    m_Timer = 0;
+    m_Frame = frame;
+    
+    if (m_Frame >= BEZIEREFFECT_FRAME) {
+        m_Frame = BEZIEREFFECT_FRAME_MAX;
+    }
+}
+
+- (void)_doPlayer {
+    
+    // ダメージ処理
+    Player* player = [self _getPlayer];
+    [player damage:m_Damage];
+}
+- (void)_doEnemy {
+    
+    // ダメージ処理
+    Enemy* enemy = [self _getEnemy];
+    [enemy damage:m_Damage];
+    
+}
+- (void)_doCountDown {
+    
+    Block* b = [BlockMgr getFromIndex:m_hTarget];
+    if (b) {
+        
+        [b countDown];
+    }
+}
+
 - (void)update:(ccTime)dt {
     m_Timer++;
     [self move:0];
     
     if (m_Timer >= m_Frame) {
-        
-        Block* b = [BlockMgr getFromIndex:m_hTarget];
-        if (b) {
-            
-            [b countDown];
+       
+        switch (m_Type) {
+            case eBezierEffect_Player:
+                [self _doPlayer];
+                break;
+                
+            case eBezierEffect_Enemy:
+                [self _doEnemy];
+                break;
+                
+            case eBezierEffect_Block:
+                [self _doCountDown];
+                break;
+                
+            default:
+                NSLog(@"Error: Not Inplement BezierEffect::update().");
+                assert(0);
+                break;
         }
         [self vanish];
         
@@ -64,25 +122,60 @@
     self._x = v.x;
     self._y = v.y;
     
-    [self setScale:self.scale * 0.98];
+    [self setScale:self.scale * 0.99];
 }
 
 // ----------------------------------------------------
 // public
 /**
- * 送信パラメータ設定 (カウントダウン)
+ * カウントダウン用の設定
+ * @param handle ブロックのハンドラ
+ * @param frame  到達フレーム数
  */
 - (void)setParamCountDown:(int)handle frame:(int)frame {
     
     m_Type    = eBezierEffect_Block;
     m_hTarget = handle;
-    m_Timer   = 0;
-    m_Frame   = frame;
+    [self _setFrame:frame];
     
     // ベジェ曲線の作成
     Block* b = [BlockMgr getFromIndex:m_hTarget];
     float x3 = b._x;
     float y3 = b._y;
+    float y1 = Math_Randf(480);
+    float x2 = Math_Randf(320);
+    Vec2d_GetBezierCurve(self._x, self._y, 320, y1, x2, 480, x3, y3, m_vList, frame);
+}
+
+/**
+ * ダメージ用の設定
+ * @param type   種別
+ * @param frame  到達フレーム数
+ * @param damage ダメージ量
+ */
+- (void)setParamDamage:(eBezierEffect)type frame:(int)frame damage:(int)damage {
+    
+    m_Type   = type;
+    m_Damage = damage;
+    [self _setFrame:frame];
+    
+    float x3 = 0;
+    float y3 = 0;
+    if (type == eBezierEffect_Player) {
+        
+        // プレイヤーに向かって飛んでいく
+        Player* player = [self _getPlayer];
+        x3 = player._x;
+        y3 = player._y;
+    }
+    else {
+        
+        // 的に向かって飛んでいく
+        Enemy* enemy = [self _getEnemy];
+        x3 = enemy._x;
+        y3 = enemy._y;
+    }
+    
     float y1 = Math_Randf(480);
     float x2 = Math_Randf(320);
     Vec2d_GetBezierCurve(self._x, self._y, 320, y1, x2, 480, x3, y3, m_vList, frame);
