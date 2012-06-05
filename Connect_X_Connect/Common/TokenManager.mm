@@ -55,7 +55,7 @@
     m_Idx   = 0;
     m_Size  = size;
     m_Layer = layer;
-    m_Prio  = 0;
+//    m_Prio  = 0;
     
 //    NSLog(@"TokenManager::Create '%@'", m_Name);
 }

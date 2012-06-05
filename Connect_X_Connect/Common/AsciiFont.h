@@ -67,6 +67,7 @@ typedef enum {
  * @param NSInteger 文字列長
  */
 - (void)createFont:(CCLayer *)layer length:(NSInteger)length;
+- (void)createFont2:(CCLayer *)layer length:(NSInteger)length prio:(NSInteger)prio;
 
 // フォントの１文字あたりのサイズを取得する
 - (float)getLetterSize;

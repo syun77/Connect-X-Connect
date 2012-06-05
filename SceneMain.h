@@ -22,6 +22,7 @@
 #import "BezierEffect.h"
 #import "Player.h"
 #import "Enemy.h"
+#import "FontEffect.h"
 
 /**
  * ゲームメインのシーン
@@ -39,6 +40,7 @@
     AsciiFont*      fontTest3;
     TokenManager*   mgrBlock;
     TokenManager*   mgrBezierEffect;
+    TokenManager*   mgrFontEffect;
     Cursor*         cursor;
     Grid*           grid;
     HpGauge*        hpGauge;
@@ -65,6 +67,7 @@
 @property (nonatomic, retain)AsciiFont*         fontTest3;
 @property (nonatomic, retain)TokenManager*      mgrBlock;
 @property (nonatomic, retain)TokenManager*      mgrBezierEffect;
+@property (nonatomic, retain)TokenManager*      mgrFontEffect;
 @property (nonatomic, retain)Cursor*            cursor;
 @property (nonatomic, retain)Grid*              grid;
 @property (nonatomic, retain)HpGauge*           hpGauge;

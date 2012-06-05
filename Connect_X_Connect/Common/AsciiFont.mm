@@ -130,6 +130,13 @@
     m_Y         = 0;
 }
 
+- (void)createFont2:(CCLayer *)layer length:(NSInteger)length prio:(NSInteger)prio {
+    
+    [self setPrio:prio];
+    
+    [self createFont:layer length:length];
+}
+
 /**
  * フォントの１文字あたりのサイズを取得する
  */

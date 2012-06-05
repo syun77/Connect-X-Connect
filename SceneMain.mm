@@ -44,6 +44,7 @@ static SceneMain* scene_ = nil;
 @synthesize fontTest3;
 @synthesize mgrBlock;
 @synthesize mgrBezierEffect;
+@synthesize mgrFontEffect;
 @synthesize cursor;
 @synthesize grid;
 @synthesize hpGauge;
@@ -126,6 +127,10 @@ static SceneMain* scene_ = nil;
     [self.mgrBezierEffect create:self.baseLayer size:512 className:@"BezierEffect"];
     [self.mgrBezierEffect setPrio:ePrio_Effect];
     
+    self.mgrFontEffect = [TokenManager node];
+    [self.mgrFontEffect create:self.baseLayer size:16 className:@"FontEffect"];
+    [self.mgrFontEffect setPrio:ePrio_Effect];
+    
     self.cursor = [Cursor node];
     [self.baseLayer addChild:self.cursor z:ePrio_Cursor];
     [self.cursor setDraw:NO chipX:3];
@@ -188,6 +193,7 @@ static SceneMain* scene_ = nil;
     
     // ■描画オブジェクト
     // トークン
+    self.mgrFontEffect = nil;
     self.mgrBezierEffect = nil;
     self.mgrBlock = nil;
     

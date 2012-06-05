@@ -9,6 +9,7 @@
 #import "Player.h"
 #import "SceneMain.h"
 #import "Exerinya.h"
+#import "FontEffect.h"
 
 static const int PLAYER_POS_X = 64;
 static const int PLAYER_POS_Y = 480 - 80;
@@ -130,5 +131,7 @@ static const int TIMER_DAMAGE = 30;
     
     // ダメージ演出開始
     m_tDamage = TIMER_DAMAGE;
+    
+    [FontEffect add:eFontEffect_Damage x:self._x y:self._y text:[NSString stringWithFormat:@"%d", v]];
 }
 @end
