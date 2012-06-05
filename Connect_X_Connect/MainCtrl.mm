@@ -78,6 +78,9 @@ enum eTouchState {
     
     m_NumberPrev = 1;
     
+    m_ReqAppearBottom = NO;
+    m_nBlockLevel = 5;
+    
     
     return self;
 }
@@ -242,6 +245,32 @@ enum eTouchState {
     
     m_State = eState_Standby;
     
+    // TODO: テスト
+    {
+        // 初期化に戻る
+        Layer2D* layer = [FieldMgr getLayer];
+        
+        // ブロック生成テスト
+        [layer random:6];
+        
+        for (int i = 0; i < FIELD_BLOCK_COUNT_MAX; i++) {
+            int v = [layer getFromIdx:i];
+            if (v > 0) {
+                Block* b = [Block addFromIdx:v idx:i];
+                
+                if (Math_Rand(5) == 0) {
+                    [b setShield:2];
+                }
+            }
+        }
+        
+        // 落下要求を送る
+        [BlockMgr requestFall];
+        
+        
+        // 落下状態へ遷移
+        m_State = eState_Fall;
+    }
 }
 
 /**
@@ -249,38 +278,20 @@ enum eTouchState {
  */
 - (void)_updateAppearBottomCheck {
     
-    // TODO: 下から出現チェック
-    Layer2D* layer = [FieldMgr getLayer];
-    
-    static int s_tmp = 0;
-    if ([layer count:0] < 5 * 5) {
-        // TODO: 色々埋まっていたら出現しない
-        m_Timer = 1;
+    if (m_ReqAppearBottom == NO) {
         
-        if (s_tmp == 0) {
-            s_tmp = 1;
-        }
-        else {
-            
-            // やっぱり出す
-            s_tmp = 0;
-            m_Timer = 0;
-        }
-    }
-    
-    
-    if (m_Timer > 0) {
-        
-        // 出現しないので、ブロック出現
+        // 出現要求なし
+        // ブロック出現
         m_State = eState_AppearBlock;
         m_Timer = 0;
         return;
     }
     
     // 下から出現
+    m_ReqAppearBottom = NO;
     for(int i = 0; i < FIELD_BLOCK_COUNT_X; i++)
     {
-        int number = Math_RandInt(1, 7);
+        int number = Math_RandInt(1, m_nBlockLevel);
         Block* b = [Block addFromChip:number chipX:i chipY:-1];
         if (b) {
             [b setShield:1];
@@ -315,7 +326,7 @@ enum eTouchState {
 - (void)_updateAppearBlock {
     
     // ブロック追加
-    int num1 = Math_RandInt(2, 7);
+    int num1 = Math_RandInt(2, m_nBlockLevel);
     
     // 出現番号を保存
     m_NumberPrev = num1;

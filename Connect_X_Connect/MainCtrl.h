@@ -34,6 +34,9 @@
     
     int     m_NumberPrev;       // 出現したブロックの数値
     
+    BOOL    m_ReqAppearBottom;  // 下から出現要求
+    int     m_nBlockLevel;      // 出現ブロックレベル
+    
 }
 
 @property (nonatomic, retain)Layer2D* layerVanish;

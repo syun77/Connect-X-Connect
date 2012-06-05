@@ -258,8 +258,11 @@
         if ([b getChipY] >= FIELD_BLOCK_COUNT_Y-1) {
             
             // 領域外
-            // 他のブロックをカウントダウンさせる
-            [BlockMgr countDonwBlock:b];
+            if (NO) {
+                
+                // 他のブロックをカウントダウンさせる
+                [BlockMgr countDonwBlock:b];
+            }
             
             // ダメージ処理を行う
             int chipX = [b getChipX];
