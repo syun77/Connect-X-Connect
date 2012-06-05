@@ -61,7 +61,7 @@
     m_Timer = 0;
     m_Frame = frame;
     
-    if (m_Frame >= BEZIEREFFECT_FRAME) {
+    if (m_Frame >= BEZIEREFFECT_FRAME_MAX) {
         m_Frame = BEZIEREFFECT_FRAME_MAX;
     }
 }

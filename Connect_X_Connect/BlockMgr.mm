@@ -267,7 +267,7 @@
             // ダメージ処理を行う
             int chipX = [b getChipX];
             int chipY = [b getChipY];
-            int frame = BEZIEREFFECT_FRAME;
+            int frame  = BEZIEREFFECT_FRAME + Math_RandInt(-10, 10);
             int damage = [b getNumber] * 3;
             BezierEffect* eft = [BezierEffect addFromChip:chipX chipY:chipY];
             if (eft) {

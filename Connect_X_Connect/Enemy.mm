@@ -132,6 +132,9 @@ static const int TIMER_DAMAGE = 30;
     
     // ダメージ演出開始
     m_tDamage = TIMER_DAMAGE;
+    
+    // ダメージ数値表示
+    [FontEffect add:eFontEffect_Damage x:self._x y:self._y text:[NSString stringWithFormat:@"%d", v]];
 }
 
 

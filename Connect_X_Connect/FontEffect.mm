@@ -52,6 +52,7 @@
     
     [self.m_pFont createFont2:layer length:8 prio:10];
     [self.m_pFont setVisible:NO];
+    [self.m_pFont setAlign:eFontAlign_Center];
 }
 
 /**

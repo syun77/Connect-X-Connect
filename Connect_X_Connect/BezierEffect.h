@@ -10,8 +10,7 @@
 #import "cocos2d.h"
 #import "Token.h"
 #import "Vec.h"
-
-static const int BEZIEREFFECT_FRAME_MAX = 80;
+#import "gamecommon.h"
 
 /**
  * 種別 (目標)

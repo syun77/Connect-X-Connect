@@ -493,11 +493,10 @@ enum eTouchState {
                     [player addHp:v];
                     
                     // 敵にダメージを与える
-                    
                     BezierEffect* eft = [BezierEffect addFromChip:i chipY:j];
                     if (eft) {
                         
-                        int frame  = BEZIEREFFECT_FRAME;
+                        int frame  = BEZIEREFFECT_FRAME + Math_RandInt(-10, 10);
                         int damage = cnt * val;
                         
                         [eft setParamDamage:eBezierEffect_Enemy frame:frame damage:damage];
