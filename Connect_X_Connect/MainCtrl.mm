@@ -66,7 +66,6 @@ enum eTouchState {
     // 変数の初期化
     m_State = eState_Init;
     m_Timer = 0;
-    m_Hp = HP_MAX;
     m_TouchState = eState_Standby;
     m_TouchStartY = 0;
     m_TouchX = 0;
@@ -465,7 +464,7 @@ enum eTouchState {
     // 消去判定
     [layerVanish clear];
     Layer2D* layer = [FieldMgr getLayer];
-    Player* player = [self _getPlayer];
+//    Player* player = [self _getPlayer];
     
     // 消去できた数
     int nVanish = 0;
@@ -489,8 +488,8 @@ enum eTouchState {
                     nVanish++;
                     
                     // HPを増やす
-                    int v = cnt * val / 3 + 1;
-                    [player addHp:v];
+//                    int v = cnt * val / 3 + 1;
+//                    [player addHp:v];
                     
                     // 敵にダメージを与える
                     BezierEffect* eft = [BezierEffect addFromChip:i chipY:j];
@@ -550,7 +549,15 @@ enum eTouchState {
 
 - (void)_updateVanishExec {
     
-    if ([BlockMgr isEndVanishingAll]) {
+//    if ([BlockMgr isEndVanishingAll]) {
+    if ([BezierEffect countExist] == 0) {
+        
+        Enemy* enemy = [self _getEnemy];
+        if ([enemy isDead]) {
+            
+            // TODO: 勝利演出へ
+            
+        }
         
         // 待機状態にする
         [BlockMgr changeStandbyAll];
@@ -591,7 +598,8 @@ enum eTouchState {
 
     if ([BlockMgr isEndVanishingAll] && [BezierEffect countExist] == 0) {
         
-        if (m_Hp < 1) {
+        Player* player = [self _getPlayer];
+        if ([player isDead]) {
             
             // ゲームオーバーへ
             m_State = eState_Gameover;
@@ -721,22 +729,6 @@ enum eTouchState {
 - (BOOL)isEnd {
     
     return m_State == eState_End;
-}
-
-/**
- * HPを取得する
- * @return HP
- */
-- (int)getHp {
-    return m_Hp;
-}
-
-/**
- * HPの割合を取得する
- */
-- (float)getHpRatio {
-    
-    return (float)m_Hp / HP_MAX;
 }
 
 @end

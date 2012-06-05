@@ -59,12 +59,18 @@ static const int TIMER_DAMAGE = 30;
         [self setTexRect:r];
     }
     
+    self._x = PLAYER_POS_X;
+    self._y = PLAYER_POS_Y;
+    
     if (m_tDamage > 0) {
         
         // ダメージ中
         m_tDamage--;
         CGRect r = Exerinya_GetRect(eExerinyaRect_PlayerDamage);
         [self setTexRect:r];
+        
+        self._x += (m_tPast%8 < 4 ? -1 : 1) * Math_Randf(m_tDamage * 0.5);
+        self._y += -m_tDamage*0.5 + Math_Randf(m_tDamage);
     }
 }
 
@@ -134,4 +140,13 @@ static const int TIMER_DAMAGE = 30;
     
     [FontEffect add:eFontEffect_Damage x:self._x y:self._y text:[NSString stringWithFormat:@"%d", v]];
 }
+
+/**
+ * 死亡したかどうか
+ */
+- (BOOL)isDead {
+    
+    return m_Hp <= 0;
+}
+
 @end

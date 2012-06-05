@@ -112,6 +112,8 @@ static int TIMER_DAMAGE = 70;
     [self.m_pFont setPosScreen:self._x y:self._y];
     
     m_StartY = self._y;
+    
+    // 飛び跳ねる用のパラメータ設定
     self._vy = 220;
     self._ay = -12;
 }

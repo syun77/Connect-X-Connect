@@ -55,6 +55,9 @@ static const int TIMER_DAMAGE = 30;
     [self setRotation:rot];
     
     [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
+    
+    self._x = ENEMY_POS_X;
+    self._y = ENEMY_POS_Y;
     if (m_tDamage > 0) {
         
         m_tDamage--;
@@ -65,7 +68,11 @@ static const int TIMER_DAMAGE = 30;
             // ダメージ演出
             [self setColor:ccc3(0xFF, 0, 0)];
         }
+        
+        self._x += (m_tPast%8 < 4 ? -1 : 1) * Math_Randf(m_tDamage);
+        self._y += (-m_tDamage*0.5 + Math_Randf(m_tDamage));
     }
+    
 }
 
 // -------------------------------------------------
@@ -137,5 +144,11 @@ static const int TIMER_DAMAGE = 30;
     [FontEffect add:eFontEffect_Damage x:self._x y:self._y text:[NSString stringWithFormat:@"%d", v]];
 }
 
+/**
+ * 死亡したかどうか
+ */
+- (BOOL)isDead {
+    return m_Hp <= 0;
+}
 
 @end

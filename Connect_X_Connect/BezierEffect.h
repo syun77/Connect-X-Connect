@@ -56,4 +56,5 @@ enum eBezierEffect {
 // エフェクト追加
 + (BezierEffect*)add:(float)x y:(float)y;
 + (BezierEffect*)addFromChip:(int)chipX chipY:(int)chipY;
+
 @end
