@@ -16,6 +16,15 @@ static const int ENEMY_POS_Y = 480-80;
 static const int TIMER_DAMAGE = 30;
 
 /**
+ * 状態
+ */
+enum eState {
+    eState_Appear,  // 出現状態
+    eState_Standby, // 待機中
+    eState_Vanish,  // 消滅演出
+};
+
+/**
  * 敵の実装
  */
 @implementation Enemy
@@ -36,20 +45,17 @@ static const int TIMER_DAMAGE = 30;
     self._y = ENEMY_POS_Y;
     CGRect r = Exerinya_GetRect(eExerinyaRect_Nasu);
     [self setTexRect:r];
+    [self setVisible:NO];
     
     m_Hp = HP_MAX;
     
     return self;
 }
 
-/**
- * 更新
- */
-- (void)update:(ccTime)dt {
+- (void)_updateAppear {
     
-    [self move:0];
-    
-    m_tPast++;
+}
+- (void)_updateStandby {
     
     float rot = 15 * Math_SinEx(m_tPast/2);
     [self setRotation:rot];
@@ -71,6 +77,36 @@ static const int TIMER_DAMAGE = 30;
         
         self._x += (m_tPast%8 < 4 ? -1 : 1) * Math_Randf(m_tDamage);
         self._y += (-m_tDamage*0.5 + Math_Randf(m_tDamage));
+    }
+}
+- (void)_updateVanish {
+    
+}
+
+/**
+ * 更新
+ */
+- (void)update:(ccTime)dt {
+    
+    [self move:0];
+    
+    m_tPast++;
+    
+    switch (m_State) {
+        case eState_Appear:
+            [self _updateAppear];
+            break;
+            
+        case eState_Standby:
+            [self _updateStandby];
+            break;
+            
+        case eState_Vanish:
+            [self _updateVanish];
+            break;
+            
+        default:
+            break;
     }
     
 }
@@ -101,6 +137,9 @@ static const int TIMER_DAMAGE = 30;
     // 描画座標を設定
     [hpGauge setPos:320-32-80 y:480-128];
     [self.m_pSprite setScale:0.5];
+    
+    [self setVisible:YES];
+    m_State = eState_Standby;
 }
 
 /**

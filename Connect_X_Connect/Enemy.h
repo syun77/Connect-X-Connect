@@ -15,6 +15,9 @@
  */
 @interface Enemy : Token {
     
+    int m_State;    // 状態
+    int m_Timer;    // タイマー
+    
     int m_tPast;    // 経過時間
     int m_tDamage;  // ダメージタイマー
     
