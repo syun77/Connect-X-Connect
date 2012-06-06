@@ -10,10 +10,13 @@
 #import "SceneMain.h"
 #import "Exerinya.h"
 
+// 座標関連
 static const int ENEMY_POS_X = 320-64;
 static const int ENEMY_POS_Y = 480-80;
 
+// タイマー関連
 static const int TIMER_DAMAGE = 30;
+static const int TIMER_APPEAR = 30;
 
 /**
  * 状態
@@ -53,6 +56,21 @@ enum eState {
 }
 
 - (void)_updateAppear {
+    
+    [self setVisible:YES];
+    
+    float x = ENEMY_POS_X;
+    float y = ENEMY_POS_Y;
+    x += m_Timer * 2;
+    self._x = x;
+    self._y = y;
+    
+    m_Timer = m_Timer * 0.9;
+    if (m_Timer < 1) {
+        
+        m_Timer = 0;
+        m_State = eState_Standby;
+    }
     
 }
 - (void)_updateStandby {
@@ -131,6 +149,10 @@ enum eState {
     
     m_Hp = HP_MAX;
     m_HpMax = HP_MAX;
+    
+    // TODO:
+    m_Hp *= 0.1;
+    
     HpGauge* hpGauge = [self _getGauge];
     [hpGauge initHp:[self getHpRatio]];
     
@@ -138,8 +160,9 @@ enum eState {
     [hpGauge setPos:320-32-80 y:480-128];
     [self.m_pSprite setScale:0.5];
     
-    [self setVisible:YES];
-    m_State = eState_Standby;
+    // 出現演出開始
+    m_State = eState_Appear;
+    m_Timer = TIMER_APPEAR;
 }
 
 /**
@@ -180,7 +203,7 @@ enum eState {
     m_tDamage = TIMER_DAMAGE;
     
     // ダメージ数値表示
-    [FontEffect add:eFontEffect_Damage x:self._x y:self._y text:[NSString stringWithFormat:@"%d", v]];
+    [FontEffect add:eFontEffect_Damage x:ENEMY_POS_X y:ENEMY_POS_Y text:[NSString stringWithFormat:@"%d", v]];
 }
 
 /**

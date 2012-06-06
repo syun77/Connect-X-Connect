@@ -26,6 +26,9 @@ enum eState {
     eState_VanishExec,          // 消去実行
     eState_DamageCheck,         // ダメージチェック
     eState_DamageExec,          // ダメージ実行
+    eState_WinLoseCheck,        // 勝敗チェック
+    eState_Win,                 // 勝利演出
+    eState_Lose,                // 敗北演出
     eState_Gameover,            // ゲームオーバー
     eState_End,                 // おしまい
 };
@@ -64,9 +67,10 @@ enum eTouchState {
     [self.layerTmp create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
     
     // 変数の初期化
+    m_StatePrev = eState_Init;
     m_State = eState_Init;
     m_Timer = 0;
-    m_TouchState = eState_Standby;
+    m_TouchState = eTouchState_Standby;
     m_TouchStartY = 0;
     m_TouchX = 0;
     m_TouchY = 0;
@@ -96,6 +100,36 @@ enum eTouchState {
 
 // -----------------------------------------------------
 // private
+- (NSString*)_getState:(eState)s {
+    switch (s) {
+        case eState_Init: { return @"Init"; }                // 初期化
+        case eState_AppearBottomCheck: { return @"AppearBottomCheck"; }   // ブロック出現（下から）チェック
+        case eState_AppearBottomExec: { return @"AppearBottomExec"; }    // ブロック出現（下から）実行
+        case eState_AppearBlock: { return @"AppearBlock"; }         // ブロック出現
+        case eState_Standby: { return @"Standby"; }             // 待機中
+        case eState_Fall: { return @"Fall"; }                // 落下中
+        case eState_VanishCheck: { return @"VanishCheck"; }         // 消去チェック
+        case eState_VanishExec: { return @"VanishExec"; }          // 消去実行
+        case eState_DamageCheck: { return @"DamageCheck"; }         // ダメージチェック
+        case eState_DamageExec: { return @"DamageExec"; }          // ダメージ実行
+        case eState_WinLoseCheck: { return @"WinLoseCheck"; }        // 勝敗チェック
+        case eState_Win: { return @"Win"; }                 // 勝利演出
+        case eState_Lose: { return @"Lose"; }                // 敗北演出
+        case eState_Gameover: { return @"Gameover"; }            // ゲームオーバー
+        case eState_End: { return @"End"; }                 // おしまい
+        default:
+            assert(0);
+            return @"None";
+    }
+}
+
+- (void)_changeState:(eState)s {
+    
+    NSLog(@"ChangeState %@->%@", [self _getState:(eState)m_State], [self _getState:s]);
+    
+    m_StatePrev = m_State;
+    m_State = s;
+}
 
 - (InterfaceLayer*)_getInterfaceLayer {
     
@@ -242,7 +276,7 @@ enum eTouchState {
     Enemy* enemy = [self _getEnemy];
     [enemy initHp];
     
-    m_State = eState_Standby;
+    [self _changeState:eState_Standby];
     
     // TODO: テスト
     {
@@ -268,7 +302,7 @@ enum eTouchState {
         
         
         // 落下状態へ遷移
-        m_State = eState_Fall;
+        [self _changeState:eState_Fall];
     }
 }
 
@@ -281,7 +315,7 @@ enum eTouchState {
         
         // 出現要求なし
         // ブロック出現
-        m_State = eState_AppearBlock;
+        [self _changeState:eState_AppearBlock];
         m_Timer = 0;
         return;
     }
@@ -299,7 +333,7 @@ enum eTouchState {
     
     [BlockMgr changeFallWaitAll];
     
-    m_State = eState_AppearBottomExec;
+    [self _changeState:eState_AppearBottomExec];
     m_Timer = 0;
 }
 
@@ -315,7 +349,7 @@ enum eTouchState {
         
         // 消滅チェック
         [FieldMgr copyBlockToLayer];
-        m_State = eState_VanishCheck;
+        [self _changeState:eState_VanishCheck];
     }
 }
 
@@ -347,7 +381,8 @@ enum eTouchState {
     m_TouchState = eTouchState_Standby;
     
     // タッチ入力待ちへ
-    m_State = eState_Standby;
+//    m_State = eState_Standby;
+    [self _changeState:eState_Standby];
 }
 
 /**
@@ -375,7 +410,7 @@ enum eTouchState {
         
         
         // 落下状態へ遷移
-        m_State = eState_Fall;
+        [self _changeState:eState_Fall];
             
     }
     else {
@@ -392,7 +427,7 @@ enum eTouchState {
     if ([BlockMgr isFallWaitAll]) {
         
         // 消去判定
-        m_State = eState_VanishCheck;
+        [self _changeState:eState_VanishCheck];
     }
 }
 
@@ -510,7 +545,7 @@ enum eTouchState {
         
         // 消去できるものはない
         // ダメージチェックへ
-        m_State = eState_DamageCheck;
+        [self _changeState:eState_DamageCheck];
         return;
     }
     
@@ -544,7 +579,8 @@ enum eTouchState {
     }
     
     // 消去演出中
-    m_State = eState_VanishExec;
+//    m_State = eState_VanishExec;
+    [self _changeState:eState_VanishExec];
 }
 
 - (void)_updateVanishExec {
@@ -567,7 +603,7 @@ enum eTouchState {
         
         
         // 落下状態へ遷移
-        m_State = eState_Fall;
+        [self _changeState:eState_Fall];
     }
 }
 
@@ -581,13 +617,13 @@ enum eTouchState {
     if (cnt > 0) {
         
         // ダメージあり
-        m_State = eState_DamageExec;
+        [self _changeState:eState_DamageExec];
         
         return;
     }
     
-    // ブロック出現 (下) チェック
-    m_State = eState_AppearBottomCheck;
+    // 勝敗チェック
+    [self _changeState:eState_WinLoseCheck];
     
 }
 
@@ -598,32 +634,85 @@ enum eTouchState {
 
     if ([BlockMgr isEndVanishingAll] && [BezierEffect countExist] == 0) {
         
-        Player* player = [self _getPlayer];
-        if ([player isDead]) {
-            
-            // ゲームオーバーへ
-            m_State = eState_Gameover;
-            m_TouchState = eTouchState_Standby;
-            [[SceneMain sharedInstance].fontGameover setVisible:YES];
-            return;
-        }
-        
-        // ブロック出現 (下) チェック
-//        m_State = eState_AppearBottomCheck;
-        // 待機状態にする
-        [BlockMgr changeStandbyAll];
-        
-        // 落下要求を送る
-        [BlockMgr requestFall];
-        
-        
-        // 落下状態へ遷移
-        m_State = eState_Fall;
- 
+        // 勝利敗北判定へ
+        [self _changeState:eState_WinLoseCheck];
         
     }
 }
 
+/**
+ * 勝利・敗北判定
+ */
+- (void)_updateWinLoseCheck {
+    
+    Player* player = [self _getPlayer];
+    Enemy* enemy = [self _getEnemy];
+    
+    if ([player isDead]) {
+        
+        // 敗北処理へ
+        [self _changeState:eState_Lose];
+        return;
+    }
+    
+    if ([enemy isDead]) {
+        
+        // 勝利処理へ
+        [self _changeState:eState_Win];
+        return;
+    }
+    
+    // ブロック出現 (下) チェック
+    [self _changeState:eState_AppearBottomCheck];
+//    // 待機状態にする
+//    [BlockMgr changeStandbyAll];
+//    
+//    // 落下要求を送る
+//    [BlockMgr requestFall];
+//    
+//    // 落下状態へ遷移
+//    [self _changeState:eState_Fall];
+    
+}
+
+/**
+ * 更新・勝利演出
+ */
+- (void)_updateWin {
+    
+    Enemy* enemy = [self _getEnemy];
+    
+    // 出現開始
+    [enemy initHp];
+    
+    // TODO:
+    // ブロック出現 (下) チェック
+//    [self _changeState:eState_AppearBottomCheck];
+    // 待機状態にする
+    [BlockMgr changeStandbyAll];
+    
+    // 落下要求を送る
+    [BlockMgr requestFall];
+    
+    // 落下状態へ遷移
+    [self _changeState:eState_Fall];
+}
+
+/**
+ * 更新・敗北演出
+ */
+- (void)_updateLose {
+    
+    // ゲームオーバ処理へ
+    m_TouchState = eTouchState_Standby;
+    [[SceneMain sharedInstance].fontGameover setVisible:YES];
+    
+    [self _changeState:eState_Gameover];
+}
+
+/**
+ * 更新・ゲームオーバー
+ */
 - (void)_updateGameover {
     
     if (m_TouchState == eTouchState_Release) {
@@ -660,7 +749,7 @@ enum eTouchState {
         
         
         // 落下状態へ遷移
-        m_State = eState_Fall;
+        [self _changeState:eState_Fall];
     }
 }
 
@@ -711,6 +800,18 @@ enum eTouchState {
             
         case eState_DamageExec:
             [self _updateDamageExec];
+            break;
+            
+        case eState_WinLoseCheck:
+            [self _updateWinLoseCheck];
+            break;
+            
+        case eState_Win:
+            [self _updateWin];
+            break;
+            
+        case eState_Lose:
+            [self _updateLose];
             break;
             
         case eState_Gameover:

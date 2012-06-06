@@ -18,6 +18,7 @@
     Layer2D* layerVanish;       // 消去判定用レイヤー
     Layer2D* layerTmp;          // 計算用テンポラリ
     
+    int     m_StatePrev;        // 状態 (１つ前)
     int     m_State;            // 状態
     int     m_Timer;            // タイマー
     
