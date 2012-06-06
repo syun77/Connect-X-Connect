@@ -159,7 +159,6 @@
         [layer set:x y:y val:[b getNumber]];
     }
     
-    [layer dump];
 }
 
 

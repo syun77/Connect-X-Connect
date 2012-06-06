@@ -142,6 +142,16 @@ enum eState {
 // ----------------------------------------------------
 // public
 
+- (void)initialize {
+    
+    m_State = eState_Appear;
+    m_Timer = TIMER_APPEAR;
+    m_tDamage = 0;
+    
+    [self initHp];
+    
+}
+
 /**
  * HPを初期化する
  */

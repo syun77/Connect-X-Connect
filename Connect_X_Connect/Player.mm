@@ -87,6 +87,12 @@ static const int TIMER_DAMAGE = 30;
 // ----------------------------------------------------
 // public
 
+- (void)initialize {
+    
+    m_tDamage = 0;
+    [self initHp];
+}
+
 /**
  * HPを初期化する
  */

@@ -125,7 +125,7 @@ enum eTouchState {
 
 - (void)_changeState:(eState)s {
     
-    NSLog(@"ChangeState %@->%@", [self _getState:(eState)m_State], [self _getState:s]);
+    NSLog(@"ChangeState %@ -> %@", [self _getState:(eState)m_State], [self _getState:s]);
     
     m_StatePrev = m_State;
     m_State = s;
@@ -271,10 +271,10 @@ enum eTouchState {
     
     // HPの初期化
     Player* player = [self _getPlayer];
-    [player initHp];
+    [player initialize];
     
     Enemy* enemy = [self _getEnemy];
-    [enemy initHp];
+    [enemy initialize];
     
     [self _changeState:eState_Standby];
     
@@ -683,7 +683,7 @@ enum eTouchState {
     Enemy* enemy = [self _getEnemy];
     
     // 出現開始
-    [enemy initHp];
+    [enemy initialize];
     
     // TODO:
     // ブロック出現 (下) チェック
@@ -725,7 +725,7 @@ enum eTouchState {
         
         // HPの初期化
         Player* player = [self _getPlayer];
-        [player initHp];
+        [player initialize];
         
         // 初期化に戻る
         Layer2D* layer = [FieldMgr getLayer];
