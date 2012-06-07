@@ -39,6 +39,7 @@ static SceneMain* scene_ = nil;
 @synthesize interfaceLayer;
 @synthesize baseLayer;
 @synthesize fontGameover;
+@synthesize fontLevelup;
 @synthesize fontTest;
 @synthesize fontTest2;
 @synthesize fontTest3;
@@ -120,6 +121,14 @@ static SceneMain* scene_ = nil;
     [self.fontGameover setAlign:eFontAlign_Center];
     [self.fontGameover setText:@"GAME OVER"];
     [self.fontGameover setVisible:NO];
+    
+    self.fontLevelup = [AsciiFont node];
+    [self.fontLevelup createFont:self.baseLayer length:24];
+    [self.fontLevelup setScale:3];
+    [self.fontLevelup setPos:24 y:36];
+    [self.fontLevelup setAlign:eFontAlign_Center];
+    [self.fontLevelup setText:@"Level up"];
+    [self.fontLevelup setVisible:NO];
     
     self.mgrBlock = [TokenManager node];
     [self.mgrBlock create:self.baseLayer size:FIELD_BLOCK_COUNT_X*(FIELD_BLOCK_COUNT_Y+2) className:@"Block"];
@@ -209,6 +218,8 @@ static SceneMain* scene_ = nil;
     self.mgrBlock = nil;
     
     // フォント
+    self.fontLevelup = nil;
+    self.fontGameover = nil;
     self.fontTest = nil;
     
     self.interfaceLayer = nil;

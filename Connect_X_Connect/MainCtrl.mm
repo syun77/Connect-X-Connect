@@ -151,6 +151,9 @@ enum eTouchState {
 - (Back*)_getBack {
     return [SceneMain sharedInstance].back;
 }
+- (AsciiFont*)_getFontLevelup {
+    return [SceneMain sharedInstance].fontLevelup;
+}
 
 // タッチ座標をチップ座標に変換する
 - (int)touchToChip:(float)p {
@@ -660,6 +663,8 @@ enum eTouchState {
         [self _changeState:eState_Win];
         m_Timer = TIMER_ENEMY_VANISH;
         [enemy destroy];
+        AsciiFont* font = [self _getFontLevelup];
+        [font setVisible:YES];
         
         return;
     }
@@ -686,6 +691,9 @@ enum eTouchState {
         m_Timer--;
         return;
     }
+    
+    AsciiFont* font = [self _getFontLevelup];
+    [font setVisible:NO];
     
     Enemy* enemy = [self _getEnemy];
     
