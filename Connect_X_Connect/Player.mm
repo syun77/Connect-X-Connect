@@ -151,6 +151,14 @@ static const int TIMER_DAMAGE = 30;
 }
 
 /**
+ * 危険状態かどうか
+ */
+- (BOOL)isDanger {
+    
+    return [self getHpRatio] < 0.3f;
+}
+
+/**
  * 死亡したかどうか
  */
 - (BOOL)isDead {

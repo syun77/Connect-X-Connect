@@ -148,6 +148,9 @@ enum eTouchState {
 - (Enemy*)_getEnemy {
     return [SceneMain sharedInstance].enemy;
 }
+- (Back*)_getBack {
+    return [SceneMain sharedInstance].back;
+}
 
 // タッチ座標をチップ座標に変換する
 - (int)touchToChip:(float)p {
@@ -763,6 +766,21 @@ enum eTouchState {
  * 更新
  */
 - (void)update:(ccTime)dt {
+    
+    {
+        Back* back = [self _getBack];
+        
+        if ([BezierEffect countExist] > 0) {
+            
+            // ベジェエフェクトがあれば背景を暗くする
+            [back beginDark];
+        }
+        else {
+            
+            [back beginLight];
+        }
+    }
+    
     
     switch (m_State) {
             

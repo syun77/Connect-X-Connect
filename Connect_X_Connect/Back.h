@@ -15,6 +15,13 @@
  */
 @interface Back : Token {
     
+    int     m_State;    // 状態
+    int     m_Timer;    // コンボ用タイマー
+    int     m_tDanger;  // 危険タイマー
 }
+
+// 背景変化
+- (void)beginDark;
+- (void)beginLight;
 
 @end

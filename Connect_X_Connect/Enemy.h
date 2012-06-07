@@ -37,6 +37,9 @@
 // ダメージを与える
 - (void)damage:(int)v;
 
+// 危険状態かどうか
+- (BOOL)isDanger;
+
 // 死亡
 - (void)destroy;
 
