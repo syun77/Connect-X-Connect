@@ -193,6 +193,10 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
 // 描画プライオリティの設定
 - (void)setPrio:(int)prio {
     m_Prio = prio;
+    if (self.m_pSprite) {
+        
+        [[self.m_pSprite parent] reorderChild:self.m_pSprite z:prio];
+    }
 }
 
 // 描画プライオリティの取得

@@ -15,6 +15,9 @@ static const int TIMER_VANISH = 30;
 static const float SPEED_FALL = 50; // ブロック落下速度
 static const float SPEED_FALL_MAX = 1000; // 落下速度の最大値
 
+static const int PRIO_OFS_FONT_FRONT = 3; // 前面に出すとき
+static const int PRIO_OFS_FONT_BACK  = 2; // 後方に出すとき
+
 /**
  * 状態
  */
@@ -31,6 +34,7 @@ enum eState {
 @implementation Block
 
 @synthesize fontNumber;
+@synthesize fontNumber2;
 
 /**
  * コンストラクタ
@@ -56,6 +60,7 @@ enum eState {
 - (void)dealloc {
     
     self.fontNumber = nil;
+    self.fontNumber2 = nil;
     
     [super dealloc];
 }
@@ -68,12 +73,18 @@ enum eState {
     int prio = [self getPrio];
     
     self.fontNumber = [AsciiFont node];
-    [self.fontNumber setPrio:prio + 1];
+    [self.fontNumber setPrio:prio + PRIO_OFS_FONT_FRONT];
     [self.fontNumber createFont:layer length:2];
     [self.fontNumber setAlign:eFontAlign_Center];
     [self.fontNumber setScale:3];
-    int c = 0xFF;
-    [self.fontNumber setColor:ccc3(c, c, c)];
+    [self.fontNumber setColor:ccc3(0xFF, 0xFF, 0xFF)];
+    
+    self.fontNumber2 = [AsciiFont node];
+    [self.fontNumber2 setPrio:prio + PRIO_OFS_FONT_BACK];
+    [self.fontNumber2 createFont:layer length:2];
+    [self.fontNumber2 setAlign:eFontAlign_Center];
+    [self.fontNumber2 setScale:3];
+    [self.fontNumber2 setColor:ccc3(0xFF, 0xFF, 0xFF)];
     
 }
 
@@ -89,11 +100,13 @@ enum eState {
     m_ReqFall       = NO;
     m_ReqVanish     = NO;
     [self.fontNumber setVisible:YES];
+    [self.fontNumber2 setVisible:NO];
     [self setVisible:YES];
 }
 
 - (void)vanish {
     [self.fontNumber setVisible:NO];
+    [self.fontNumber2 setVisible:NO];
     
     [super vanish];
 }
@@ -296,6 +309,7 @@ enum eState {
     [self move:1.0 / 60];
     
     [self.fontNumber setPosScreen:self._x y:self._y];
+    [self.fontNumber2 setPosScreen:self._x y:self._y];
     
     switch (m_State) {
         case eState_Standby:
@@ -333,19 +347,25 @@ enum eState {
     float s = BLOCK_SIZE / 2;
     if ([self isShield]) {
         
+        [self.fontNumber setVisible:NO];
+        
         // シールド有効
         if (m_nShield == 1) {
+            [self.fontNumber2 setVisible:YES];
             glColor4ub(0x60, 0x60, 0x60, 0x40);
         }
         else {
             
             // 数字は不可視
+            [self.fontNumber2 setVisible:NO];
             glColor4ub(0x60, 0x60, 0x60, 0xFF);
         }
     }
     else {
         
         // 通常状態
+        [self.fontNumber setVisible:YES];
+        [self.fontNumber2 setVisible:NO];
         [self setGlColor];
     }
     
@@ -360,6 +380,7 @@ enum eState {
 - (void)setNumber:(int)number {
     m_nNumber = number;
     [self.fontNumber setText:[NSString stringWithFormat:@"%d", number]];
+    [self.fontNumber2 setText:[NSString stringWithFormat:@"%d", number]];
 }
 
 // 番号を取得する
@@ -371,6 +392,14 @@ enum eState {
 - (void)setShield:(int)v {
     
     m_nShield = v;
+    
+    [self.fontNumber setVisible:NO];
+    if (m_nShield == 1) {
+        [self.fontNumber2 setVisible:YES];
+    }
+    else if(m_nShield == 2) {
+        [self.fontNumber2 setVisible:NO];
+    }
 }
 
 // 固ぷよカウンタを減らす
