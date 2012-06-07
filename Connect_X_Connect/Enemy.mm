@@ -219,7 +219,7 @@ enum eState {
     [FontEffect add:eFontEffect_Damage x:ENEMY_POS_X y:ENEMY_POS_Y text:[NSString stringWithFormat:@"%d", v]];
     
     // ダメージエフェクト再生
-    [Particle addDamage:self._x y:self._y];
+    [Particle addDamage:ENEMY_POS_X y:ENEMY_POS_Y];
     
 }
 
@@ -244,7 +244,7 @@ enum eState {
     [self setVisible:NO];
     
     // 死亡エフェクト生成
-    [Particle addDead:self._x y:self._y];
+    [Particle addDead:ENEMY_POS_X y:ENEMY_POS_Y];
 }
 
 @end

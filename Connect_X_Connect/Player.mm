@@ -144,10 +144,10 @@ static const int TIMER_DAMAGE = 30;
     // ダメージ演出開始
     m_tDamage = TIMER_DAMAGE;
     
-    [FontEffect add:eFontEffect_Damage x:self._x y:self._y text:[NSString stringWithFormat:@"%d", v]];
+    [FontEffect add:eFontEffect_Damage x:PLAYER_POS_X y:PLAYER_POS_Y text:[NSString stringWithFormat:@"%d", v]];
     
     // ダメージエフェクト再生
-    [Particle addDamage:self._x y:self._y];
+    [Particle addDamage:PLAYER_POS_X y:PLAYER_POS_Y];
 }
 
 /**
@@ -170,7 +170,7 @@ static const int TIMER_DAMAGE = 30;
 - (void)destroy {
     
     // 死亡エフェクト生成
-    [Particle addDead:self._x y:self._y];
+    [Particle addDead:PLAYER_POS_X y:PLAYER_POS_Y];
 }
 
 @end

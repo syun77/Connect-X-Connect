@@ -22,8 +22,6 @@
     int     m_State;            // 状態
     int     m_Timer;            // タイマー
     
-//    int     m_Hp;               // 残りHP
-    
     int     m_TouchState;       // タッチしているかどうか
     float   m_TouchStartY;      // タッチ開始座標 (Y)
     float   m_TouchX;           // タッチ座標 (X)
@@ -37,6 +35,8 @@
     
     BOOL    m_ReqAppearBottom;  // 下から出現要求
     int     m_nBlockLevel;      // 出現ブロックレベル
+    
+    int     m_nLevel;           // 現在のレベル
     
 }
 
