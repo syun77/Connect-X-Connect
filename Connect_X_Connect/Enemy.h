@@ -37,6 +37,9 @@
 // ダメージを与える
 - (void)damage:(int)v;
 
+// 死亡
+- (void)destroy;
+
 // 死亡したかどうか
 - (BOOL)isDead;
 

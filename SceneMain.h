@@ -23,6 +23,7 @@
 #import "Player.h"
 #import "Enemy.h"
 #import "FontEffect.h"
+#import "Particle.h"
 
 /**
  * ゲームメインのシーン
@@ -41,6 +42,7 @@
     TokenManager*   mgrBlock;
     TokenManager*   mgrBezierEffect;
     TokenManager*   mgrFontEffect;
+    TokenManager*   mgrParticle;
     Cursor*         cursor;
     Grid*           grid;
     HpGauge*        hpGauge;
@@ -68,6 +70,7 @@
 @property (nonatomic, retain)TokenManager*      mgrBlock;
 @property (nonatomic, retain)TokenManager*      mgrBezierEffect;
 @property (nonatomic, retain)TokenManager*      mgrFontEffect;
+@property (nonatomic, retain)TokenManager*      mgrParticle;
 @property (nonatomic, retain)Cursor*            cursor;
 @property (nonatomic, retain)Grid*              grid;
 @property (nonatomic, retain)HpGauge*           hpGauge;

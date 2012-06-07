@@ -19,6 +19,7 @@
 		C70E3F4415731075009BF0CB /* TokenManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F3915731075009BF0CB /* TokenManager.mm */; };
 		C70E3F471573118A009BF0CB /* SceneMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F461573118A009BF0CB /* SceneMain.mm */; };
 		C7468141157D9A1500A9E70F /* FontEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7468140157D9A1500A9E70F /* FontEffect.mm */; };
+		C74681441580219D00A9E70F /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C74681431580219D00A9E70F /* Particle.mm */; };
 		C7750C24157A768C00F78387 /* Vec.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C23157A768C00F78387 /* Vec.mm */; };
 		C7750C28157B1D2100F78387 /* BezierEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C27157B1D2100F78387 /* BezierEffect.mm */; };
 		C7750C2A157BA9B300F78387 /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7750C29157BA9B300F78387 /* all.png */; };
@@ -177,6 +178,8 @@
 		C70E3F461573118A009BF0CB /* SceneMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SceneMain.mm; path = ../SceneMain.mm; sourceTree = "<group>"; };
 		C746813F157D9A1400A9E70F /* FontEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontEffect.h; sourceTree = "<group>"; };
 		C7468140157D9A1500A9E70F /* FontEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FontEffect.mm; sourceTree = "<group>"; };
+		C74681421580219C00A9E70F /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
+		C74681431580219D00A9E70F /* Particle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Particle.mm; sourceTree = "<group>"; };
 		C7750C23157A768C00F78387 /* Vec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Vec.mm; sourceTree = "<group>"; };
 		C7750C26157B1D2100F78387 /* BezierEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierEffect.h; sourceTree = "<group>"; };
 		C7750C27157B1D2100F78387 /* BezierEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BezierEffect.mm; sourceTree = "<group>"; };
@@ -521,6 +524,8 @@
 				C783FD27157879D700AAACAE /* Grid.mm */,
 				C783FD29157917E400AAACAE /* HpGauge.h */,
 				C783FD2A157917E400AAACAE /* HpGauge.mm */,
+				C74681421580219C00A9E70F /* Particle.h */,
+				C74681431580219D00A9E70F /* Particle.mm */,
 				C7750C2E157C492E00F78387 /* Player.h */,
 				C7750C2F157C492E00F78387 /* Player.mm */,
 			);
@@ -1107,6 +1112,7 @@
 				C7750C30157C492F00F78387 /* Player.mm in Sources */,
 				C7750C33157D06E400F78387 /* Enemy.mm in Sources */,
 				C7468141157D9A1500A9E70F /* FontEffect.mm in Sources */,
+				C74681441580219D00A9E70F /* Particle.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

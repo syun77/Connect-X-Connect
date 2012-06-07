@@ -38,4 +38,7 @@
 // 死亡したかどうか
 - (BOOL)isDead;
 
+// 死亡
+- (void)destroy;
+
 @end

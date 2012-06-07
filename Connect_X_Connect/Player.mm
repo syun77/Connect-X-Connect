@@ -145,6 +145,9 @@ static const int TIMER_DAMAGE = 30;
     m_tDamage = TIMER_DAMAGE;
     
     [FontEffect add:eFontEffect_Damage x:self._x y:self._y text:[NSString stringWithFormat:@"%d", v]];
+    
+    // ダメージエフェクト再生
+    [Particle addDamage:self._x y:self._y];
 }
 
 /**
@@ -153,6 +156,13 @@ static const int TIMER_DAMAGE = 30;
 - (BOOL)isDead {
     
     return m_Hp <= 0;
+}
+
+// 死亡
+- (void)destroy {
+    
+    // 死亡エフェクト生成
+    [Particle addDead:self._x y:self._y];
 }
 
 @end

@@ -12,6 +12,8 @@
 #import "FieldMgr.h"
 #import "Math.h"
 
+static const int TIMER_ENEMY_VANISH = 60;
+
 /**
  * 状態
  */
@@ -129,6 +131,7 @@ enum eTouchState {
     
     m_StatePrev = m_State;
     m_State = s;
+//    m_Timer = 0;
 }
 
 - (InterfaceLayer*)_getInterfaceLayer {
@@ -588,13 +591,6 @@ enum eTouchState {
 //    if ([BlockMgr isEndVanishingAll]) {
     if ([BezierEffect countExist] == 0) {
         
-        Enemy* enemy = [self _getEnemy];
-        if ([enemy isDead]) {
-            
-            // TODO: 勝利演出へ
-            
-        }
-        
         // 待機状態にする
         [BlockMgr changeStandbyAll];
         
@@ -659,6 +655,9 @@ enum eTouchState {
         
         // 勝利処理へ
         [self _changeState:eState_Win];
+        m_Timer = TIMER_ENEMY_VANISH;
+        [enemy destroy];
+        
         return;
     }
     
@@ -679,6 +678,11 @@ enum eTouchState {
  * 更新・勝利演出
  */
 - (void)_updateWin {
+    
+    if (m_Timer > 0) {
+        m_Timer--;
+        return;
+    }
     
     Enemy* enemy = [self _getEnemy];
     

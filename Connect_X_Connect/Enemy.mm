@@ -9,6 +9,7 @@
 #import "Enemy.h"
 #import "SceneMain.h"
 #import "Exerinya.h"
+#import "Particle.h"
 
 // 座標関連
 static const int ENEMY_POS_X = 320-64;
@@ -144,6 +145,8 @@ enum eState {
 
 - (void)initialize {
     
+    [self setVisible:YES];
+    
     m_State = eState_Appear;
     m_Timer = TIMER_APPEAR;
     m_tDamage = 0;
@@ -214,6 +217,10 @@ enum eState {
     
     // ダメージ数値表示
     [FontEffect add:eFontEffect_Damage x:ENEMY_POS_X y:ENEMY_POS_Y text:[NSString stringWithFormat:@"%d", v]];
+    
+    // ダメージエフェクト再生
+    [Particle addDamage:self._x y:self._y];
+    
 }
 
 /**
@@ -221,6 +228,15 @@ enum eState {
  */
 - (BOOL)isDead {
     return m_Hp <= 0;
+}
+
+// 死亡
+- (void)destroy {
+    
+    [self setVisible:NO];
+    
+    // 死亡エフェクト生成
+    [Particle addDead:self._x y:self._y];
 }
 
 @end
