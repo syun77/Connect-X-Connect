@@ -14,6 +14,7 @@
 // 座標関連
 static const int ENEMY_POS_X = 320-64;
 static const int ENEMY_POS_Y = 480-80;
+static const int ENEMY_POS_LV_Y = ENEMY_POS_Y-64;
 
 // タイマー関連
 static const int TIMER_DAMAGE = 30;
@@ -140,9 +141,23 @@ enum eState {
     return [SceneMain sharedInstance].hpGaugeEnemy;
 }
 
+- (AsciiFont*)_getFontLevel {
+    return [SceneMain sharedInstance].fontLevel;
+}
+
 // ----------------------------------------------------
 // public
 
+/**
+ * レベルを設定する
+ */
+- (void)setLevel:(int)lv {
+    m_nLevel = lv;
+}
+
+/**
+ * 初期化
+ */
 - (void)initialize {
     
     [self setVisible:YES];
@@ -151,6 +166,13 @@ enum eState {
     m_Timer = TIMER_APPEAR;
     m_tDamage = 0;
     
+    // レベル表示
+    AsciiFont* fontLevel = [self _getFontLevel];
+    [fontLevel setPosScreen:ENEMY_POS_X y:ENEMY_POS_LV_Y];
+    [fontLevel setText:[NSString stringWithFormat:@"Lv %d", m_nLevel]];
+    [fontLevel setVisible:YES];
+    
+    // HPを初期化する
     [self initHp];
     
 }
@@ -242,6 +264,10 @@ enum eState {
 - (void)destroy {
     
     [self setVisible:NO];
+    
+    // レベル表示を消す
+    AsciiFont* fontLevel = [self _getFontLevel];
+    [fontLevel setVisible:NO];
     
     // 死亡エフェクト生成
     [Particle addDead:ENEMY_POS_X y:ENEMY_POS_Y];

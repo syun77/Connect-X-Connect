@@ -156,9 +156,6 @@ enum eTouchState {
 - (AsciiFont*)_getFontLevelup {
     return [SceneMain sharedInstance].fontLevelup;
 }
-- (AsciiFont*)_getFontLevel {
-    return [SceneMain sharedInstance].fontLevel;
-}
 
 // タッチ座標をチップ座標に変換する
 - (int)touchToChip:(float)p {
@@ -288,9 +285,8 @@ enum eTouchState {
     [player initialize];
     
     Enemy* enemy = [self _getEnemy];
+    [enemy setLevel:m_nLevel];
     [enemy initialize];
-    AsciiFont* fontLevel = [self _getFontLevel];
-    [fontLevel setVisible:YES];
     
     [self _changeState:eState_Standby];
     
@@ -673,9 +669,9 @@ enum eTouchState {
         AsciiFont* font = [self _getFontLevelup];
         [font setVisible:YES];
         
-        // レベル表示を消す
-        AsciiFont* fontLevel = [self _getFontLevel];
-        [fontLevel setVisible:NO];
+        // レベルを増やす
+        m_nLevel++;
+        
         
         return;
     }
@@ -703,16 +699,15 @@ enum eTouchState {
         return;
     }
     
+    // レベルアップ演出を消す
     AsciiFont* font = [self _getFontLevelup];
     [font setVisible:NO];
     
     Enemy* enemy = [self _getEnemy];
     
     // 出現開始
+    [enemy setLevel:m_nLevel];
     [enemy initialize];
-    // レベル表示を表示
-    AsciiFont* fontLevel = [self _getFontLevel];
-    [fontLevel setVisible:YES];
     
     // TODO:
     // ブロック出現 (下) チェック

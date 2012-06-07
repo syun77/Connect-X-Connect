@@ -59,7 +59,7 @@ static const int TIMER_DECREASE = 60;
     [super visit];
     
     const int WIDTH = 80;
-    const int HEIGHT = 4;
+    const int HEIGHT = 8;
     
     System_SetBlend(eBlend_Add);
     
@@ -86,7 +86,7 @@ static const int TIMER_DECREASE = 60;
     glLineWidth(1);
     {
         glColor4f(1, 1, 1, 1);
-        [self drawRectLT:x y:y-2 w:WIDTH h:4 rot:0 scale:1];
+        [self drawRectLT:x y:y-4 w:WIDTH h:HEIGHT rot:0 scale:1];
     }
     
     System_SetBlend(eBlend_Normal);

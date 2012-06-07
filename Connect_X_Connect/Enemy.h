@@ -23,7 +23,12 @@
     
     int m_Hp;       // HP
     int m_HpMax;    // 最大HP
+    
+    int m_nLevel;   // 現在のレベル
 }
+
+// レベルを設定する
+- (void)setLevel:(int)lv;
 
 // HPを初期化する
 - (void)initHp;
