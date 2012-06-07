@@ -52,6 +52,7 @@ static SceneMain* scene_ = nil;
 @synthesize hpGaugeEnemy;
 @synthesize player;
 @synthesize enemy;
+@synthesize back;
 @synthesize layer;
 @synthesize ctrl;
 
@@ -155,6 +156,9 @@ static SceneMain* scene_ = nil;
     self.enemy = [Enemy node];
     [self.baseLayer addChild:self.enemy z:ePrio_Enemy];
     
+    self.back = [Back node];
+    [self.baseLayer addChild:self.back z:ePrio_Back];
+    
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
     [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
@@ -185,6 +189,7 @@ static SceneMain* scene_ = nil;
     // ゲーム制御
     self.ctrl = nil;
     
+    self.back = nil;
     self.enemy = nil;
     self.player = nil;
     self.hpGaugeEnemy = nil;

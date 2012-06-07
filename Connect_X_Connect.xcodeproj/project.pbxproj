@@ -20,6 +20,8 @@
 		C70E3F471573118A009BF0CB /* SceneMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F461573118A009BF0CB /* SceneMain.mm */; };
 		C7468141157D9A1500A9E70F /* FontEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7468140157D9A1500A9E70F /* FontEffect.mm */; };
 		C74681441580219D00A9E70F /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C74681431580219D00A9E70F /* Particle.mm */; };
+		C746814615802C6600A9E70F /* bg001.png in Resources */ = {isa = PBXBuildFile; fileRef = C746814515802C6600A9E70F /* bg001.png */; };
+		C746814915802C7A00A9E70F /* Back.mm in Sources */ = {isa = PBXBuildFile; fileRef = C746814815802C7A00A9E70F /* Back.mm */; };
 		C7750C24157A768C00F78387 /* Vec.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C23157A768C00F78387 /* Vec.mm */; };
 		C7750C28157B1D2100F78387 /* BezierEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C27157B1D2100F78387 /* BezierEffect.mm */; };
 		C7750C2A157BA9B300F78387 /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7750C29157BA9B300F78387 /* all.png */; };
@@ -180,6 +182,9 @@
 		C7468140157D9A1500A9E70F /* FontEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FontEffect.mm; sourceTree = "<group>"; };
 		C74681421580219C00A9E70F /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		C74681431580219D00A9E70F /* Particle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Particle.mm; sourceTree = "<group>"; };
+		C746814515802C6600A9E70F /* bg001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg001.png; path = Resources/bg001.png; sourceTree = "<group>"; };
+		C746814715802C7900A9E70F /* Back.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Back.h; sourceTree = "<group>"; };
+		C746814815802C7A00A9E70F /* Back.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Back.mm; sourceTree = "<group>"; };
 		C7750C23157A768C00F78387 /* Vec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Vec.mm; sourceTree = "<group>"; };
 		C7750C26157B1D2100F78387 /* BezierEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierEffect.h; sourceTree = "<group>"; };
 		C7750C27157B1D2100F78387 /* BezierEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BezierEffect.mm; sourceTree = "<group>"; };
@@ -510,6 +515,8 @@
 		C7F1007A15746401002D7E00 /* Token */ = {
 			isa = PBXGroup;
 			children = (
+				C746814715802C7900A9E70F /* Back.h */,
+				C746814815802C7A00A9E70F /* Back.mm */,
 				C7F1007B15746421002D7E00 /* Block.h */,
 				C7F1007C15746421002D7E00 /* Block.mm */,
 				C7750C26157B1D2100F78387 /* BezierEffect.h */,
@@ -591,6 +598,7 @@
 		C7FB2F03157289EB00FB3381 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C746814515802C6600A9E70F /* bg001.png */,
 				C7750C29157BA9B300F78387 /* all.png */,
 				C7F100781573CB86002D7E00 /* font.png */,
 				C7FB2F04157289EB00FB3381 /* Default.png */,
@@ -979,6 +987,7 @@
 				C7FB2F16157289EB00FB3381 /* iTunesArtwork in Resources */,
 				C7F100791573CB86002D7E00 /* font.png in Resources */,
 				C7750C2A157BA9B300F78387 /* all.png in Resources */,
+				C746814615802C6600A9E70F /* bg001.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1113,6 +1122,7 @@
 				C7750C33157D06E400F78387 /* Enemy.mm in Sources */,
 				C7468141157D9A1500A9E70F /* FontEffect.mm in Sources */,
 				C74681441580219D00A9E70F /* Particle.mm in Sources */,
+				C746814915802C7A00A9E70F /* Back.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

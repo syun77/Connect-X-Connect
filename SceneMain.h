@@ -24,6 +24,7 @@
 #import "Enemy.h"
 #import "FontEffect.h"
 #import "Particle.h"
+#import "Back.h"
 
 /**
  * ゲームメインのシーン
@@ -49,6 +50,7 @@
     HpGauge*        hpGaugeEnemy;
     Player*         player;
     Enemy*          enemy;
+    Back*           back;
     
     // レイヤー
     Layer2D*        layer;
@@ -77,6 +79,7 @@
 @property (nonatomic, retain)HpGauge*           hpGaugeEnemy;
 @property (nonatomic, retain)Player*            player;
 @property (nonatomic, retain)Enemy*             enemy;
+@property (nonatomic, retain)Back*              back;
 
 @property (nonatomic, retain)Layer2D*   layer;
 
