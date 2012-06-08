@@ -19,6 +19,7 @@
     AsciiFont*  fontNumber;     // 数字フォント
     AsciiFont*  fontNumber2;    // 数字フォント (後ろに出す用)
     int         m_nNumber;      // 数値
+    int         m_tCursor;      // カーソルタイマー
     int         m_Timer;        // 汎用タイマー
     int         m_State;        // 状態
     BOOL        m_ReqFall;      // 落下要求フラグ
@@ -68,6 +69,9 @@
 
 // 消滅演出中かどうか
 - (BOOL)isVanishing;
+
+// プレイヤー操作可能状態にする
+- (void)changeSlide;
 
 // 待機状態にする
 - (void)changeStandby;

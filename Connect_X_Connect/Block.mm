@@ -22,6 +22,7 @@ static const int PRIO_OFS_FONT_BACK  = 2; // 後方に出すとき
  * 状態
  */
 enum eState {
+    eState_Slide,       // プレイヤー操作可能状態
     eState_Standby,     // 待機中
     eState_Fall,        // 落下中
     eState_FallWait,    // 落下停止中
@@ -50,6 +51,8 @@ enum eState {
     self._r = BLOCK_SIZE / 2;
     
     [self.m_pSprite setVisible:NO];
+    
+    m_tCursor = 0;
     
     return self;
 }
@@ -489,6 +492,12 @@ enum eState {
 - (BOOL)isVanishing {
     
     return m_State == eState_Vanish;
+}
+
+// プレイヤー操作可能状態にする
+- (void)changeSlide {
+    
+    m_State = eState_Slide;
 }
 
 // 待機状態にする
