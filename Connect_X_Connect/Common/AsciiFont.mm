@@ -63,7 +63,6 @@
     int px = idx % ASCII_X_COUNT;
     int py = idx / ASCII_X_COUNT;
     
-//    ret = CGRectMake(px * ASCII_SIZE, py * ASCII_SIZE, ASCII_SIZE, ASCII_SIZE);
     ret = CGRectMake(px * (ASCII_SIZE), py * (ASCII_SIZE), ASCII_SIZE, ASCII_SIZE);
     
     return ret;

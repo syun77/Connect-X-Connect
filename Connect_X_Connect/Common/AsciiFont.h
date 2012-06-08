@@ -12,11 +12,7 @@
 #import "TokenManager.h"
 
 /// ASCII文字のサイズ
-//#define ASCII_SIZE (16)
 #define ASCII_SIZE (8)
-#define ASCII_SIZE_REAL (8)
-//#define ASCII_SIZE (14)
-//#define ASCII_SIZE_REAL (16)
 
 /// ASCII文字の横の数
 #define ASCII_X_COUNT (16)
