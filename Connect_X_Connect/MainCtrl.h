@@ -38,6 +38,10 @@
     
     int     m_nLevel;           // 現在のレベル
     
+    int     m_nChain;           // 連鎖回数
+    int     m_nVanish;          // 消去数
+    int     m_nKind;            // 消去グループ数
+    
 }
 
 @property (nonatomic, retain)Layer2D* layerVanish;

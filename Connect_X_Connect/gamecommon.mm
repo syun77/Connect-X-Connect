@@ -25,3 +25,51 @@ int GameCommon_ChipYToScreenY(int chipY) {
     
     return y + FIELD_OFS_Y;
 }
+
+// ■計算式関連
+/**
+ * スコアを取得する
+ * @param nVanish   消去数
+ * @param nConnect  最大連結数
+ * @param nKind     色数
+ * @param nChain    連鎖数
+ * @return スコア
+ */
+int GameCommon_GetScore(int nVanish, int nConnect, int nKind, int nChain) {
+    
+    // 消去数 x 10 x (最大連結数 + 色数ボーナス + 連鎖ボーナス)
+    int ret = 0;
+    int a   = nVanish;
+    int b   = 10;
+    int c   = nConnect;
+    int d   = nKind;
+    int e   = nChain;
+    
+    // 連結ボーナス
+    if (c <= 2) {
+        c = 0;
+    }
+    else {
+        c = c - 2;
+    }
+    
+    // 色数ボーナス
+    if (d <= 2) {
+        d = d - 1;
+    }
+    else {
+        d = (d - 2) * 2;
+    }
+    
+    // 連鎖ボーナス
+    if (e <= 1) {
+        e = 0;
+    }
+    else {
+        e = (e - 1) * 8;
+    }
+    
+    ret = a * b * (c + d + e);
+    
+    return ret;
+}

@@ -116,7 +116,7 @@ enum eState {
 
 - (void)setGlColor {
     
-    int a = 0x30;
+    int a = 0xA0;
     
     switch (m_nNumber) {
         case 1:
@@ -156,6 +156,11 @@ enum eState {
             glColor4ub(141, 141, 141, a); // 灰色
             break;
     }
+}
+
+- (void)setGlColor2 {
+    
+//    int a = 0x30;
 //    switch (m_nNumber) {
 //        case 1:
 //            glColor4ub(197, 197, 197, a); // 白
@@ -352,7 +357,7 @@ enum eState {
         // シールド有効
         if (m_nShield == 1) {
             [self.fontNumber2 setVisible:YES];
-            glColor4ub(0x60, 0x60, 0x60, 0x40);
+            glColor4ub(0x60, 0x60, 0x60, 0xA0);
         }
         else {
             

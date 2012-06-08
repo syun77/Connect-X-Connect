@@ -48,4 +48,18 @@ static const int BLOCK_APPEAR_Y2 = 9;  // ２つ目
 static const int BEZIEREFFECT_FRAME = 40; // 出現フレーム数
 static const int BEZIEREFFECT_FRAME_MAX = 80;
 
+// ■計算式関連
+/**
+ * スコアを取得する
+ * @param nVanish   消去数
+ * @param nConnect  最大連結数
+ * @param nKind     色数
+ * @param nChain    連鎖数
+ * @return スコア
+ */
+int GameCommon_GetScore(int nVanish, int nConnect, int nKind, int nChain);
+
+
+
+
 #endif
