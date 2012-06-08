@@ -40,6 +40,9 @@
             assert(0);
         }
         
+        // 描画プライオリティを設定
+        [token setPrio:m_Prio];
+        
         // レイヤーの登録
         [token attachLayer:layer];
         
@@ -160,6 +163,9 @@
     
     for (int i = 0; i < m_Size; i++) {
         Token* t = [self.m_Pool objectAtIndex:i];
+        
+        // 描画プライオリティを設定
+        [t setPrio:m_Prio];
         
         // レイヤーに登録
         [m_Layer addChild:t z:m_Prio];

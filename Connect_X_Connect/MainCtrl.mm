@@ -173,6 +173,12 @@ enum eTouchState {
     if (p < FIELD_OFS_X - s || p > FIELD_OFS_X + FIELD_BLOCK_COUNT_X * BLOCK_SIZE - s) {
         
         // 非選択状態にする
+        //m_TouchState = eTouchState_Standby;
+    }
+    
+    if (m_TouchY > 320) {
+        
+        // 非選択状態にする
         m_TouchState = eTouchState_Standby;
     }
     

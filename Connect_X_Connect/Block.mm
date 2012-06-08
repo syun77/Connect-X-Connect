@@ -15,8 +15,10 @@ static const int TIMER_VANISH = 30;
 static const float SPEED_FALL = 50; // ブロック落下速度
 static const float SPEED_FALL_MAX = 1000; // 落下速度の最大値
 
-static const int PRIO_OFS_FONT_FRONT = 3; // 前面に出すとき
-static const int PRIO_OFS_FONT_BACK  = 2; // 後方に出すとき
+static const int PRIO_OFS_FONT_FRONT = 1; // 前面に出すとき
+static const int PRIO_OFS_FONT_BACK  = -1; // 後方に出すとき
+
+static const int POS_FONT_OFFSET = 2; // フォント描画位置調整
 
 /**
  * 状態
@@ -316,8 +318,13 @@ enum eState {
     // 速度固定
     [self move:1.0 / 60];
     
-    [self.fontNumber setPosScreen:self._x y:self._y];
-    [self.fontNumber2 setPosScreen:self._x y:self._y];
+    {
+        // フォント描画位置設定
+        float px = self._x + POS_FONT_OFFSET;
+        float py = self._y - POS_FONT_OFFSET;
+        [self.fontNumber setPosScreen:px y:py];
+        [self.fontNumber2 setPosScreen:px y:py];
+    }
     
     switch (m_State) {
         case eState_Standby:

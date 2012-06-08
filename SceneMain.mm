@@ -21,6 +21,7 @@ enum ePrio {
     ePrio_Cursor,       // カーソル
     ePrio_Player,       // プレイヤー
     ePrio_Enemy,        // 敵
+    ePrio_RedBar,       // 危険バー
     ePrio_Effect,       // エフェクト
     ePrio_HpGauge,      // HPゲージ
     ePrio_UI,           // ユーザインターフェース
@@ -57,6 +58,7 @@ static SceneMain* scene_ = nil;
 @synthesize enemy;
 @synthesize back;
 @synthesize chain;
+@synthesize redbar;
 
 @synthesize layer;
 @synthesize ctrl;
@@ -143,20 +145,20 @@ static SceneMain* scene_ = nil;
     [self.fontLevel setVisible:NO];
     
     self.mgrBlock = [TokenManager node];
-    [self.mgrBlock create:self.baseLayer size:FIELD_BLOCK_COUNT_X*(FIELD_BLOCK_COUNT_Y+2) className:@"Block"];
     [self.mgrBlock setPrio:ePrio_Block];
+    [self.mgrBlock create:self.baseLayer size:FIELD_BLOCK_COUNT_X*(FIELD_BLOCK_COUNT_Y+2) className:@"Block"];
     
     self.mgrBezierEffect = [TokenManager node];
-    [self.mgrBezierEffect create:self.baseLayer size:512 className:@"BezierEffect"];
     [self.mgrBezierEffect setPrio:ePrio_Effect];
+    [self.mgrBezierEffect create:self.baseLayer size:512 className:@"BezierEffect"];
     
     self.mgrFontEffect = [TokenManager node];
-    [self.mgrFontEffect create:self.baseLayer size:16 className:@"FontEffect"];
     [self.mgrFontEffect setPrio:ePrio_Effect];
+    [self.mgrFontEffect create:self.baseLayer size:16 className:@"FontEffect"];
     
     self.mgrParticle = [TokenManager node];
-    [self.mgrParticle create:self.baseLayer size:512 className:@"Particle"];
     [self.mgrParticle setPrio:ePrio_Effect];
+    [self.mgrParticle create:self.baseLayer size:512 className:@"Particle"];
     
     self.cursor = [Cursor node];
     [self.baseLayer addChild:self.cursor z:ePrio_Cursor];
@@ -183,6 +185,9 @@ static SceneMain* scene_ = nil;
     self.chain = [Chain node];
     [self.baseLayer addChild:self.chain z:ePrio_UI];
     [self.chain attachLayer:self.baseLayer];
+    
+    self.redbar = [RedBar node];
+    [self.baseLayer addChild:self.redbar z:ePrio_RedBar];
     
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
@@ -214,6 +219,7 @@ static SceneMain* scene_ = nil;
     // ゲーム制御
     self.ctrl = nil;
     
+    self.redbar = nil;
     self.chain = nil;
     self.back = nil;
     self.enemy = nil;

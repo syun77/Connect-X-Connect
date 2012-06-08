@@ -26,6 +26,7 @@
 #import "Particle.h"
 #import "Back.h"
 #import "Chain.h"
+#import "RedBar.h"
 
 /**
  * ゲームメインのシーン
@@ -55,6 +56,7 @@
     Enemy*          enemy;
     Back*           back;
     Chain*          chain;
+    RedBar*         redbar;
     
     // レイヤー
     Layer2D*        layer;
@@ -87,6 +89,7 @@
 @property (nonatomic, retain)Enemy*             enemy;
 @property (nonatomic, retain)Back*              back;
 @property (nonatomic, retain)Chain*             chain;
+@property (nonatomic, retain)RedBar*            redbar;
 
 @property (nonatomic, retain)Layer2D*   layer;
 

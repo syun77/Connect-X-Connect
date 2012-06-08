@@ -32,6 +32,7 @@
 		C783FD28157879D700AAACAE /* Grid.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD27157879D700AAACAE /* Grid.mm */; };
 		C783FD2B157917E400AAACAE /* HpGauge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD2A157917E400AAACAE /* HpGauge.mm */; };
 		C79FCD4B1581B795008AA2D6 /* Chain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C79FCD4A1581B795008AA2D6 /* Chain.mm */; };
+		C79FCD4F1582ADD1008AA2D6 /* RedBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = C79FCD4E1582ADD1008AA2D6 /* RedBar.mm */; };
 		C7B9F8EC15759A080023646A /* gamecommon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7B9F8EB15759A080023646A /* gamecommon.mm */; };
 		C7B9F8F515759F4D0023646A /* FieldMgr.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7B9F8F415759F4D0023646A /* FieldMgr.mm */; };
 		C7B9F8F81575A2470023646A /* BlockMgr.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7B9F8F71575A2470023646A /* BlockMgr.mm */; };
@@ -204,6 +205,8 @@
 		C783FD2A157917E400AAACAE /* HpGauge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HpGauge.mm; sourceTree = "<group>"; };
 		C79FCD491581B795008AA2D6 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chain.h; sourceTree = "<group>"; };
 		C79FCD4A1581B795008AA2D6 /* Chain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Chain.mm; sourceTree = "<group>"; };
+		C79FCD4D1582ADD1008AA2D6 /* RedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBar.h; sourceTree = "<group>"; };
+		C79FCD4E1582ADD1008AA2D6 /* RedBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RedBar.mm; sourceTree = "<group>"; };
 		C7B9F8E9157488C30023646A /* gamecommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gamecommon.h; sourceTree = "<group>"; };
 		C7B9F8EB15759A080023646A /* gamecommon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = gamecommon.mm; sourceTree = "<group>"; };
 		C7B9F8F315759F4D0023646A /* FieldMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldMgr.h; sourceTree = "<group>"; };
@@ -540,6 +543,8 @@
 				C74681431580219D00A9E70F /* Particle.mm */,
 				C7750C2E157C492E00F78387 /* Player.h */,
 				C7750C2F157C492E00F78387 /* Player.mm */,
+				C79FCD4D1582ADD1008AA2D6 /* RedBar.h */,
+				C79FCD4E1582ADD1008AA2D6 /* RedBar.mm */,
 			);
 			name = Token;
 			sourceTree = "<group>";
@@ -1129,6 +1134,7 @@
 				C74681441580219D00A9E70F /* Particle.mm in Sources */,
 				C746814915802C7A00A9E70F /* Back.mm in Sources */,
 				C79FCD4B1581B795008AA2D6 /* Chain.mm in Sources */,
+				C79FCD4F1582ADD1008AA2D6 /* RedBar.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
