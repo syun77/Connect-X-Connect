@@ -377,11 +377,19 @@ enum eState {
         [self setGlColor];
     }
     
+    glLineWidth(1);
     [self fillRect:self._x cy:self._y w:s h:s rot:0 scale:1];
     
     glColor4f(1, 1, 1, 1);
     [self drawRect:self._x cy:self._y w:s h:s rot:0 scale:1];
     [self drawRect:self._x cy:self._y w:s-1 h:s-1 rot:0 scale:1];
+    
+    if (m_State == eState_Slide) {
+        
+        // スライド操作中
+        glColor4f(1, 0, 0, 1);
+        
+    }
 }
 
 // 番号を設定する

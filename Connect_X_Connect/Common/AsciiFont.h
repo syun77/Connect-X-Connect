@@ -13,7 +13,7 @@
 
 /// ASCII文字のサイズ
 //#define ASCII_SIZE (16)
-#define ASCII_SIZE (7)
+#define ASCII_SIZE (8)
 #define ASCII_SIZE_REAL (8)
 //#define ASCII_SIZE (14)
 //#define ASCII_SIZE_REAL (16)
