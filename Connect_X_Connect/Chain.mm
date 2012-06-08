@@ -9,12 +9,12 @@
 #import "Chain.h"
 
 
-static const int PRIO_OFS_CHAINFONT = 1;
+static const int PRIO_OFS_CHAINFONT = 20;
 static const int TIMER_MAIN = 60;
 static const int TIMER_VANISH = 30;
 static const float POS_APPEAR_X = 320;
-static const float POS_APPEAR_Y = 300;
-static const float SPEED_X = -900;
+static const float POS_APPEAR_Y = 360;
+static const float SPEED_X = -2400;
 
 /**
  * 状態
@@ -95,6 +95,8 @@ enum eState {
             
         case eState_Vanish:
             m_Timer--;
+            [self.m_pFont setAlpha:0xFF * m_Timer / TIMER_VANISH];
+            
             if (m_Timer < 1) {
                 m_State = eState_Hide;
                 [self.m_pFont setVisible:NO];
@@ -126,6 +128,7 @@ enum eState {
     self._y = POS_APPEAR_Y;
     self._vx = SPEED_X;
     [self.m_pFont setPosScreen:self._x y:self._y];
+    [self.m_pFont setAlpha:0xFF];
 }
 
 @end

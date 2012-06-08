@@ -66,7 +66,7 @@ int GameCommon_GetScore(int nVanish, int nConnect, int nKind, int nChain) {
         e = 0;
     }
     else {
-        e = (e - 1) * 8;
+        e = (e - 1) * 12;
     }
     
     ret = a * b * (c + d + e);

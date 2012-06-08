@@ -54,7 +54,7 @@
     for (int i = 0; i < FIELD_BLOCK_COUNT_X+1; i++) {
         
         CGPoint origin = CGPointMake(x, y);
-        CGPoint destination = CGPointMake(x, 444);
+        CGPoint destination = CGPointMake(x, 324);
         
         ccDrawLine(origin, destination);
         
@@ -90,6 +90,8 @@
         ccDrawLine(origin, destination);
     }
     glLineWidth(1);
+    
+    System_SetBlend(eBlend_Normal);
     
 }
 
