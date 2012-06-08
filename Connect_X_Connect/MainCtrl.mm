@@ -157,6 +157,12 @@ enum eTouchState {
     return [SceneMain sharedInstance].fontLevelup;
 }
 
+- (void)_initChain {
+    m_nChain  = 0;
+    m_nVanish = 0;
+    m_nKind   = 0;
+}
+
 // タッチ座標をチップ座標に変換する
 - (int)touchToChip:(float)p {
     
@@ -279,6 +285,9 @@ enum eTouchState {
  * 更新・初期化
  */
 - (void)_updateInit {
+    
+    // 連鎖数初期化
+    [self _initChain];
     
     // HPの初期化
     Player* player = [self _getPlayer];
@@ -514,7 +523,9 @@ enum eTouchState {
 //    Player* player = [self _getPlayer];
     
     // 消去できた数
-    int nVanish = 0;
+    int nVanish  = 0;
+    int nKind    = 0;
+    int nConnect = 0;
     
     for (int j = 0; j < FIELD_BLOCK_COUNT_Y; j++) {
         
@@ -532,7 +543,16 @@ enum eTouchState {
                     // 消去できた
                     [self _setLayerVanish];
                     
-                    nVanish++;
+                    // 消去数アップ
+                    nVanish += cnt;
+                    
+                    // 消去グループ数アップ
+                    nKind++;
+                    
+                    // 接続数アップ
+                    if (nConnect < cnt) {
+                        nConnect = cnt;
+                    }
                     
                     // HPを増やす
 //                    int v = cnt * val / 3 + 1;
@@ -543,7 +563,9 @@ enum eTouchState {
                     if (eft) {
                         
                         int frame  = BEZIEREFFECT_FRAME + Math_RandInt(-10, 10);
-                        int damage = cnt * val;
+                        
+                        // ダメージは後で計算する
+                        int damage = 0;
                         
                         [eft setParamDamage:eBezierEffect_Enemy frame:frame damage:damage];
                     }
@@ -561,6 +583,13 @@ enum eTouchState {
         return;
     }
     
+    // 消去できたので連鎖回数アップ
+    m_nChain++;
+    m_nConnect = nConnect;
+    m_nVanish = nVanish;
+    m_nKind = nKind;
+    
+    // エフェクト出現位置は全消去ブロックの平均
     
     // 消去実行
     for (int j = 0; j < FIELD_BLOCK_COUNT_Y; j++) {
@@ -599,6 +628,11 @@ enum eTouchState {
     
 //    if ([BlockMgr isEndVanishingAll]) {
     if ([BezierEffect countExist] == 0) {
+        
+        // 敵にダメージを与える
+        int v = GameCommon_GetScore(m_nKind, m_nConnect, m_nVanish, m_nChain);
+        Enemy* enemy = [self _getEnemy];
+        [enemy damage:v];
         
         // 待機状態にする
         [BlockMgr changeStandbyAll];
@@ -675,6 +709,9 @@ enum eTouchState {
         
         return;
     }
+    
+    // 連鎖回数などを初期化
+    [self _initChain];
     
     // ブロック出現 (下) チェック
     [self _changeState:eState_AppearBottomCheck];
