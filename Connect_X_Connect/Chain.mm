@@ -13,7 +13,8 @@ static const int PRIO_OFS_CHAINFONT = 20;
 static const int TIMER_MAIN = 60;
 static const int TIMER_VANISH = 30;
 static const float POS_APPEAR_X = 320;
-static const float POS_APPEAR_Y = 360;
+static const float POS_APPEAR_Y = 368;
+static const float POS_LINE_Y = POS_APPEAR_Y - 8;
 static const float SPEED_X = -2400;
 
 /**
@@ -106,6 +107,25 @@ enum eState {
         case eState_Hide:
         default:
             break;
+    }
+}
+
+- (void)visit {
+    
+    [super visit];
+    
+    if (m_State == eState_Main) {
+        
+        int h = 4 * m_Timer / TIMER_MAIN;
+        if (h < 1) {
+            h = 1;
+        }
+        
+        System_SetBlend(eBlend_Add);
+        glColor4f(1, 0, 0, 1);
+        [self fillRectLT:0 y:POS_LINE_Y w:320 h:1 rot:0 scale:1];
+        
+        System_SetBlend(eBlend_Normal);
     }
 }
 
