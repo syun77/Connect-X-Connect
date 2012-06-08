@@ -25,6 +25,7 @@
 #import "FontEffect.h"
 #import "Particle.h"
 #import "Back.h"
+#import "Chain.h"
 
 /**
  * ゲームメインのシーン
@@ -53,6 +54,7 @@
     Player*         player;
     Enemy*          enemy;
     Back*           back;
+    Chain*          chain;
     
     // レイヤー
     Layer2D*        layer;
@@ -84,6 +86,7 @@
 @property (nonatomic, retain)Player*            player;
 @property (nonatomic, retain)Enemy*             enemy;
 @property (nonatomic, retain)Back*              back;
+@property (nonatomic, retain)Chain*             chain;
 
 @property (nonatomic, retain)Layer2D*   layer;
 

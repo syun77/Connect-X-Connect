@@ -23,6 +23,7 @@ enum ePrio {
     ePrio_Enemy,        // 敵
     ePrio_Effect,       // エフェクト
     ePrio_HpGauge,      // HPゲージ
+    ePrio_UI,           // ユーザインターフェース
 };
 
 enum eState {
@@ -55,6 +56,8 @@ static SceneMain* scene_ = nil;
 @synthesize player;
 @synthesize enemy;
 @synthesize back;
+@synthesize chain;
+
 @synthesize layer;
 @synthesize ctrl;
 
@@ -177,6 +180,10 @@ static SceneMain* scene_ = nil;
     self.back = [Back node];
     [self.baseLayer addChild:self.back z:ePrio_Back];
     
+    self.chain = [Chain node];
+    [self.baseLayer addChild:self.chain z:ePrio_UI];
+    [self.chain attachLayer:self.baseLayer];
+    
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
     [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
@@ -207,6 +214,7 @@ static SceneMain* scene_ = nil;
     // ゲーム制御
     self.ctrl = nil;
     
+    self.chain = nil;
     self.back = nil;
     self.enemy = nil;
     self.player = nil;

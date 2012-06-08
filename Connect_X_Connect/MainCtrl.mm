@@ -156,6 +156,9 @@ enum eTouchState {
 - (AsciiFont*)_getFontLevelup {
     return [SceneMain sharedInstance].fontLevelup;
 }
+- (Chain*)_getChain {
+    return [SceneMain sharedInstance].chain;
+}
 
 - (void)_initChain {
     m_nChain  = 0;
@@ -588,6 +591,10 @@ enum eTouchState {
     m_nConnect = nConnect;
     m_nVanish = nVanish;
     m_nKind = nKind;
+    
+    // 連鎖エフェクト表示
+    Chain* chain = [self _getChain];
+    [chain requestAppear:m_nChain];
     
     // エフェクト出現位置は全消去ブロックの平均
     
