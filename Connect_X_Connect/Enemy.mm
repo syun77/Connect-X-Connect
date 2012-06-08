@@ -15,6 +15,7 @@
 static const int ENEMY_POS_X = 320-64;
 static const int ENEMY_POS_Y = 480-80;
 static const int ENEMY_POS_LV_Y = ENEMY_POS_Y-64;
+static const int ENEMY_POS_DAMAGE = ENEMY_POS_Y-16;
 
 // タイマー関連
 static const int TIMER_DAMAGE = 30;
@@ -239,7 +240,7 @@ enum eState {
     
     if (v > 0) {
         // ダメージ数値表示
-        [FontEffect add:eFontEffect_Damage x:ENEMY_POS_X y:ENEMY_POS_Y text:[NSString stringWithFormat:@"%d", v]];
+        [FontEffect add:eFontEffect_Damage x:ENEMY_POS_X y:ENEMY_POS_DAMAGE text:[NSString stringWithFormat:@"%d", v]];
     }
     
     // ダメージエフェクト再生

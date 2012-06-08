@@ -405,7 +405,6 @@ enum eTouchState {
     m_TouchState = eTouchState_Standby;
     
     // タッチ入力待ちへ
-//    m_State = eState_Standby;
     [self _changeState:eState_Standby];
 }
 

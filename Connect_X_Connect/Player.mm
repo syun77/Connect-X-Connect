@@ -13,6 +13,7 @@
 
 static const int PLAYER_POS_X = 64;
 static const int PLAYER_POS_Y = 480 - 80;
+static const int PLAYER_POS_DAMAGE = PLAYER_POS_Y - 16;
 static const int TIMER_DAMAGE = 30;
 
 /**
@@ -144,7 +145,7 @@ static const int TIMER_DAMAGE = 30;
     // ダメージ演出開始
     m_tDamage = TIMER_DAMAGE;
     
-    [FontEffect add:eFontEffect_Damage x:PLAYER_POS_X y:PLAYER_POS_Y text:[NSString stringWithFormat:@"%d", v]];
+    [FontEffect add:eFontEffect_Damage x:PLAYER_POS_X y:PLAYER_POS_DAMAGE text:[NSString stringWithFormat:@"%d", v]];
     
     // ダメージエフェクト再生
     [Particle addDamage:PLAYER_POS_X y:PLAYER_POS_Y];

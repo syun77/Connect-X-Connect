@@ -38,7 +38,6 @@
  * 文字に対応する矩形を取得する
  */
 - (CGRect)getRectWithChar:(char)c {
-//    CGRect ret = CGRectMake(0, 0, ASCII_SIZE, ASCII_SIZE);
     CGRect ret = CGRectMake(256, 256, ASCII_SIZE, ASCII_SIZE);
     
     // ASCII文字の並び
