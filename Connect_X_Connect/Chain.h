@@ -16,6 +16,7 @@
     AsciiFont*  m_pFont;
     int         m_State;
     int         m_Timer;
+    int         m_tLine;
 }
 
 @property (nonatomic, retain)AsciiFont* m_pFont;

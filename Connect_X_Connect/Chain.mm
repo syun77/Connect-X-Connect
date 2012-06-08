@@ -12,9 +12,10 @@
 static const int PRIO_OFS_CHAINFONT = 20;
 static const int TIMER_MAIN = 60;
 static const int TIMER_VANISH = 30;
+static const int TIMER_LINE = 60;
 static const float POS_APPEAR_X = 320;
 static const float POS_APPEAR_Y = 368;
-static const float POS_LINE_Y = POS_APPEAR_Y - 8;
+static const float POS_LINE_Y = POS_APPEAR_Y;
 static const float SPEED_X = -2400;
 
 /**
@@ -43,6 +44,8 @@ enum eState {
     [self load:@"all.png"];
     [self create];
     [self setVisible:NO];
+    
+    m_tLine = 0;
     
     return self;
 }
@@ -83,6 +86,10 @@ enum eState {
     [self move:1/60.0];
     [self.m_pFont setPosScreen:self._x y:self._y];
     
+    if (m_tLine > 0) {
+        m_tLine = m_tLine * 0.8;
+    }
+    
     switch (m_State) {
         case eState_Main:
             m_Timer--;
@@ -90,6 +97,10 @@ enum eState {
             if (m_Timer < 1) {
                 m_State = eState_Vanish;
                 m_Timer = TIMER_VANISH;
+            }
+            
+            if (m_tLine < 1) {
+                m_tLine = 1;
             }
             
             break;
@@ -114,16 +125,17 @@ enum eState {
     
     [super visit];
     
-    if (m_State == eState_Main) {
+    if (m_tLine > 0) {
         
-        int h = 4 * m_Timer / TIMER_MAIN;
+        int h = 16 * m_tLine / TIMER_LINE;
         if (h < 1) {
             h = 1;
         }
+        int y = POS_LINE_Y - h/2;
         
         System_SetBlend(eBlend_Add);
         glColor4f(1, 0, 0, 1);
-        [self fillRectLT:0 y:POS_LINE_Y w:320 h:1 rot:0 scale:1];
+        [self fillRectLT:0 y:y w:320 h:h rot:0 scale:1];
         
         System_SetBlend(eBlend_Normal);
     }
@@ -140,6 +152,7 @@ enum eState {
     
     m_State = eState_Main;
     m_Timer = TIMER_MAIN;
+    m_tLine = TIMER_LINE;
     
     [self.m_pFont setVisible:YES];
     [self.m_pFont setText:[NSString stringWithFormat:@"%d CHAIN", nChain]];
