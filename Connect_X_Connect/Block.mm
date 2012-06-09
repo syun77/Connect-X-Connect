@@ -11,6 +11,8 @@
 #import "FieldMgr.h"
 #import "BlockMgr.h"
 
+#define RESOURCE_IMAGE_ENABLE (0)
+
 static const int TIMER_VANISH = 30;
 static const float SPEED_FALL = 50; // ブロック落下速度
 static const float SPEED_FALL_MAX = 1000; // 落下速度の最大値
@@ -48,11 +50,14 @@ enum eState {
         return self;
     }
     
+#if RESOURCE_IMAGE_ENABLE
+    [self load:@"block.png"];
+#else
     [self load:@"font.png"];
+    [self.m_pSprite setVisible:NO];
+#endif
     
     self._r = BLOCK_SIZE / 2;
-    
-    [self.m_pSprite setVisible:NO];
     
     m_tCursor = 0;
     
@@ -81,14 +86,22 @@ enum eState {
     [self.fontNumber setPrio:prio + PRIO_OFS_FONT_FRONT];
     [self.fontNumber createFont:layer length:2];
     [self.fontNumber setAlign:eFontAlign_Center];
+#if RESOURCE_IMAGE_ENABLE
+    [self.fontNumber setScale:1];
+#else
     [self.fontNumber setScale:3];
+#endif
     [self.fontNumber setColor:ccc3(0xFF, 0xFF, 0xFF)];
     
     self.fontNumber2 = [AsciiFont node];
     [self.fontNumber2 setPrio:prio + PRIO_OFS_FONT_BACK];
     [self.fontNumber2 createFont:layer length:2];
     [self.fontNumber2 setAlign:eFontAlign_Center];
+#if RESOURCE_IMAGE_ENABLE
+    [self.fontNumber2 setScale:1];
+#else
     [self.fontNumber2 setScale:3];
+#endif
     [self.fontNumber2 setColor:ccc3(0xFF, 0xFF, 0xFF)];
     
 }
@@ -360,6 +373,10 @@ enum eState {
         return;
     }
     
+#if RESOURCE_IMAGE_ENABLE
+    return;
+#endif
+    
     System_SetBlend(eBlend_Normal);
     float s = BLOCK_SIZE / 2;
     if ([self isShield]) {
@@ -391,7 +408,6 @@ enum eState {
     glLineWidth(2);
     glColor4f(1, 1, 1, 1);
     [self drawRect:self._x cy:self._y w:s h:s rot:0 scale:1];
-    //[self drawRect:self._x cy:self._y w:s-1 h:s-1 rot:0 scale:1];
     
     if (m_State == eState_Slide) {
         
@@ -420,6 +436,15 @@ enum eState {
     m_nNumber = number;
     [self.fontNumber setText:[NSString stringWithFormat:@"%d", number]];
     [self.fontNumber2 setText:[NSString stringWithFormat:@"%d", number]];
+    
+#if RESOURCE_IMAGE_ENABLE
+    float px = (number - 1) * BLOCK_SIZE;
+    float py = 0;
+    CGRect r = CGRectMake(px, py, BLOCK_SIZE, BLOCK_SIZE);
+    
+    [self setTexRect:r];
+#endif
+    
 }
 
 // 番号を取得する
