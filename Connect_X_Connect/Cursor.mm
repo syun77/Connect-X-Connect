@@ -52,9 +52,9 @@
         return;
     }
     
-    System_SetBlend(eBlend_Add);
-    glColor4f(0.5, 0.5, 0.5, 0.5);
-    [self fillRectLT:self._x y:self._y w:BLOCK_SIZE h:480 rot:0 scale:1];
+    System_SetBlend(eBlend_Normal);
+    glColor4f(0.3, 0.3, 0.3, 0.2);
+    [self fillRectLT:self._x y:self._y w:BLOCK_SIZE h:320 rot:0 scale:1];
     System_SetBlend(eBlend_Normal);
 }
 

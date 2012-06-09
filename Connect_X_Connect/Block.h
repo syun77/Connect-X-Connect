@@ -16,6 +16,7 @@
  */
 @interface Block : Token {
     
+    int         m_tPast;        // 経過時間
     AsciiFont*  fontNumber;     // 数字フォント
     AsciiFont*  fontNumber2;    // 数字フォント (後ろに出す用)
     int         m_nNumber;      // 数値

@@ -318,6 +318,8 @@ enum eState {
     // 速度固定
     [self move:1.0 / 60];
     
+    m_tPast++;
+    
     {
         // フォント描画位置設定
         float px = self._x + POS_FONT_OFFSET;
@@ -384,18 +386,32 @@ enum eState {
         [self setGlColor];
     }
     
-    glLineWidth(1);
     [self fillRect:self._x cy:self._y w:s h:s rot:0 scale:1];
     
+    glLineWidth(2);
     glColor4f(1, 1, 1, 1);
     [self drawRect:self._x cy:self._y w:s h:s rot:0 scale:1];
-    [self drawRect:self._x cy:self._y w:s-1 h:s-1 rot:0 scale:1];
+    //[self drawRect:self._x cy:self._y w:s-1 h:s-1 rot:0 scale:1];
     
     if (m_State == eState_Slide) {
         
         // スライド操作中
-        glColor4f(1, 0, 0, 1);
+        System_SetBlend(eBlend_Add);
         
+        float cx = self._x;
+        float cy = self._y;
+        for (int i = 0; i < 3; i++) {
+            int t  = (m_tPast+i*10)%30;
+            int t2 = 30 - t;            
+            
+            glColor4f(1, 0, 0, t2/30.0);
+            float size = (BLOCK_SIZE/2)+t/2;
+            
+            [self drawRect:cx cy:cy w:size h:size rot:0 scale:1];
+            
+        }
+        
+        System_SetBlend(eBlend_Normal);
     }
 }
 
