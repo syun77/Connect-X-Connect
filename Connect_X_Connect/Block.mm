@@ -121,7 +121,7 @@ enum eState {
 
 - (void)setGlColor {
     
-    int a = 0xA0;
+    int a = 0x80;
     
     switch (m_nNumber) {
         case 1:
