@@ -274,6 +274,17 @@ enum eState {
         return;
     }
     
+    if (m_ReqVanish) {
+        
+        // TODO: 落下中でも消滅要求を処理してみるテスト
+        // 消滅要求を処理
+        m_State = eState_Vanish;
+        m_Timer = TIMER_VANISH;
+        
+        m_ReqVanish = NO;
+        return;
+    }
+    
     // 落下処理
     self._vy -= SPEED_FALL;
     if (self._vy < -SPEED_FALL_MAX) {
