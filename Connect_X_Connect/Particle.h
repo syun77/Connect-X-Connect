@@ -18,8 +18,7 @@ enum eParticle {
     eParticle_Ball,     // 球体
     eParticle_Ring,     // 輪っか
     eParticle_Blade,    // 刃
-    eParticle_ChargeRecover, // チャージゲージ回復
-    eParticle_ChargeRecoverSmall, // チャージ回復エフェクト (小)
+    eParticle_Rect,     // 矩形
 };
 
 @interface Particle : Token {
@@ -43,5 +42,8 @@ enum eParticle {
 
 // 死亡エフェクト再生
 + (void)addDead:(float)x y:(float)y;
+
+// シールド破壊エフェクトを生成
++ (void)addShieldBreak:(float)x y:(float)y;
 
 @end

@@ -200,11 +200,6 @@ static const int TIMER_VANISH = 48;
             r = Exerinya_GetRect(eExerinyaRect_EftBlade);
             break;
             
-        case eParticle_ChargeRecover:
-        case eParticle_ChargeRecoverSmall:
-            [self.m_pSprite setVisible:NO];
-            break;
-            
         default:
             break;
     }
@@ -290,6 +285,11 @@ static const int TIMER_VANISH = 48;
             [p2 setRotation:rot];
         }
     }
+}
+
+// シールド破壊エフェクトを生成
++ (void)addShieldBreak:(float)x y:(float)y {
+    
 }
 
 @end
