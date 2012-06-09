@@ -643,24 +643,31 @@ enum eTouchState {
 
 - (void)_updateVanishExec {
     
-//    if ([BlockMgr isEndVanishingAll]) {
-    if ([BezierEffect countExist] == 0) {
+    if ([BlockMgr isEndVanishingAll] == NO) {
         
-        // 敵にダメージを与える
-        int v = GameCommon_GetScore(m_nKind, m_nConnect, m_nVanish, m_nChain);
-        Enemy* enemy = [self _getEnemy];
-        [enemy damage:v];
-        
-        // 待機状態にする
-        [BlockMgr changeStandbyAll];
-        
-        // 落下要求を送る
-        [BlockMgr requestFall];
-        
-        
-        // 落下状態へ遷移
-        [self _changeState:eState_Fall];
+        // 消滅演出が終わっていない
+        return;
     }
+    if ([BezierEffect countExist] > 0) {
+        
+        // ダメージエフェクトが残っている
+        return;
+    }
+        
+    // 敵にダメージを与える
+    int v = GameCommon_GetScore(m_nKind, m_nConnect, m_nVanish, m_nChain);
+    Enemy* enemy = [self _getEnemy];
+    [enemy damage:v];
+    
+    // 待機状態にする
+    [BlockMgr changeStandbyAll];
+    
+    // 落下要求を送る
+    [BlockMgr requestFall];
+    
+    
+    // 落下状態へ遷移
+    [self _changeState:eState_Fall];
 }
 
 /**
