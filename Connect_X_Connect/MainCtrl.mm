@@ -210,10 +210,8 @@ enum eTouchState {
         m_ChipX = chipX;
     }
     
-    TokenManager* mgrBlock = [self _getManagerBlock];
-    
     // ブロック１
-    Block* b1 = (Block*)[mgrBlock getFromIdx:m_BlockHandler1];
+    Block* b1 = [BlockMgr getFromIndex:m_BlockHandler1];
     [b1 setPosFromChip:m_ChipX chipY:BLOCK_APPEAR_Y1];
     
 }
@@ -405,6 +403,9 @@ enum eTouchState {
     // ブロックを待機状態にする
     [BlockMgr changeStandbyAll];
     
+    // 操作状態にする
+    [b1 changeSlide];
+    
     [FieldMgr copyBlockToLayer];
     
     // タッチ状態をクリア
@@ -434,6 +435,10 @@ enum eTouchState {
         m_TouchState = eTouchState_Standby;
         
         // 下にブロックがなければ置ける
+        // 操作中のブロックを待機状態にする
+        Block* b = [BlockMgr getFromIndex:m_BlockHandler1];
+        [b changeStandby];
+        
         // 落下要求を送る
         [BlockMgr requestFall];
         
