@@ -37,6 +37,9 @@ int GameCommon_ChipYToScreenY(int chipY);
 static const int BLOCK_SIZE = 40;
 static const int BLOCK_INVALID = 0; // 無効なブロック
 
+// 次に出現するブロックの数
+static const int BLOCK_NEXT_COUNT = 3;
+
 // ブロック出現座標
 // X座標
 static const int BLOCK_APPEAR_X = 3;

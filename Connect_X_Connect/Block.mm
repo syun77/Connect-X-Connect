@@ -11,8 +11,6 @@
 #import "FieldMgr.h"
 #import "BlockMgr.h"
 
-#define RESOURCE_IMAGE_ENABLE (0)
-
 static const int TIMER_VANISH = 30;
 static const float SPEED_FALL = 50; // ブロック落下速度
 static const float SPEED_FALL_MAX = 1000; // 落下速度の最大値
@@ -31,6 +29,7 @@ enum eState {
     eState_Fall,        // 落下中
     eState_FallWait,    // 落下停止中
     eState_Vanish,      // 消滅中
+    eState_End,         // おしまい
 };
 
 /**
@@ -38,8 +37,34 @@ enum eState {
  */
 @implementation Block
 
-@synthesize fontNumber;
-@synthesize fontNumber2;
+- (CGRect)_getTexRect {
+    
+    float s = BLOCK_SIZE;
+    
+    if (m_nShield == 1) {
+        
+        float px = (m_nNumber - 1) * s;
+        float py = 1 * s;
+        
+        return CGRectMake(px, py, s, s);
+    }
+    
+    if (m_nShield >= 2) {
+        
+        float px = 10 * s;
+        float py = 0;
+        
+        return CGRectMake(px, py, s, s);
+    }
+    
+    {
+        float px = (m_nNumber - 1) * s;
+        float py = 0;
+        
+        return CGRectMake(px, py, s, s);
+    }
+    
+}
 
 /**
  * コンストラクタ
@@ -50,60 +75,13 @@ enum eState {
         return self;
     }
     
-#if RESOURCE_IMAGE_ENABLE
     [self load:@"block.png"];
-#else
-    [self load:@"font.png"];
-    [self.m_pSprite setVisible:NO];
-#endif
     
     self._r = BLOCK_SIZE / 2;
     
     m_tCursor = 0;
     
     return self;
-}
-
-/**
- * デストラクタ
- */
-- (void)dealloc {
-    
-    self.fontNumber = nil;
-    self.fontNumber2 = nil;
-    
-    [super dealloc];
-}
-
-/**
- * フォントの生成
- */
-- (void)attachLayer:(CCLayer *)layer {
-    
-    int prio = [self getPrio];
-    
-    self.fontNumber = [AsciiFont node];
-    [self.fontNumber setPrio:prio + PRIO_OFS_FONT_FRONT];
-    [self.fontNumber createFont:layer length:2];
-    [self.fontNumber setAlign:eFontAlign_Center];
-#if RESOURCE_IMAGE_ENABLE
-    [self.fontNumber setScale:1];
-#else
-    [self.fontNumber setScale:3];
-#endif
-    [self.fontNumber setColor:ccc3(0xFF, 0xFF, 0xFF)];
-    
-    self.fontNumber2 = [AsciiFont node];
-    [self.fontNumber2 setPrio:prio + PRIO_OFS_FONT_BACK];
-    [self.fontNumber2 createFont:layer length:2];
-    [self.fontNumber2 setAlign:eFontAlign_Center];
-#if RESOURCE_IMAGE_ENABLE
-    [self.fontNumber2 setScale:1];
-#else
-    [self.fontNumber2 setScale:3];
-#endif
-    [self.fontNumber2 setColor:ccc3(0xFF, 0xFF, 0xFF)];
-    
 }
 
 /**
@@ -117,15 +95,10 @@ enum eState {
     m_nShield       = 0;
     m_ReqFall       = NO;
     m_ReqVanish     = NO;
-    [self.fontNumber setVisible:YES];
-    [self.fontNumber2 setVisible:NO];
     [self setVisible:YES];
 }
 
 - (void)vanish {
-    [self.fontNumber setVisible:NO];
-    [self.fontNumber2 setVisible:NO];
-    
     [super vanish];
 }
 
@@ -274,17 +247,6 @@ enum eState {
         return;
     }
     
-    if (m_ReqVanish) {
-        
-        // TODO: 落下中でも消滅要求を処理してみるテスト
-        // 消滅要求を処理
-        m_State = eState_Vanish;
-        m_Timer = TIMER_VANISH;
-        
-        m_ReqVanish = NO;
-        return;
-    }
-    
     // 落下処理
     self._vy -= SPEED_FALL;
     if (self._vy < -SPEED_FALL_MAX) {
@@ -315,16 +277,15 @@ enum eState {
     if (m_Timer%4 < 2) {
         
         [self setVisible:NO];
-        [self.fontNumber setVisible:NO];
     }
     else {
         
         [self setVisible:YES];
-        [self.fontNumber setVisible:YES];
     }
     
     if (m_Timer < 1) {
         [self vanish];
+        m_State = eState_End;
     }
 }
 
@@ -343,14 +304,6 @@ enum eState {
     [self move:1.0 / 60];
     
     m_tPast++;
-    
-    {
-        // フォント描画位置設定
-        float px = self._x + POS_FONT_OFFSET;
-        float py = self._y - POS_FONT_OFFSET;
-        [self.fontNumber setPosScreen:px y:py];
-        [self.fontNumber2 setPosScreen:px y:py];
-    }
     
     switch (m_State) {
         case eState_Standby:
@@ -384,37 +337,8 @@ enum eState {
         return;
     }
     
-#if RESOURCE_IMAGE_ENABLE
-    return;
-#endif
-    
     System_SetBlend(eBlend_Normal);
     float s = BLOCK_SIZE / 2;
-    if ([self isShield]) {
-        
-        [self.fontNumber setVisible:NO];
-        
-        // シールド有効
-        if (m_nShield == 1) {
-            [self.fontNumber2 setVisible:YES];
-            glColor4ub(0x60, 0x60, 0x60, 0xA0);
-        }
-        else {
-            
-            // 数字は不可視
-            [self.fontNumber2 setVisible:NO];
-            glColor4ub(0x60, 0x60, 0x60, 0xFF);
-        }
-    }
-    else {
-        
-        // 通常状態
-        [self.fontNumber setVisible:YES];
-        [self.fontNumber2 setVisible:NO];
-        [self setGlColor];
-    }
-    
-    [self fillRect:self._x cy:self._y w:s h:s rot:0 scale:1];
     
     glLineWidth(2);
     glColor4f(1, 1, 1, 1);
@@ -445,16 +369,7 @@ enum eState {
 // 番号を設定する
 - (void)setNumber:(int)number {
     m_nNumber = number;
-    [self.fontNumber setText:[NSString stringWithFormat:@"%d", number]];
-    [self.fontNumber2 setText:[NSString stringWithFormat:@"%d", number]];
-    
-#if RESOURCE_IMAGE_ENABLE
-    float px = (number - 1) * BLOCK_SIZE;
-    float py = 0;
-    CGRect r = CGRectMake(px, py, BLOCK_SIZE, BLOCK_SIZE);
-    
-    [self setTexRect:r];
-#endif
+    [self setTexRect:[self _getTexRect]];
     
 }
 
@@ -468,13 +383,7 @@ enum eState {
     
     m_nShield = v;
     
-    [self.fontNumber setVisible:NO];
-    if (m_nShield == 1) {
-        [self.fontNumber2 setVisible:YES];
-    }
-    else if(m_nShield == 2) {
-        [self.fontNumber2 setVisible:NO];
-    }
+    [self setTexRect:[self _getTexRect]];
 }
 
 // 固ぷよカウンタを減らす
@@ -485,6 +394,8 @@ enum eState {
         // エフェクト生成
         [Particle addShieldBreak:self._x y:self._y];
     }
+    
+    [self setTexRect:[self _getTexRect]];
 }
 
 // 固ぷよカウンタが有効かどうか

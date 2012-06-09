@@ -17,8 +17,6 @@
 @interface Block : Token {
     
     int         m_tPast;        // 経過時間
-    AsciiFont*  fontNumber;     // 数字フォント
-    AsciiFont*  fontNumber2;    // 数字フォント (後ろに出す用)
     int         m_nNumber;      // 数値
     int         m_tCursor;      // カーソルタイマー
     int         m_Timer;        // 汎用タイマー
@@ -28,9 +26,6 @@
     
     int         m_nShield;      // 固ぷよカウンタ
 }
-
-@property (nonatomic, retain)AsciiFont* fontNumber;
-@property (nonatomic, retain)AsciiFont* fontNumber2;
 
 // 番号を設定する
 - (void)setNumber:(int)number;
