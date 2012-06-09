@@ -87,6 +87,13 @@ static const int TIMER_VANISH = 48;
             [self setAlpha:[self getAlpha] * 0.97f];
             break;
             
+        case eParticle_Rect:
+            m_Timer++;
+            if (m_Timer > TIMER_VANISH/2) {
+                m_bBlink = YES;
+            }
+            break;
+            
         default:
             break;
     }
@@ -122,59 +129,21 @@ static const int TIMER_VANISH = 48;
 - (void)visit {
     [super visit];
     
-//    switch (m_Type) {
-//        case eParticle_ChargeRecover:
-//        {
-//            // チャージ回復エフェクト
-//            float ratio = (float)(TIMER_VANISH - m_Timer) / TIMER_VANISH;
-//            
-//            float val = ratio * TIMER_VANISH * 0.2f;
-//            if (val < 1) {
-//                val = 1;
-//            }
-//            m_Timer += val;
-//            
-//            Player* player = [GameScene sharedInstance].player;
-//            float pRatio = [player getPowerRatio];
-//            float r = pRatio;
-//            float g = 1.0 - pRatio;
-//            float a = ratio;
-//            // チャージ回復エフェクト
-//            System_SetBlend(eBlend_Add);
-//            glColor4f(r, g, 0, a);
-//            glLineWidth(4);
-//            [self drawCircle:self._x cy:self._y radius:m_Timer];
-//            System_SetBlend(eBlend_Normal);
-//        }
-//            break;
-//            
-//        case eParticle_ChargeRecoverSmall:
-//        {
-//            // チャージ回復エフェクト
-//            float ratio = (float)(TIMER_VANISH - m_Timer) / TIMER_VANISH;
-//            
-//            float val = ratio * TIMER_VANISH * 0.5f;
-//            if (val < 1) {
-//                val = 1;
-//            }
-//            m_Timer += val;
-//            
-//            Player* player = [GameScene sharedInstance].player;
-//            float pRatio = [player getPowerRatio];
-//            float r = pRatio;
-//            float g = 1.0 - pRatio;
-//            float a = ratio;
-//            // チャージ回復エフェクト
-//            System_SetBlend(eBlend_Add);
-//            glColor4f(r, g, 0, a);
-//            glLineWidth(4);
-//            [self drawCircle:self._x cy:self._y radius:m_Timer/4];
-//            System_SetBlend(eBlend_Normal);        }
-//            break;
-//            
-//        default:
-//            break;
-//    }
+    if (self.visible == NO) {
+        return;
+    }
+    
+    switch (m_Type) {
+        case eParticle_Rect:
+            System_SetBlend(eBlend_Normal);
+            glColor4f(0.5, 0.5, 0.5, 0.8);
+            [self fillRect:self._x cy:self._y w:4 h:4 rot:0 scale:1];
+            
+            break;
+            
+        default:
+            break;
+    }
 }
 
 /**
@@ -201,6 +170,7 @@ static const int TIMER_VANISH = 48;
             break;
             
         default:
+            [self.m_pSprite setVisible:NO];
             break;
     }
     
@@ -289,6 +259,21 @@ static const int TIMER_VANISH = 48;
 
 // シールド破壊エフェクトを生成
 + (void)addShieldBreak:(float)x y:(float)y {
+    
+    float dRot = 360 / 8.0;
+    float rot = Math_Randf(dRot);
+    for (int i = 0; i < 8; i++) {
+        
+        float speed = 150 + Math_Randf(75);
+        rot += dRot + Math_Randf(15);
+        
+        Particle* p = [Particle add:eParticle_Rect x:x y:y rot:rot speed:speed];
+        if (p) {
+            [p setScale:1.5];
+            [p setAlpha:0xFF];
+            p._ay = -5;
+        }
+    }
     
 }
 

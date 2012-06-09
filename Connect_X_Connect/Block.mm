@@ -470,6 +470,9 @@ enum eState {
 - (void)decShield {
     if (m_nShield > 0) {
         m_nShield--;
+        
+        // エフェクト生成
+        [Particle addShieldBreak:self._x y:self._y];
     }
 }
 
