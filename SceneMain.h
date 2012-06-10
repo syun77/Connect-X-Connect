@@ -27,6 +27,7 @@
 #import "Back.h"
 #import "Chain.h"
 #import "RedBar.h"
+#import "BlockNext.h"
 
 /**
  * ゲームメインのシーン
@@ -64,6 +65,9 @@
     Back*           back;
     Chain*          chain;
     RedBar*         redbar;
+    BlockNext*      blockNext1;
+    BlockNext*      blockNext2;
+    BlockNext*      blockNext3;
     
     // レイヤー
     Layer2D*        layer;
@@ -102,6 +106,9 @@
 @property (nonatomic, retain)Back*              back;
 @property (nonatomic, retain)Chain*             chain;
 @property (nonatomic, retain)RedBar*            redbar;
+@property (nonatomic, retain)BlockNext*         blockNext1;
+@property (nonatomic, retain)BlockNext*         blockNext2;
+@property (nonatomic, retain)BlockNext*         blockNext3;
 
 @property (nonatomic, retain)Layer2D*   layer;
 

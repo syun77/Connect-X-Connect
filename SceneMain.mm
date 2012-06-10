@@ -22,6 +22,7 @@ enum ePrio {
     ePrio_Player,       // プレイヤー
     ePrio_Enemy,        // 敵
     ePrio_RedBar,       // 危険バー
+    ePrio_BlockNext,    // 次に出現するブロック
     ePrio_Effect,       // エフェクト
     ePrio_HpGauge,      // HPゲージ
     ePrio_UI,           // ユーザインターフェース
@@ -66,6 +67,9 @@ static SceneMain* scene_ = nil;
 @synthesize back;
 @synthesize chain;
 @synthesize redbar;
+@synthesize blockNext1;
+@synthesize blockNext2;
+@synthesize blockNext3;
 
 @synthesize layer;
 @synthesize ctrl;
@@ -220,6 +224,15 @@ static SceneMain* scene_ = nil;
     self.redbar = [RedBar node];
     [self.baseLayer addChild:self.redbar z:ePrio_RedBar];
     
+    self.blockNext1 = [BlockNext node];
+    [self.baseLayer addChild:self.blockNext1 z:ePrio_BlockNext];
+    
+    self.blockNext2 = [BlockNext node];
+    [self.baseLayer addChild:self.blockNext2 z:ePrio_BlockNext];
+    
+    self.blockNext3 = [BlockNext node];
+    [self.baseLayer addChild:self.blockNext3 z:ePrio_BlockNext];
+    
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
     [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
@@ -250,6 +263,9 @@ static SceneMain* scene_ = nil;
     // ゲーム制御
     self.ctrl = nil;
     
+    self.blockNext3 = nil;
+    self.blockNext2 = nil;
+    self.blockNext1 = nil;
     self.redbar = nil;
     self.chain = nil;
     self.back = nil;

@@ -20,6 +20,7 @@
 		C70E3F471573118A009BF0CB /* SceneMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F461573118A009BF0CB /* SceneMain.mm */; };
 		C7295A9A15831805006A70F8 /* Queue.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7295A9915831805006A70F8 /* Queue.mm */; };
 		C7295A9D15837E6B006A70F8 /* block.png in Resources */ = {isa = PBXBuildFile; fileRef = C7295A9C15837E6A006A70F8 /* block.png */; };
+		C7295AA015843842006A70F8 /* BlockNext.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7295A9F15843842006A70F8 /* BlockNext.mm */; };
 		C7468141157D9A1500A9E70F /* FontEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7468140157D9A1500A9E70F /* FontEffect.mm */; };
 		C74681441580219D00A9E70F /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C74681431580219D00A9E70F /* Particle.mm */; };
 		C746814615802C6600A9E70F /* bg001.png in Resources */ = {isa = PBXBuildFile; fileRef = C746814515802C6600A9E70F /* bg001.png */; };
@@ -185,6 +186,8 @@
 		C7295A9815831805006A70F8 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 		C7295A9915831805006A70F8 /* Queue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Queue.mm; sourceTree = "<group>"; };
 		C7295A9C15837E6A006A70F8 /* block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = block.png; path = Resources/block.png; sourceTree = "<group>"; };
+		C7295A9E15843842006A70F8 /* BlockNext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockNext.h; sourceTree = "<group>"; };
+		C7295A9F15843842006A70F8 /* BlockNext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BlockNext.mm; sourceTree = "<group>"; };
 		C746813F157D9A1400A9E70F /* FontEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontEffect.h; sourceTree = "<group>"; };
 		C7468140157D9A1500A9E70F /* FontEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FontEffect.mm; sourceTree = "<group>"; };
 		C74681421580219C00A9E70F /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
@@ -532,6 +535,8 @@
 				C746814815802C7A00A9E70F /* Back.mm */,
 				C7F1007B15746421002D7E00 /* Block.h */,
 				C7F1007C15746421002D7E00 /* Block.mm */,
+				C7295A9E15843842006A70F8 /* BlockNext.h */,
+				C7295A9F15843842006A70F8 /* BlockNext.mm */,
 				C7750C26157B1D2100F78387 /* BezierEffect.h */,
 				C7750C27157B1D2100F78387 /* BezierEffect.mm */,
 				C79FCD491581B795008AA2D6 /* Chain.h */,
@@ -1145,6 +1150,7 @@
 				C79FCD4B1581B795008AA2D6 /* Chain.mm in Sources */,
 				C79FCD4F1582ADD1008AA2D6 /* RedBar.mm in Sources */,
 				C7295A9A15831805006A70F8 /* Queue.mm in Sources */,
+				C7295AA015843842006A70F8 /* BlockNext.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

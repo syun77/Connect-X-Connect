@@ -403,6 +403,23 @@ enum eTouchState {
     }
 }
 
+- (BlockNext*)_getNextBlock:(int)idx {
+    
+    SceneMain* scene = [SceneMain sharedInstance];
+    switch (idx) {
+        case 0:
+            return scene.blockNext1;
+            
+        case 1:
+            return scene.blockNext2;
+            
+        case 2:
+        default:
+            return scene.blockNext3;
+            break;
+    }
+}
+
 /**
  * 足りないブロックを積んでおく
  */
@@ -421,10 +438,9 @@ enum eTouchState {
     for (int i = 0; i < BLOCK_NEXT_COUNT; i++) {
         
         int v = m_Queue.getFromIndex(i);
-        AsciiFont* f = [self _getNextBlockFont:i];
+        BlockNext* next = [self _getNextBlock:i];
         
-        [f setVisible:YES];
-        [f setText:[NSString stringWithFormat:@"%d", v]];
+        [next setParam:i nNumber:v];
     }
     
 }
