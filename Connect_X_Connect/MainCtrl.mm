@@ -88,6 +88,12 @@ enum eTouchState {
     
     m_nLevel = 1;
     
+    for (int i = 0; i < BLOCK_NEXT_COUNT; i++) {
+        
+        // 出現ブロックをキューに積んでおく
+        m_Queue.push(Math_RandInt(2, m_nBlockLevel));
+    }
+    
     
     return self;
 }
@@ -381,13 +387,60 @@ enum eTouchState {
     }
 }
 
+- (AsciiFont*)_getNextBlockFont:(int)idx {
+    
+    SceneMain* scene = [SceneMain sharedInstance];
+    switch (idx) {
+        case 0:
+            return scene.fontNextBlock1;
+            
+        case 1:
+            return scene.fontNextBlock2;
+        
+        case 2:
+        default:
+            return scene.fontNextBlock3;
+    }
+}
+
+/**
+ * 足りないブロックを積んでおく
+ */
+- (void)_pushBlockNext {
+    
+    int cnt = BLOCK_NEXT_COUNT - m_Queue.count();
+    // 足りない分を積んでおく
+    for (int i = 0; i < cnt; i++) {
+        
+        int v = Math_RandInt(2, m_nBlockLevel);
+        
+        m_Queue.push(v);
+    }
+    
+    // フォントに反映
+    for (int i = 0; i < BLOCK_NEXT_COUNT; i++) {
+        
+        int v = m_Queue.getFromIndex(i);
+        AsciiFont* f = [self _getNextBlockFont:i];
+        
+        [f setVisible:YES];
+        [f setText:[NSString stringWithFormat:@"%d", v]];
+    }
+    
+}
+
 /**
  * 操作ブロック出現
  */
 - (void)_updateAppearBlock {
     
     // ブロック追加
-    int num1 = Math_RandInt(2, m_nBlockLevel);
+    [self _pushBlockNext];
+    
+    // キューから取り出し
+    int num1 = m_Queue.pop();
+    
+    [self _pushBlockNext];
     
     // 出現番号を保存
     m_NumberPrev = num1;

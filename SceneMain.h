@@ -38,16 +38,23 @@
     
     // 描画オブジェクト
     CCLayer*        baseLayer;
+    
     AsciiFont*      fontGameover;
     AsciiFont*      fontLevelup;
     AsciiFont*      fontLevel;
+    AsciiFont*      fontNextBlock1;
+    AsciiFont*      fontNextBlock2;
+    AsciiFont*      fontNextBlock3;
+    
     AsciiFont*      fontTest;
     AsciiFont*      fontTest2;
     AsciiFont*      fontTest3;
+    
     TokenManager*   mgrBlock;
     TokenManager*   mgrBezierEffect;
     TokenManager*   mgrFontEffect;
     TokenManager*   mgrParticle;
+    
     Cursor*         cursor;
     Grid*           grid;
     HpGauge*        hpGauge;
@@ -74,9 +81,14 @@
 @property (nonatomic, retain)AsciiFont*         fontGameover;
 @property (nonatomic, retain)AsciiFont*         fontLevelup;
 @property (nonatomic, retain)AsciiFont*         fontLevel;
+@property (nonatomic, retain)AsciiFont*         fontNextBlock1;
+@property (nonatomic, retain)AsciiFont*         fontNextBlock2;
+@property (nonatomic, retain)AsciiFont*         fontNextBlock3;
+
 @property (nonatomic, retain)AsciiFont*         fontTest;
 @property (nonatomic, retain)AsciiFont*         fontTest2;
 @property (nonatomic, retain)AsciiFont*         fontTest3;
+
 @property (nonatomic, retain)TokenManager*      mgrBlock;
 @property (nonatomic, retain)TokenManager*      mgrBezierEffect;
 @property (nonatomic, retain)TokenManager*      mgrFontEffect;

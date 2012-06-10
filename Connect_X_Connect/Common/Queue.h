@@ -9,7 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+// キューのサイズ
 static const int QUEUE_SIZE = 8;
+
+// 無効な要素
+static const int QUEUE_INVALID = 0;
 
 /**
  * 簡易的なキューの実装 (固定長)
@@ -32,7 +36,7 @@ struct SimpleQueue
      */
     void clear()
     {
-        memset(m_Pool, 0, sizeof(SimpleQueue));
+        memset(m_Pool, QUEUE_INVALID, sizeof(SimpleQueue));
         m_Ptr = -1;
     }
     
@@ -52,7 +56,10 @@ struct SimpleQueue
     void push(int v)
     {
         if (m_Ptr >= QUEUE_SIZE - 1) {
+            
+            // サイズオーバー
             assert(0);
+            return;
         }
         
         m_Ptr++;
@@ -65,28 +72,48 @@ struct SimpleQueue
     int pop()
     {
         if (m_Ptr < 0) {
+            
+            // 要素がない
             assert(0);
+            return QUEUE_INVALID;
         }
         int ret = m_Pool[0];
         
+        // 前詰めする
         for (int i = 0; i < m_Ptr; i++) {
             m_Pool[i] = m_Pool[i + 1];
         }
-        m_Pool[m_Ptr] = 0;
+        m_Pool[m_Ptr] = QUEUE_INVALID;
         m_Ptr--;
         
         return ret;
     }
     
+    /**
+     * 要素番号を指定して直接取得
+     * @param idx 要素番号
+     * @return 値
+     */
+    int getFromIndex(int idx)
+    {
+        if (idx < 0 || QUEUE_SIZE <= idx) {
+            
+            NSLog(@"Warning: SimpleQueue::getFromIndex() Invalid Index = %d", idx);
+            return QUEUE_INVALID;
+        }
+        
+        return m_Pool[idx];
+    }
+    
     void dump()
     {
-        fprintf(stdout, "[SimpleQueue]¥n");
-        fprintf(stdout, "  Ptr = %d¥n", m_Ptr);
+        fprintf(stdout, "[SimpleQueue]\n");
+        fprintf(stdout, "  Ptr = %d\n", m_Ptr);
         fprintf(stdout, "  Val = ");
         
         for (int i = 0; i < QUEUE_SIZE; i++) {
             fprintf(stdout, "%d,", m_Pool[i]);
         }
-        fprintf(stdout, "¥n");
+        fprintf(stdout, "\n");
     }
 };
