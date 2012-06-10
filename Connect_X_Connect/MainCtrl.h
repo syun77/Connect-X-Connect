@@ -12,6 +12,26 @@
 #import "Queue.h"
 
 /**
+ * 出現要求のパラメータ
+ */
+struct ReqBlock {
+    
+    int     count;      // 出現数
+    int     nShield;    // シールドの数
+    float   rSkull;     // ドクロの出現率 (0〜1.0)
+    
+    /**
+     * コンストラクタ
+     */
+    ReqBlock()
+    {
+        count   = 1;
+        nShield = 0;
+        rSkull  = 0.0;
+    }
+};
+
+/**
  * ゲームメインのコントローラー
  */
 @interface MainCtrl : CCNode {
@@ -34,8 +54,11 @@
     
     int     m_NumberPrev;       // 出現したブロックの数値
     
-    BOOL    m_ReqAppearBottom;  // 下から出現要求
-    int     m_nBlockLevel;      // 出現ブロックレベル
+    BOOL        m_ReqAppearUpper;   // 上から出現要求
+    BOOL        m_ReqAppearBottom;  // 下から出現要求
+    int         m_nBlockLevel;      // 出現ブロックレベル
+    ReqBlock    m_ReqParamUpper;    // 上から出現要求のパラメータ
+    ReqBlock    m_ReqParamBottom;   // 下から出現要求のパラメータ
     
     int     m_nLevel;           // 現在のレベル
     
