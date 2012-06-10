@@ -43,9 +43,7 @@
     AsciiFont*      fontGameover;
     AsciiFont*      fontLevelup;
     AsciiFont*      fontLevel;
-    AsciiFont*      fontTest;
-    AsciiFont*      fontTest2;
-    AsciiFont*      fontTest3;
+    AsciiFont*      fontTurn;
     
     TokenManager*   mgrBlock;
     TokenManager*   mgrBezierEffect;
@@ -81,9 +79,7 @@
 @property (nonatomic, retain)AsciiFont*         fontGameover;
 @property (nonatomic, retain)AsciiFont*         fontLevelup;
 @property (nonatomic, retain)AsciiFont*         fontLevel;
-@property (nonatomic, retain)AsciiFont*         fontTest;
-@property (nonatomic, retain)AsciiFont*         fontTest2;
-@property (nonatomic, retain)AsciiFont*         fontTest3;
+@property (nonatomic, retain)AsciiFont*         fontTurn;
 
 @property (nonatomic, retain)TokenManager*      mgrBlock;
 @property (nonatomic, retain)TokenManager*      mgrBezierEffect;

@@ -94,6 +94,7 @@ enum eTouchState {
         m_Queue.push(Math_RandInt(2, m_nBlockLevel));
     }
     
+    m_nTurn = 0;
     
     return self;
 }
@@ -175,12 +176,12 @@ enum eTouchState {
 // タッチ座標をチップ座標に変換する
 - (int)touchToChip:(float)p {
     
-    int s = BLOCK_SIZE/2;
-    if (p < FIELD_OFS_X - s || p > FIELD_OFS_X + FIELD_BLOCK_COUNT_X * BLOCK_SIZE - s) {
-        
-        // 非選択状態にする
-        //m_TouchState = eTouchState_Standby;
-    }
+//    int s = BLOCK_SIZE/2;
+//    if (p < FIELD_OFS_X - s || p > FIELD_OFS_X + FIELD_BLOCK_COUNT_X * BLOCK_SIZE - s) {
+//        
+//        // 非選択状態にする
+//        m_TouchState = eTouchState_Standby;
+//    }
     
     if (m_TouchY > 320) {
         
@@ -438,6 +439,15 @@ enum eTouchState {
  * 操作ブロック出現
  */
 - (void)_updateAppearBlock {
+    
+    {
+        // ターン数を加算
+        m_nTurn++;
+        
+        AsciiFont* font = [SceneMain sharedInstance].fontTurn;
+        [font setText:[NSString stringWithFormat:@"Turn:%d", m_nTurn]];
+        
+    }
     
     // ブロック追加
     [self _pushBlockNext];

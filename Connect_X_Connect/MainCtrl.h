@@ -46,6 +46,8 @@
     
     SimpleQueue m_Queue;        // 次に出現するブロックの管理キュー
     
+    int     m_nTurn;            // 経過ターン数
+    
 }
 
 @property (nonatomic, retain)Layer2D* layerVanish;

@@ -45,10 +45,7 @@ static SceneMain* scene_ = nil;
 @synthesize fontGameover;
 @synthesize fontLevelup;
 @synthesize fontLevel;
-
-@synthesize fontTest;
-@synthesize fontTest2;
-@synthesize fontTest3;
+@synthesize fontTurn;
 
 @synthesize mgrBlock;
 @synthesize mgrBezierEffect;
@@ -110,23 +107,10 @@ static SceneMain* scene_ = nil;
     
     // 描画関連
     
-    self.fontTest = [AsciiFont node];
-    [self.fontTest createFont:self.baseLayer length:24];
-    [self.fontTest setScale:3];
-    [self.fontTest setPos:5 y:16];
-    [self.fontTest setVisible:NO];
-    
-    self.fontTest2 = [AsciiFont node];
-    [self.fontTest2 createFont:self.baseLayer length:24];
-    [self.fontTest2 setScale:3];
-    [self.fontTest2 setPos:5 y:13];
-    [self.fontTest2 setVisible:NO];
-    
-    self.fontTest3 = [AsciiFont node];
-    [self.fontTest3 createFont:self.baseLayer length:24];
-    [self.fontTest3 setScale:3];
-    [self.fontTest3 setPos:5 y:10];
-    [self.fontTest3 setVisible:NO];
+    self.fontTurn = [AsciiFont node];
+    [self.fontTurn createFont:self.baseLayer length:12];
+    [self.fontTurn setScale:2];
+    [self.fontTurn setPos:4 y:56];
     
     self.fontGameover = [AsciiFont node];
     [self.fontGameover createFont:self.baseLayer length:24];
@@ -261,10 +245,10 @@ static SceneMain* scene_ = nil;
     self.mgrBlock = nil;
     
     // フォント
+    self.fontTurn = nil;
     self.fontLevel = nil;
     self.fontLevelup = nil;
     self.fontGameover = nil;
-    self.fontTest = nil;
     
     self.interfaceLayer = nil;
     
