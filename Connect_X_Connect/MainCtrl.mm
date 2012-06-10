@@ -29,6 +29,7 @@ enum eState {
     eState_DamageCheck,         // ダメージチェック
     eState_DamageExec,          // ダメージ実行
     eState_WinLoseCheck,        // 勝敗チェック
+    eState_EnemyAI,             // 敵のAI実行
     eState_Win,                 // 勝利演出
     eState_Lose,                // 敗北演出
     eState_Gameover,            // ゲームオーバー
@@ -124,6 +125,7 @@ enum eTouchState {
         case eState_DamageCheck: { return @"DamageCheck"; }         // ダメージチェック
         case eState_DamageExec: { return @"DamageExec"; }          // ダメージ実行
         case eState_WinLoseCheck: { return @"WinLoseCheck"; }        // 勝敗チェック
+        case eState_EnemyAI: { return @"EnemyAI"; } // 敵のAI実行
         case eState_Win: { return @"Win"; }                 // 勝利演出
         case eState_Lose: { return @"Lose"; }                // 敗北演出
         case eState_Gameover: { return @"Gameover"; }            // ゲームオーバー
@@ -819,6 +821,13 @@ enum eTouchState {
 }
 
 /**
+ * 更新・敵のAI実行
+ */
+- (void)_updateEnemyAI {
+    
+}
+
+/**
  * 更新・勝利演出
  */
 - (void)_updateWin {
@@ -870,6 +879,8 @@ enum eTouchState {
     
     if (m_TouchState == eTouchState_Release) {
         
+        
+        // TODO: テスト用に無限プレイ
         [[SceneMain sharedInstance].fontGameover setVisible:NO];
         
         // すべて消す
@@ -972,6 +983,10 @@ enum eTouchState {
             
         case eState_WinLoseCheck:
             [self _updateWinLoseCheck];
+            break;
+            
+        case eState_EnemyAI:
+            [self _updateEnemyAI];
             break;
             
         case eState_Win:
