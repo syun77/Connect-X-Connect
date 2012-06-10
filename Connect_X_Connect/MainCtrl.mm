@@ -348,6 +348,26 @@ enum eTouchState {
  */
 - (void)_updateAppearBottomCheck {
     
+    if (m_ReqParam.isRequest()) {
+        
+        // 落下リクエストあり
+        int number = Math_RandInt(2, m_nBlockLevel);
+        int x = Math_Rand(FIELD_BLOCK_COUNT_X);
+        Block* b = [Block addFromChip:number chipX:x chipY:FIELD_BLOCK_COUNT_Y];
+        if (b) {
+            [b setShield:1];
+        }
+        
+        // 落下要求を送る
+        [BlockMgr requestFall];
+        
+        // 落下状態へ遷移
+        [self _changeState:eState_Fall];
+        
+        return;
+        
+    }
+    
     if (m_ReqAppearBottom == NO) {
         
         // 出現要求なし
@@ -807,16 +827,8 @@ enum eTouchState {
     // 連鎖回数などを初期化
     [self _initChain];
     
-    // ブロック出現 (下) チェック
-    [self _changeState:eState_AppearBottomCheck];
-//    // 待機状態にする
-//    [BlockMgr changeStandbyAll];
-//    
-//    // 落下要求を送る
-//    [BlockMgr requestFall];
-//    
-//    // 落下状態へ遷移
-//    [self _changeState:eState_Fall];
+    // 敵のAI実行へ
+    [self _changeState:eState_EnemyAI];
     
 }
 
@@ -824,6 +836,15 @@ enum eTouchState {
  * 更新・敵のAI実行
  */
 - (void)_updateEnemyAI {
+    
+    // お邪魔ブロック出現
+    m_ReqParam.clear();
+    if (Math_Rand(2) == 0) {
+        m_ReqParam.setUpper(1);
+    }
+    
+    // ブロック出現 (下) チェック
+    [self _changeState:eState_AppearBottomCheck];
     
 }
 

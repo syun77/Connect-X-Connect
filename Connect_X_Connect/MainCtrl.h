@@ -38,8 +38,7 @@
     BOOL        m_ReqAppearUpper;   // 上から出現要求
     BOOL        m_ReqAppearBottom;  // 下から出現要求
     int         m_nBlockLevel;      // 出現ブロックレベル
-    ReqBlock    m_ReqParamUpper;    // 上から出現要求のパラメータ
-    ReqBlock    m_ReqParamBottom;   // 下から出現要求のパラメータ
+    ReqBlock    m_ReqParam;    // 出現要求のパラメータ
     
     int     m_nLevel;           // 現在のレベル
     
