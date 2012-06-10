@@ -387,22 +387,11 @@ enum eTouchState {
     }
 }
 
-- (AsciiFont*)_getNextBlockFont:(int)idx {
-    
-    SceneMain* scene = [SceneMain sharedInstance];
-    switch (idx) {
-        case 0:
-            return scene.fontNextBlock1;
-            
-        case 1:
-            return scene.fontNextBlock2;
-        
-        case 2:
-        default:
-            return scene.fontNextBlock3;
-    }
-}
-
+/**
+ * インデックスに対応する次のブロックを取得する
+ * @param idx インデックス
+ * @return 次のブロック
+ */
 - (BlockNext*)_getNextBlock:(int)idx {
     
     SceneMain* scene = [SceneMain sharedInstance];

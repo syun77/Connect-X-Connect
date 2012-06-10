@@ -45,9 +45,6 @@ static SceneMain* scene_ = nil;
 @synthesize fontGameover;
 @synthesize fontLevelup;
 @synthesize fontLevel;
-@synthesize fontNextBlock1;
-@synthesize fontNextBlock2;
-@synthesize fontNextBlock3;
 
 @synthesize fontTest;
 @synthesize fontTest2;
@@ -154,30 +151,6 @@ static SceneMain* scene_ = nil;
     [self.fontLevel setAlign:eFontAlign_Center];
     [self.fontLevel setText:@"Lv"];
     [self.fontLevel setVisible:NO];
-    
-    self.fontNextBlock1 = [AsciiFont node];
-    [self.fontNextBlock1 createFont:self.baseLayer length:2];
-    [self.fontNextBlock1 setScale:3];
-    [self.fontNextBlock1 setPos:20 y:43];
-    [self.fontNextBlock1 setAlign:eFontAlign_Center];
-    [self.fontNextBlock1 setText:@""];
-    [self.fontNextBlock1 setVisible:NO];
-    
-    self.fontNextBlock2 = [AsciiFont node];
-    [self.fontNextBlock2 createFont:self.baseLayer length:2];
-    [self.fontNextBlock2 setScale:2];
-    [self.fontNextBlock2 setPos:20 y:46];
-    [self.fontNextBlock2 setAlign:eFontAlign_Center];
-    [self.fontNextBlock2 setText:@""];
-    [self.fontNextBlock2 setVisible:NO];
-    
-    self.fontNextBlock3 = [AsciiFont node];
-    [self.fontNextBlock3 createFont:self.baseLayer length:2];
-    [self.fontNextBlock3 setScale:1];
-    [self.fontNextBlock3 setPos:20 y:48];
-    [self.fontNextBlock3 setAlign:eFontAlign_Center];
-    [self.fontNextBlock3 setText:@""];
-    [self.fontNextBlock3 setVisible:NO];
     
     self.mgrBlock = [TokenManager node];
     [self.mgrBlock setPrio:ePrio_Block];
@@ -288,9 +261,6 @@ static SceneMain* scene_ = nil;
     self.mgrBlock = nil;
     
     // フォント
-    self.fontNextBlock3 = nil;
-    self.fontNextBlock2 = nil;
-    self.fontNextBlock1 = nil;
     self.fontLevel = nil;
     self.fontLevelup = nil;
     self.fontGameover = nil;
