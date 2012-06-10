@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Layer2D.h"
+#import "Queue.h"
 
 /**
  * ゲームメインのコントローラー
@@ -42,6 +43,8 @@
     int     m_nConnect;         // 最大連結数 (数字)
     int     m_nVanish;          // 消去数
     int     m_nKind;            // 消去グループ数
+    
+    SimpleQueue m_Queue;        // 次に出現するブロックの管理キュー
     
 }
 
