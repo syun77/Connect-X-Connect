@@ -15,6 +15,7 @@
  */
 @interface Enemy : Token {
     
+    int m_Id;       // 敵のID
     int m_State;    // 状態
     int m_Timer;    // タイマー
     
@@ -25,6 +26,9 @@
     int m_HpMax;    // 最大HP
     
     int m_nLevel;   // 現在のレベル
+    
+    int m_nAT;      // アクティブタイムゲージ (現在値)
+    int m_dAT;      // アクティブタイムゲージ (上昇率)
 }
 
 // レベルを設定する
@@ -50,5 +54,18 @@
 
 // 死亡したかどうか
 - (BOOL)isDead;
+
+// ターン経過
+- (void)doTurn;
+
+// ターン終了
+- (void)endTurn;
+
+// 攻撃可能かどうか
+- (BOOL)isAttack;
+
+// 攻撃を実行する
+- (void)doAttack;
+
 
 @end

@@ -359,9 +359,10 @@ enum eTouchState {
             [b setShield:1];
         }
         
-        // TODO: 敵の攻撃終了
+        // 敵の攻撃終了
         m_ReqParam.clear();
-        m_bEnemyAttack = NO;
+        Enemy* enemy = [self _getEnemy];
+        [enemy endTurn];
         
         // 落下要求を送る
         [BlockMgr requestFall];
@@ -471,8 +472,9 @@ enum eTouchState {
         // ターン数を加算
         m_nTurn++;
         
-        // 敵の攻撃を可能にする
-        m_bEnemyAttack = YES;
+        // 敵のターンを進める
+        Enemy* enemy = [self _getEnemy];
+        [enemy doTurn];
         
         AsciiFont* font = [SceneMain sharedInstance].fontTurn;
         [font setText:[NSString stringWithFormat:@"Turn:%d", m_nTurn]];
@@ -845,12 +847,11 @@ enum eTouchState {
  */
 - (void)_updateEnemyAI {
     
-    if (m_bEnemyAttack) {
+    Enemy* enemy = [self _getEnemy];
+    if ([enemy isAttack]) {
         
-        // 敵の攻撃開始
-        // お邪魔ブロック出現
-        m_ReqParam.clear();
-        m_ReqParam.setUpper(Math_Rand(3)+1);
+        // 攻撃開始
+        [enemy doAttack];
     }
     
     // ブロック出現 (下) チェック
@@ -1044,6 +1045,15 @@ enum eTouchState {
 - (BOOL)isEnd {
     
     return m_State == eState_End;
+}
+
+/**
+ * ブロック落下要求を送る
+ * @param req リクエストパラメータ
+ */
+- (void)reqestBlock:(ReqBlock)req {
+    
+    m_ReqParam = req;
 }
 
 @end

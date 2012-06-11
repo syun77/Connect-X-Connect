@@ -59,4 +59,7 @@
 - (void)update:(ccTime)dt;
 - (BOOL)isEnd;
 
+// ブロック落下要求を送る
+- (void)reqestBlock:(ReqBlock)req;
+
 @end

@@ -21,6 +21,9 @@ static const int ENEMY_POS_DAMAGE = ENEMY_POS_Y-16;
 static const int TIMER_DAMAGE = 30;
 static const int TIMER_APPEAR = 30;
 
+// アクティブタイムゲージ関連
+static const int AT_MAX = 100;
+
 /**
  * 状態
  */
@@ -34,6 +37,15 @@ enum eState {
  * 敵の実装
  */
 @implementation Enemy
+
+/**
+ * コントローラー取得
+ */
+- (MainCtrl*)_getCtrl {
+    
+    return [SceneMain sharedInstance].ctrl;
+}
+
 
 /**
  * コンストラクタ
@@ -53,7 +65,11 @@ enum eState {
     [self setTexRect:r];
     [self setVisible:NO];
     
+    m_Id = 0;
     m_Hp = HP_MAX;
+    
+    m_nAT = 0;
+    m_dAT = 40;
     
     return self;
 }
@@ -274,6 +290,49 @@ enum eState {
     
     // 死亡エフェクト生成
     [Particle addDead:ENEMY_POS_X y:ENEMY_POS_Y];
+}
+
+/**
+ * ターン経過
+ */
+- (void)doTurn {
+    
+    // アクティブタイムゲージを増やす
+    m_nAT += m_dAT;
+    if (m_nAT > AT_MAX) {
+        
+        m_nAT = AT_MAX;
+    }
+}
+
+/**
+ * ターン終了
+ */
+- (void)endTurn {
+    
+    m_nAT = 0;
+}
+
+/**
+ * 攻撃可能かどうか
+ */
+- (BOOL)isAttack {
+    
+    return m_nAT >= AT_MAX;
+}
+
+/**
+ * 攻撃を実行する
+ */
+- (void)doAttack {
+    
+    MainCtrl* ctrl = [self _getCtrl];
+    
+    // TODO: とりあえず１つだけ出しておく
+    ReqBlock req;
+    req.setUpper(1);
+    
+    [ctrl reqestBlock:req];
 }
 
 @end
