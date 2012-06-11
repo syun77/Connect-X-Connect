@@ -96,6 +96,7 @@ enum eTouchState {
     }
     
     m_nTurn = 0;
+    m_bEnemyAttack = NO;
     
     return self;
 }
@@ -358,6 +359,10 @@ enum eTouchState {
             [b setShield:1];
         }
         
+        // TODO: 敵の攻撃終了
+        m_ReqParam.clear();
+        m_bEnemyAttack = NO;
+        
         // 落下要求を送る
         [BlockMgr requestFall];
         
@@ -465,6 +470,9 @@ enum eTouchState {
     {
         // ターン数を加算
         m_nTurn++;
+        
+        // 敵の攻撃を可能にする
+        m_bEnemyAttack = YES;
         
         AsciiFont* font = [SceneMain sharedInstance].fontTurn;
         [font setText:[NSString stringWithFormat:@"Turn:%d", m_nTurn]];
@@ -837,10 +845,12 @@ enum eTouchState {
  */
 - (void)_updateEnemyAI {
     
-    // お邪魔ブロック出現
-    m_ReqParam.clear();
-    if (Math_Rand(2) == 0) {
-        m_ReqParam.setUpper(1);
+    if (m_bEnemyAttack) {
+        
+        // 敵の攻撃開始
+        // お邪魔ブロック出現
+        m_ReqParam.clear();
+        m_ReqParam.setUpper(Math_Rand(3)+1);
     }
     
     // ブロック出現 (下) チェック
