@@ -14,7 +14,7 @@
 // 座標関連
 static const int ENEMY_POS_X = 320-64;
 static const int ENEMY_POS_Y = 480-80;
-static const int ENEMY_POS_LV_Y = ENEMY_POS_Y-64;
+static const int ENEMY_POS_LV_Y = ENEMY_POS_Y+64;
 static const int ENEMY_POS_DAMAGE = ENEMY_POS_Y-16;
 
 static const int ENEMY_AT_X = 320-128;
@@ -164,16 +164,16 @@ enum eState {
 - (void)visit {
     [super visit];
     
-    System_SetBlend(eBlend_Normal);
-    float x = ENEMY_AT_X;
-    float y = ENEMY_AT_Y;
-    float w = ENEMY_AT_W * [self getAtRatio];
-    
-    glColor4f(1, 0, 0, 1);
-    [self fillRectLT:x y:y w:w h:ENEMY_AT_H rot:0 scale:1];
-    glLineWidth(1);
-    glColor4f(1, 1, 1, 1);
-    [self drawRectLT:x y:y w:ENEMY_AT_W h:ENEMY_AT_H rot:0 scale:1];
+//    System_SetBlend(eBlend_Normal);
+//    float x = ENEMY_AT_X;
+//    float y = ENEMY_AT_Y;
+//    float w = ENEMY_AT_W * [self getAtRatio];
+//    
+//    glColor4f(1, 0, 0, 1);
+//    [self fillRectLT:x y:y w:w h:ENEMY_AT_H rot:0 scale:1];
+//    glLineWidth(1);
+//    glColor4f(1, 1, 1, 1);
+//    [self drawRectLT:x y:y w:ENEMY_AT_W h:ENEMY_AT_H rot:0 scale:1];
 }
 
 // -------------------------------------------------
@@ -216,6 +216,9 @@ enum eState {
     [fontLevel setPosScreen:ENEMY_POS_X y:ENEMY_POS_LV_Y];
     [fontLevel setText:[NSString stringWithFormat:@"Lv %d", m_nLevel]];
     [fontLevel setVisible:YES];
+    
+    // AT初期化
+    m_nAT = 0;
     
     // HPを初期化する
     [self initHp];

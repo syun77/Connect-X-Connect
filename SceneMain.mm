@@ -23,9 +23,9 @@ enum ePrio {
     ePrio_Enemy,        // 敵
     ePrio_RedBar,       // 危険バー
     ePrio_BlockNext,    // 次に出現するブロック
-    ePrio_Effect,       // エフェクト
     ePrio_HpGauge,      // HPゲージ
     ePrio_AtGauge,      // ATゲージ
+    ePrio_Effect,       // エフェクト
     ePrio_UI,           // ユーザインターフェース
 };
 

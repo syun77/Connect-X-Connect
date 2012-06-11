@@ -70,13 +70,40 @@ enum eState {
     const int WIDTH = 80;
     const int HEIGHT = 8;
     
-    System_SetBlend(eBlend_Add);
+    System_SetBlend(eBlend_Normal);
     
     int x = m_BaseX;
     int y = m_BaseY;
     
     float c = 0.3 * Math_SinEx(m_tPast%180);
     
+    glLineWidth(HEIGHT);
+    switch (m_State) {
+        case eState_Standby:
+        {
+            glColor4f(1-c, 0, 0, 1);
+            CGPoint origin = CGPointMake(x, y);
+            CGPoint destination = CGPointMake(x + WIDTH*m_Now, y);
+            ccDrawLine(origin, destination);
+        }
+            break;
+        
+        case eState_Increase:
+        {
+            float px1 = x + WIDTH * m_Now;
+            float px2 = px1 + WIDTH * (m_Prev - m_Now) * m_Timer / TIMER_INCREASE;
+            glColor4f(1, c, c, 1);
+            CGPoint origin = CGPointMake(x, y);
+            CGPoint destination = CGPointMake(px2, y);
+            ccDrawLine(origin, destination);
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    /*
     glLineWidth(HEIGHT);
     {
         glColor4f(1, 1, 0, 1);
@@ -87,11 +114,12 @@ enum eState {
         ccDrawLine(origin, destination);
     }
     {
-        glColor4f(0, 1-c, 0, 1);
+        glColor4f(1-c, 0, 0, 1);
         CGPoint origin = CGPointMake(x, y);
         CGPoint destination = CGPointMake(x + WIDTH*m_Now, y);
         ccDrawLine(origin, destination);
     }
+     */
     glLineWidth(1);
     {
         glColor4f(1, 1, 1, 1);
@@ -127,11 +155,13 @@ enum eState {
     m_Prev = m_Now;
     m_Now = v;
     m_Timer = TIMER_INCREASE;
+    m_State = eState_Increase;
 }
 
 // ATを設定 (ダメージ用)
 - (void)damageAt:(float)v {
     
+    m_State = eState_Decrease;
 }
 
 @end
