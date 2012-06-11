@@ -34,6 +34,7 @@
 		C783FD241577C1DA00AAACAE /* Cursor.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD231577C1DA00AAACAE /* Cursor.mm */; };
 		C783FD28157879D700AAACAE /* Grid.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD27157879D700AAACAE /* Grid.mm */; };
 		C783FD2B157917E400AAACAE /* HpGauge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD2A157917E400AAACAE /* HpGauge.mm */; };
+		C79944F01586421F00C564FC /* AtGauge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C79944EF1586421F00C564FC /* AtGauge.mm */; };
 		C79FCD4B1581B795008AA2D6 /* Chain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C79FCD4A1581B795008AA2D6 /* Chain.mm */; };
 		C79FCD4F1582ADD1008AA2D6 /* RedBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = C79FCD4E1582ADD1008AA2D6 /* RedBar.mm */; };
 		C7B9F8EC15759A080023646A /* gamecommon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7B9F8EB15759A080023646A /* gamecommon.mm */; };
@@ -212,6 +213,8 @@
 		C783FD27157879D700AAACAE /* Grid.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Grid.mm; sourceTree = "<group>"; };
 		C783FD29157917E400AAACAE /* HpGauge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HpGauge.h; sourceTree = "<group>"; };
 		C783FD2A157917E400AAACAE /* HpGauge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HpGauge.mm; sourceTree = "<group>"; };
+		C79944EE1586421F00C564FC /* AtGauge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtGauge.h; sourceTree = "<group>"; };
+		C79944EF1586421F00C564FC /* AtGauge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AtGauge.mm; sourceTree = "<group>"; };
 		C79FCD491581B795008AA2D6 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chain.h; sourceTree = "<group>"; };
 		C79FCD4A1581B795008AA2D6 /* Chain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Chain.mm; sourceTree = "<group>"; };
 		C79FCD4D1582ADD1008AA2D6 /* RedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBar.h; sourceTree = "<group>"; };
@@ -553,6 +556,8 @@
 				C783FD29157917E400AAACAE /* HpGauge.h */,
 				C783FD2A157917E400AAACAE /* HpGauge.mm */,
 				C74681421580219C00A9E70F /* Particle.h */,
+				C79944EE1586421F00C564FC /* AtGauge.h */,
+				C79944EF1586421F00C564FC /* AtGauge.mm */,
 				C74681431580219D00A9E70F /* Particle.mm */,
 				C7750C2E157C492E00F78387 /* Player.h */,
 				C7750C2F157C492E00F78387 /* Player.mm */,
@@ -1153,6 +1158,7 @@
 				C79FCD4F1582ADD1008AA2D6 /* RedBar.mm in Sources */,
 				C7295A9A15831805006A70F8 /* Queue.mm in Sources */,
 				C7295AA015843842006A70F8 /* BlockNext.mm in Sources */,
+				C79944F01586421F00C564FC /* AtGauge.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

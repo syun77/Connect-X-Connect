@@ -19,6 +19,7 @@
 #import "Cursor.h"
 #import "Grid.h"
 #import "HpGauge.h"
+#import "AtGauge.h"
 #import "BezierEffect.h"
 #import "Player.h"
 #import "Enemy.h"
@@ -54,6 +55,7 @@
     Grid*           grid;
     HpGauge*        hpGauge;
     HpGauge*        hpGaugeEnemy;
+    AtGauge*        atGauge;
     Player*         player;
     Enemy*          enemy;
     Back*           back;
@@ -89,6 +91,7 @@
 @property (nonatomic, retain)Grid*              grid;
 @property (nonatomic, retain)HpGauge*           hpGauge;
 @property (nonatomic, retain)HpGauge*           hpGaugeEnemy;
+@property (nonatomic, retain)AtGauge*           atGauge;
 @property (nonatomic, retain)Player*            player;
 @property (nonatomic, retain)Enemy*             enemy;
 @property (nonatomic, retain)Back*              back;

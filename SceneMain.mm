@@ -25,6 +25,7 @@ enum ePrio {
     ePrio_BlockNext,    // 次に出現するブロック
     ePrio_Effect,       // エフェクト
     ePrio_HpGauge,      // HPゲージ
+    ePrio_AtGauge,      // ATゲージ
     ePrio_UI,           // ユーザインターフェース
 };
 
@@ -56,6 +57,7 @@ static SceneMain* scene_ = nil;
 @synthesize grid;
 @synthesize hpGauge;
 @synthesize hpGaugeEnemy;
+@synthesize atGauge;
 @synthesize player;
 @synthesize enemy;
 @synthesize back;
@@ -163,7 +165,10 @@ static SceneMain* scene_ = nil;
     [self.baseLayer addChild:self.hpGauge z:ePrio_HpGauge];
     
     self.hpGaugeEnemy = [HpGauge node];
-    [self.baseLayer addChild:self.hpGaugeEnemy z:ePrio_HpGauge];
+//    [self.baseLayer addChild:self.hpGaugeEnemy z:ePrio_HpGauge];
+    
+    self.atGauge = [AtGauge node];
+    [self.baseLayer addChild:self.atGauge z:ePrio_AtGauge];
     
     self.player = [Player node];
     [self.baseLayer addChild:self.player z:ePrio_Player];
@@ -228,6 +233,7 @@ static SceneMain* scene_ = nil;
     self.back = nil;
     self.enemy = nil;
     self.player = nil;
+    self.atGauge = nil;
     self.hpGaugeEnemy = nil;
     self.hpGauge = nil;
     

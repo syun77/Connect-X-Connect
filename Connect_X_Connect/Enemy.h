@@ -67,5 +67,8 @@
 // 攻撃を実行する
 - (void)doAttack;
 
+// ATゲージの割合を取得する
+- (float)getAtRatio;
+
 
 @end

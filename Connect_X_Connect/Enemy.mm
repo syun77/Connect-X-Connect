@@ -17,6 +17,11 @@ static const int ENEMY_POS_Y = 480-80;
 static const int ENEMY_POS_LV_Y = ENEMY_POS_Y-64;
 static const int ENEMY_POS_DAMAGE = ENEMY_POS_Y-16;
 
+static const int ENEMY_AT_X = 320-128;
+static const int ENEMY_AT_Y = 480-120;
+static const int ENEMY_AT_W = 64;
+static const int ENEMY_AT_H = 4;
+
 // タイマー関連
 static const int TIMER_DAMAGE = 30;
 static const int TIMER_APPEAR = 30;
@@ -44,6 +49,11 @@ enum eState {
 - (MainCtrl*)_getCtrl {
     
     return [SceneMain sharedInstance].ctrl;
+}
+
+- (AtGauge*)_getAtGauge {
+    
+    return [SceneMain sharedInstance].atGauge;
 }
 
 
@@ -148,6 +158,24 @@ enum eState {
     
 }
 
+/**
+ * ATゲージの描画
+ */
+- (void)visit {
+    [super visit];
+    
+    System_SetBlend(eBlend_Normal);
+    float x = ENEMY_AT_X;
+    float y = ENEMY_AT_Y;
+    float w = ENEMY_AT_W * [self getAtRatio];
+    
+    glColor4f(1, 0, 0, 1);
+    [self fillRectLT:x y:y w:w h:ENEMY_AT_H rot:0 scale:1];
+    glLineWidth(1);
+    glColor4f(1, 1, 1, 1);
+    [self drawRectLT:x y:y w:ENEMY_AT_W h:ENEMY_AT_H rot:0 scale:1];
+}
+
 // -------------------------------------------------
 // private
 /**
@@ -205,11 +233,17 @@ enum eState {
     // TODO:
     m_Hp *= 0.1;
     
+    // HPゲージ設定
     HpGauge* hpGauge = [self _getGauge];
     [hpGauge initHp:[self getHpRatio]];
     
+    // ATゲージ設定
+    AtGauge* atGauge = [self _getAtGauge];
+    [atGauge initAt:[self getAtRatio]];
+    
     // 描画座標を設定
     [hpGauge setPos:320-32-80 y:480-128];
+    [atGauge setPos:320-32-80 y:480-128];
     [self.m_pSprite setScale:0.5];
     
     // 出現演出開始
@@ -303,6 +337,9 @@ enum eState {
         
         m_nAT = AT_MAX;
     }
+    
+    AtGauge* gauge = [self _getAtGauge];
+    [gauge setAt:[self getAtRatio]];
 }
 
 /**
@@ -333,6 +370,14 @@ enum eState {
     req.setUpper(1);
     
     [ctrl reqestBlock:req];
+}
+
+/**
+ * ATゲージの割合を取得する
+ */
+- (float)getAtRatio {
+    
+    return 1.0 * m_nAT / AT_MAX;
 }
 
 @end
