@@ -11,6 +11,7 @@
 
 // ATゲージの上昇アニメ
 static const int TIMER_INCREASE = 60;
+static const int TIMER_DECREASE = 60;
 
 /**
  * ATゲージの実装
@@ -54,7 +55,7 @@ enum eState {
             break;
             
         case eState_Increase:
-            m_Timer--;
+            m_Timer = m_Timer * 0.9;
             
             if (m_Timer < 1) {
                 m_State = eState_Standby;
@@ -62,6 +63,12 @@ enum eState {
             break;
             
         case eState_Decrease:
+            m_Timer = m_Timer * 0.9;
+            
+            if (m_Timer < 1) {
+                m_State = eState_Standby;
+            }
+            
             break;
             
         default:
@@ -119,6 +126,23 @@ enum eState {
         }
             break;
             
+        case eState_Decrease:
+            glLineWidth(HEIGHT);
+            {
+                glColor4f(1, 1, 0, 1);
+                float px1 = x + WIDTH * m_Now;
+                float px2 = px1 + WIDTH * (m_Prev - m_Now) * m_Timer / TIMER_INCREASE;
+                CGPoint origin = CGPointMake(px1, y);
+                CGPoint destination = CGPointMake(px2, y);
+                ccDrawLine(origin, destination);
+            }
+            {
+                glColor4f(1, 0, 0, 1);
+                CGPoint origin = CGPointMake(x, y);
+                CGPoint destination = CGPointMake(x + WIDTH*m_Now, y);
+                ccDrawLine(origin, destination);
+            }
+            break;
         default:
             break;
     }
@@ -182,7 +206,10 @@ enum eState {
 // ATを設定 (ダメージ用)
 - (void)damageAt:(float)v {
     
+    m_Prev = m_Now;
+    m_Now = v;
     m_State = eState_Decrease;
+    m_Timer = TIMER_DECREASE;
 }
 
 @end

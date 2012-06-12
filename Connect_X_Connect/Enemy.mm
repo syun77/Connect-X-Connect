@@ -268,11 +268,11 @@ enum eState {
  */
 - (void)initHp {
     
-    m_Hp = HP_MAX;
-    m_HpMax = HP_MAX;
+    m_HpMax = 500;
+    m_Hp = m_HpMax;
     
     // TODO:
-    m_Hp *= 0.1;
+//    m_Hp *= 0.1;
     
     // HPゲージ設定
     HpGauge* hpGauge = [self _getGauge];
@@ -336,6 +336,15 @@ enum eState {
         // ダメージ数値表示
         [FontEffect add:eFontEffect_Damage x:ENEMY_POS_X y:ENEMY_POS_DAMAGE text:[NSString stringWithFormat:@"%d", v]];
     }
+    
+    // TODO: ATゲージを減らす
+    m_nAT -= 10;
+    if (m_nAT < 0) {
+        m_nAT = 0;
+    }
+    
+    AtGauge* atGauge = [self _getAtGauge];
+    [atGauge damageAt:[self getAtRatio]];
     
     // ダメージエフェクト再生
     [Particle addDamage:ENEMY_POS_X y:ENEMY_POS_Y];
