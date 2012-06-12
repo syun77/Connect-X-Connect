@@ -11,6 +11,7 @@
 #import "BlockMgr.h"
 #import "FieldMgr.h"
 #import "Math.h"
+#import "FixedArray.h"
 
 static const int TIMER_ENEMY_VANISH = 60;
 
@@ -353,16 +354,38 @@ enum eTouchState {
         
         // 落下リクエストあり
         int number = Math_RandInt(2, m_nBlockLevel);
-        int x = Math_Rand(FIELD_BLOCK_COUNT_X);
-        Block* b = [Block addFromChip:number chipX:x chipY:FIELD_BLOCK_COUNT_Y];
-        if (b) {
-            [b setShield:1];
+        
+        // 出現位置をランダムに決める
+        FixedArray arr;
+        for (int i = 0; i < FIELD_BLOCK_COUNT_X; i++) {
+            arr.push(i);
+        }
+        arr.shuffle();
+        
+        int count = m_ReqParam.count;
+        if (count >= FIELD_BLOCK_COUNT_X) {
+            
+            count = FIELD_BLOCK_COUNT_X;
         }
         
-        // 敵の攻撃終了
-        m_ReqParam.clear();
-        Enemy* enemy = [self _getEnemy];
-        [enemy endTurn];
+        for (int i = 0; i < count; i++) {
+            int x = arr.get(i);
+            Block* b = [Block addFromChip:number chipX:x chipY:FIELD_BLOCK_COUNT_Y];
+            if (b) {
+                [b setShield:1];
+            }
+        }
+        
+        // 配置した分だけ減らす
+        m_ReqParam.count -= count;
+        if (m_ReqParam.count <= 0) {
+            
+            // 全て配置したら敵の攻撃終了
+            // 敵の攻撃終了
+            m_ReqParam.clear();
+            Enemy* enemy = [self _getEnemy];
+            [enemy endTurn];
+        }
         
         // 落下要求を送る
         [BlockMgr requestFall];

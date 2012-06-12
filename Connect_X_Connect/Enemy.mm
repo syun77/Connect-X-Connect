@@ -422,9 +422,10 @@ enum eState {
     
     MainCtrl* ctrl = [self _getCtrl];
     
-    // TODO: とりあえず１つだけ出しておく
+    // TODO
+    int cnt = Math_Rand(20) + 1;
     ReqBlock req;
-    req.setUpper(1);
+    req.setUpper(cnt);
     
     [ctrl reqestBlock:req];
 }
