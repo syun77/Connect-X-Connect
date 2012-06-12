@@ -55,8 +55,8 @@ static SceneMain* scene_ = nil;
 
 @synthesize cursor;
 @synthesize grid;
-@synthesize hpGauge;
-@synthesize hpGaugeEnemy;
+//@synthesize hpGauge;
+//@synthesize hpGaugeEnemy;
 @synthesize atGauge;
 @synthesize player;
 @synthesize enemy;
@@ -161,10 +161,10 @@ static SceneMain* scene_ = nil;
     self.grid = [Grid node];
     [self.baseLayer addChild:self.grid z:ePrio_Grid];
     
-    self.hpGauge = [HpGauge node];
-    [self.baseLayer addChild:self.hpGauge z:ePrio_HpGauge];
+//    self.hpGauge = [HpGauge node];
+//    [self.baseLayer addChild:self.hpGauge z:ePrio_HpGauge];
     
-    self.hpGaugeEnemy = [HpGauge node];
+//    self.hpGaugeEnemy = [HpGauge node];
 //    [self.baseLayer addChild:self.hpGaugeEnemy z:ePrio_HpGauge];
     
     self.atGauge = [AtGauge node];
@@ -236,8 +236,8 @@ static SceneMain* scene_ = nil;
     self.enemy = nil;
     self.player = nil;
     self.atGauge = nil;
-    self.hpGaugeEnemy = nil;
-    self.hpGauge = nil;
+//    self.hpGaugeEnemy = nil;
+//    self.hpGauge = nil;
     
     self.grid = nil;
     self.cursor = nil;

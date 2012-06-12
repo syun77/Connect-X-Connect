@@ -94,6 +94,7 @@ enum eState {
     self.m_pFont = [AsciiFont node];
     [self.m_pFont createFont:layer length:24];
     [self.m_pFont setAlign:eFontAlign_Center];
+    [self.m_pFont setScale:2];
     [self.m_pFont setPos:32 y:45];
 }
 
@@ -113,10 +114,10 @@ enum eState {
 /**
  * HPゲージの取得
  */
-- (HpGauge*)_getGauge {
-    
-    return [SceneMain sharedInstance].hpGaugeEnemy;
-}
+//- (HpGauge*)_getGauge {
+//    
+//    return [SceneMain sharedInstance].hpGaugeEnemy;
+//}
 
 - (AsciiFont*)_getFontLevel {
     return [SceneMain sharedInstance].fontLevel;
@@ -268,22 +269,23 @@ enum eState {
  */
 - (void)initHp {
     
-    m_HpMax = 500;
+    // TODO:
+    m_HpMax = 1000;
     m_Hp = m_HpMax;
     
     // TODO:
 //    m_Hp *= 0.1;
     
     // HPゲージ設定
-    HpGauge* hpGauge = [self _getGauge];
-    [hpGauge initHp:[self getHpRatio]];
+//    HpGauge* hpGauge = [self _getGauge];
+//    [hpGauge initHp:[self getHpRatio]];
     
     // ATゲージ設定
     AtGauge* atGauge = [self _getAtGauge];
     [atGauge initAt:[self getAtRatio]];
     
     // 描画座標を設定
-    [hpGauge setPos:320-32-80 y:480-128];
+//    [hpGauge setPos:320-32-80 y:480-128];
     [atGauge setPos:320-32-80 y:480-128];
     [self.m_pSprite setScale:0.5];
     [self _setFont];
@@ -310,8 +312,8 @@ enum eState {
     if (m_Hp > m_HpMax) {
         m_Hp = m_HpMax;
     }
-    HpGauge* hpGauge = [self _getGauge];
-    [hpGauge initHp:[self getHpRatio]];
+//    HpGauge* hpGauge = [self _getGauge];
+//    [hpGauge initHp:[self getHpRatio]];
     [self _setFont];
 }
 
@@ -325,8 +327,8 @@ enum eState {
         m_Hp = 0;
     }
     
-    HpGauge* hpGauge = [self _getGauge];
-    [hpGauge setHp:[self getHpRatio]];
+//    HpGauge* hpGauge = [self _getGauge];
+//    [hpGauge setHp:[self getHpRatio]];
     [self _setFont];
     
     // ダメージ演出開始

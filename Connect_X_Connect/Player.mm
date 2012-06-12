@@ -54,6 +54,7 @@ static const int TIMER_DAMAGE = 30;
     [self.m_pFont createFont:layer length:24];
     [self.m_pFont setAlign:eFontAlign_Center];
     [self.m_pFont setPos:9 y:45];
+    [self.m_pFont setScale:2];
 }
 
 /**
@@ -103,10 +104,10 @@ static const int TIMER_DAMAGE = 30;
 /**
  * HPゲージの取得
  */
-- (HpGauge*)_getGauge {
-    
-    return [SceneMain sharedInstance].hpGauge;
-}
+//- (HpGauge*)_getGauge {
+//    
+//    return [SceneMain sharedInstance].hpGauge;
+//}
 
 /**
  * フォント文字の更新
@@ -132,11 +133,11 @@ static const int TIMER_DAMAGE = 30;
     
     m_Hp = HP_MAX;
     m_HpMax = HP_MAX;
-    HpGauge* hpGauge = [self _getGauge];
-    [hpGauge initHp:[self getHpRatio]];
+//    HpGauge* hpGauge = [self _getGauge];
+//    [hpGauge initHp:[self getHpRatio]];
     
     // 描画座標を設定
-    [hpGauge setPos:32 y:480-128];
+//    [hpGauge setPos:32 y:480-128];
     [self _setFont];
 }
 
@@ -157,8 +158,8 @@ static const int TIMER_DAMAGE = 30;
     if (m_Hp > m_HpMax) {
         m_Hp = m_HpMax;
     }
-    HpGauge* hpGauge = [self _getGauge];
-    [hpGauge initHp:[self getHpRatio]];
+//    HpGauge* hpGauge = [self _getGauge];
+//    [hpGauge initHp:[self getHpRatio]];
     [self _setFont];
 }
 
@@ -172,8 +173,8 @@ static const int TIMER_DAMAGE = 30;
         m_Hp = 0;
     }
     
-    HpGauge* hpGauge = [self _getGauge];
-    [hpGauge setHp:[self getHpRatio]];
+//    HpGauge* hpGauge = [self _getGauge];
+//    [hpGauge setHp:[self getHpRatio]];
     [self _setFont];
     
     // ダメージ演出開始
