@@ -270,7 +270,7 @@ enum eState {
 - (void)initHp {
     
     // TODO:
-    m_HpMax = 1000;
+    m_HpMax = 100 + m_nLevel * 200;
     m_Hp = m_HpMax;
     
     // TODO:
@@ -340,7 +340,7 @@ enum eState {
     }
     
     // TODO: ATゲージを減らす
-    m_nAT -= 10;
+    m_nAT -= 20;
     if (m_nAT < 0) {
         m_nAT = 0;
     }
@@ -423,7 +423,7 @@ enum eState {
     MainCtrl* ctrl = [self _getCtrl];
     
     // TODO
-    int cnt = Math_Rand(20) + 1;
+    int cnt = Math_Rand(m_nLevel) + 1;
     ReqBlock req;
     req.setUpper(cnt);
     
