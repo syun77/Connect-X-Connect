@@ -212,11 +212,11 @@ enum eState {
     // HPフォントの色設定
     if ([self getHpRatio] < 0.3) {
         
-        [self.m_pFont setColor:ccc3(0xFF, 0x40, 0x40)];
+        [self.m_pFont setColor:ccc3(0xFF, 0x80, 0x80)];
     }
     else if([self getHpRatio] < 0.5) {
         
-        [self.m_pFont setColor:ccc3(0xFF, 0xFF, 0x40)];
+        [self.m_pFont setColor:ccc3(0xFF, 0xFF, 0x80)];
     }
     else {
         
