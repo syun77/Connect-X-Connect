@@ -72,6 +72,7 @@ static const int TIMER_DAMAGE = 30;
  */
 - (void)update:(ccTime)dt {
     
+    
     [self move:0];
     
     m_tPast++;
@@ -96,6 +97,20 @@ static const int TIMER_DAMAGE = 30;
         
         self._x += (m_tPast%8 < 4 ? -1 : 1) * Math_Randf(m_tDamage * 0.5);
         self._y += -m_tDamage*0.5 + Math_Randf(m_tDamage);
+    }
+    
+    // HPフォントの色設定
+    if ([self getHpRatio] < 0.3) {
+        
+        [self.m_pFont setColor:ccc3(0xFF, 0x40, 0x40)];
+    }
+    else if([self getHpRatio] < 0.5) {
+        
+        [self.m_pFont setColor:ccc3(0xFF, 0xFF, 0x40)];
+    }
+    else {
+        
+        [self.m_pFont setColor:ccc3(0xFF, 0xFF, 0xFF)];
     }
 }
 

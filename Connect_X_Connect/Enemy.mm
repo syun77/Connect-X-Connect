@@ -209,6 +209,20 @@ enum eState {
             break;
     }
     
+    // HPフォントの色設定
+    if ([self getHpRatio] < 0.3) {
+        
+        [self.m_pFont setColor:ccc3(0xFF, 0x40, 0x40)];
+    }
+    else if([self getHpRatio] < 0.5) {
+        
+        [self.m_pFont setColor:ccc3(0xFF, 0xFF, 0x40)];
+    }
+    else {
+        
+        [self.m_pFont setColor:ccc3(0xFF, 0xFF, 0xFF)];
+    }
+    
 }
 
 /**
@@ -270,7 +284,7 @@ enum eState {
 - (void)initHp {
     
     // TODO:
-    m_HpMax = 100 + m_nLevel * 200;
+    m_HpMax = 100 + m_nLevel * 10;
     m_Hp = m_HpMax;
     
     // TODO:
@@ -424,8 +438,16 @@ enum eState {
     
     // TODO
     int cnt = Math_Rand(m_nLevel) + 1;
+    
     ReqBlock req;
-    req.setUpper(cnt);
+    if (cnt < 10) {
+        
+        req.setUpperShield(cnt);
+    }
+    else {
+        
+        req.setUpper(cnt);
+    }
     
     [ctrl reqestBlock:req];
 }

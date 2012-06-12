@@ -353,7 +353,6 @@ enum eTouchState {
     if (m_ReqParam.isRequest()) {
         
         // 落下リクエストあり
-        int number = Math_RandInt(2, m_nBlockLevel);
         
         // 出現位置をランダムに決める
         FixedArray arr;
@@ -369,10 +368,15 @@ enum eTouchState {
         }
         
         for (int i = 0; i < count; i++) {
+            
+            // ブロック発生
             int x = arr.get(i);
+            int number = Math_RandInt(2, m_nBlockLevel);
             Block* b = [Block addFromChip:number chipX:x chipY:FIELD_BLOCK_COUNT_Y];
-            if (b) {
-                [b setShield:1];
+            if (m_ReqParam.nShield > 0) {
+                
+                // シールド設定
+                [b setShield:m_ReqParam.nShield];
             }
         }
         
