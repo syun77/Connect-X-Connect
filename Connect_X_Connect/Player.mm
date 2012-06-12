@@ -112,7 +112,8 @@ static const int TIMER_DAMAGE = 30;
  * フォント文字の更新
  */
 - (void)_setFont {
-    [self.m_pFont setText:[NSString stringWithFormat:@"%d/%d", m_Hp, m_HpMax]];
+//    [self.m_pFont setText:[NSString stringWithFormat:@"%d/%d", m_Hp, m_HpMax]];
+    [self.m_pFont setText:[NSString stringWithFormat:@"%d", m_Hp]];
 }
 
 // ----------------------------------------------------

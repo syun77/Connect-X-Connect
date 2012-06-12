@@ -126,7 +126,8 @@ enum eState {
  * HPフォント文字の更新
  */
 - (void)_setFont {
-    [self.m_pFont setText:[NSString stringWithFormat:@"%d/%d", m_Hp, m_HpMax]];
+//    [self.m_pFont setText:[NSString stringWithFormat:@"%d/%d", m_Hp, m_HpMax]];
+    [self.m_pFont setText:[NSString stringWithFormat:@"%d", m_Hp]];
 }
 
 // ---------------------------------------------------------
@@ -391,6 +392,8 @@ enum eState {
 - (void)endTurn {
     
     m_nAT = 0;
+    AtGauge* gauge = [self _getAtGauge];
+    [gauge initAt:0];
 }
 
 /**
