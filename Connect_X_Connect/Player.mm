@@ -45,6 +45,9 @@ static const int TIMER_DAMAGE = 30;
     return self;
 }
 
+/**
+ * フォントを登録
+ */
 - (void)attachLayer:(CCLayer *)layer {
     
     self.m_pFont = [AsciiFont node];
@@ -53,6 +56,9 @@ static const int TIMER_DAMAGE = 30;
     [self.m_pFont setPos:9 y:45];
 }
 
+/**
+ * デストラクタ
+ */
 - (void)dealloc {
     
     self.m_pFont = nil;
@@ -102,6 +108,9 @@ static const int TIMER_DAMAGE = 30;
     return [SceneMain sharedInstance].hpGauge;
 }
 
+/**
+ * フォント文字の更新
+ */
 - (void)_setFont {
     [self.m_pFont setText:[NSString stringWithFormat:@"%d/%d", m_Hp, m_HpMax]];
 }

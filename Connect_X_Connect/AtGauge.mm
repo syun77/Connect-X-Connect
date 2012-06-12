@@ -90,23 +90,21 @@ enum eState {
     int x = m_BaseX;
     int y = m_BaseY;
     
-    float c = 0.3 * Math_SinEx(m_tPast%180);
+    float c = 0;
+    if (m_Now == m_Max) {
+        
+        c = 0.5 * Math_SinEx((m_tPast*3)%180);
+    }
     
     glLineWidth(HEIGHT);
     switch (m_State) {
         case eState_Standby:
         {
-            glColor4f(1, 0, 0, 1);
+            glColor4f(1, c, c, 1);
             CGPoint origin = CGPointMake(x, y);
             CGPoint destination = CGPointMake(x + WIDTH*m_Now, y);
             ccDrawLine(origin, destination);
             
-            if (m_Now == m_Max) {
-                
-                float a = 0.5 * Math_SinEx((m_tPast*3)%180);
-                glColor4f(a, a, a, a);
-                ccDrawLine(origin, destination);
-            }
         }
             break;
         
@@ -114,7 +112,7 @@ enum eState {
         {
             float px1 = x + WIDTH * m_Now;
             float px2 = px1 + WIDTH * (m_Prev - m_Now) * m_Timer / TIMER_INCREASE;
-            glColor4f(1, c, c, 1);
+            glColor4f(1, 0, 0, 1);
             CGPoint origin = CGPointMake(x, y);
             CGPoint destination = CGPointMake(px2, y);
             ccDrawLine(origin, destination);

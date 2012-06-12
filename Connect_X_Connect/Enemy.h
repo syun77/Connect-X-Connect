@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Token.h"
+#import "AsciiFont.h"
 
 /**
  * 敵クラス
  */
 @interface Enemy : Token {
+    
+    AsciiFont* m_pFont;
     
     int m_Id;       // 敵のID
     int m_State;    // 状態
@@ -30,6 +33,8 @@
     int m_nAT;      // アクティブタイムゲージ (現在値)
     int m_dAT;      // アクティブタイムゲージ (上昇率)
 }
+
+@property (nonatomic, retain)AsciiFont* m_pFont;
 
 // レベルを設定する
 - (void)setLevel:(int)lv;

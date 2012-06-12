@@ -43,6 +43,8 @@ enum eState {
  */
 @implementation Enemy
 
+@synthesize m_pFont;
+
 /**
  * コントローラー取得
  */
@@ -84,6 +86,55 @@ enum eState {
     return self;
 }
 
+/**
+ * フォントを登録
+ */
+- (void)attachLayer:(CCLayer *)layer {
+    
+    self.m_pFont = [AsciiFont node];
+    [self.m_pFont createFont:layer length:24];
+    [self.m_pFont setAlign:eFontAlign_Center];
+    [self.m_pFont setPos:32 y:45];
+}
+
+/**
+ * デストラクタ
+ */
+- (void)dealloc {
+    
+    self.m_pFont = nil;
+    
+    [super dealloc];
+}
+
+// ---------------------------------------------------------
+// private
+
+/**
+ * HPゲージの取得
+ */
+- (HpGauge*)_getGauge {
+    
+    return [SceneMain sharedInstance].hpGaugeEnemy;
+}
+
+- (AsciiFont*)_getFontLevel {
+    return [SceneMain sharedInstance].fontLevel;
+}
+
+/**
+ * HPフォント文字の更新
+ */
+- (void)_setFont {
+    [self.m_pFont setText:[NSString stringWithFormat:@"%d/%d", m_Hp, m_HpMax]];
+}
+
+// ---------------------------------------------------------
+// update
+
+/**
+ * 更新・出現
+ */
 - (void)_updateAppear {
     
     [self setVisible:YES];
@@ -176,20 +227,6 @@ enum eState {
 //    [self drawRectLT:x y:y w:ENEMY_AT_W h:ENEMY_AT_H rot:0 scale:1];
 }
 
-// -------------------------------------------------
-// private
-/**
- * HPゲージの取得
- */
-- (HpGauge*)_getGauge {
-    
-    return [SceneMain sharedInstance].hpGaugeEnemy;
-}
-
-- (AsciiFont*)_getFontLevel {
-    return [SceneMain sharedInstance].fontLevel;
-}
-
 // ----------------------------------------------------
 // public
 
@@ -248,6 +285,7 @@ enum eState {
     [hpGauge setPos:320-32-80 y:480-128];
     [atGauge setPos:320-32-80 y:480-128];
     [self.m_pSprite setScale:0.5];
+    [self _setFont];
     
     // 出現演出開始
     m_State = eState_Appear;
@@ -273,6 +311,7 @@ enum eState {
     }
     HpGauge* hpGauge = [self _getGauge];
     [hpGauge initHp:[self getHpRatio]];
+    [self _setFont];
 }
 
 /**
@@ -287,6 +326,7 @@ enum eState {
     
     HpGauge* hpGauge = [self _getGauge];
     [hpGauge setHp:[self getHpRatio]];
+    [self _setFont];
     
     // ダメージ演出開始
     m_tDamage = TIMER_DAMAGE;
