@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Token.h"
+#import "AsciiFont.h"
 
 /**
  * プレイヤー
  */
 @interface Player : Token {
+    
+    AsciiFont*  m_pFont;
     
     int m_tPast;    // 経過時間
     int m_tDamage;  // ダメージタイマー
@@ -22,6 +25,8 @@
     int m_HpMax;    // 最大HP
     
 }
+
+@property (nonatomic, retain)AsciiFont* m_pFont;
 
 // HPを初期化する
 - (void)initHp;

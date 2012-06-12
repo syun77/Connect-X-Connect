@@ -49,8 +49,23 @@ enum eState {
     
     m_tPast++;
     
-    if(m_Timer > 0) {
-        m_Timer--;
+    switch (m_State) {
+        case eState_Standby:
+            break;
+            
+        case eState_Increase:
+            m_Timer--;
+            
+            if (m_Timer < 1) {
+                m_State = eState_Standby;
+            }
+            break;
+            
+        case eState_Decrease:
+            break;
+            
+        default:
+            break;
     }
 }
 
@@ -81,10 +96,17 @@ enum eState {
     switch (m_State) {
         case eState_Standby:
         {
-            glColor4f(1-c, 0, 0, 1);
+            glColor4f(1, 0, 0, 1);
             CGPoint origin = CGPointMake(x, y);
             CGPoint destination = CGPointMake(x + WIDTH*m_Now, y);
             ccDrawLine(origin, destination);
+            
+            if (m_Now == m_Max) {
+                
+                float a = 0.5 * Math_SinEx((m_tPast*3)%180);
+                glColor4f(a, a, a, a);
+                ccDrawLine(origin, destination);
+            }
         }
             break;
         
@@ -145,7 +167,8 @@ enum eState {
 // AT初期値の設定
 - (void)initAt:(float)v {
     
-    m_Now = v;
+    m_Now  = v;
+    m_Max  = 1;
     m_Prev = v;
 }
 

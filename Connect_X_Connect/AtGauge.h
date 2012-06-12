@@ -23,6 +23,7 @@
     int     m_Timer;    // タイマー
     float   m_Now;      // 現在のHP
     float   m_Prev;     // 以前のHP
+    float   m_Max;      // 最大値
 }
 
 // 描画座標を設定

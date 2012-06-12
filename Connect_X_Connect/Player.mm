@@ -21,6 +21,8 @@ static const int TIMER_DAMAGE = 30;
  */
 @implementation Player
 
+@synthesize m_pFont;
+
 /**
  * コンストラクタ
  */
@@ -41,6 +43,21 @@ static const int TIMER_DAMAGE = 30;
     m_Hp = HP_MAX;
     
     return self;
+}
+
+- (void)attachLayer:(CCLayer *)layer {
+    
+    self.m_pFont = [AsciiFont node];
+    [self.m_pFont createFont:layer length:24];
+    [self.m_pFont setAlign:eFontAlign_Center];
+    [self.m_pFont setPos:9 y:45];
+}
+
+- (void)dealloc {
+    
+    self.m_pFont = nil;
+    
+    [super dealloc];
 }
 
 /**
@@ -85,6 +102,10 @@ static const int TIMER_DAMAGE = 30;
     return [SceneMain sharedInstance].hpGauge;
 }
 
+- (void)_setFont {
+    [self.m_pFont setText:[NSString stringWithFormat:@"%d/%d", m_Hp, m_HpMax]];
+}
+
 // ----------------------------------------------------
 // public
 
@@ -106,6 +127,7 @@ static const int TIMER_DAMAGE = 30;
     
     // 描画座標を設定
     [hpGauge setPos:32 y:480-128];
+    [self _setFont];
 }
 
 /**
@@ -127,6 +149,7 @@ static const int TIMER_DAMAGE = 30;
     }
     HpGauge* hpGauge = [self _getGauge];
     [hpGauge initHp:[self getHpRatio]];
+    [self _setFont];
 }
 
 /**
@@ -141,6 +164,7 @@ static const int TIMER_DAMAGE = 30;
     
     HpGauge* hpGauge = [self _getGauge];
     [hpGauge setHp:[self getHpRatio]];
+    [self _setFont];
     
     // ダメージ演出開始
     m_tDamage = TIMER_DAMAGE;

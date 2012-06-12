@@ -172,9 +172,11 @@ static SceneMain* scene_ = nil;
     
     self.player = [Player node];
     [self.baseLayer addChild:self.player z:ePrio_Player];
+    [self.player attachLayer:self.baseLayer];
     
     self.enemy = [Enemy node];
     [self.baseLayer addChild:self.enemy z:ePrio_Enemy];
+    [self.enemy attachLayer:self.baseLayer];
     
     self.back = [Back node];
     [self.baseLayer addChild:self.back z:ePrio_Back];
