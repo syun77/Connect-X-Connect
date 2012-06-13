@@ -62,6 +62,7 @@ static SceneMain* scene_ = nil;
 @synthesize enemy;
 @synthesize back;
 @synthesize chain;
+@synthesize combo;
 @synthesize redbar;
 @synthesize blockNext1;
 @synthesize blockNext2;
@@ -185,6 +186,10 @@ static SceneMain* scene_ = nil;
     [self.baseLayer addChild:self.chain z:ePrio_UI];
     [self.chain attachLayer:self.baseLayer];
     
+    self.combo = [Combo node];
+    [self.baseLayer addChild:self.combo z:ePrio_UI];
+    [self.combo attachLayer:self.baseLayer];
+    
     self.redbar = [RedBar node];
     [self.baseLayer addChild:self.redbar z:ePrio_RedBar];
     
@@ -231,6 +236,7 @@ static SceneMain* scene_ = nil;
     self.blockNext2 = nil;
     self.blockNext1 = nil;
     self.redbar = nil;
+    self.combo = nil;
     self.chain = nil;
     self.back = nil;
     self.enemy = nil;

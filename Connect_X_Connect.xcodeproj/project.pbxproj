@@ -18,6 +18,7 @@
 		C70E3F4315731075009BF0CB /* Token.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F3715731075009BF0CB /* Token.mm */; };
 		C70E3F4415731075009BF0CB /* TokenManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F3915731075009BF0CB /* TokenManager.mm */; };
 		C70E3F471573118A009BF0CB /* SceneMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70E3F461573118A009BF0CB /* SceneMain.mm */; };
+		C71516AD15884FDE00266B71 /* Combo.mm in Sources */ = {isa = PBXBuildFile; fileRef = C71516AC15884FDE00266B71 /* Combo.mm */; };
 		C7295A9A15831805006A70F8 /* Queue.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7295A9915831805006A70F8 /* Queue.mm */; };
 		C7295A9D15837E6B006A70F8 /* block.png in Resources */ = {isa = PBXBuildFile; fileRef = C7295A9C15837E6A006A70F8 /* block.png */; };
 		C7295AA015843842006A70F8 /* BlockNext.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7295A9F15843842006A70F8 /* BlockNext.mm */; };
@@ -185,6 +186,8 @@
 		C70E3F3A15731075009BF0CB /* Vec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec.h; sourceTree = "<group>"; };
 		C70E3F451573118A009BF0CB /* SceneMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneMain.h; path = ../SceneMain.h; sourceTree = "<group>"; };
 		C70E3F461573118A009BF0CB /* SceneMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SceneMain.mm; path = ../SceneMain.mm; sourceTree = "<group>"; };
+		C71516AB15884FDE00266B71 /* Combo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Combo.h; sourceTree = "<group>"; };
+		C71516AC15884FDE00266B71 /* Combo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Combo.mm; sourceTree = "<group>"; };
 		C7295A9815831805006A70F8 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 		C7295A9915831805006A70F8 /* Queue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Queue.mm; sourceTree = "<group>"; };
 		C7295A9C15837E6A006A70F8 /* block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = block.png; path = Resources/block.png; sourceTree = "<group>"; };
@@ -552,6 +555,8 @@
 				C7750C27157B1D2100F78387 /* BezierEffect.mm */,
 				C79FCD491581B795008AA2D6 /* Chain.h */,
 				C79FCD4A1581B795008AA2D6 /* Chain.mm */,
+				C71516AB15884FDE00266B71 /* Combo.h */,
+				C71516AC15884FDE00266B71 /* Combo.mm */,
 				C783FD221577C1DA00AAACAE /* Cursor.h */,
 				C783FD231577C1DA00AAACAE /* Cursor.mm */,
 				C7750C31157D06E400F78387 /* Enemy.h */,
@@ -1165,6 +1170,7 @@
 				C7295AA015843842006A70F8 /* BlockNext.mm in Sources */,
 				C79944F01586421F00C564FC /* AtGauge.mm in Sources */,
 				C7C035AF1587001900DC20CF /* FixedArray.mm in Sources */,
+				C71516AD15884FDE00266B71 /* Combo.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

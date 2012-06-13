@@ -58,9 +58,10 @@ static const int BEZIEREFFECT_FRAME_MAX = 80;
  * @param nConnect  最大連結数
  * @param nKind     色数
  * @param nChain    連鎖数
+ * @param nCombo    コンボ数
  * @return スコア
  */
-int GameCommon_GetScore(int nVanish, int nConnect, int nKind, int nChain);
+int GameCommon_GetScore(int nVanish, int nConnect, int nKind, int nChain, int nCombo);
 
 
 

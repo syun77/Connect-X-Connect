@@ -41,6 +41,8 @@
     
     int     m_nLevel;           // 現在のレベル
     
+    BOOL    m_bCombo;           // コンボチェック済みフラグ
+    int     m_nCombo;           // コンボ数
     int     m_nChain;           // 連鎖回数
     int     m_nConnect;         // 最大連結数 (数字)
     int     m_nVanish;          // 消去数

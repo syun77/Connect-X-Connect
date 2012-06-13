@@ -96,6 +96,8 @@ enum eTouchState {
         m_Queue.push(Math_RandInt(2, m_nBlockLevel));
     }
     
+    m_bCombo = NO;
+    m_nCombo = 0;
     m_nTurn = 0;
     m_bEnemyAttack = NO;
     
@@ -169,6 +171,9 @@ enum eTouchState {
 }
 - (Chain*)_getChain {
     return [SceneMain sharedInstance].chain;
+}
+- (Combo*)_getCombo {
+    return [SceneMain sharedInstance].combo;
 }
 
 - (void)_initChain {
@@ -496,6 +501,7 @@ enum eTouchState {
  */
 - (void)_updateAppearBlock {
     
+    // 色々初期化
     {
         // ターン数を加算
         m_nTurn++;
@@ -509,6 +515,11 @@ enum eTouchState {
         
     }
     
+    {
+        // コンボチェック済みフラグを下げる
+        m_bCombo = NO;
+    }
+    
     // ブロック追加
     [self _pushBlockNext];
     
@@ -516,6 +527,7 @@ enum eTouchState {
     int num1 = m_Queue.pop();
     
     [self _pushBlockNext];
+    
     
     // 出現番号を保存
     m_NumberPrev = num1;
@@ -719,6 +731,14 @@ enum eTouchState {
     if (nVanish == 0) {
         
         // 消去できるものはない
+        if (m_nChain == 0) {
+            
+            // 連鎖なしでコンボ回数リセット
+            m_nCombo = 0;
+            Combo* combo = [self _getCombo];
+            [combo end];
+        }
+        
         // ダメージチェックへ
         [self _changeState:eState_DamageCheck];
         return;
@@ -729,6 +749,14 @@ enum eTouchState {
     m_nConnect = nConnect;
     m_nVanish = nVanish;
     m_nKind = nKind;
+    
+    if (m_nChain == 1) {
+        
+        // 最初の連鎖でコンボ回数を増やす
+        m_nCombo++;
+        Combo* combo = [self _getCombo];
+        [combo begin:m_nCombo];
+    }
     
     // 連鎖エフェクト表示
     Chain* chain = [self _getChain];
@@ -783,7 +811,7 @@ enum eTouchState {
     }
         
     // 敵にダメージを与える
-    int v = GameCommon_GetScore(m_nKind, m_nConnect, m_nVanish, m_nChain);
+    int v = GameCommon_GetScore(m_nKind, m_nConnect, m_nVanish, m_nChain, m_nCombo);
     Enemy* enemy = [self _getEnemy];
     [enemy damage:v];
     

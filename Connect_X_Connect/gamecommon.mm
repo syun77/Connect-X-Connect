@@ -33,17 +33,19 @@ int GameCommon_ChipYToScreenY(int chipY) {
  * @param nConnect  最大連結数
  * @param nKind     色数
  * @param nChain    連鎖数
+ * @param nCombo    コンボ数
  * @return スコア
  */
-int GameCommon_GetScore(int nVanish, int nConnect, int nKind, int nChain) {
+int GameCommon_GetScore(int nVanish, int nConnect, int nKind, int nChain, int nCombo) {
     
-    // 消去数 x 10 x (最大連結数 + 色数ボーナス + 連鎖ボーナス)
+    // 消去数 x 10 x (最大連結数 + 色数ボーナス + 連鎖ボーナス + コンボボーナス)
     int ret = 0;
     int a   = nVanish;
     int b   = 10;
     int c   = nConnect;
     int d   = nKind;
     int e   = nChain;
+    int f   = nCombo;
     
     // 連結ボーナス
     if (c <= 2) {
@@ -69,7 +71,15 @@ int GameCommon_GetScore(int nVanish, int nConnect, int nKind, int nChain) {
         e = (e - 1) * 12;
     }
     
-    ret = a * b * (c + d + e);
+    // コンボボーナス
+    if (f <= 1) {
+        f = 0;
+    }
+    else {
+        f = (f - 1) * 2;
+    }
+    
+    ret = a * b * (c + d + e + f);
     
     return ret;
 }

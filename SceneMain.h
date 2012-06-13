@@ -29,6 +29,7 @@
 #import "Chain.h"
 #import "RedBar.h"
 #import "BlockNext.h"
+#import "Combo.h"
 
 /**
  * ゲームメインのシーン
@@ -60,6 +61,7 @@
     Enemy*          enemy;
     Back*           back;
     Chain*          chain;
+    Combo*          combo;
     RedBar*         redbar;
     BlockNext*      blockNext1;
     BlockNext*      blockNext2;
@@ -96,6 +98,7 @@
 @property (nonatomic, retain)Enemy*             enemy;
 @property (nonatomic, retain)Back*              back;
 @property (nonatomic, retain)Chain*             chain;
+@property (nonatomic, retain)Combo*             combo;
 @property (nonatomic, retain)RedBar*            redbar;
 @property (nonatomic, retain)BlockNext*         blockNext1;
 @property (nonatomic, retain)BlockNext*         blockNext2;
