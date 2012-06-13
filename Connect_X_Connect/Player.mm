@@ -98,6 +98,16 @@ static const int TIMER_DAMAGE = 30;
         self._x += (m_tPast%8 < 4 ? -1 : 1) * Math_Randf(m_tDamage * 0.5);
         self._y += -m_tDamage*0.5 + Math_Randf(m_tDamage);
     }
+    else {
+        
+        if ([self isDanger] && m_tPast%48 < 24) {
+            
+            // HP危険
+            CGRect r = Exerinya_GetRect(eExerinyaRect_PlayerDamage);
+            [self setTexRect:r];
+        }
+        
+    }
     
     // HPフォントの色設定
     if ([self getHpRatio] < 0.3) {
@@ -146,8 +156,12 @@ static const int TIMER_DAMAGE = 30;
  */
 - (void)initHp {
     
+    // 表示する
+    [self setVisible:YES];
+    
     m_Hp = HP_MAX;
     m_HpMax = HP_MAX;
+    
 //    HpGauge* hpGauge = [self _getGauge];
 //    [hpGauge initHp:[self getHpRatio]];
     
@@ -222,6 +236,9 @@ static const int TIMER_DAMAGE = 30;
     
     // 死亡エフェクト生成
     [Particle addDead:PLAYER_POS_X y:PLAYER_POS_Y];
+    
+    // 非表示にする
+    [self setVisible:NO];
 }
 
 @end

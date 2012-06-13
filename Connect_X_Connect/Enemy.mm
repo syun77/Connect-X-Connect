@@ -209,8 +209,18 @@ enum eState {
             break;
     }
     
+    if ([self isDanger] && m_tPast%48 < 24) {
+        
+        // HP危険
+        [self setColor:ccc3(0xFF, 0, 0)];
+    }
+    else {
+        
+        [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
+    }
+    
     // HPフォントの色設定
-    if ([self getHpRatio] < 0.3) {
+    if ([self isDanger]) {
         
         [self.m_pFont setColor:ccc3(0xFF, 0x80, 0x80)];
     }

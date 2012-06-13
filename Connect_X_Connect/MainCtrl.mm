@@ -315,9 +315,10 @@ enum eTouchState {
     [enemy setLevel:m_nLevel];
     [enemy initialize];
     
-    [self _changeState:eState_Standby];
+    [self _changeState:eState_AppearBlock];
     
     // TODO: テスト
+    if (NO)
     {
         // 初期化に戻る
         Layer2D* layer = [FieldMgr getLayer];
@@ -842,6 +843,7 @@ enum eTouchState {
         
         // 敗北処理へ
         [self _changeState:eState_Lose];
+        [player destroy];
         return;
     }
     

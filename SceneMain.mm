@@ -117,7 +117,7 @@ static SceneMain* scene_ = nil;
     self.fontGameover = [AsciiFont node];
     [self.fontGameover createFont:self.baseLayer length:24];
     [self.fontGameover setScale:3];
-    [self.fontGameover setPos:18 y:3];
+    [self.fontGameover setPos:20 y:36];
     [self.fontGameover setAlign:eFontAlign_Center];
     [self.fontGameover setText:@"GAME OVER"];
     [self.fontGameover setVisible:NO];
