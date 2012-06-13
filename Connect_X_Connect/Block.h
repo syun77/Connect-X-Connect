@@ -18,6 +18,7 @@
     
     int         m_tPast;        // 経過時間
     int         m_nNumber;      // 数値
+    int         m_bSkull;       // ドクロかどうか
     int         m_tCursor;      // カーソルタイマー
     int         m_Timer;        // 汎用タイマー
     int         m_State;        // 状態

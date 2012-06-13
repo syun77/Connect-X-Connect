@@ -41,14 +41,6 @@ enum eState {
     
     float s = BLOCK_SIZE;
     
-    if (m_nShield == 1) {
-        
-        float px = (m_nNumber - 1) * s;
-        float py = 1 * s;
-        
-        return CGRectMake(px, py, s, s);
-    }
-    
     if (m_nShield >= 2) {
         
         float px = 10 * s;
@@ -57,9 +49,29 @@ enum eState {
         return CGRectMake(px, py, s, s);
     }
     
+    if (m_nShield == 1) {
+        
+        float px = (m_nNumber - 1) * s;
+        float py = 1 * s;
+        
+        if (m_bSkull) {
+            
+            // ドクロ
+            px = 12 * s;
+        }
+        
+        return CGRectMake(px, py, s, s);
+    }
+    
     {
         float px = (m_nNumber - 1) * s;
         float py = 0;
+        
+        if (m_bSkull) {
+            
+            // ドクロ
+            px = 12 * s;
+        }
         
         return CGRectMake(px, py, s, s);
     }
@@ -70,6 +82,7 @@ enum eState {
  * コンストラクタ
  */
 - (id)init {
+    
     self = [super init];
     if (self == nil) {
         return self;
