@@ -798,7 +798,7 @@ enum eTouchState {
                         else if([b isSkull]) {
                             
                             // ドクロなら消滅
-                            [BlockMgr requestVanish:i+dx y:i+dy];
+                            [BlockMgr requestVanish:i+dx y:j+dy];
                         }
                     }
                 }
