@@ -352,6 +352,57 @@ enum eTouchState {
 }
 
 /**
+ * 上から出現
+ */
+- (void)_appearUpper {
+    
+    // 出現位置をランダムに決める
+    FixedArray arr;
+    for (int i = 0; i < FIELD_BLOCK_COUNT_X; i++) {
+        arr.push(i);
+    }
+    arr.shuffle();
+    
+    int count = m_ReqParam.count;
+    if (count >= FIELD_BLOCK_COUNT_X) {
+        
+        count = FIELD_BLOCK_COUNT_X;
+    }
+    
+    for (int i = 0; i < count; i++) {
+        
+        // ブロック発生
+        int x = arr.get(i);
+        int number = Math_RandInt(2, m_nBlockLevel);
+        Block* b = [Block addFromChip:number chipX:x chipY:FIELD_BLOCK_COUNT_Y];
+        if (m_ReqParam.nShield > 0) {
+            
+            // シールド設定
+            [b setShield:m_ReqParam.nShield];
+        }
+        
+        float rRnd = Math_Randf(1);
+        if (rRnd < m_ReqParam.rSkull) {
+            
+            // ドクロブロック
+            [b setSkull];
+        }
+    }
+    
+    // 配置した分だけ減らす
+    m_ReqParam.count -= count;
+    if (m_ReqParam.count <= 0) {
+        
+        // 全て配置したら敵の攻撃終了
+        // 敵の攻撃終了
+        m_ReqParam.clear();
+        Enemy* enemy = [self _getEnemy];
+        [enemy endTurn];
+    }
+}
+
+
+/**
  * ブロックが下から出現 (チェック)
  */
 - (void)_updateAppearBottomCheck {
@@ -359,58 +410,54 @@ enum eTouchState {
     if (m_ReqParam.isRequest()) {
         
         // 落下リクエストあり
-        
-        // 出現位置をランダムに決める
-        FixedArray arr;
-        for (int i = 0; i < FIELD_BLOCK_COUNT_X; i++) {
-            arr.push(i);
-        }
-        arr.shuffle();
-        
-        int count = m_ReqParam.count;
-        if (count >= FIELD_BLOCK_COUNT_X) {
+        if (m_ReqParam.type == eReqBlock_Upper) {
             
-            count = FIELD_BLOCK_COUNT_X;
-        }
-        
-        for (int i = 0; i < count; i++) {
+            // 上から出現
+            [self _appearUpper];
             
-            // ブロック発生
-            int x = arr.get(i);
-            int number = Math_RandInt(2, m_nBlockLevel);
-            Block* b = [Block addFromChip:number chipX:x chipY:FIELD_BLOCK_COUNT_Y];
-            if (m_ReqParam.nShield > 0) {
-                
-                // シールド設定
-                [b setShield:m_ReqParam.nShield];
+            // 落下要求を送る
+            [BlockMgr requestFall];
+            
+            // 落下状態へ遷移
+            [self _changeState:eState_Fall];
+            
+            return;
+        
+        }
+        else { //if(m_ReqParam.type == eReqBlock_Bottom)
+            
+            // 下から出現
+//            [self _appearBottom];
+            
+            m_ReqAppearBottom = NO;
+            for(int i = 0; i < FIELD_BLOCK_COUNT_X; i++)
+            {
+                int number = Math_RandInt(1, m_nBlockLevel);
+                Block* b = [Block addFromChip:number chipX:i chipY:-1];
+                if (b) {
+                    [b setShield:1];
+                }
             }
             
-            float rRnd = Math_Randf(1);
-            if (rRnd < m_ReqParam.rSkull) {
-                
-                // ドクロブロック
-                [b setSkull];
-            }
-        }
-        
-        // 配置した分だけ減らす
-        m_ReqParam.count -= count;
-        if (m_ReqParam.count <= 0) {
+            // 要求ライン数を減らす
+            m_ReqParam.nLine--;
             
-            // 全て配置したら敵の攻撃終了
-            // 敵の攻撃終了
-            m_ReqParam.clear();
-            Enemy* enemy = [self _getEnemy];
-            [enemy endTurn];
+            if (m_ReqParam.nLine <= 0) {
+                
+                // 全て配置したら敵の攻撃終了
+                // 敵の攻撃終了
+                m_ReqParam.clear();
+                Enemy* enemy = [self _getEnemy];
+                [enemy endTurn];
+            }
+            
+            [BlockMgr changeFallWaitAll];
+            
+            [self _changeState:eState_AppearBottomExec];
+            m_Timer = 0;
+            
+            return;
         }
-        
-        // 落下要求を送る
-        [BlockMgr requestFall];
-        
-        // 落下状態へ遷移
-        [self _changeState:eState_Fall];
-        
-        return;
         
     }
     
@@ -423,21 +470,6 @@ enum eTouchState {
         return;
     }
     
-    // 下から出現
-    m_ReqAppearBottom = NO;
-    for(int i = 0; i < FIELD_BLOCK_COUNT_X; i++)
-    {
-        int number = Math_RandInt(1, m_nBlockLevel);
-        Block* b = [Block addFromChip:number chipX:i chipY:-1];
-        if (b) {
-            [b setShield:1];
-        }
-    }
-    
-    [BlockMgr changeFallWaitAll];
-    
-    [self _changeState:eState_AppearBottomExec];
-    m_Timer = 0;
 }
 
 /**

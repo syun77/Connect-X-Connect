@@ -41,7 +41,7 @@ struct ReqBlock {
     void clear()
     {
         type    = eReqBlock_None;
-        count   = 1;
+        count   = 0;
         nShield = 0;
         rSkull  = 0.0;
         nLine   = 0;
@@ -83,6 +83,27 @@ struct ReqBlock {
         this->type = eReqBlock_Upper;
         this->count = count;
         this->rSkull = 1.0f;
+    }
+    
+    /**
+     * 下から出現
+     * @param nLine 出現ライン数
+     */
+    void setBottom(int nLine)
+    {
+        this->type = eReqBlock_Bottom;
+        this->nLine = nLine;
+        this->nShield = 0;
+    }
+    
+    /**
+     * 下から出現 (固ぷよ)
+     */
+    void setBottomShield(int nLine)
+    {
+        this->type = eReqBlock_Bottom;
+        this->nLine = nLine;
+        this->nShield = 1;
     }
 };
 
