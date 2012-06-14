@@ -387,6 +387,10 @@ enum eTouchState {
             // ドクロブロック
             [b setSkull];
         }
+        
+        // 出現エフェクト生成
+        [Particle addBlockAppear:b._x y:b._y];
+        
     }
     
     // 配置した分だけ減らす

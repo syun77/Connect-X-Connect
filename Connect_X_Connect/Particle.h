@@ -19,6 +19,7 @@ enum eParticle {
     eParticle_Ring,     // 輪っか
     eParticle_Blade,    // 刃
     eParticle_Rect,     // 矩形
+    eParticle_Circle,   // 円
 };
 
 @interface Particle : Token {
@@ -45,5 +46,8 @@ enum eParticle {
 
 // シールド破壊エフェクトを生成
 + (void)addShieldBreak:(float)x y:(float)y;
+
+// ブロック出現エフェクトを生成
++ (void)addBlockAppear:(float)x y:(float)y;
 
 @end

@@ -94,6 +94,9 @@ static const int TIMER_VANISH = 48;
             }
             break;
             
+        case eParticle_Circle:
+            break;
+            
         default:
             break;
     }
@@ -141,9 +144,28 @@ static const int TIMER_VANISH = 48;
             
             break;
             
+        case eParticle_Circle:
+        {
+            float ratio = (float)(TIMER_VANISH - m_Timer) / TIMER_VANISH;
+            float val = ratio * TIMER_VANISH * 0.2f;
+            if (val < 1) {
+                val = 1;
+            }
+            m_Timer += val;
+            System_SetBlend(eBlend_Add);
+            glColor4f(1, 0, 0, ratio);
+            glLineWidth(8);
+            [self drawCircle:self._x cy:self._y radius:m_Timer];
+            glLineWidth(1);
+        }
+            break;
+            
         default:
             break;
     }
+    
+    System_SetBlend(eBlend_Normal);
+    
 }
 
 /**
@@ -275,6 +297,16 @@ static const int TIMER_VANISH = 48;
         }
     }
     
+}
+
+// ブロック出現エフェクトを生成
++ (void)addBlockAppear:(float)x y:(float)y {
+    
+    Particle* p = [Particle add:eParticle_Circle x:x y:y rot:0 speed:1];
+    
+    if (p) {
+        [p setAlpha:0xFF];
+    }
 }
 
 @end

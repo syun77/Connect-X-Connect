@@ -469,7 +469,7 @@ enum eState {
     
     // 下から出現
     cnt = Math_Rand(3) + 1;
-    req.setBottom(cnt);
+//    req.setBottom(cnt);
     
     [ctrl reqestBlock:req];
 }
