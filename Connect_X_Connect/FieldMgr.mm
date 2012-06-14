@@ -156,6 +156,13 @@
             continue;
         }
         
+        if ([b isSkull]) {
+            
+            // ドクロはそのままでは消せない
+            [layer set:x y:y val:101];
+            continue;
+        }
+        
         [layer set:x y:y val:[b getNumber]];
     }
     

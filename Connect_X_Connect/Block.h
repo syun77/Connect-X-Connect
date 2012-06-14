@@ -43,6 +43,12 @@
 // 固ぷよカウンタが有効かどうか
 - (BOOL)isShield;
 
+// ドクロブロックにする
+- (void)setSkull;
+
+// ドクロブロックかどうか
+- (BOOL)isSkull;
+
 // チップ座標の取得 (X座標)
 - (int)getChipX;
 

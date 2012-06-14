@@ -384,6 +384,12 @@ enum eTouchState {
                 // シールド設定
                 [b setShield:m_ReqParam.nShield];
             }
+            
+            if (m_ReqParam.rSkull == 1) {
+                
+                // ドクロブロック
+                [b setSkull];
+            }
         }
         
         // 配置した分だけ減らす
@@ -784,8 +790,16 @@ enum eTouchState {
                     Block* b = [BlockMgr getFromChip:i+dx chipY:j+dy];
                     if (b) {
                         
-                        // シールドを減らす
-                        [b decShield];
+                        if ([b isShield]) {
+                            
+                            // シールドを減らす
+                            [b decShield];
+                        }
+                        else if([b isSkull]) {
+                            
+                            // ドクロなら消滅
+                            [BlockMgr requestVanish:i+dx y:i+dy];
+                        }
                     }
                 }
             }

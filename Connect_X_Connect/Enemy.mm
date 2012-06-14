@@ -452,11 +452,19 @@ enum eState {
     ReqBlock req;
     if (cnt < 10) {
         
+        // シールド付きブロック
         req.setUpperShield(cnt);
     }
     else {
         
+        // 通常ブロック
         req.setUpper(cnt);
+    }
+    
+    if (Math_Rand(2) == 0) {
+        
+        // ドクロブロック
+        req.setUpperSkull(cnt);
     }
     
     [ctrl reqestBlock:req];

@@ -57,7 +57,7 @@ enum eState {
         if (m_bSkull) {
             
             // ドクロ
-            px = 12 * s;
+            px = 11 * s;
         }
         
         return CGRectMake(px, py, s, s);
@@ -70,7 +70,7 @@ enum eState {
         if (m_bSkull) {
             
             // ドクロ
-            px = 12 * s;
+            px = 11 * s;
         }
         
         return CGRectMake(px, py, s, s);
@@ -106,6 +106,8 @@ enum eState {
     m_Timer         = 0;
     m_nNumber       = 1;
     m_nShield       = 0;
+    m_bSkull        = NO;
+    
     m_ReqFall       = NO;
     m_ReqVanish     = NO;
     [self setVisible:YES];
@@ -415,6 +417,19 @@ enum eState {
 - (BOOL)isShield {
     
     return m_nShield > 0;
+}
+
+// ドクロブロックにする
+- (void)setSkull {
+    
+    m_bSkull = YES;
+    [self setTexRect:[self _getTexRect]];
+}
+
+// ドクロブロックかどうか
+- (BOOL)isSkull {
+    
+    return m_bSkull;
 }
 
 /**
