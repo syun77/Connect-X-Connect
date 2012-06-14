@@ -71,7 +71,7 @@ static const int TIMER_BEGIN = 60;
  */
 - (void)update:(ccTime)dt {
     
-    if (m_Timer > 1) {
+    if (m_Timer > 0) {
         
         m_Timer = m_Timer * 0.8;
     }
