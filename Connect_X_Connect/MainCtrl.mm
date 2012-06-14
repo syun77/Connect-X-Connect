@@ -385,7 +385,8 @@ enum eTouchState {
                 [b setShield:m_ReqParam.nShield];
             }
             
-            if (m_ReqParam.rSkull == 1) {
+            float rRnd = Math_Randf(1);
+            if (rRnd < m_ReqParam.rSkull) {
                 
                 // ドクロブロック
                 [b setSkull];

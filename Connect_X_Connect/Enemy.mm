@@ -461,7 +461,7 @@ enum eState {
         req.setUpper(cnt);
     }
     
-    if (Math_Rand(2) == 0) {
+    if (Math_Rand(1) == 0) {
         
         // ドクロブロック
         req.setUpperSkull(cnt);
