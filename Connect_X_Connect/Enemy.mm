@@ -14,7 +14,8 @@
 // 座標関連
 static const int ENEMY_POS_X = 320-64;
 static const int ENEMY_POS_Y = 480-80;
-static const int ENEMY_POS_LV_Y = ENEMY_POS_Y+64;
+static const int ENEMY_POS_LV_X = 32;
+static const int ENEMY_POS_LV_Y = 480 - 64;
 static const int ENEMY_POS_DAMAGE = ENEMY_POS_Y-16;
 
 static const int ENEMY_AT_X = 320-128;
@@ -276,7 +277,7 @@ enum eState {
     
     // レベル表示
     AsciiFont* fontLevel = [self _getFontLevel];
-    [fontLevel setPosScreen:ENEMY_POS_X y:ENEMY_POS_LV_Y];
+    [fontLevel setPosScreen:ENEMY_POS_LV_X y:ENEMY_POS_LV_Y];
     [fontLevel setText:[NSString stringWithFormat:@"Lv %d", m_nLevel]];
     [fontLevel setVisible:YES];
     
@@ -398,8 +399,8 @@ enum eState {
     [self setVisible:NO];
     
     // レベル表示を消す
-    AsciiFont* fontLevel = [self _getFontLevel];
-    [fontLevel setVisible:NO];
+//    AsciiFont* fontLevel = [self _getFontLevel];
+//    [fontLevel setVisible:NO];
     
     // 死亡エフェクト生成
     [Particle addDead:ENEMY_POS_X y:ENEMY_POS_Y];

@@ -134,9 +134,7 @@ static SceneMain* scene_ = nil;
     self.fontLevel = [AsciiFont node];
     [self.fontLevel createFont:self.baseLayer length:24];
     [self.fontLevel setScale:2];
-    [self.fontLevel setPos:24 y:36];
-    [self.fontLevel setAlign:eFontAlign_Center];
-    [self.fontLevel setText:@"Lv"];
+//    [self.fontLevel setAlign:eFontAlign_Center];
     [self.fontLevel setVisible:NO];
     
     self.mgrBlock = [TokenManager node];

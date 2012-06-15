@@ -147,14 +147,16 @@ static const int TIMER_VANISH = 48;
         case eParticle_Circle:
         {
             float ratio = (float)(TIMER_VANISH - m_Timer) / TIMER_VANISH;
-            float val = ratio * TIMER_VANISH * 0.2f;
+            float val = ratio * TIMER_VANISH * 0.1f;
             if (val < 1) {
                 val = 1;
             }
             m_Timer += val;
             System_SetBlend(eBlend_Add);
-            glColor4f(1, 0, 0, ratio);
-            glLineWidth(8);
+            float a = ratio;
+            float w = 1 + 7 * ratio;
+            glColor4f(1, 0, 0, a);
+            glLineWidth(w);
             [self drawCircle:self._x cy:self._y radius:m_Timer];
             glLineWidth(1);
         }

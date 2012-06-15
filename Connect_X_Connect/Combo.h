@@ -19,6 +19,7 @@
     AsciiFont*  m_pFont;
     AsciiFont*  m_pFont2;
     int         m_nCombo;   // コンボ数
+    int         m_State;
     int         m_Timer;
 }
 

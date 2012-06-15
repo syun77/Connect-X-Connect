@@ -9,6 +9,14 @@
 #import "Combo.h"
 
 static const int TIMER_BEGIN = 60;
+static const int TIMER_END = 60;
+
+enum eState {
+    eState_Hide,
+    eState_Appear,
+    eState_Standby,
+    eState_Disappear,
+};
 
 @implementation Combo
 
@@ -27,6 +35,8 @@ static const int TIMER_BEGIN = 60;
     [self load:@"all.png"];
     [self create];
     [self setVisible:NO];
+    
+    m_State = eState_Hide;
     
     return self;
 }
@@ -71,19 +81,53 @@ static const int TIMER_BEGIN = 60;
  */
 - (void)update:(ccTime)dt {
     
-    if (m_Timer > 0) {
-        
-        m_Timer = m_Timer * 0.8;
+    switch (m_State) {
+        case eState_Appear:
+        {
+            if (m_Timer > 0) {
+                
+                m_Timer = m_Timer * 0.8;
+            }
+            
+            float scale = 2.0 + 6.0 * m_Timer / TIMER_BEGIN;
+            [self.m_pFont setScale:scale];
+            
+            if (m_Timer < 1) {
+                
+                m_State = eState_Standby;
+            }
+        }   
+            break;
+            
+        case eState_Disappear:
+        {
+            if (m_Timer > 0) {
+                
+                m_Timer = m_Timer * 0.8;
+            }
+            
+            float scale = 2.0 * m_Timer / TIMER_END;
+            [self.m_pFont setScale:scale];
+            
+            if (m_Timer < 1) {
+                
+                [self.m_pFont setVisible:NO];
+                
+                m_State = eState_Hide;
+            }
+        }
+            break;
+            
+        default:
+            break;
     }
-    
-    float scale = 2.0 + 6.0 * m_Timer / TIMER_BEGIN;
-    [self.m_pFont setScale:scale];
 }
 
 // コンボ演出開始
 - (void)begin:(int)nCombo {
     
     m_nCombo = nCombo;
+    m_State = eState_Appear;
     m_Timer = TIMER_BEGIN;
     
     [self.m_pFont setText:[NSString stringWithFormat:@"%d", m_nCombo]];
@@ -94,7 +138,8 @@ static const int TIMER_BEGIN = 60;
 - (void)end {
     
     m_nCombo = 0;
-    [self.m_pFont setVisible:NO];
+    m_State = eState_Disappear;
+    m_Timer = TIMER_END;
     [self.m_pFont2 setVisible:NO];
 }
 
