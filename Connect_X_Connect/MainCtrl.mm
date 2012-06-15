@@ -774,6 +774,9 @@ enum eTouchState {
     if (nVanish == 0) {
         
         // 消去できるものはない
+        // 連鎖チェック完了
+        m_bChainCheck = NO;
+        
         if (m_nChain == 0) {
             
             // 連鎖なしでコンボ回数リセット
@@ -799,6 +802,9 @@ enum eTouchState {
         m_nCombo++;
         Combo* combo = [self _getCombo];
         [combo begin:m_nCombo];
+        
+        // 連鎖チェック開始
+        m_bChainCheck = YES;
     }
     
     // 連鎖エフェクト表示
@@ -844,7 +850,6 @@ enum eTouchState {
     }
     
     // 消去演出中
-//    m_State = eState_VanishExec;
     [self _changeState:eState_VanishExec];
 }
 
@@ -866,15 +871,16 @@ enum eTouchState {
     Enemy* enemy = [self _getEnemy];
     [enemy damage:v];
     
-    // 待機状態にする
-    [BlockMgr changeStandbyAll];
-    
-    // 落下要求を送る
-    [BlockMgr requestFall];
-    
-    
-    // 落下状態へ遷移
-    [self _changeState:eState_Fall];
+    [self _changeState:eState_WinLoseCheck];
+//    // 待機状態にする
+//    [BlockMgr changeStandbyAll];
+//    
+//    // 落下要求を送る
+//    [BlockMgr requestFall];
+//    
+//    
+//    // 落下状態へ遷移
+//    [self _changeState:eState_Fall];
 }
 
 /**
@@ -942,6 +948,21 @@ enum eTouchState {
         return;
     }
     
+    if (m_bChainCheck) {
+        // 連鎖チェックが必要
+        // 待機状態にする
+        [BlockMgr changeStandbyAll];
+        
+        // 落下要求を送る
+        [BlockMgr requestFall];
+        
+        
+        // 落下状態へ遷移
+        [self _changeState:eState_Fall];
+        
+        return;
+    }
+    
     // 連鎖回数などを初期化
     [self _initChain];
     
@@ -983,13 +1004,10 @@ enum eTouchState {
     
     Enemy* enemy = [self _getEnemy];
     
-    // 出現開始
+    // 敵出現開始
     [enemy setLevel:m_nLevel];
     [enemy initialize];
     
-    // TODO:
-    // ブロック出現 (下) チェック
-//    [self _changeState:eState_AppearBottomCheck];
     // 待機状態にする
     [BlockMgr changeStandbyAll];
     

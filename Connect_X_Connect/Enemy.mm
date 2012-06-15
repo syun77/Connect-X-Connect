@@ -465,7 +465,7 @@ enum eState {
     if (Math_Rand(1) == 0) {
         
         // ドクロブロック
-        req.setUpperSkull(cnt);
+        //req.setUpperSkull(cnt);
     }
     
     // 下から出現

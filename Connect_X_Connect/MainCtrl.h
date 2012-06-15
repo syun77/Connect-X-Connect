@@ -52,6 +52,7 @@
     
     int     m_nTurn;            // 経過ターン数
     BOOL    m_bEnemyAttack;     // 敵の攻撃が可能かどうか
+    BOOL    m_bChainCheck;      // 連鎖チェックが必要かどうか
     
 }
 
