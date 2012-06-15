@@ -70,6 +70,7 @@ static SceneMain* scene_ = nil;
 
 @synthesize layer;
 @synthesize ctrl;
+@synthesize blockLevel;
 
 
 /**
@@ -208,6 +209,9 @@ static SceneMain* scene_ = nil;
     self.ctrl = [MainCtrl node];
     [self.interfaceLayer addCB:self.ctrl];
     
+    // 出現ブロック管理
+    self.blockLevel = [BlockLevel node];
+    
     // 変数初期化
     m_State = eState_Init;
     m_Timer = 0;
@@ -226,6 +230,9 @@ static SceneMain* scene_ = nil;
     
     // コールバックから削除
     [self.interfaceLayer delCB];
+    
+    // 出現ブロック
+    self.blockLevel = nil;
     
     // ゲーム制御
     self.ctrl = nil;

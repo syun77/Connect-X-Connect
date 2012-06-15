@@ -85,15 +85,15 @@ enum eTouchState {
     
     m_NumberPrev = 1;
     
-    m_nBlockLevel = 5;
+    m_nBlockLevel = 1;
     
     m_nLevel = 1;
     
-    for (int i = 0; i < BLOCK_NEXT_COUNT; i++) {
-        
-        // 出現ブロックをキューに積んでおく
-        m_Queue.push(Math_RandInt(2, m_nBlockLevel));
-    }
+//    for (int i = 0; i < BLOCK_NEXT_COUNT; i++) {
+//        
+//        // 出現ブロックをキューに積んでおく
+//        m_Queue.push(Math_RandInt(2, m_nBlockLevel));
+//    }
     
     m_bCombo = NO;
     m_nCombo = 0;
@@ -173,6 +173,9 @@ enum eTouchState {
 }
 - (Combo*)_getCombo {
     return [SceneMain sharedInstance].combo;
+}
+- (BlockLevel*)_getBlockLevel {
+    return [SceneMain sharedInstance].blockLevel;
 }
 
 - (void)_initChain {
@@ -301,6 +304,17 @@ enum eTouchState {
  */
 - (void)_updateInit {
     
+    // 出現ブロック設定
+    BlockLevel* level = [self _getBlockLevel];
+    [level setLevel:m_nBlockLevel];
+    
+    for (int i = 0; i < BLOCK_NEXT_COUNT; i++) {
+        
+        // 出現ブロックをキューに積んでおく
+        m_Queue.push([level getNumber]);
+//        m_Queue.push(Math_RandInt(2, m_nBlockLevel));
+    }
+    
     // 連鎖数初期化
     [self _initChain];
     
@@ -361,11 +375,14 @@ enum eTouchState {
         count = FIELD_BLOCK_COUNT_X;
     }
     
+    BlockLevel* level = [self _getBlockLevel];
+    
     for (int i = 0; i < count; i++) {
         
         // ブロック発生
         int x = arr.get(i);
-        int number = Math_RandInt(2, m_nBlockLevel);
+//        int number = Math_RandInt(2, m_nBlockLevel);
+        int number = [level getNumber];
         Block* b = [Block addFromChip:number chipX:x chipY:FIELD_BLOCK_COUNT_Y];
         if (m_ReqParam.nShield > 0) {
             
@@ -424,10 +441,12 @@ enum eTouchState {
             
             // 下から出現
 //            [self _appearBottom];
+            BlockLevel* level = [self _getBlockLevel];
             
             for(int i = 0; i < FIELD_BLOCK_COUNT_X; i++)
             {
-                int number = Math_RandInt(1, m_nBlockLevel);
+//                int number = Math_RandInt(1, m_nBlockLevel);
+                int number = [level getNumberBottom];
                 Block* b = [Block addFromChip:number chipX:i chipY:-1];
                 if (b) {
                     [b setShield:1];
@@ -507,11 +526,14 @@ enum eTouchState {
  */
 - (void)_pushBlockNext {
     
+    BlockLevel* level = [self _getBlockLevel];
     int cnt = BLOCK_NEXT_COUNT - m_Queue.count();
+    
     // 足りない分を積んでおく
     for (int i = 0; i < cnt; i++) {
         
-        int v = Math_RandInt(2, m_nBlockLevel);
+//        int v = Math_RandInt(2, m_nBlockLevel);
+        int v = [level getNumber];
         
         m_Queue.push(v);
     }

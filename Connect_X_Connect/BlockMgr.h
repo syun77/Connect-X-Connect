@@ -14,7 +14,7 @@
  * ブロック管理クラス
  */
 @interface BlockMgr : NSObject {
-    int m_Timer;
+    int     m_Timer;
 }
 
 // 落下要求を送る

@@ -32,6 +32,7 @@
 		C7750C2D157BA9D400F78387 /* Exerinya.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C2C157BA9D400F78387 /* Exerinya.mm */; };
 		C7750C30157C492F00F78387 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C2F157C492E00F78387 /* Player.mm */; };
 		C7750C33157D06E400F78387 /* Enemy.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C32157D06E400F78387 /* Enemy.mm */; };
+		C775A890158B8B25007F5925 /* BlockLevel.mm in Sources */ = {isa = PBXBuildFile; fileRef = C775A88F158B8B25007F5925 /* BlockLevel.mm */; };
 		C783FD241577C1DA00AAACAE /* Cursor.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD231577C1DA00AAACAE /* Cursor.mm */; };
 		C783FD28157879D700AAACAE /* Grid.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD27157879D700AAACAE /* Grid.mm */; };
 		C783FD2B157917E400AAACAE /* HpGauge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C783FD2A157917E400AAACAE /* HpGauge.mm */; };
@@ -211,6 +212,8 @@
 		C7750C2F157C492E00F78387 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
 		C7750C31157D06E400F78387 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
 		C7750C32157D06E400F78387 /* Enemy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Enemy.mm; sourceTree = "<group>"; };
+		C775A88E158B8B25007F5925 /* BlockLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockLevel.h; sourceTree = "<group>"; };
+		C775A88F158B8B25007F5925 /* BlockLevel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BlockLevel.mm; sourceTree = "<group>"; };
 		C783FD221577C1DA00AAACAE /* Cursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cursor.h; sourceTree = "<group>"; };
 		C783FD231577C1DA00AAACAE /* Cursor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Cursor.mm; sourceTree = "<group>"; };
 		C783FD26157879D700AAACAE /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
@@ -530,12 +533,14 @@
 		C7B9F8F215759F240023646A /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				C7B9F8F61575A2470023646A /* BlockMgr.h */,
+				C7B9F8F71575A2470023646A /* BlockMgr.mm */,
+				C775A88E158B8B25007F5925 /* BlockLevel.h */,
+				C775A88F158B8B25007F5925 /* BlockLevel.mm */,
 				C7750C2B157BA9D400F78387 /* Exerinya.h */,
 				C7750C2C157BA9D400F78387 /* Exerinya.mm */,
 				C7B9F8F315759F4D0023646A /* FieldMgr.h */,
 				C7B9F8F415759F4D0023646A /* FieldMgr.mm */,
-				C7B9F8F61575A2470023646A /* BlockMgr.h */,
-				C7B9F8F71575A2470023646A /* BlockMgr.mm */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -1171,6 +1176,7 @@
 				C79944F01586421F00C564FC /* AtGauge.mm in Sources */,
 				C7C035AF1587001900DC20CF /* FixedArray.mm in Sources */,
 				C71516AD15884FDE00266B71 /* Combo.mm in Sources */,
+				C775A890158B8B25007F5925 /* BlockLevel.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

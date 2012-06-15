@@ -30,6 +30,7 @@
 #import "RedBar.h"
 #import "BlockNext.h"
 #import "Combo.h"
+#import "BlockLevel.h"
 
 /**
  * ゲームメインのシーン
@@ -72,6 +73,7 @@
     
     // ゲーム状態管理
     MainCtrl*       ctrl;
+    BlockLevel*     blockLevel;
     
     // 変数
     int             m_State;    // 状態
@@ -104,9 +106,10 @@
 @property (nonatomic, retain)BlockNext*         blockNext2;
 @property (nonatomic, retain)BlockNext*         blockNext3;
 
-@property (nonatomic, retain)Layer2D*   layer;
+@property (nonatomic, retain)Layer2D*           layer;
 
-@property (nonatomic, retain)MainCtrl*  ctrl;
+@property (nonatomic, retain)MainCtrl*          ctrl;
+@property (nonatomic, retain)BlockLevel*        blockLevel;
 
 + (SceneMain*)sharedInstance;
 + (void)releaseInstance;
