@@ -35,7 +35,6 @@
     
     int     m_NumberPrev;       // 出現したブロックの数値
     
-    BOOL        m_ReqAppearBottom;  // 下から出現要求
     int         m_nBlockLevel;      // 出現ブロックレベル
     ReqBlock    m_ReqParam;    // 出現要求のパラメータ
     
@@ -51,7 +50,6 @@
     SimpleQueue m_Queue;        // 次に出現するブロックの管理キュー
     
     int     m_nTurn;            // 経過ターン数
-    BOOL    m_bEnemyAttack;     // 敵の攻撃が可能かどうか
     BOOL    m_bChainCheck;      // 連鎖チェックが必要かどうか
     
 }

@@ -85,7 +85,6 @@ enum eTouchState {
     
     m_NumberPrev = 1;
     
-    m_ReqAppearBottom = NO;
     m_nBlockLevel = 5;
     
     m_nLevel = 1;
@@ -99,7 +98,7 @@ enum eTouchState {
     m_bCombo = NO;
     m_nCombo = 0;
     m_nTurn = 0;
-    m_bEnemyAttack = NO;
+    m_bChainCheck = NO;
     
     return self;
 }
@@ -184,13 +183,6 @@ enum eTouchState {
 
 // タッチ座標をチップ座標に変換する
 - (int)touchToChip:(float)p {
-    
-//    int s = BLOCK_SIZE/2;
-//    if (p < FIELD_OFS_X - s || p > FIELD_OFS_X + FIELD_BLOCK_COUNT_X * BLOCK_SIZE - s) {
-//        
-//        // 非選択状態にする
-//        m_TouchState = eTouchState_Standby;
-//    }
     
     if (m_TouchY > 320) {
         
@@ -433,7 +425,6 @@ enum eTouchState {
             // 下から出現
 //            [self _appearBottom];
             
-            m_ReqAppearBottom = NO;
             for(int i = 0; i < FIELD_BLOCK_COUNT_X; i++)
             {
                 int number = Math_RandInt(1, m_nBlockLevel);
@@ -465,14 +456,11 @@ enum eTouchState {
         
     }
     
-    if (m_ReqAppearBottom == NO) {
-        
-        // 出現要求なし
-        // ブロック出現
-        [self _changeState:eState_AppearBlock];
-        m_Timer = 0;
-        return;
-    }
+    // 出現要求なし
+    // ブロック出現
+    [self _changeState:eState_AppearBlock];
+    m_Timer = 0;
+    return;
     
 }
 
@@ -750,10 +738,6 @@ enum eTouchState {
                         nConnect = cnt;
                     }
                     
-                    // HPを増やす
-//                    int v = cnt * val / 3 + 1;
-//                    [player addHp:v];
-                    
                     // 敵にダメージを与える
                     BezierEffect* eft = [BezierEffect addFromChip:i chipY:j];
                     if (eft) {
@@ -872,15 +856,6 @@ enum eTouchState {
     [enemy damage:v];
     
     [self _changeState:eState_WinLoseCheck];
-//    // 待機状態にする
-//    [BlockMgr changeStandbyAll];
-//    
-//    // 落下要求を送る
-//    [BlockMgr requestFall];
-//    
-//    
-//    // 落下状態へ遷移
-//    [self _changeState:eState_Fall];
 }
 
 /**
