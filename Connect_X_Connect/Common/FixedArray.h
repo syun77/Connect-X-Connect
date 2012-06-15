@@ -14,6 +14,19 @@
 static const int FIXED_ARRAY_SIZE = 16;
 
 /**
+ * ソート比較関数
+ */
+inline int cmp_int_sort(const void* a, const void* b) {
+    if (*(int*)a < *(int*)b) {
+        return -1;
+    }
+    else if(*(int*)a == *(int*)b) {
+        return 0;
+    }
+    return 1;
+}
+
+/**
  * 固定長の配列
  */
 struct FixedArray {
@@ -90,6 +103,14 @@ struct FixedArray {
             m_Pool[i] = m_Pool[idx];
             m_Pool[idx] = tmp;
         }
+    }
+    
+    /**
+     * ソートする
+     */
+    void sort()
+    {
+        qsort(m_Pool, m_Ptr, sizeof(int), cmp_int_sort);
     }
     
     void dump()
