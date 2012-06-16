@@ -375,6 +375,15 @@ enum eState {
     
     // ダメージエフェクト再生
     [Particle addDamage:ENEMY_POS_X y:ENEMY_POS_Y];
+    if (v < 100) {
+        Sound_PlaySe(@"hit04.wav");
+    }
+    else if (v < 300) {
+        Sound_PlaySe(@"hit03.wav");
+    }
+    else {
+        Sound_PlaySe(@"hit05.wav");
+    }
     
 }
 
@@ -404,6 +413,9 @@ enum eState {
     
     // 死亡エフェクト生成
     [Particle addDead:ENEMY_POS_X y:ENEMY_POS_Y];
+    
+    // SE再生
+    Sound_PlaySe(@"damage3.wav");
 }
 
 /**

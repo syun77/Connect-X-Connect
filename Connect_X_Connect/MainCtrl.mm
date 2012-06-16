@@ -100,6 +100,8 @@ enum eTouchState {
     m_nTurn = 0;
     m_bChainCheck = NO;
     
+    Sound_PlayBgm(@"alyssum.mp3");
+    
     return self;
 }
 
@@ -428,6 +430,8 @@ enum eTouchState {
             // 上から出現
             [self _appearUpper];
             
+            Sound_PlaySe(@"encount.wav");
+            
             // 落下要求を送る
             [BlockMgr requestFall];
             
@@ -634,6 +638,8 @@ enum eTouchState {
         
         // 落下要求を送る
         [BlockMgr requestFall];
+        
+        Sound_PlaySe(@"sa.wav");
         
         
         // 落下状態へ遷移
@@ -855,6 +861,8 @@ enum eTouchState {
         }
     }
     
+    Sound_PlaySe(@"swing.wav");
+    
     // 消去演出中
     [self _changeState:eState_VanishExec];
 }
@@ -892,6 +900,7 @@ enum eTouchState {
         // ダメージあり
         [self _changeState:eState_DamageExec];
         
+        Sound_PlaySe(@"swing.wav");
         return;
     }
     
