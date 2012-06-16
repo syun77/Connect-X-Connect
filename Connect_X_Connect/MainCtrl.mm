@@ -143,7 +143,7 @@ enum eTouchState {
 
 - (void)_changeState:(eState)s {
     
-    NSLog(@"ChangeState %@ -> %@", [self _getState:(eState)m_State], [self _getState:s]);
+//    NSLog(@"ChangeState %@ -> %@", [self _getState:(eState)m_State], [self _getState:s]);
     
     m_StatePrev = m_State;
     m_State = s;
@@ -881,7 +881,7 @@ enum eTouchState {
     }
         
     // 敵にダメージを与える
-    int v = GameCommon_GetScore(m_nKind, m_nConnect, m_nVanish, m_nChain, m_nCombo);
+    int v = GameCommon_GetScore(m_nVanish, m_nConnect, m_nKind, m_nChain, m_nCombo);
     Enemy* enemy = [self _getEnemy];
     [enemy damage:v];
     

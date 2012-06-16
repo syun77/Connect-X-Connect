@@ -297,6 +297,7 @@ enum eState {
     // TODO:
     m_HpMax = 100 + m_nLevel * 10;
     m_Hp = m_HpMax;
+    m_bStun = NO;
     
     // TODO:
 //    m_Hp *= 0.1;
@@ -370,6 +371,9 @@ enum eState {
         m_nAT = 0;
     }
     
+    // スタンフラグを立てる
+    m_bStun = YES;
+    
     AtGauge* atGauge = [self _getAtGauge];
     [atGauge damageAt:[self getAtRatio]];
     
@@ -423,15 +427,26 @@ enum eState {
  */
 - (void)doTurn {
     
-    // アクティブタイムゲージを増やす
-    m_nAT += m_dAT;
-    if (m_nAT > AT_MAX) {
+    if (m_bStun) {
         
-        m_nAT = AT_MAX;
+        // スタン中は攻撃できない
+    }
+    else {
+        // アクティブタイムゲージを増やす
+        m_nAT += m_dAT;
+        if (m_nAT > AT_MAX) {
+            
+            m_nAT = AT_MAX;
+        }
+        
+        AtGauge* gauge = [self _getAtGauge];
+        [gauge setAt:[self getAtRatio]];
     }
     
-    AtGauge* gauge = [self _getAtGauge];
-    [gauge setAt:[self getAtRatio]];
+    
+    // スタンフラグを下げる
+    m_bStun = NO;
+ 
 }
 
 /**
@@ -448,6 +463,12 @@ enum eState {
  * 攻撃可能かどうか
  */
 - (BOOL)isAttack {
+    
+    if (m_bStun) {
+        
+        // スタン中は攻撃できない
+        return NO;
+    }
     
     return m_nAT >= AT_MAX;
 }
