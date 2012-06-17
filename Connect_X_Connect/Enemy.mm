@@ -82,7 +82,7 @@ enum eState {
     m_Hp = HP_MAX;
     
     m_nAT = 0;
-    m_dAT = 40;
+    m_dAT = 20;
     
     return self;
 }

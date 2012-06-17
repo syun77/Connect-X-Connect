@@ -44,6 +44,7 @@
 		C7516FAE158C19FA000C4BD4 /* straycat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C7516FA7158C19FA000C4BD4 /* straycat.mp3 */; };
 		C7516FB0158C1B33000C4BD4 /* encount.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7516FAF158C1B33000C4BD4 /* encount.wav */; };
 		C7516FB2158C1D08000C4BD4 /* damage3.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7516FB1158C1D08000C4BD4 /* damage3.wav */; };
+		C7516FB5158DA74E000C4BD4 /* SceneTitle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7516FB4158DA74E000C4BD4 /* SceneTitle.mm */; };
 		C7750C24157A768C00F78387 /* Vec.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C23157A768C00F78387 /* Vec.mm */; };
 		C7750C28157B1D2100F78387 /* BezierEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C27157B1D2100F78387 /* BezierEffect.mm */; };
 		C7750C2A157BA9B300F78387 /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7750C29157BA9B300F78387 /* all.png */; };
@@ -238,6 +239,8 @@
 		C7516FA7158C19FA000C4BD4 /* straycat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = straycat.mp3; path = Resources/straycat.mp3; sourceTree = "<group>"; };
 		C7516FAF158C1B33000C4BD4 /* encount.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = encount.wav; path = Resources/encount.wav; sourceTree = "<group>"; };
 		C7516FB1158C1D08000C4BD4 /* damage3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = damage3.wav; path = Resources/damage3.wav; sourceTree = "<group>"; };
+		C7516FB3158DA74E000C4BD4 /* SceneTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneTitle.h; sourceTree = "<group>"; };
+		C7516FB4158DA74E000C4BD4 /* SceneTitle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SceneTitle.mm; sourceTree = "<group>"; };
 		C7750C23157A768C00F78387 /* Vec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Vec.mm; sourceTree = "<group>"; };
 		C7750C26157B1D2100F78387 /* BezierEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierEffect.h; sourceTree = "<group>"; };
 		C7750C27157B1D2100F78387 /* BezierEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BezierEffect.mm; sourceTree = "<group>"; };
@@ -666,6 +669,8 @@
 				C7B9F8F91576D7860023646A /* MainCtrl.h */,
 				C7B9F8FA1576D7860023646A /* MainCtrl.mm */,
 				C7482A8E1584E422008EF0B9 /* ReqBlock.h */,
+				C7516FB3158DA74E000C4BD4 /* SceneTitle.h */,
+				C7516FB4158DA74E000C4BD4 /* SceneTitle.mm */,
 				C7FB2F03157289EB00FB3381 /* Resources */,
 				C7FB2F17157289EB00FB3381 /* libs */,
 				C7FB3050157289ED00FB3381 /* Supporting Files */,
@@ -1249,6 +1254,7 @@
 				C7C035AF1587001900DC20CF /* FixedArray.mm in Sources */,
 				C71516AD15884FDE00266B71 /* Combo.mm in Sources */,
 				C775A890158B8B25007F5925 /* BlockLevel.mm in Sources */,
+				C7516FB5158DA74E000C4BD4 /* SceneTitle.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
