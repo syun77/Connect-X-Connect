@@ -297,7 +297,6 @@ enum eState {
     // TODO:
     m_HpMax = 100 + m_nLevel * 10;
     m_Hp = m_HpMax;
-    m_bStun = NO;
     
     // TODO:
 //    m_Hp *= 0.1;
@@ -315,6 +314,9 @@ enum eState {
     [atGauge setPos:320-32-80 y:480-128];
     [self.m_pSprite setScale:0.5];
     [self _setFont];
+    
+    // 最初のターンを無効にする
+    m_bStun = YES;
     
     // 出現演出開始
     m_State = eState_Appear;
@@ -379,13 +381,20 @@ enum eState {
     
     // ダメージエフェクト再生
     [Particle addDamage:ENEMY_POS_X y:ENEMY_POS_Y];
-    if (v < 100) {
+    if (v < 250) {
+        // 微小ダメージ
         Sound_PlaySe(@"hit04.wav");
     }
-    else if (v < 300) {
+    else if (v < 1000) {
+        // 小ダメージ
         Sound_PlaySe(@"hit03.wav");
     }
+    else if (v < 3000) {
+        // 中ダメージ
+        Sound_PlaySe(@"hit05.wav");
+    }
     else {
+        // 大ダメージ
         Sound_PlaySe(@"hit05.wav");
     }
     
