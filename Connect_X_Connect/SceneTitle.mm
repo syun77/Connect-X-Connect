@@ -85,6 +85,7 @@ static SceneTitle* scene_ = nil;
  */
 - (void)dealloc {
     
+    
     self.m_pFont = nil;
     self.interfaceLayer = nil;
     self.baseLayer = nil;

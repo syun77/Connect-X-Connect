@@ -10,6 +10,7 @@
 #import "FieldMgr.h"
 #import "BlockMgr.h"
 #import "SceneManager.h"
+#import "AppDelegate.h"
 
 /**
  * 描画プライオリティ
@@ -96,6 +97,9 @@ static SceneMain* scene_ = nil;
  * コンストラクタ
  */
 - (id)init {
+    
+    // 広告非表示
+//    [AppDelegate setVisibleAdWhirlView:NO];
     
     self = [super init];
     if (self == nil) {
@@ -228,6 +232,8 @@ static SceneMain* scene_ = nil;
  * デストラクタ
  */
 - (void)dealloc {
+    
+    [AppDelegate setVisibleAdWhirlView:YES];
     
     // コールバックから削除
     [self.interfaceLayer delCB];

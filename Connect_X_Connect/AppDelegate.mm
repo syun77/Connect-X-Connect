@@ -20,6 +20,19 @@
 @implementation AppDelegate
 
 @synthesize window;
+@synthesize adWhirlView;
+
+// アプリケーションキーの取得
+- (NSString*)adWhirlApplicationKey {
+    
+    return @"829b9cb5c67140c687174334c9cd355a";
+}
+
+// adWhirlView の取得
+- (UIViewController*)viewControllerForPresentingModalView {
+    
+    return (UIViewController*)self.adWhirlView;
+}
 
 - (void) removeStartupFlicker
 {
@@ -89,7 +102,8 @@
 #if GAME_AUTOROTATION == kGameAutorotationUIViewController
 	[director setDeviceOrientation:kCCDeviceOrientationPortrait];
 #else
-	[director setDeviceOrientation:kCCDeviceOrientationLandscapeLeft];
+//	[director setDeviceOrientation:kCCDeviceOrientationLandscapeLeft];
+	[director setDeviceOrientation:kCCDeviceOrientationPortrait];
 #endif
 	
 	[director setAnimationInterval:1.0/60];
@@ -112,6 +126,13 @@
 	
 	// Removes the startup flicker
 	[self removeStartupFlicker];
+    
+    // adWhirl の生成
+    self.adWhirlView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
+    [self.adWhirlView setBackgroundColor:[UIColor whiteColor]];
+    
+    // viewController に登録
+    [viewController.view addSubview:self.adWhirlView];
     
     // システム初期化
     System_Init();
@@ -168,6 +189,18 @@
 	[[CCDirector sharedDirector] end];
 	[window release];
 	[super dealloc];
+}
+
+// AdWhirlView の表示・非表示を切り替え
++ (void)setVisibleAdWhirlView:(BOOL)b {
+    
+    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (b) {
+        app.adWhirlView.hidden = NO;
+    }
+    else {
+        app.adWhirlView.hidden = YES;
+    }
 }
 
 @end
