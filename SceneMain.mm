@@ -119,7 +119,8 @@ static SceneMain* scene_ = nil;
     self.fontTurn = [AsciiFont node];
     [self.fontTurn createFont:self.baseLayer length:12];
     [self.fontTurn setScale:2];
-    [self.fontTurn setPos:4 y:56];
+    [self.fontTurn setPosScreen:24 y:380];
+    [self.fontTurn setVisible:NO];
     
     self.fontGameover = [AsciiFont node];
     [self.fontGameover createFont:self.baseLayer length:24];

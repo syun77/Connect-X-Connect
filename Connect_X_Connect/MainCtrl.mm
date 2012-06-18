@@ -567,8 +567,8 @@ enum eTouchState {
         Enemy* enemy = [self _getEnemy];
         [enemy doTurn];
         
-        AsciiFont* font = [SceneMain sharedInstance].fontTurn;
-        [font setText:[NSString stringWithFormat:@"Turn:%d", m_nTurn]];
+//        AsciiFont* font = [SceneMain sharedInstance].fontTurn;
+//        [font setText:[NSString stringWithFormat:@"Turn:%d", m_nTurn]];
         
     }
     

@@ -758,6 +758,20 @@
 			path = legacy;
 			sourceTree = "<group>";
 		};
+		C799C422158F6E5300856782 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				C7889C04158F389600AAECDE /* Admob */,
+				C7889C0C158F389600AAECDE /* AdWhirl */,
+				C7FB3054157289ED00FB3381 /* AppDelegate.h */,
+				C7DBA880157313160096C068 /* AppDelegate.mm */,
+				C7FB3057157289ED00FB3381 /* RootViewController.h */,
+				C7FB3058157289ED00FB3381 /* RootViewController.m */,
+				C7FB305D157289ED00FB3381 /* GameConfig.h */,
+			);
+			name = System;
+			sourceTree = "<group>";
+		};
 		C7B9F8F215759F240023646A /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -853,13 +867,7 @@
 		C7FB2F02157289EB00FB3381 /* Connect_X_Connect */ = {
 			isa = PBXGroup;
 			children = (
-				C7889C04158F389600AAECDE /* Admob */,
-				C7889C0C158F389600AAECDE /* AdWhirl */,
-				C7FB3054157289ED00FB3381 /* AppDelegate.h */,
-				C7DBA880157313160096C068 /* AppDelegate.mm */,
-				C7FB3057157289ED00FB3381 /* RootViewController.h */,
-				C7FB3058157289ED00FB3381 /* RootViewController.m */,
-				C7FB305D157289ED00FB3381 /* GameConfig.h */,
+				C799C422158F6E5300856782 /* System */,
 				C70E3F2515731075009BF0CB /* Common */,
 				C7F1007A15746401002D7E00 /* Token */,
 				C7B9F8F215759F240023646A /* Util */,
@@ -870,11 +878,11 @@
 				C7482A8E1584E422008EF0B9 /* ReqBlock.h */,
 				C7516FB3158DA74E000C4BD4 /* SceneTitle.h */,
 				C7516FB4158DA74E000C4BD4 /* SceneTitle.mm */,
+				C7B9F8E9157488C30023646A /* gamecommon.h */,
+				C7B9F8EB15759A080023646A /* gamecommon.mm */,
 				C7FB2F03157289EB00FB3381 /* Resources */,
 				C7FB2F17157289EB00FB3381 /* libs */,
 				C7FB3050157289ED00FB3381 /* Supporting Files */,
-				C7B9F8E9157488C30023646A /* gamecommon.h */,
-				C7B9F8EB15759A080023646A /* gamecommon.mm */,
 			);
 			path = Connect_X_Connect;
 			sourceTree = "<group>";

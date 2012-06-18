@@ -13,9 +13,9 @@
 
 // 座標関連
 static const int ENEMY_POS_X = 320-64;
-static const int ENEMY_POS_Y = 480-80;
-static const int ENEMY_POS_LV_X = 32;
-static const int ENEMY_POS_LV_Y = 480 - 64;
+static const int ENEMY_POS_Y = 480-108;
+static const int ENEMY_POS_LV_X = 24;
+static const int ENEMY_POS_LV_Y = 480 - 84;
 static const int ENEMY_POS_DAMAGE = ENEMY_POS_Y-16;
 
 static const int ENEMY_AT_X = 320-128;
@@ -96,7 +96,7 @@ enum eState {
     [self.m_pFont createFont:layer length:24];
     [self.m_pFont setAlign:eFontAlign_Center];
     [self.m_pFont setScale:2];
-    [self.m_pFont setPos:32 y:45];
+    [self.m_pFont setPos:32 y:42];
 }
 
 /**

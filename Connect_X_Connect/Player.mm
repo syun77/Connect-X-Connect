@@ -12,7 +12,7 @@
 #import "FontEffect.h"
 
 static const int PLAYER_POS_X = 64;
-static const int PLAYER_POS_Y = 480 - 80;
+static const int PLAYER_POS_Y = 480 - 108;
 static const int PLAYER_POS_DAMAGE = PLAYER_POS_Y - 16;
 static const int TIMER_DAMAGE = 30;
 
@@ -53,7 +53,7 @@ static const int TIMER_DAMAGE = 30;
     self.m_pFont = [AsciiFont node];
     [self.m_pFont createFont:layer length:24];
     [self.m_pFont setAlign:eFontAlign_Center];
-    [self.m_pFont setPos:9 y:45];
+    [self.m_pFont setPos:8 y:42];
     [self.m_pFont setScale:2];
 }
 

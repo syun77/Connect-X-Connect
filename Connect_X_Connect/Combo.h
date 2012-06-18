@@ -21,6 +21,7 @@
     int         m_nCombo;   // コンボ数
     int         m_State;
     int         m_Timer;
+    int         m_tPast;
 }
 
 @property (nonatomic, retain)AsciiFont* m_pFont;

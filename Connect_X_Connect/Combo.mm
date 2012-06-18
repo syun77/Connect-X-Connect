@@ -7,6 +7,7 @@
 //
 
 #import "Combo.h"
+#import "Math.h"
 
 static const int TIMER_BEGIN = 60;
 static const int TIMER_END = 60;
@@ -49,7 +50,7 @@ enum eState {
     // フォントをアタッチ
     self.m_pFont = [AsciiFont node];
     [self.m_pFont createFont:layer length:8];
-    [self.m_pFont setPos:28 y:50];
+    [self.m_pFont setPos:25 y:50];
     [self.m_pFont setAlign:eFontAlign_Center];
     
     [self.m_pFont setVisible:NO];
@@ -57,7 +58,7 @@ enum eState {
     // フォントをアタッチ
     self.m_pFont2 = [AsciiFont node];
     [self.m_pFont2 createFont:layer length:8];
-    [self.m_pFont2 setPos:28 y:48];
+    [self.m_pFont2 setPos:25 y:48];
     [self.m_pFont2 setAlign:eFontAlign_Center];
     [self.m_pFont2 setText:@"combo"];
     
@@ -80,6 +81,8 @@ enum eState {
  * 更新
  */
 - (void)update:(ccTime)dt {
+    
+    m_tPast++;
     
     switch (m_State) {
         case eState_Appear:
@@ -115,6 +118,13 @@ enum eState {
                 
                 m_State = eState_Hide;
             }
+        }
+            break;
+            
+        case eState_Standby:
+        {
+            float scale = 2.0 + 1.0 * Math_SinEx((m_tPast*2)%180);
+            [self.m_pFont setScale:scale];
         }
             break;
             
