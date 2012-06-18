@@ -31,7 +31,7 @@
 // adWhirlView の取得
 - (UIViewController*)viewControllerForPresentingModalView {
     
-    return (UIViewController*)self.adWhirlView;
+    return viewController;
 }
 
 - (void) removeStartupFlicker
