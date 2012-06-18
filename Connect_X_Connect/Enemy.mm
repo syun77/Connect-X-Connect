@@ -11,6 +11,20 @@
 #import "Exerinya.h"
 #import "Particle.h"
 
+/**
+ * 敵の種類
+ */
+enum eEnemy {
+    eEnemy_Nasu,
+    eEnemy_Tako,
+    eEnemy_5Box,
+    eEnemy_Pudding,
+    eEnemy_Milk,
+    eEnemy_XBox,
+};
+
+#import "EnemyTbl.h"
+
 // 座標関連
 static const int ENEMY_POS_X = 320-64;
 static const int ENEMY_POS_Y = 480-108;
@@ -280,6 +294,24 @@ enum eState {
     [fontLevel setPosScreen:ENEMY_POS_LV_X y:ENEMY_POS_LV_Y];
     [fontLevel setText:[NSString stringWithFormat:@"Lv %d", m_nLevel]];
     [fontLevel setVisible:YES];
+    
+    // 敵番号取得
+    int size = sizeof(s_tbl) / sizeof(EnemyParam);
+    int dLv = (m_nLevel % size) - 1;
+    EnemyParam p = s_tbl[dLv];
+    m_Id = p.m_Id;
+    eExerinyaRect type = eExerinyaRect_Nasu;
+    switch (m_Id) {
+        case eEnemy_Nasu: { type = eExerinyaRect_Nasu; break; }
+        case eEnemy_Tako: { type = eExerinyaRect_Tako; break; }
+        case eEnemy_5Box: { type = eExerinyaRect_5Box; break; }
+        case eEnemy_Pudding : { type = eExerinyaRect_Pudding; break; }
+        case eEnemy_Milk: { type = eExerinyaRect_Milk; break; }
+        case eEnemy_XBox: { type = eExerinyaRect_XBox; break; }
+        default: { type = eExerinyaRect_Nasu; break; }
+    }
+    CGRect r = Exerinya_GetRect(type);
+    [self setTexRect:r];
     
     // AT初期化
     m_nAT = 0;

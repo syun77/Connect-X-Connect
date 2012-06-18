@@ -351,6 +351,7 @@
 		C7889C62158F398B00AAECDE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C79944EE1586421F00C564FC /* AtGauge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtGauge.h; sourceTree = "<group>"; };
 		C79944EF1586421F00C564FC /* AtGauge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AtGauge.mm; sourceTree = "<group>"; };
+		C799C424158FC7FD00856782 /* EnemyTbl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyTbl.h; sourceTree = "<group>"; };
 		C79FCD491581B795008AA2D6 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chain.h; sourceTree = "<group>"; };
 		C79FCD4A1581B795008AA2D6 /* Chain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Chain.mm; sourceTree = "<group>"; };
 		C79FCD4D1582ADD1008AA2D6 /* RedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBar.h; sourceTree = "<group>"; };
@@ -807,6 +808,7 @@
 				C783FD221577C1DA00AAACAE /* Cursor.h */,
 				C783FD231577C1DA00AAACAE /* Cursor.mm */,
 				C7750C31157D06E400F78387 /* Enemy.h */,
+				C799C424158FC7FD00856782 /* EnemyTbl.h */,
 				C7750C32157D06E400F78387 /* Enemy.mm */,
 				C746813F157D9A1400A9E70F /* FontEffect.h */,
 				C7468140157D9A1500A9E70F /* FontEffect.mm */,
