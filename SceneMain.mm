@@ -9,6 +9,7 @@
 #import "SceneMain.h"
 #import "FieldMgr.h"
 #import "BlockMgr.h"
+#import "SceneManager.h"
 
 /**
  * 描画プライオリティ
@@ -295,6 +296,10 @@ static SceneMain* scene_ = nil;
             
         default:
             break;
+    }
+    
+    if ([self.interfaceLayer isTouch]) {
+        //SceneManager_Change(@"SceneTitle");
     }
     
     //[self.fontTest setText:[NSString stringWithFormat:@"%d", s_cnt]];

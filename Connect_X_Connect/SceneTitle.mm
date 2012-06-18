@@ -72,8 +72,10 @@ static SceneTitle* scene_ = nil;
     self.m_pFont = [AsciiFont node];
     [self.m_pFont createFont:self.baseLayer length:24];
     [self.m_pFont setScale:2];
-    [self.m_pFont setPos:24 y:36];
+    [self.m_pFont setPos:4 y:36];
     [self.m_pFont setText:[NSString stringWithFormat:@"Connect X Connect"]];
+    
+    [self scheduleUpdate];
     
     return self;
 }
@@ -97,7 +99,7 @@ static SceneTitle* scene_ = nil;
     
     if ([self.interfaceLayer isTouch]) {
         
-        SceneManager_Change(@"Main");
+        SceneManager_Change(@"SceneMain");
     }
 }
 
