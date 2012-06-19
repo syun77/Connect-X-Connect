@@ -1059,7 +1059,10 @@ enum eTouchState {
     
     if (m_TouchState == eTouchState_Release) {
         
+        // おしまい
+        [self _changeState:eState_End];
         
+        /*
         // TODO: テスト用に無限プレイ
         [[SceneMain sharedInstance].fontGameover setVisible:NO];
         
@@ -1094,6 +1097,7 @@ enum eTouchState {
         
         // 落下状態へ遷移
         [self _changeState:eState_Fall];
+        */
     }
 }
 

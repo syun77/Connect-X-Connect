@@ -305,8 +305,12 @@ static SceneMain* scene_ = nil;
             if ([self.ctrl isEnd]) {
                 m_State = eState_End;
             }
+            break;
             
         case eState_End:
+            
+            // タイトル画面に戻る
+            SceneManager_Change(@"SceneTitle");
             break;
             
         default:
