@@ -168,6 +168,7 @@
         Player* player = [self _getPlayer];
         x3 = player._x;
         y3 = player._y;
+        [self setColor:ccc3(0xFF, 0, 0)];
     }
     else {
         
@@ -175,6 +176,7 @@
         Enemy* enemy = [self _getEnemy];
         x3 = enemy._x;
         y3 = enemy._y;
+        [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
     }
     
     float y1 = Math_Randf(480);
