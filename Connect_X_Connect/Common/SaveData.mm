@@ -25,7 +25,7 @@ void SaveData_Init() {
     if ([defaults boolForKey:@"INIT"]) {
         
         // 初期化済みなので何もしない
-//        return;
+        return;
     }
     
     [defaults setBool:YES forKey:@"INIT"];

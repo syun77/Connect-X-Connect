@@ -65,7 +65,7 @@
             
         case 2:
             scale = 0.4;
-            y += 40 + 30 + 25;
+            y += 40 + 30 + 20;
             break;
             
         default:

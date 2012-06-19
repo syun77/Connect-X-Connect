@@ -86,7 +86,7 @@ enum eTouchState {
     
     m_NumberPrev = 1;
     
-    m_nBlockLevel = 1;
+//    m_nBlockLevel = 1;
     
     // レベルを取得
     m_nLevel = SaveData_GetRank();
@@ -311,7 +311,8 @@ enum eTouchState {
     
     // 出現ブロック設定
     BlockLevel* level = [self _getBlockLevel];
-    [level setLevel:m_nBlockLevel];
+//    [level setLevel:m_nBlockLevel];
+    [level setLevel:m_nLevel];
     
     for (int i = 0; i < BLOCK_NEXT_COUNT; i++) {
         
@@ -960,6 +961,9 @@ enum eTouchState {
         
         // レベルを増やす
         m_nLevel++;
+        // 出現ブロック設定
+        BlockLevel* level = [self _getBlockLevel];
+        [level setLevel:m_nLevel];
         
         // オートセーブ
         SaveData_SetRankMax(m_nLevel);

@@ -35,7 +35,7 @@
     
     int     m_NumberPrev;       // 出現したブロックの数値
     
-    int         m_nBlockLevel;      // 出現ブロックレベル
+//    int         m_nBlockLevel;      // 出現ブロックレベル
     ReqBlock    m_ReqParam;    // 出現要求のパラメータ
     
     int     m_nLevel;           // 現在のレベル

@@ -325,14 +325,7 @@ enum eState {
 - (void)initHp {
     
     m_Hp = m_HpMax;
-    m_Hp = 1;
-    
-    // TODO:
-//    m_Hp *= 0.1;
-    
-    // HPゲージ設定
-//    HpGauge* hpGauge = [self _getGauge];
-//    [hpGauge initHp:[self getHpRatio]];
+//    m_Hp = 1;
     
     // ATゲージ設定
     AtGauge* atGauge = [self _getAtGauge];

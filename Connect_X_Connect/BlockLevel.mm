@@ -48,11 +48,26 @@
     
     m_Array.clear();
     
+    int d = nLevel/10;
+    if (d > 8) {
+        d = d % 9;
+        if (d < 2) {
+            d = 2;
+        }
+    }
+    
     NSString* str = nil;
     
-    switch (m_nLevel) {
+    switch (d) {
+        case 8:  { str = @"3,4,5,6"; break; }
+        case 7:  { str = @"5,6,7"; break; }
+        case 6:  { str = @"6,7,8"; break; }
+        case 5:  { str = @"4,5,6,7"; break; }
+        case 4:  { str = @"3,4,5,6"; break; }
+        case 3:  { str = @"3,4,5,6"; break; }
         case 2:  { str = @"2,3,4,5,6"; break; }
-        default: { str = @"2,3,4,5"; break; }
+        case 1:  { str = @"2,3,4,5"; break; }
+        default: { str = @"2,3,4"; break; }
     }
     
     NSArray* arr = [str componentsSeparatedByString:@","];
