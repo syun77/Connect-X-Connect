@@ -144,7 +144,8 @@
     Sound_Init();
     
     // シーン切り替え
-    SceneManager_Change(@"SceneMain");
+//    SceneManager_Change(@"SceneMain");
+    SceneManager_Change(@"SceneTitle");
 	
 }
 
