@@ -25,7 +25,7 @@ void SaveData_Init() {
     if ([defaults boolForKey:@"INIT"]) {
         
         // 初期化済みなので何もしない
-        return;
+//        return;
     }
     
     [defaults setBool:YES forKey:@"INIT"];
@@ -84,19 +84,51 @@ int SaveData_GetRank() {
 }
 
 /**
+ * ランクを保存する
+ * @param rank 難易度
+ * @return 成功したら「YES」
+ */
+BOOL SaveData_SaveRank(int rank) {
+    
+    int max = SaveData_GetRankMax();
+    
+    if (rank > max) {
+        rank = max;
+    }
+    
+    NSUserDefaults* defaults = _Get();
+    [defaults setInteger:rank forKey:@"RANK"];
+    
+    // 保存
+    [defaults synchronize];
+    
+    // 更新できた
+    return YES;
+}
+
+/**
  * タイトル画面→メインゲーム用の難易度設定
  * @param rank 難易度
  */
 BOOL SaveData_SetRank(int rank) {
     
-    // 10の倍数になるようにする
+    // 元の数値
+    int src = rank;
+    
+    // 10の倍数 +1 になるようにする
     rank = (int)(rank / 10) * 10;
     if (rank < 1) {
         rank = 1;
     }
+    else {
+        if (src%10 != 0) {
+            
+            rank += 1;
+        }
+    }
     
     // 最大ランクの端数切捨てで丸める
-    int max = (int)(SaveData_GetRankMax() / 10) * 10;
+    int max = (int)(SaveData_GetRankMax() / 10) * 10 + 1;
     
     if (rank > max) {
         

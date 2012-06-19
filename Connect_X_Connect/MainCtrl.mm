@@ -960,11 +960,16 @@ enum eTouchState {
         
         // レベルを増やす
         m_nLevel++;
+        
+        // オートセーブ
+        SaveData_SetRankMax(m_nLevel);
         if (m_nLevel%10 == 1) {
             
-            // オートセーブ
-            SaveData_SetRank(m_nLevel);
+            SaveData_SaveRank(m_nLevel);
         }
+        
+        NSLog(@"Rank=%d", SaveData_GetRank());
+        NSLog(@"RankMax=%d", SaveData_GetRankMax());
         
         
         return;

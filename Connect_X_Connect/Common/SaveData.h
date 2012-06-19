@@ -33,6 +33,13 @@ void SaveData_SetHiScore(int score, BOOL bForce=false);
 int SaveData_GetRank();
 
 /**
+ * ランクを保存する
+ * @param rank 難易度
+ * @return 成功したら「YES」
+ */
+BOOL SaveData_SaveRank(int rank);
+
+/**
  * タイトル画面→メインゲーム用の難易度設定
  * @param rank 難易度
  */

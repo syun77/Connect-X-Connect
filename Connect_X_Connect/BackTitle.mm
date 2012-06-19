@@ -11,9 +11,9 @@
 #import "Math.h"
 #import "SceneTitle.h"
 
-static const float POS_RANK_L = 80;
-static const float POS_RANK_R = 480-POS_RANK_L;
-static const float POS_RANK_Y = 160;
+static const float POS_RANK_L = 40;
+static const float POS_RANK_R = 320-POS_RANK_L;
+static const float POS_RANK_Y = 240;
 
 /**
  * タイトル画面用背景

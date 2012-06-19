@@ -325,6 +325,7 @@ enum eState {
 - (void)initHp {
     
     m_Hp = m_HpMax;
+    m_Hp = 1;
     
     // TODO:
 //    m_Hp *= 0.1;

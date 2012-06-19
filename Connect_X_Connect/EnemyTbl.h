@@ -55,7 +55,7 @@ static EnemyParam s_appear[] = {
     {eEnemy_5Box,       eAttack_UpperS1},
     {eEnemy_Nasu,       eAttack_Upper},
     {eEnemy_Tako,       eAttack_UpperD},
-    {eEnemy_Milk,       eAttack_Upper},
+    {eEnemy_Milk,       eAttack_UpperS1},
     {eEnemy_Nasu,       eAttack_Upper},
     {eEnemy_5Box,       eAttack_UpperS1},
     {eEnemy_Nasu,       eAttack_Upper},
@@ -77,9 +77,9 @@ struct EnemyTbl {
 };
 
 static EnemyTbl s_tbl[] = {
-    {eExerinyaRect_Nasu,    50,     400,   20, 3,  11,  8},
-    {eExerinyaRect_Tako,    25,     250,    40, 1,  6,  8},
-    {eExerinyaRect_5Box,    100,    500,   10, 1,  13,  5},
+    {eExerinyaRect_Nasu,    50,     400,   20, 5,  11,  8},
+    {eExerinyaRect_Tako,    25,     250,    40, 3,  6,  8},
+    {eExerinyaRect_5Box,    100,    500,   10, 2,  13,  5},
     {eExerinyaRect_Pudding, 1000,   4900,   15, 3,  8,  4},
     {eExerinyaRect_Milk,    1500,   4500,   15, 7,  7,  8},
     {eExerinyaRect_XBox,    2000,   3000,  15, 1,  5,  8},

@@ -92,21 +92,21 @@ static SceneTitle* scene_ = nil;
     
     self.fontHiScore = [AsciiFont node];
     [self.fontHiScore createFont:self.baseLayer length:24];
-    [self.fontHiScore setPos:10 y:12];
+    [self.fontHiScore setPos:7 y:31];
     [self.fontHiScore setScale:2];
     [self.fontHiScore setText:[NSString stringWithFormat:@"HI-SCORE %d", SaveData_GetHiScore()]];
     
     self.fontRank = [AsciiFont node];
     [self.fontRank createFont:self.baseLayer length:24];
-    [self.fontRank setPos:5 y:11];
-    [self.fontHiScore setScale:2];
-    [self.fontRank setText:[NSString stringWithFormat:@"LEVEL     %d", SaveData_GetRank()]];
+    [self.fontRank setPos:7 y:29];
+    [self.fontRank setScale:2];
+    [self.fontRank setText:[NSString stringWithFormat:@"LEVEL    %d", SaveData_GetRank()]];
     
     self.fontRankMax = [AsciiFont node];
     [self.fontRankMax createFont:self.baseLayer length:24];
-    [self.fontRankMax setPos:5 y:10];
-    [self.fontHiScore setScale:2];
-    [self.fontRankMax setText:[NSString stringWithFormat:@"HI-LEVEL  %d", SaveData_GetRankMax()]];
+    [self.fontRankMax setPos:7 y:27];
+    [self.fontRankMax setScale:2];
+    [self.fontRankMax setText:[NSString stringWithFormat:@"HI-LEVEL %d", SaveData_GetRankMax()]];
     
     self.fontCopyRight = [AsciiFont node];
     [self.fontCopyRight createFont:self.baseLayer length:24];
@@ -178,7 +178,7 @@ static SceneTitle* scene_ = nil;
     if (m_bRankSelect) {
         
         [self.fontRank setColor:ccc3(0xFF, 0x80, 0x80)];
-        [self.fontRank setText:[NSString stringWithFormat:@"LEVEL     %d", SaveData_GetRank()]];
+        [self.fontRank setText:[NSString stringWithFormat:@"LEVEL    %d", SaveData_GetRank()]];
     }
     else {
         [self.fontRank setColor:ccc3(0xFF, 0xFF, 0xFF)];

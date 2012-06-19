@@ -15,21 +15,21 @@
 
 // ランク選択タッチエリア
 static const float RANK_SELECT_RECT_X = 0;
-static const float RANK_SELECT_RECT_Y = 160-32;
-static const float RANK_SELECT_RECT_W = 480;
+static const float RANK_SELECT_RECT_Y = 240-32;
+static const float RANK_SELECT_RECT_W = 320;
 static const float RANK_SELECT_RECT_H = 64;
 
-static const float START_BUTTON_RECT_X = 240-96;
+static const float START_BUTTON_RECT_X = 160-96;
 static const float START_BUTTON_RECT_Y = 48;
 static const float START_BUTTON_RECT_W = 96*2;
 static const float START_BUTTON_RECT_H = 48;
 
-static const float BGM_BUTTON_RECT_X = 480-80-8;
+static const float BGM_BUTTON_RECT_X = 320-80-8;
 static const float BGM_BUTTON_RECT_Y = 48+8;
 static const float BGM_BUTTON_RECT_W = 80;
 static const float BGM_BUTTON_RECT_H = 32;
 
-static const float SE_BUTTON_RECT_X = 480-80-8;
+static const float SE_BUTTON_RECT_X = 320-80-8;
 static const float SE_BUTTON_RECT_Y = 16;
 static const float SE_BUTTON_RECT_W = 80;
 static const float SE_BUTTON_RECT_H = 32;
