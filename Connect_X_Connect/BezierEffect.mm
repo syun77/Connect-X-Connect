@@ -78,6 +78,7 @@
     Enemy* enemy = [self _getEnemy];
     [enemy damage:m_Damage];
     
+    
 }
 - (void)_doCountDown {
     

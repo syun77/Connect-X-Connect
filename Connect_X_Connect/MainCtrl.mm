@@ -12,6 +12,7 @@
 #import "FieldMgr.h"
 #import "Math.h"
 #import "FixedArray.h"
+#import "SaveData.h"
 
 static const int TIMER_ENEMY_VANISH = 30;
 
@@ -87,7 +88,8 @@ enum eTouchState {
     
     m_nBlockLevel = 1;
     
-    m_nLevel = 1;
+    // レベルを取得
+    m_nLevel = SaveData_GetRank();
     
 //    for (int i = 0; i < BLOCK_NEXT_COUNT; i++) {
 //        
@@ -99,6 +101,7 @@ enum eTouchState {
     m_nCombo = 0;
     m_nTurn = 0;
     m_bChainCheck = NO;
+    m_nScore = 0;
     
     Sound_PlayBgm(@"alyssum.mp3");
     
@@ -371,7 +374,7 @@ enum eTouchState {
     }
     arr.shuffle();
     
-    NSLog(@"Attack count=%d", m_ReqParam.count);
+//    NSLog(@"Attack count=%d", m_ReqParam.count);
     
     int count = m_ReqParam.count;
     if (count >= FIELD_BLOCK_COUNT_X) {
@@ -415,7 +418,7 @@ enum eTouchState {
         Enemy* enemy = [self _getEnemy];
         [enemy endTurn];
     }
-    NSLog(@"Attack count=%d<<", m_ReqParam.count);
+//    NSLog(@"Attack count=%d<<", m_ReqParam.count);
 }
 
 
@@ -887,6 +890,9 @@ enum eTouchState {
     Enemy* enemy = [self _getEnemy];
     [enemy damage:v];
     
+    // スコア加算
+    [self addScore:v];
+    
     [self _changeState:eState_WinLoseCheck];
 }
 
@@ -954,6 +960,11 @@ enum eTouchState {
         
         // レベルを増やす
         m_nLevel++;
+        if (m_nLevel%10 == 1) {
+            
+            // オートセーブ
+            SaveData_SetRank(m_nLevel);
+        }
         
         
         return;
@@ -1191,6 +1202,19 @@ enum eTouchState {
 - (void)reqestBlock:(ReqBlock)req {
     
     m_ReqParam = req;
+}
+
+/**
+ * スコアを加算する
+ */
+- (void)addScore:(int)v {
+    
+    m_nScore += v;
+    
+    SaveData_SetHiScore(m_nScore);
+    
+    AsciiFont* font = [SceneMain sharedInstance].fontScore;
+    [font setText:[NSString stringWithFormat:@"SCORE:%d", m_nScore]];
 }
 
 @end

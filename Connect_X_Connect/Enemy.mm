@@ -18,7 +18,7 @@
 static const int ENEMY_POS_X = 320-64;
 static const int ENEMY_POS_Y = 480-108;
 static const int ENEMY_POS_LV_X = 24;
-static const int ENEMY_POS_LV_Y = 480 - 84;
+static const int ENEMY_POS_LV_Y = 480 - 92;
 static const int ENEMY_POS_DAMAGE = ENEMY_POS_Y-16;
 
 static const int ENEMY_AT_X = 320-128;

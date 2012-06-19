@@ -47,6 +47,7 @@
     AsciiFont*      fontLevelup;
     AsciiFont*      fontLevel;
     AsciiFont*      fontTurn;
+    AsciiFont*      fontScore;
     
     TokenManager*   mgrBlock;
     TokenManager*   mgrBezierEffect;
@@ -86,6 +87,7 @@
 @property (nonatomic, retain)AsciiFont*         fontLevelup;
 @property (nonatomic, retain)AsciiFont*         fontLevel;
 @property (nonatomic, retain)AsciiFont*         fontTurn;
+@property (nonatomic, retain)AsciiFont*         fontScore;
 
 @property (nonatomic, retain)TokenManager*      mgrBlock;
 @property (nonatomic, retain)TokenManager*      mgrBezierEffect;

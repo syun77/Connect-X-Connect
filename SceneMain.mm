@@ -49,6 +49,7 @@ static SceneMain* scene_ = nil;
 @synthesize fontLevelup;
 @synthesize fontLevel;
 @synthesize fontTurn;
+@synthesize fontScore;
 
 @synthesize mgrBlock;
 @synthesize mgrBezierEffect;
@@ -143,6 +144,13 @@ static SceneMain* scene_ = nil;
     [self.fontLevel setScale:2];
 //    [self.fontLevel setAlign:eFontAlign_Center];
     [self.fontLevel setVisible:NO];
+    
+    self.fontScore = [AsciiFont node];
+    [self.fontScore createFont:self.baseLayer length:24];
+    [self.fontScore setScale:2];
+    [self.fontScore setPos:3 y:51];
+    [self.fontScore setText:@"SCORE:0"];
+    
     
     self.mgrBlock = [TokenManager node];
     [self.mgrBlock setPrio:ePrio_Block];

@@ -52,6 +52,8 @@
     int     m_nTurn;            // 経過ターン数
     BOOL    m_bChainCheck;      // 連鎖チェックが必要かどうか
     
+    int     m_nScore;           // スコア
+    
 }
 
 @property (nonatomic, retain)Layer2D* layerVanish;
@@ -62,5 +64,8 @@
 
 // ブロック落下要求を送る
 - (void)reqestBlock:(ReqBlock)req;
+
+// スコアを加算する
+- (void)addScore:(int)v;
 
 @end
