@@ -173,6 +173,9 @@ enum eTouchState {
 - (AsciiFont*)_getFontLevelup {
     return [SceneMain sharedInstance].fontLevelup;
 }
+- (LevelUp*)_getLevelUp {
+    return [SceneMain sharedInstance].levelUp;
+}
 - (Chain*)_getChain {
     return [SceneMain sharedInstance].chain;
 }
@@ -953,8 +956,12 @@ enum eTouchState {
         [self _changeState:eState_Win];
         m_Timer = TIMER_ENEMY_VANISH;
         [enemy destroy];
-        AsciiFont* font = [self _getFontLevelup];
-        [font setVisible:YES];
+        
+        // レベルアップ演出開始
+//        AsciiFont* font = [self _getFontLevelup];
+//        [font setVisible:YES];
+        LevelUp* levelUp = [self _getLevelUp];
+        [levelUp start];
         
         // HPを増やす
         [player addHp:10];
@@ -1025,9 +1032,9 @@ enum eTouchState {
         return;
     }
     
-    // レベルアップ演出を消す
-    AsciiFont* font = [self _getFontLevelup];
-    [font setVisible:NO];
+//    // レベルアップ演出を消す
+//    AsciiFont* font = [self _getFontLevelup];
+//    [font setVisible:NO];
     
     Enemy* enemy = [self _getEnemy];
     

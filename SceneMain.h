@@ -31,6 +31,7 @@
 #import "BlockNext.h"
 #import "Combo.h"
 #import "BlockLevel.h"
+#import "LevelUp.h"
 
 /**
  * ゲームメインのシーン
@@ -68,6 +69,7 @@
     BlockNext*      blockNext1;
     BlockNext*      blockNext2;
     BlockNext*      blockNext3;
+    LevelUp*        levelUp;
     
     // レイヤー
     Layer2D*        layer;
@@ -107,6 +109,7 @@
 @property (nonatomic, retain)BlockNext*         blockNext1;
 @property (nonatomic, retain)BlockNext*         blockNext2;
 @property (nonatomic, retain)BlockNext*         blockNext3;
+@property (nonatomic, retain)LevelUp*           levelUp;
 
 @property (nonatomic, retain)Layer2D*           layer;
 
