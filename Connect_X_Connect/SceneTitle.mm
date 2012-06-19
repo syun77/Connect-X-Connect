@@ -87,7 +87,7 @@ static SceneTitle* scene_ = nil;
     self.m_pFont = [AsciiFont node];
     [self.m_pFont createFont:self.baseLayer length:24];
     [self.m_pFont setScale:2];
-    [self.m_pFont setPos:4 y:36];
+    [self.m_pFont setPos:3 y:40];
     [self.m_pFont setText:[NSString stringWithFormat:@"Connect X Connect"]];
     
     self.fontHiScore = [AsciiFont node];
@@ -117,22 +117,22 @@ static SceneTitle* scene_ = nil;
     
     self.fontStartButton = [AsciiFont node];
     [self.fontStartButton createFont:self.baseLayer length:12];
-    [self.fontStartButton setPos:17 y:5];
+    [self.fontStartButton setPos:20 y:18];
     [self.fontStartButton setAlign:eFontAlign_Center];
-    [self.fontStartButton setScale:1];
+    [self.fontStartButton setScale:2];
     [self.fontStartButton setText:@"START"];
     
     self.fontBgm = [AsciiFont node];
     [self.fontBgm createFont:self.baseLayer length:12];
-    [self.fontBgm setPos:31 y:5];
+    [self.fontBgm setPos:34 y:9];
     [self.fontBgm setAlign:eFontAlign_Center];
-    [self.fontBgm setScale:1];
+    [self.fontBgm setScale:2];
     
     self.fontSe = [AsciiFont node];
     [self.fontSe createFont:self.baseLayer length:12];
-    [self.fontSe setPos:31 y:2];
+    [self.fontSe setPos:34 y:4];
     [self.fontSe setAlign:eFontAlign_Center];
-    [self.fontSe setScale:1];
+    [self.fontSe setScale:2];
     
     // 変数初期化
     m_bNextScene = NO;

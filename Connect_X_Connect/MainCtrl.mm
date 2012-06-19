@@ -968,10 +968,6 @@ enum eTouchState {
             SaveData_SaveRank(m_nLevel);
         }
         
-        NSLog(@"Rank=%d", SaveData_GetRank());
-        NSLog(@"RankMax=%d", SaveData_GetRankMax());
-        
-        
         return;
     }
     
