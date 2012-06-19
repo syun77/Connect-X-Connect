@@ -97,6 +97,15 @@ enum eState {
     int x = m_BaseX;
     int y = m_BaseY;
     
+    glLineWidth(1);
+    {
+        glColor4f(1, 1, 1, 0.5);
+        [self drawRectLT:x-1 y:y-5 w:WIDTH+2 h:HEIGHT+2 rot:0 scale:1];
+        glColor4f(0, 0, 0, 0.5);
+        [self fillRectLT:x y:y-4 w:WIDTH h:HEIGHT rot:0 scale:1];
+    }
+    
+    
     float c = 0;
     if (m_Now == m_Max) {
         
@@ -164,12 +173,8 @@ enum eState {
         ccDrawLine(origin, destination);
     }
      */
-    glLineWidth(1);
-    {
-        glColor4f(1, 1, 1, 1);
-        [self drawRectLT:x y:y-4 w:WIDTH h:HEIGHT rot:0 scale:1];
-    }
     
+    glLineWidth(1);
     System_SetBlend(eBlend_Normal);
     
 }

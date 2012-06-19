@@ -13,7 +13,7 @@
 #import "Math.h"
 #import "FixedArray.h"
 
-static const int TIMER_ENEMY_VANISH = 60;
+static const int TIMER_ENEMY_VANISH = 30;
 
 /**
  * 状態
@@ -371,6 +371,8 @@ enum eTouchState {
     }
     arr.shuffle();
     
+    NSLog(@"Attack count=%d", m_ReqParam.count);
+    
     int count = m_ReqParam.count;
     if (count >= FIELD_BLOCK_COUNT_X) {
         
@@ -392,8 +394,7 @@ enum eTouchState {
             [b setShield:m_ReqParam.nShield];
         }
         
-        float rRnd = Math_Randf(1);
-        if (rRnd < m_ReqParam.rSkull) {
+        if (m_ReqParam.rSkull > 0) {
             
             // ドクロブロック
             [b setSkull];
@@ -414,6 +415,7 @@ enum eTouchState {
         Enemy* enemy = [self _getEnemy];
         [enemy endTurn];
     }
+    NSLog(@"Attack count=%d<<", m_ReqParam.count);
 }
 
 
@@ -946,6 +948,9 @@ enum eTouchState {
         [enemy destroy];
         AsciiFont* font = [self _getFontLevelup];
         [font setVisible:YES];
+        
+        // HPを増やす
+        [player addHp:10];
         
         // レベルを増やす
         m_nLevel++;

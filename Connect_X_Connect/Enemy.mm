@@ -11,19 +11,8 @@
 #import "Exerinya.h"
 #import "Particle.h"
 
-/**
- * 敵の種類
- */
-enum eEnemy {
-    eEnemy_Nasu,
-    eEnemy_Tako,
-    eEnemy_5Box,
-    eEnemy_Pudding,
-    eEnemy_Milk,
-    eEnemy_XBox,
-};
-
 #import "EnemyTbl.h"
+#import "BlockMgr.h"
 
 // 座標関連
 static const int ENEMY_POS_X = 320-64;
@@ -296,22 +285,31 @@ enum eState {
     [fontLevel setVisible:YES];
     
     // 敵番号取得
-    int size = sizeof(s_tbl) / sizeof(EnemyParam);
-    int dLv = (m_nLevel % size) - 1;
-    EnemyParam p = s_tbl[dLv];
+//    int size = sizeof(s_tbl) / sizeof(EnemyParam);
+    int size = 20;
+    int dLv = ((m_nLevel-1) % size);
+    EnemyParam p = s_appear[dLv];
     m_Id = p.m_Id;
-    eExerinyaRect type = eExerinyaRect_Nasu;
-    switch (m_Id) {
-        case eEnemy_Nasu: { type = eExerinyaRect_Nasu; break; }
-        case eEnemy_Tako: { type = eExerinyaRect_Tako; break; }
-        case eEnemy_5Box: { type = eExerinyaRect_5Box; break; }
-        case eEnemy_Pudding : { type = eExerinyaRect_Pudding; break; }
-        case eEnemy_Milk: { type = eExerinyaRect_Milk; break; }
-        case eEnemy_XBox: { type = eExerinyaRect_XBox; break; }
-        default: { type = eExerinyaRect_Nasu; break; }
-    }
+    EnemyTbl tbl = s_tbl[m_Id];
+    eExerinyaRect type = (eExerinyaRect)tbl.m_Id;
     CGRect r = Exerinya_GetRect(type);
     [self setTexRect:r];
+    
+    // 最大HP設定
+    int dLevel = m_nLevel / tbl.m_DivLevel;
+    if (dLevel >= 90) {
+        dLevel = 90-1;
+    }
+    m_HpMax = tbl.m_HpFix + tbl.m_HpVal * Math_SinEx(dLevel);
+    
+    // AT増分設定
+    m_dAT = tbl.m_dAt;
+    
+    // ブロック増やす設定
+    m_CntBlock = tbl.m_CntFix + tbl.m_CntVal * Math_SinEx(dLevel);
+    
+    // 攻撃パターン
+    m_AttackPattern = p.m_Attack;
     
     // AT初期化
     m_nAT = 0;
@@ -326,8 +324,6 @@ enum eState {
  */
 - (void)initHp {
     
-    // TODO:
-    m_HpMax = 100 + m_nLevel * 10;
     m_Hp = m_HpMax;
     
     // TODO:
@@ -400,7 +396,7 @@ enum eState {
     }
     
     // TODO: ATゲージを減らす
-    m_nAT -= 20;
+    m_nAT -= 5;
     if (m_nAT < 0) {
         m_nAT = 0;
     }
@@ -474,7 +470,22 @@ enum eState {
     }
     else {
         // アクティブタイムゲージを増やす
-        m_nAT += m_dAT;
+        // 存在ブロック数に合わせてボーナスを与える
+        int d = m_dAT;
+        int nLine = [BlockMgr count] / FIELD_BLOCK_COUNT_X;
+        if (nLine < 3) {
+            d *= 2;
+            d += 10;
+        }
+        else if(nLine < 4) {
+            d = d * 1.5;
+            d += 5;
+        }
+        else if(nLine < 5) {
+            d = d * 1.2;
+        }
+        
+        m_nAT += d;
         if (m_nAT > AT_MAX) {
             
             m_nAT = AT_MAX;
@@ -521,19 +532,33 @@ enum eState {
     
     MainCtrl* ctrl = [self _getCtrl];
     
-    // TODO
-    int cnt = Math_Rand(m_nLevel) + 1;
+    // ブロック降らす数
+    int cnt = m_CntBlock;
     
     ReqBlock req;
-    if (cnt < 10) {
+    switch (m_AttackPattern) {
+        case eAttack_Upper:
+            req.setUpper(cnt);
+            break;
         
-        // シールド付きブロック
-        req.setUpperShield(cnt);
-    }
-    else {
+        case eAttack_UpperS1:
+            req.setUpperShield(cnt);
+            break;
         
-        // 通常ブロック
-        req.setUpper(cnt);
+        case eAttack_UpperS2:
+            req.setUpperShield2(cnt);
+            break;
+            
+        case eAttack_UpperD:
+            req.setUpperSkull(cnt);
+            break;
+            
+        case eAttack_Bottom:
+            req.setBottom(cnt);
+            break;
+            
+        default:
+            break;
     }
     
     if (Math_Rand(1) == 0) {
@@ -543,10 +568,13 @@ enum eState {
     }
     
     // 下から出現
-    cnt = Math_Rand(3) + 1;
+//    cnt = Math_Rand(3) + 1;
 //    req.setBottom(cnt);
     
     [ctrl reqestBlock:req];
+    
+    // AT初期化
+    m_nAT = 0;
 }
 
 /**

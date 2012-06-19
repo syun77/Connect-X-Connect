@@ -53,4 +53,7 @@
 // 全てのブロックを上に移動する
 + (void)shiftUpAll:(int)dy;
 
+// 存在するブロックの数を取得する
++ (int)count;
+
 @end

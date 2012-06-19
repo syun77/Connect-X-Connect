@@ -33,6 +33,9 @@
     
     int m_nAT;      // アクティブタイムゲージ (現在値)
     int m_dAT;      // アクティブタイムゲージ (上昇率)
+    
+    int m_CntBlock; // ブロック増やす数
+    int m_AttackPattern; // 攻撃パターン
 }
 
 @property (nonatomic, retain)AsciiFont* m_pFont;

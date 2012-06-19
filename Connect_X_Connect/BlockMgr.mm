@@ -269,7 +269,8 @@
             int chipX = [b getChipX];
             int chipY = [b getChipY];
             int frame  = BEZIEREFFECT_FRAME + Math_RandInt(-10, 10);
-            int damage = [b getNumber] * 3;
+//            int damage = [b getNumber] * 3;
+            int damage = 30;
             BezierEffect* eft = [BezierEffect addFromChip:chipX chipY:chipY];
             if (eft) {
                 
@@ -346,6 +347,14 @@
         // 座標を移動させる
         b._y += dy;
     }
+}
+
+// 存在するブロックの数を取得する
++ (int)count {
+    
+    TokenManager* mgr = [BlockMgr _getTokenManager];
+    
+    return [mgr count];
 }
 
 @end

@@ -424,6 +424,9 @@ enum eState {
     
     m_bSkull = YES;
     [self setTexRect:[self _getTexRect]];
+    
+    // ドクロはダメージがでかい
+    m_nNumber = 10;
 }
 
 // ドクロブロックかどうか

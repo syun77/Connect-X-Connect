@@ -76,9 +76,19 @@ struct ReqBlock {
     }
     
     /**
+     * 上から出現 (固ぷよ)
+     */
+    void setUpperShield2(int count)
+    {
+        this->type = eReqBlock_Upper;
+        this->count = count;
+        this->nShield = 2;
+    }
+    
+    /**
      * 上から出現 (ドクロ)
      */
-    void setUpperSkull(int coount)
+    void setUpperSkull(int count)
     {
         this->type = eReqBlock_Upper;
         this->count = count;
