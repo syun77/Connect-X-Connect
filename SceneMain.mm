@@ -71,6 +71,7 @@ static SceneMain* scene_ = nil;
 @synthesize blockNext2;
 @synthesize blockNext3;
 @synthesize levelUp;
+@synthesize gameover;
 
 @synthesize layer;
 @synthesize ctrl;
@@ -127,7 +128,7 @@ static SceneMain* scene_ = nil;
     self.fontGameover = [AsciiFont node];
     [self.fontGameover createFont:self.baseLayer length:24];
     [self.fontGameover setScale:3];
-    [self.fontGameover setPos:20 y:36];
+    [self.fontGameover setPos:20 y:30];
     [self.fontGameover setAlign:eFontAlign_Center];
     [self.fontGameover setText:@"GAME OVER"];
     [self.fontGameover setVisible:NO];
@@ -219,6 +220,9 @@ static SceneMain* scene_ = nil;
     self.levelUp = [LevelUp node];
     [self.baseLayer addChild:self.levelUp z:ePrio_UI];
     
+    self.gameover = [GameOver node];
+    [self.baseLayer addChild:self.gameover z:ePrio_UI];
+    
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
     [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
@@ -257,6 +261,7 @@ static SceneMain* scene_ = nil;
     // ゲーム制御
     self.ctrl = nil;
     
+    self.gameover = nil;
     self.levelUp = nil;
     self.blockNext3 = nil;
     self.blockNext2 = nil;

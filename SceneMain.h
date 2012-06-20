@@ -32,6 +32,7 @@
 #import "Combo.h"
 #import "BlockLevel.h"
 #import "LevelUp.h"
+#import "GameOver.h"
 
 /**
  * ゲームメインのシーン
@@ -70,6 +71,7 @@
     BlockNext*      blockNext2;
     BlockNext*      blockNext3;
     LevelUp*        levelUp;
+    GameOver*       gameover;
     
     // レイヤー
     Layer2D*        layer;
@@ -110,6 +112,7 @@
 @property (nonatomic, retain)BlockNext*         blockNext2;
 @property (nonatomic, retain)BlockNext*         blockNext3;
 @property (nonatomic, retain)LevelUp*           levelUp;
+@property (nonatomic, retain)GameOver*          gameover;
 
 @property (nonatomic, retain)Layer2D*           layer;
 

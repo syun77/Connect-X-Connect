@@ -186,6 +186,9 @@ enum eTouchState {
 - (BlockLevel*)_getBlockLevel {
     return [SceneMain sharedInstance].blockLevel;
 }
+- (GameOver*)_getGameOver {
+    return [SceneMain sharedInstance].gameover;
+}
 
 - (void)_initChain {
     m_nChain  = 0;
@@ -1076,6 +1079,8 @@ enum eTouchState {
     // ゲームオーバ処理へ
     m_TouchState = eTouchState_Standby;
     [[SceneMain sharedInstance].fontGameover setVisible:YES];
+    GameOver* gameover = [self _getGameOver];
+    [gameover start];
     
     [self _changeState:eState_Gameover];
 }

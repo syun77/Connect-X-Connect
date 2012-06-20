@@ -88,6 +88,7 @@
 		C79944F01586421F00C564FC /* AtGauge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C79944EF1586421F00C564FC /* AtGauge.mm */; };
 		C799C4281590375000856782 /* BackTitle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C799C4271590375000856782 /* BackTitle.mm */; };
 		C799C42B1590D74700856782 /* LevelUp.mm in Sources */ = {isa = PBXBuildFile; fileRef = C799C42A1590D74600856782 /* LevelUp.mm */; };
+		C799C42E159184C100856782 /* GameOver.mm in Sources */ = {isa = PBXBuildFile; fileRef = C799C42D159184C100856782 /* GameOver.mm */; };
 		C79FCD4B1581B795008AA2D6 /* Chain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C79FCD4A1581B795008AA2D6 /* Chain.mm */; };
 		C79FCD4F1582ADD1008AA2D6 /* RedBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = C79FCD4E1582ADD1008AA2D6 /* RedBar.mm */; };
 		C7B9F8EC15759A080023646A /* gamecommon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7B9F8EB15759A080023646A /* gamecommon.mm */; };
@@ -358,6 +359,8 @@
 		C799C4271590375000856782 /* BackTitle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BackTitle.mm; sourceTree = "<group>"; };
 		C799C4291590D74600856782 /* LevelUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelUp.h; sourceTree = "<group>"; };
 		C799C42A1590D74600856782 /* LevelUp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelUp.mm; sourceTree = "<group>"; };
+		C799C42C159184C000856782 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOver.h; sourceTree = "<group>"; };
+		C799C42D159184C100856782 /* GameOver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameOver.mm; sourceTree = "<group>"; };
 		C79FCD491581B795008AA2D6 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chain.h; sourceTree = "<group>"; };
 		C79FCD4A1581B795008AA2D6 /* Chain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Chain.mm; sourceTree = "<group>"; };
 		C79FCD4D1582ADD1008AA2D6 /* RedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBar.h; sourceTree = "<group>"; };
@@ -818,6 +821,8 @@
 				C7750C32157D06E400F78387 /* Enemy.mm */,
 				C746813F157D9A1400A9E70F /* FontEffect.h */,
 				C7468140157D9A1500A9E70F /* FontEffect.mm */,
+				C799C42C159184C000856782 /* GameOver.h */,
+				C799C42D159184C100856782 /* GameOver.mm */,
 				C783FD26157879D700AAACAE /* Grid.h */,
 				C783FD27157879D700AAACAE /* Grid.mm */,
 				C783FD29157917E400AAACAE /* HpGauge.h */,
@@ -1497,6 +1502,7 @@
 				C7889C52158F389600AAECDE /* UIColor+AdWhirlConfig.m in Sources */,
 				C799C4281590375000856782 /* BackTitle.mm in Sources */,
 				C799C42B1590D74700856782 /* LevelUp.mm in Sources */,
+				C799C42E159184C100856782 /* GameOver.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
