@@ -89,3 +89,67 @@ int GameCommon_GetScore(int nVanish, int nConnect, int nKind, int nChain, int nC
     
     return ret;
 }
+
+int GameCommon_LevelToSound(int nLevel) {
+    
+    if (nLevel < 10) {
+        return 0;
+    }
+    else if(nLevel < 30) {
+        return 1;
+    }
+    else {
+        int lv = (nLevel - 30)/30%4;
+        
+        switch (lv) {
+            case 0:
+                return 2;
+                
+            case 1:
+                return 3;
+                
+            case 2:
+                return 4;
+                
+            default: // case 3:
+                return 5;
+        }
+    }
+}
+
+/**
+ * サウンド番号に対応したファイル名を取得する
+ * @param サウンド番号
+ * @return ファイルパス
+ */
+NSString* GameCommon_GetSoundFile(int nSound) {
+    switch (nSound) {
+        case 0: { return @"nu_sunday.mp3"; }
+        case 1: { return @"sayonara_satellites.mp3"; }
+        case 2: { return @"alyssum.mp3"; }
+        case 3: { return @"robiopsys.mp3"; }
+        case 4: { return @"lily_of_the_valley.mp3"; }
+        case 5: { return @"straycat.mp3"; }
+            
+        default: { return @"alyssum.mp3"; }
+    }
+}
+
+/**
+ * サウンド番号に対応した曲名を取得する
+ * @param サウンド番号
+ * @return 曲名
+ */
+NSString* GameCommon_GetSoundName(int nSound) {
+    switch (nSound) {
+        case 0: { return @"nu sunday"; }
+        case 1: { return @"sayonara satellites"; }
+        case 2: { return @"alyssum"; }
+        case 3: { return @"robiopsys"; }
+        case 4: { return @"lily of the valley"; }
+        case 5: { return @"straycat"; }
+            
+        default: { return @"alyssum"; }
+    }
+    
+}

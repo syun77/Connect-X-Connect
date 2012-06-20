@@ -129,7 +129,7 @@
     
     // adWhirl の生成
     self.adWhirlView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
-    [self.adWhirlView setBackgroundColor:[UIColor whiteColor]];
+//    [self.adWhirlView setBackgroundColor:[UIColor whiteColor]];
     
     // viewController に登録
     [viewController.view addSubview:self.adWhirlView];

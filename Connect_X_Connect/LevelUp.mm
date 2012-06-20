@@ -106,9 +106,9 @@ enum eState {
     if (m_State != eState_Standby) {
         System_SetBlend(eBlend_Add);
         glLineWidth(2);
-        float a = 1.0;
+        float a = 0.2;
         if (m_State == eState_Hide) {
-            a = 1.0 * m_Timer / TIMER_HIDE;
+            a = 0.2 * m_Timer / TIMER_HIDE;
         }
         
         int t = m_tPast * 4;

@@ -13,6 +13,7 @@
 #import "Math.h"
 #import "FixedArray.h"
 #import "SaveData.h"
+#import "gamecommon.h"
 
 static const int TIMER_ENEMY_VANISH = 30;
 
@@ -104,7 +105,9 @@ enum eTouchState {
     m_nScore = 0;
     m_nDamage = 0;
     
-    Sound_PlayBgm(@"alyssum.mp3");
+    int nSound = GameCommon_LevelToSound(m_nLevel);
+    NSString* file = GameCommon_GetSoundFile(nSound);
+    Sound_PlayBgm(file);
     
     return self;
 }
@@ -985,8 +988,15 @@ enum eTouchState {
         // HPを増やす
         [player addHp:10];
         
+        int nSoundPrev = GameCommon_LevelToSound(m_nLevel);
         // レベルを増やす
         m_nLevel++;
+        int nSound = GameCommon_LevelToSound(m_nLevel);
+        if (nSound != nSoundPrev) {
+            NSString* file = GameCommon_GetSoundFile(nSound);
+            Sound_PlayBgm(file);
+        }
+        
         // 出現ブロック設定
         BlockLevel* level = [self _getBlockLevel];
         [level setLevel:m_nLevel];
@@ -1081,6 +1091,8 @@ enum eTouchState {
     [[SceneMain sharedInstance].fontGameover setVisible:YES];
     GameOver* gameover = [self _getGameOver];
     [gameover start];
+    
+    Sound_StopBgm();
     
     [self _changeState:eState_Gameover];
 }

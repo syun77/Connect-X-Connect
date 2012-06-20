@@ -225,6 +225,8 @@ static const int TIMER_DAMAGE = 30;
     
     // ダメージエフェクト再生
     [Particle addDamage:PLAYER_POS_X y:PLAYER_POS_Y];
+    
+    Sound_PlaySe(@"hit3.wav");
 }
 
 /**
@@ -248,6 +250,8 @@ static const int TIMER_DAMAGE = 30;
     
     // 死亡エフェクト生成
     [Particle addDead:PLAYER_POS_X y:PLAYER_POS_Y];
+    
+    Sound_PlaySe(@"damage3.wav");
     
     // 非表示にする
     [self setVisible:NO];

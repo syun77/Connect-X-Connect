@@ -63,7 +63,20 @@ static const int BEZIEREFFECT_FRAME_MAX = 80;
  */
 int GameCommon_GetScore(int nVanish, int nConnect, int nKind, int nChain, int nCombo);
 
+int GameCommon_LevelToSound(int nLevel);
 
+/**
+ * サウンド番号に対応したファイル名を取得する
+ * @param サウンド番号
+ * @return ファイルパス
+ */
+NSString* GameCommon_GetSoundFile(int nSound);
 
+/**
+ * サウンド番号に対応した曲名を取得する
+ * @param サウンド番号
+ * @return 曲名
+ */
+NSString* GameCommon_GetSoundName(int nSound);
 
 #endif
