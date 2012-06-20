@@ -150,7 +150,7 @@ enum eState {
     
     float x = ENEMY_POS_X;
     float y = ENEMY_POS_Y;
-    x += m_Timer * 4;
+    x += m_Timer * 2;
     self._x = x;
     self._y = y;
     [self move:0];

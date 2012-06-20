@@ -46,6 +46,7 @@
     int     m_nConnect;         // 最大連結数 (数字)
     int     m_nVanish;          // 消去数
     int     m_nKind;            // 消去グループ数
+    int     m_nDamage;          // プレイヤーダメージオブジェクト数
     
     SimpleQueue m_Queue;        // 次に出現するブロックの管理キュー
     

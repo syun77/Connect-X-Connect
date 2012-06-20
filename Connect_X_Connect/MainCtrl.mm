@@ -102,6 +102,7 @@ enum eTouchState {
     m_nTurn = 0;
     m_bChainCheck = NO;
     m_nScore = 0;
+    m_nDamage = 0;
     
     Sound_PlayBgm(@"alyssum.mp3");
     
@@ -905,9 +906,9 @@ enum eTouchState {
  */
 - (void)_updateDamageCheck {
     
-    int cnt = [BlockMgr vanishOutOfField];
+    m_nDamage = [BlockMgr vanishOutOfField];
     
-    if (cnt > 0) {
+    if (m_nDamage > 0) {
         
         // ダメージあり
         [self _changeState:eState_DamageExec];
@@ -927,6 +928,21 @@ enum eTouchState {
 - (void)_updateDamageExec {
 
     if ([BlockMgr isEndVanishingAll] && [BezierEffect countExist] == 0) {
+        
+        // プレイヤーにダメージを与える
+        int v = 0;
+        int d = 30; // 基準
+        for (int i = 0; i < m_nDamage; i++) {
+            v += d;
+            d /= 2;
+            if (d < 5) {
+                d = 5;
+            }
+        }
+        
+        Player* player = [self _getPlayer];
+        [player damage:v];
+        m_nDamage = 0;
         
         // 勝利敗北判定へ
         [self _changeState:eState_WinLoseCheck];

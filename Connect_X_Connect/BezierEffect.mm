@@ -69,8 +69,8 @@
 - (void)_doPlayer {
     
     // ダメージ処理
-    Player* player = [self _getPlayer];
-    [player damage:m_Damage];
+//    Player* player = [self _getPlayer];
+//    [player damage:m_Damage];
 }
 - (void)_doEnemy {
     

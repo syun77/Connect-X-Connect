@@ -197,9 +197,21 @@ static const int TIMER_DAMAGE = 30;
  */
 - (void)damage:(int)v {
     
+    // 計算前の値を保持しておく
+    int prev = m_Hp;
+    
     m_Hp -= v;
     if (m_Hp < 0) {
-        m_Hp = 0;
+        
+        if (prev >= 30) {
+            
+            // 30以上の場合、一撃では死なないようにしておく
+            m_Hp = 1;
+        }
+        else {
+            m_Hp = 0;
+        }
+        
     }
     
 //    HpGauge* hpGauge = [self _getGauge];
