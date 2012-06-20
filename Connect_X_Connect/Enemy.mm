@@ -37,6 +37,7 @@ static const int AT_MAX = 100;
  * 状態
  */
 enum eState {
+    eState_None,    // 無効
     eState_Appear,  // 出現状態
     eState_Standby, // 待機中
     eState_Vanish,  // 消滅演出
@@ -79,13 +80,15 @@ enum eState {
     self._y = ENEMY_POS_Y;
     CGRect r = Exerinya_GetRect(eExerinyaRect_Nasu);
     [self setTexRect:r];
-    [self setVisible:NO];
+    [self.m_pSprite setVisible:NO];
     
     m_Id = 0;
     m_Hp = HP_MAX;
     
     m_nAT = 0;
     m_dAT = 20;
+    
+    m_State = eState_None;
     
     return self;
 }
@@ -143,13 +146,14 @@ enum eState {
  */
 - (void)_updateAppear {
     
-    [self setVisible:YES];
+    [self.m_pSprite setVisible:YES];
     
     float x = ENEMY_POS_X;
     float y = ENEMY_POS_Y;
-    x += m_Timer * 2;
+    x += m_Timer * 4;
     self._x = x;
     self._y = y;
+    [self move:0];
     
     m_Timer = m_Timer * 0.9;
     if (m_Timer < 1) {
@@ -271,8 +275,6 @@ enum eState {
  * 初期化
  */
 - (void)initialize {
-    
-    [self setVisible:YES];
     
     m_State = eState_Appear;
     m_Timer = TIMER_APPEAR;
@@ -440,7 +442,7 @@ enum eState {
 // 死亡
 - (void)destroy {
     
-    [self setVisible:NO];
+    [self.m_pSprite setVisible:NO];
     
     // レベル表示を消す
 //    AsciiFont* fontLevel = [self _getFontLevel];
