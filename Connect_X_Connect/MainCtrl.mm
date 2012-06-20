@@ -473,6 +473,8 @@ enum eTouchState {
                 }
             }
             
+            Sound_PlaySe(@"encount.wav");
+            
             // 要求ライン数を減らす
             m_ReqParam.nLine--;
             

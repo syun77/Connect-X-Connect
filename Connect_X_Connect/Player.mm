@@ -226,7 +226,7 @@ static const int TIMER_DAMAGE = 30;
     // ダメージエフェクト再生
     [Particle addDamage:PLAYER_POS_X y:PLAYER_POS_Y];
     
-    Sound_PlaySe(@"hit3.wav");
+    Sound_PlaySe(@"hit03.wav");
 }
 
 /**
