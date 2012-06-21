@@ -89,6 +89,7 @@ enum eTouchState {
     
     // レベルを取得
     m_nLevel = SaveData_GetRank();
+    m_nLevel = 9;
     
     m_bCombo = NO;
     m_nCombo = 0;
@@ -100,6 +101,9 @@ enum eTouchState {
     int nSound = GameCommon_LevelToSound(m_nLevel);
     NSString* file = GameCommon_GetSoundFile(nSound);
     Sound_PlayBgm(file);
+    // キャプション表示開始
+//    Caption* caption = [self _getCaption];
+//    [caption start];
     
     return self;
 }
@@ -183,6 +187,9 @@ enum eTouchState {
 }
 - (GameOver*)_getGameOver {
     return [SceneMain sharedInstance].gameover;
+}
+- (Caption*)_getCaption {
+    return[SceneMain sharedInstance].caption;
 }
 
 - (void)_initChain {
@@ -988,10 +995,16 @@ enum eTouchState {
         int nSoundPrev = GameCommon_LevelToSound(m_nLevel);
         // レベルを増やす
         m_nLevel++;
+        
+        // BGM再生
         int nSound = GameCommon_LevelToSound(m_nLevel);
         if (nSound != nSoundPrev) {
             NSString* file = GameCommon_GetSoundFile(nSound);
             Sound_PlayBgm(file);
+            
+            // キャプション表示開始
+            Caption* caption = [self _getCaption];
+            [caption start:nSound];
         }
         
         // 出現ブロック設定

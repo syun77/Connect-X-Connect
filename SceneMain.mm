@@ -72,6 +72,7 @@ static SceneMain* scene_ = nil;
 @synthesize blockNext3;
 @synthesize levelUp;
 @synthesize gameover;
+@synthesize caption;
 
 @synthesize layer;
 @synthesize ctrl;
@@ -223,6 +224,10 @@ static SceneMain* scene_ = nil;
     self.gameover = [GameOver node];
     [self.baseLayer addChild:self.gameover z:ePrio_UI];
     
+    self.caption = [Caption node];
+    [self.baseLayer addChild:self.caption z:ePrio_UI];
+    [self.caption attachLayer:self.baseLayer];
+    
     // レイヤー
     [[self.layer = [Layer2D alloc] init] autorelease];
     [self.layer create:FIELD_BLOCK_COUNT_X h:FIELD_BLOCK_COUNT_Y];
@@ -261,6 +266,7 @@ static SceneMain* scene_ = nil;
     // ゲーム制御
     self.ctrl = nil;
     
+    self.caption = nil;
     self.gameover = nil;
     self.levelUp = nil;
     self.blockNext3 = nil;
