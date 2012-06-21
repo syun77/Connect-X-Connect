@@ -39,6 +39,7 @@ static const int TIMER_DAMAGE = 30;
     CGRect r = Exerinya_GetRect(eExerinyaRect_Player1);
     [self setTexRect:r];
     [self setScale:0.5f];
+    [self setVisible:NO];
     
     m_Hp = HP_MAX;
     
@@ -149,6 +150,7 @@ static const int TIMER_DAMAGE = 30;
     
     m_tDamage = 0;
     [self initHp];
+    [self setVisible:YES];
 }
 
 /**

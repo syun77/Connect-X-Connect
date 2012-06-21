@@ -89,7 +89,6 @@ enum eTouchState {
     
     // レベルを取得
     m_nLevel = SaveData_GetRank();
-    m_nLevel =160; 
     
     m_bCombo = NO;
     m_nCombo = 0;
