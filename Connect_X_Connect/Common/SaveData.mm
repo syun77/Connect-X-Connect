@@ -128,7 +128,10 @@ BOOL SaveData_SetRank(int rank) {
     }
     
     // 最大ランクの端数切捨てで丸める
-    int max = (int)(SaveData_GetRankMax() / 10) * 10 + 1;
+    int max = (int)(SaveData_GetRankMax() / 10) * 10 - 9;
+    if (SaveData_GetRankMax()%10 != 0) {
+        max += 10;
+    }
     
     if (rank > max) {
         
