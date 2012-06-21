@@ -864,6 +864,9 @@ enum eTouchState {
                             
                             // ドクロなら消滅
                             [BlockMgr requestVanish:i+dx y:j+dy];
+                            
+                            // 消去数をアップ
+                            m_nVanish++;
                         }
                     }
                 }
