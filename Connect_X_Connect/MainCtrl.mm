@@ -89,7 +89,6 @@ enum eTouchState {
     
     // レベルを取得
     m_nLevel = SaveData_GetRank();
-    m_nLevel = 9;
     
     m_bCombo = NO;
     m_nCombo = 0;
@@ -653,6 +652,9 @@ enum eTouchState {
         Block* b = [BlockMgr getFromIndex:m_BlockHandler1];
         [b changeStandby];
         
+        // プレイヤーが置いたフラグを立てる
+        [b setPutPlayer:YES];
+        
         // 落下要求を送る
         [BlockMgr requestFall];
         
@@ -964,6 +966,12 @@ enum eTouchState {
  * 勝利・敗北判定
  */
 - (void)_updateWinLoseCheck {
+    
+    if ([BlockMgr isEndVanishingAll] == NO) {
+        
+        // 消滅完了待ち
+        return;
+    }
     
     Player* player = [self _getPlayer];
     Enemy* enemy = [self _getEnemy];

@@ -24,6 +24,7 @@
     int         m_State;        // 状態
     BOOL        m_ReqFall;      // 落下要求フラグ
     BOOL        m_ReqVanish;    // 消滅要求フラグ
+    BOOL        m_bPutPlayer;   // プレイヤーがそのターンに置いたかどうかフラグ
     
     int         m_nShield;      // 固ぷよカウンタ
 }
@@ -84,6 +85,12 @@
 
 // 数値のカウントダウンをする
 - (void)countDown;
+
+// プレイヤーがそのターンに置いたかどうかフラグを設定
+- (void)setPutPlayer:(BOOL)b;
+
+// プレイヤーがそのターンに置いたかどうか
+- (BOOL)isPutPlayer;
 
 // ブロックを追加する
 + (Block*)add:(int)number x:(float)x y:(float)y;

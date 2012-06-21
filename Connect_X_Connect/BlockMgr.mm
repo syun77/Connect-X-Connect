@@ -265,21 +265,40 @@
                 [BlockMgr countDonwBlock:b];
             }
             
-            // ダメージ処理を行う
-            int chipX = [b getChipX];
-            int chipY = [b getChipY];
-            int frame  = BEZIEREFFECT_FRAME + Math_RandInt(-10, 10);
-//            int damage = [b getNumber] * 3;
-            int damage = 30;
-            BezierEffect* eft = [BezierEffect addFromChip:chipX chipY:chipY];
-            if (eft) {
+            if ([b isPutPlayer]) {
                 
-                // エフェクト生成
-                [eft setParamDamage:eBezierEffect_Player frame:frame damage:damage];
+                // プレイヤーがそのターンに置いたブロックは除外
+                // 下にあるブロックを消す
+                int px = [b getChipX];
+                int py = [b getChipY] - 1;
+                
+                [BlockMgr requestVanish:px y:py];
+            }
+            else {
+        
+                // ダメージ処理を行う
+                int chipX = [b getChipX];
+                int chipY = [b getChipY];
+                int frame  = BEZIEREFFECT_FRAME + Math_RandInt(-10, 10);
+    //            int damage = [b getNumber] * 3;
+                int damage = 30;
+                BezierEffect* eft = [BezierEffect addFromChip:chipX chipY:chipY];
+                if (eft) {
+                    
+                    // エフェクト生成
+                    [eft setParamDamage:eBezierEffect_Player frame:frame damage:damage];
+                }
+                
+                // ダメージブロック数をカウントアップ
+                ret++;
             }
             
             [b requestVanish];
-            ret++;
+        }
+        else {
+            
+            // プレイヤーが置いたフラグを下げておく
+            [b setPutPlayer:NO];
         }
     }
     

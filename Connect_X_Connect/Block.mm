@@ -110,6 +110,7 @@ enum eState {
     
     m_ReqFall       = NO;
     m_ReqVanish     = NO;
+    m_bPutPlayer    = NO;
     [self setVisible:YES];
 }
 
@@ -540,6 +541,22 @@ enum eState {
         m_nNumber--;
         [self setNumber:m_nNumber];
     }
+}
+
+/**
+ * プレイヤーがそのターンに置いたかどうかフラグを設定
+ */
+- (void)setPutPlayer:(BOOL)b {
+    
+    m_bPutPlayer = b;
+}
+
+/**
+ * プレイヤーがそのターンに置いたかどうか
+ */
+- (BOOL)isPutPlayer {
+    
+    return m_bPutPlayer;
 }
 
 /**
