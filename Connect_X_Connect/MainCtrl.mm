@@ -87,16 +87,8 @@ enum eTouchState {
     
     m_NumberPrev = 1;
     
-//    m_nBlockLevel = 1;
-    
     // レベルを取得
     m_nLevel = SaveData_GetRank();
-    
-//    for (int i = 0; i < BLOCK_NEXT_COUNT; i++) {
-//        
-//        // 出現ブロックをキューに積んでおく
-//        m_Queue.push(Math_RandInt(2, m_nBlockLevel));
-//    }
     
     m_bCombo = NO;
     m_nCombo = 0;
@@ -791,7 +783,7 @@ enum eTouchState {
                         int frame  = BEZIEREFFECT_FRAME + Math_RandInt(-10, 10);
                         
                         // ダメージは後で計算する
-                        int damage = 0;
+                        int damage = val;
                         
                         [eft setParamDamage:eBezierEffect_Enemy frame:frame damage:damage];
                     }

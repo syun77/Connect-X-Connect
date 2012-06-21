@@ -76,7 +76,7 @@
     
     // ダメージ処理
     Enemy* enemy = [self _getEnemy];
-    [enemy damage:m_Damage];
+    [enemy damageAt:m_Damage];
     
     
 }

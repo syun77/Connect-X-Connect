@@ -203,7 +203,7 @@ static const int TIMER_DAMAGE = 30;
     m_Hp -= v;
     if (m_Hp < 0) {
         
-        if (prev >= 30) {
+        if (prev >= 2) {
             
             // 30以上の場合、一撃では死なないようにしておく
             m_Hp = 1;

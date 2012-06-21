@@ -391,17 +391,8 @@ enum eState {
         [FontEffect add:eFontEffect_Damage x:ENEMY_POS_X y:ENEMY_POS_DAMAGE text:[NSString stringWithFormat:@"%d", v]];
     }
     
-    // TODO: ATゲージを減らす
-    m_nAT -= 5;
-    if (m_nAT < 0) {
-        m_nAT = 0;
-    }
-    
     // スタンフラグを立てる
     m_bStun = YES;
-    
-    AtGauge* atGauge = [self _getAtGauge];
-    [atGauge damageAt:[self getAtRatio]];
     
     // ダメージエフェクト再生
     [Particle addDamage:ENEMY_POS_X y:ENEMY_POS_Y];
@@ -421,6 +412,20 @@ enum eState {
         // 大ダメージ
         Sound_PlaySe(@"hit05.wav");
     }
+    
+}
+
+// ATゲージへのダメージを与える
+- (void)damageAt:(int)v {
+    
+    // ATゲージを減らす
+    m_nAT -= v * v;
+    if (m_nAT < 0) {
+        m_nAT = 0;
+    }
+    
+    AtGauge* atGauge = [self _getAtGauge];
+    [atGauge damageAt:[self getAtRatio]];
     
 }
 
@@ -470,15 +475,15 @@ enum eState {
         int d = m_dAT;
         int nLine = [BlockMgr count] / FIELD_BLOCK_COUNT_X;
         if (nLine < 3) {
-            d *= 2;
-            d += 10;
-        }
-        else if(nLine < 4) {
             d = d * 1.5;
             d += 5;
         }
-        else if(nLine < 5) {
+        else if(nLine < 4) {
             d = d * 1.2;
+            d += 2;
+        }
+        else if(nLine < 5) {
+            d = d * 1.1;
         }
         
         m_nAT += d;

@@ -55,6 +55,9 @@
 // ダメージを与える
 - (void)damage:(int)v;
 
+// ATゲージへのダメージを与える
+- (void)damageAt:(int)v;
+
 // 危険状態かどうか
 - (BOOL)isDanger;
 
