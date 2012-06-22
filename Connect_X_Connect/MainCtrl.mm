@@ -100,6 +100,7 @@ enum eTouchState {
     int nSound = GameCommon_LevelToSound(m_nLevel);
     NSString* file = GameCommon_GetSoundFile(nSound);
     Sound_PlayBgm(file);
+    
     // キャプション表示開始
 //    Caption* caption = [self _getCaption];
 //    [caption start];
@@ -1013,6 +1014,10 @@ enum eTouchState {
             // キャプション表示開始
             Caption* caption = [self _getCaption];
             [caption start:nSound];
+            
+            // 背景画像設定
+            Back* back = [self _getBack];
+            [back change:nSound];
         }
         
         // 出現ブロック設定

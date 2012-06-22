@@ -8,6 +8,7 @@
 
 #import "Back.h"
 #import "SceneMain.h"
+#import "SaveData.h"
 
 @implementation Back
 
@@ -23,6 +24,14 @@ static const int TIMER_DARK = 10;
 // 危険タイマー
 static const int TIMER_DANGER = 10;
 
+- (CGRect)_getTexRect:(int)n {
+    
+    int x = (n%3) * 320;
+    int y = (n/3) * 480;
+    
+    return CGRectMake(x, y, 320, 480);
+}
+
 /**
  * コンストラクタ
  */
@@ -33,9 +42,16 @@ static const int TIMER_DANGER = 10;
         return self;
     }
     
-    [self load:@"bg001.png"];
+    [self load:@"bg.png"];
     self._x = System_CenterX();
     self._y = System_CenterY();
+    
+    // レベルを取得
+    int nLevel = SaveData_GetRank();
+    
+    int nSound = GameCommon_LevelToSound(nLevel);
+    CGRect r = [self _getTexRect:nSound];
+    [self setTexRect:r];
     
     [self move:0];
     [self create];
@@ -99,4 +115,17 @@ static const int TIMER_DANGER = 10;
     m_State = eState_Light;
 }
 
+// 背景画像入れ替え
+- (void)change:(int)n {
+    
+    CGRect r = [self _getTexRect:n];
+    [self setTexRect:r];
+}
+
+// 背景画像入れ替え（素早く変える）
+- (void)changeQuick:(int)n {
+    
+    CGRect r = [self _getTexRect:n];
+    [self setTexRect:r];
+}
 @end

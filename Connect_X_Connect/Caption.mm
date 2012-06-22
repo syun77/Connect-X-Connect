@@ -8,6 +8,7 @@
 
 #import "Caption.h"
 #import "gamecommon.h"
+#import "SaveData.h"
 
 static const int TIMER_APPEAR = 240;
 
@@ -34,6 +35,13 @@ static const int TIMER_APPEAR = 240;
     [self.m_pFont createFont:layer length:36];
     [self.m_pFont setVisible:NO];
     [self.m_pFont setPos:1 y:4];
+    
+    // レベルを取得
+    int nLevel = SaveData_GetRank();
+    
+    int nSound = GameCommon_LevelToSound(nLevel);
+    [self start:nSound];
+    
 }
 
 - (void)dealloc {
@@ -81,6 +89,7 @@ static const int TIMER_APPEAR = 240;
 - (void)start:(int)nSound {
     
     [self.m_pFont setVisible:YES];
+    [self.m_pFont setAlpha:0xFF];
     NSString* name = GameCommon_GetSoundName(nSound);
     [self.m_pFont setText:[NSString stringWithFormat:@"%@ - dong", name]];
     m_Timer = TIMER_APPEAR;

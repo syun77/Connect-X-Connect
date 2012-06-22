@@ -24,4 +24,10 @@
 - (void)beginDark;
 - (void)beginLight;
 
+// 背景画像入れ替え
+- (void)change:(int)n;
+
+// 背景画像入れ替え（素早く変える）
+- (void)changeQuick:(int)n;
+
 @end
