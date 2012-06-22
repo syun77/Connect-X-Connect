@@ -793,7 +793,8 @@ enum eTouchState {
                     BezierEffect* eft = [BezierEffect addFromChip:i chipY:j];
                     if (eft) {
                         
-                        int frame  = BEZIEREFFECT_FRAME + Math_RandInt(-10, 10);
+                        int frame = 20;
+                        frame += (val - 1) * 3;
                         
                         // ダメージは後で計算する
                         int damage = val;
