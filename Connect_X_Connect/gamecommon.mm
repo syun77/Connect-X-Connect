@@ -99,20 +99,20 @@ int GameCommon_LevelToSound(int nLevel) {
         return 1;
     }
     else {
-        int lv = (nLevel - 30)/30%4;
+        int lv = (nLevel - 30)/15%4;
         
         switch (lv) {
             case 0:
-                return 2;
+                return 5;
                 
             case 1:
-                return 3;
+                return 2;
                 
             case 2:
-                return 4;
+                return 3;
                 
             default: // case 3:
-                return 5;
+                return 4;
         }
     }
 }
@@ -128,7 +128,7 @@ NSString* GameCommon_GetSoundFile(int nSound) {
         case 1: { return @"sayonara_satellites.mp3"; }
         case 2: { return @"alyssum.mp3"; }
         case 3: { return @"robiopsys.mp3"; }
-        case 4: { return @"lily_of_the_valley.mp3"; }
+        case 4: { return @"babys_breath.mp3"; }
         case 5: { return @"straycat.mp3"; }
             
         default: { return @"alyssum.mp3"; }
@@ -146,7 +146,7 @@ NSString* GameCommon_GetSoundName(int nSound) {
         case 1: { return @"sayonara satellites"; }
         case 2: { return @"alyssum"; }
         case 3: { return @"robiopsys"; }
-        case 4: { return @"lily of the valley"; }
+        case 4: { return @"babys breath"; }
         case 5: { return @"straycat"; }
             
         default: { return @"alyssum"; }

@@ -77,9 +77,9 @@ static const int TIMER_APPEAR = 240;
 //        CGPoint p1 = CGPointMake(0, y);
 //        CGPoint p2 = CGPointMake(320, y);
 //        ccDrawLine(p1, p2);
-        float a = 0.5;
+        float a = 0.3;
         if (m_Timer < 30) {
-            a = 0.5 * m_Timer / 30;
+            a = 0.3 * m_Timer / 30;
         }
         glColor4f(0, 0, 0, a);
         [self fillRect:160 cy:36 w:160 h:6 rot:0 scale:1];

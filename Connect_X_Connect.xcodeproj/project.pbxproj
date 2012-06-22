@@ -42,6 +42,7 @@
 		C7516FB2158C1D08000C4BD4 /* damage3.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7516FB1158C1D08000C4BD4 /* damage3.wav */; };
 		C7516FB5158DA74E000C4BD4 /* SceneTitle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7516FB4158DA74E000C4BD4 /* SceneTitle.mm */; };
 		C764E222159404EF001C7B13 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C764E221159404EF001C7B13 /* bg.png */; };
+		C764E2251594D787001C7B13 /* babys_breath.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C764E2241594D787001C7B13 /* babys_breath.mp3 */; };
 		C7750C24157A768C00F78387 /* Vec.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C23157A768C00F78387 /* Vec.mm */; };
 		C7750C28157B1D2100F78387 /* BezierEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C27157B1D2100F78387 /* BezierEffect.mm */; };
 		C7750C2A157BA9B300F78387 /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7750C29157BA9B300F78387 /* all.png */; };
@@ -88,7 +89,6 @@
 		C799C42E159184C100856782 /* GameOver.mm in Sources */ = {isa = PBXBuildFile; fileRef = C799C42D159184C100856782 /* GameOver.mm */; };
 		C799C43115921D1800856782 /* Caption.mm in Sources */ = {isa = PBXBuildFile; fileRef = C799C43015921D1700856782 /* Caption.mm */; };
 		C799C4331592249B00856782 /* nu_sunday.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C799C4321592249B00856782 /* nu_sunday.mp3 */; };
-		C799C43515922D4C00856782 /* lily_of_the_valley.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C799C43415922D4C00856782 /* lily_of_the_valley.mp3 */; };
 		C799C4381592361400856782 /* pi.wav in Resources */ = {isa = PBXBuildFile; fileRef = C799C4361592361300856782 /* pi.wav */; };
 		C799C4391592361400856782 /* push.wav in Resources */ = {isa = PBXBuildFile; fileRef = C799C4371592361300856782 /* push.wav */; };
 		C79FCD4B1581B795008AA2D6 /* Chain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C79FCD4A1581B795008AA2D6 /* Chain.mm */; };
@@ -273,6 +273,7 @@
 		C7516FB3158DA74E000C4BD4 /* SceneTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneTitle.h; sourceTree = "<group>"; };
 		C7516FB4158DA74E000C4BD4 /* SceneTitle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SceneTitle.mm; sourceTree = "<group>"; };
 		C764E221159404EF001C7B13 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = Resources/bg.png; sourceTree = "<group>"; };
+		C764E2241594D787001C7B13 /* babys_breath.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = babys_breath.mp3; path = Resources/babys_breath.mp3; sourceTree = "<group>"; };
 		C7750C23157A768C00F78387 /* Vec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Vec.mm; sourceTree = "<group>"; };
 		C7750C26157B1D2100F78387 /* BezierEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierEffect.h; sourceTree = "<group>"; };
 		C7750C27157B1D2100F78387 /* BezierEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BezierEffect.mm; sourceTree = "<group>"; };
@@ -363,7 +364,6 @@
 		C799C42F15921D1600856782 /* Caption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Caption.h; sourceTree = "<group>"; };
 		C799C43015921D1700856782 /* Caption.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Caption.mm; sourceTree = "<group>"; };
 		C799C4321592249B00856782 /* nu_sunday.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = nu_sunday.mp3; path = Resources/nu_sunday.mp3; sourceTree = "<group>"; };
-		C799C43415922D4C00856782 /* lily_of_the_valley.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = lily_of_the_valley.mp3; path = Resources/lily_of_the_valley.mp3; sourceTree = "<group>"; };
 		C799C4361592361300856782 /* pi.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pi.wav; path = Resources/pi.wav; sourceTree = "<group>"; };
 		C799C4371592361300856782 /* push.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = push.wav; path = Resources/push.wav; sourceTree = "<group>"; };
 		C79FCD491581B795008AA2D6 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chain.h; sourceTree = "<group>"; };
@@ -933,7 +933,7 @@
 				C799C4321592249B00856782 /* nu_sunday.mp3 */,
 				C7516FA6158C19FA000C4BD4 /* sayonara_satellites.mp3 */,
 				C7516FA7158C19FA000C4BD4 /* straycat.mp3 */,
-				C799C43415922D4C00856782 /* lily_of_the_valley.mp3 */,
+				C764E2241594D787001C7B13 /* babys_breath.mp3 */,
 				C7295A9C15837E6A006A70F8 /* block.png */,
 				C7750C29157BA9B300F78387 /* all.png */,
 				C7F100781573CB86002D7E00 /* font.png */,
@@ -1341,10 +1341,10 @@
 				C7516FB2158C1D08000C4BD4 /* damage3.wav in Resources */,
 				C7889C4E158F389600AAECDE /* AdWhirlWebBrowser.xib in Resources */,
 				C799C4331592249B00856782 /* nu_sunday.mp3 in Resources */,
-				C799C43515922D4C00856782 /* lily_of_the_valley.mp3 in Resources */,
 				C799C4381592361400856782 /* pi.wav in Resources */,
 				C799C4391592361400856782 /* push.wav in Resources */,
 				C764E222159404EF001C7B13 /* bg.png in Resources */,
+				C764E2251594D787001C7B13 /* babys_breath.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
