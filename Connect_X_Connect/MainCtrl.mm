@@ -404,6 +404,9 @@ enum eTouchState {
         if (m_ReqParam.nShield > 0) {
             
             // シールド設定
+            // １を含めた数にする
+            number = [level getNumberBottom];
+            [b setNumber:number];
             [b setShield:m_ReqParam.nShield];
         }
         
@@ -990,6 +993,8 @@ enum eTouchState {
         // 勝利処理へ
         [self _changeState:eState_Win];
         m_Timer = TIMER_ENEMY_VANISH;
+        
+        // 敵消滅
         [enemy destroy];
         
         // レベルアップ演出開始
@@ -1093,6 +1098,9 @@ enum eTouchState {
     // 敵出現開始
     [enemy setLevel:m_nLevel];
     [enemy initialize];
+    
+    // 攻撃要求を初期化しておく
+    m_ReqParam.clear();
     
     // 待機状態にする
     [BlockMgr changeStandbyAll];
