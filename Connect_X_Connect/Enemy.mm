@@ -73,7 +73,8 @@ enum eState {
         return self;
     }
     
-    [self load:@"all.png"];
+//    [self load:@"all.png"];
+    [self load:@"enemy.png"];
     [self create];
     
     self._x = ENEMY_POS_X;
@@ -81,6 +82,7 @@ enum eState {
     CGRect r = Exerinya_GetRect(eExerinyaRect_Nasu);
     [self setTexRect:r];
     [self.m_pSprite setVisible:NO];
+    [self setScale:2];
     
     m_Id = 0;
     m_Hp = HP_MAX;
@@ -293,8 +295,10 @@ enum eState {
     EnemyParam p = s_appear[dLv];
     m_Id = p.m_Id;
     EnemyTbl tbl = s_tbl[m_Id];
-    eExerinyaRect type = (eExerinyaRect)tbl.m_Id;
-    CGRect r = Exerinya_GetRect(type);
+//    eExerinyaRect type = (eExerinyaRect)tbl.m_Id;
+//    CGRect r = Exerinya_GetRect(type);
+//    [self setTexRect:r];
+    CGRect r = _getEnemyTexRect(p.m_Id);
     [self setTexRect:r];
     
     // 最大HP設定
@@ -487,9 +491,12 @@ enum eState {
         }
         
         m_nAT += d;
-        if (m_nAT > AT_MAX) {
+        if (m_nAT >= AT_MAX) {
             
+            Sound_PlaySe(@"lock.wav");
             m_nAT = AT_MAX;
+            
+            [Particle addBlockAppear:self._x y:self._y];
         }
         
         AtGauge* gauge = [self _getAtGauge];

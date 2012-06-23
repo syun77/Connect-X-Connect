@@ -21,6 +21,14 @@ enum eEnemy {
     eEnemy_XBox,
 };
 
+static CGRect _getEnemyTexRect(eEnemy type)
+{
+    float px = 120 * type;
+    float py = 0;
+    
+    return CGRectMake(px, py, 120, 120);
+}
+
 /**
  * 攻撃種別
  */
