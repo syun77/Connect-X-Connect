@@ -45,6 +45,7 @@
 		C764E2251594D787001C7B13 /* babys_breath.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C764E2241594D787001C7B13 /* babys_breath.mp3 */; };
 		C764E22715953D55001C7B13 /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = C764E22615953D55001C7B13 /* enemy.png */; };
 		C764E22915954AFD001C7B13 /* lock.wav in Resources */ = {isa = PBXBuildFile; fileRef = C764E22815954AFD001C7B13 /* lock.wav */; };
+		C764E22B15956383001C7B13 /* vanish03.wav in Resources */ = {isa = PBXBuildFile; fileRef = C764E22A15956383001C7B13 /* vanish03.wav */; };
 		C7750C24157A768C00F78387 /* Vec.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C23157A768C00F78387 /* Vec.mm */; };
 		C7750C28157B1D2100F78387 /* BezierEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C27157B1D2100F78387 /* BezierEffect.mm */; };
 		C7750C2A157BA9B300F78387 /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7750C29157BA9B300F78387 /* all.png */; };
@@ -278,6 +279,7 @@
 		C764E2241594D787001C7B13 /* babys_breath.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = babys_breath.mp3; path = Resources/babys_breath.mp3; sourceTree = "<group>"; };
 		C764E22615953D55001C7B13 /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = enemy.png; path = Resources/enemy.png; sourceTree = "<group>"; };
 		C764E22815954AFD001C7B13 /* lock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = lock.wav; path = Resources/lock.wav; sourceTree = "<group>"; };
+		C764E22A15956383001C7B13 /* vanish03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = vanish03.wav; path = Resources/vanish03.wav; sourceTree = "<group>"; };
 		C7750C23157A768C00F78387 /* Vec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Vec.mm; sourceTree = "<group>"; };
 		C7750C26157B1D2100F78387 /* BezierEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierEffect.h; sourceTree = "<group>"; };
 		C7750C27157B1D2100F78387 /* BezierEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BezierEffect.mm; sourceTree = "<group>"; };
@@ -921,6 +923,7 @@
 				C764E221159404EF001C7B13 /* bg.png */,
 				C764E22615953D55001C7B13 /* enemy.png */,
 				C799C4361592361300856782 /* pi.wav */,
+				C764E22A15956383001C7B13 /* vanish03.wav */,
 				C799C4371592361300856782 /* push.wav */,
 				C7516FAF158C1B33000C4BD4 /* encount.wav */,
 				C764E22815954AFD001C7B13 /* lock.wav */,
@@ -1353,6 +1356,7 @@
 				C764E2251594D787001C7B13 /* babys_breath.mp3 in Resources */,
 				C764E22715953D55001C7B13 /* enemy.png in Resources */,
 				C764E22915954AFD001C7B13 /* lock.wav in Resources */,
+				C764E22B15956383001C7B13 /* vanish03.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

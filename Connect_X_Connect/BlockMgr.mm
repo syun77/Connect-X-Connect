@@ -273,6 +273,8 @@
                 int py = [b getChipY] - 1;
                 
                 [BlockMgr requestVanish:px y:py];
+                
+                Sound_PlaySe(@"vanish03.wav");
             }
             else {
         
