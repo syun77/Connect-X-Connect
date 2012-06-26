@@ -113,7 +113,7 @@ static SceneTitle* scene_ = nil;
     [self.fontCopyRight setPos:20 y:1];
     [self.fontCopyRight setScale:1];
     [self.fontCopyRight setAlign:eFontAlign_Center];
-    [self.fontCopyRight setText:@"(c) 2012 2dgames.jp"];
+    [self.fontCopyRight setText:@"(c) 2dgames.jp 2012"];
     
     self.fontStartButton = [AsciiFont node];
     [self.fontStartButton createFont:self.baseLayer length:12];
