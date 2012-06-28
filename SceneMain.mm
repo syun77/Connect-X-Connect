@@ -58,7 +58,7 @@ static SceneMain* scene_ = nil;
 
 @synthesize cursor;
 @synthesize grid;
-//@synthesize hpGauge;
+@synthesize hpGauge;
 //@synthesize hpGaugeEnemy;
 @synthesize atGauge;
 @synthesize player;
@@ -178,8 +178,8 @@ static SceneMain* scene_ = nil;
     self.grid = [Grid node];
     [self.baseLayer addChild:self.grid z:ePrio_Grid];
     
-//    self.hpGauge = [HpGauge node];
-//    [self.baseLayer addChild:self.hpGauge z:ePrio_HpGauge];
+    self.hpGauge = [HpGauge node];
+    [self.baseLayer addChild:self.hpGauge z:ePrio_HpGauge];
     
 //    self.hpGaugeEnemy = [HpGauge node];
 //    [self.baseLayer addChild:self.hpGaugeEnemy z:ePrio_HpGauge];
@@ -280,7 +280,7 @@ static SceneMain* scene_ = nil;
     self.player = nil;
     self.atGauge = nil;
 //    self.hpGaugeEnemy = nil;
-//    self.hpGauge = nil;
+    self.hpGauge = nil;
     
     self.grid = nil;
     self.cursor = nil;
@@ -332,14 +332,6 @@ static SceneMain* scene_ = nil;
         default:
             break;
     }
-    
-    if ([self.interfaceLayer isTouch]) {
-        //SceneManager_Change(@"SceneTitle");
-    }
-    
-    //[self.fontTest setText:[NSString stringWithFormat:@"%d", s_cnt]];
-    //[self.fontTest2 setText:[NSString stringWithFormat:@"%06d", s_cnt]];
-    //[self.fontTest3 setText:[NSString stringWithFormat:@"%09d", s_cnt]];
     
 }
 

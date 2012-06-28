@@ -59,7 +59,7 @@
     
     Cursor*         cursor;
     Grid*           grid;
-//    HpGauge*        hpGauge;
+    HpGauge*        hpGauge;
 //    HpGauge*        hpGaugeEnemy;
     AtGauge*        atGauge;
     Player*         player;
@@ -101,7 +101,7 @@
 @property (nonatomic, retain)TokenManager*      mgrParticle;
 @property (nonatomic, retain)Cursor*            cursor;
 @property (nonatomic, retain)Grid*              grid;
-//@property (nonatomic, retain)HpGauge*           hpGauge;
+@property (nonatomic, retain)HpGauge*           hpGauge;
 //@property (nonatomic, retain)HpGauge*           hpGaugeEnemy;
 @property (nonatomic, retain)AtGauge*           atGauge;
 @property (nonatomic, retain)Player*            player;

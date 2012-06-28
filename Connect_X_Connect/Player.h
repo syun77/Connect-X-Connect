@@ -24,6 +24,9 @@
     int m_Hp;       // HP
     int m_HpMax;    // 最大HP
     
+    int m_Mp;       // MP
+    int m_MpMax;    // 最大MP
+    
 }
 
 @property (nonatomic, retain)AsciiFont* m_pFont;
@@ -48,5 +51,17 @@
 
 // 死亡
 - (void)destroy;
+
+// MPの割合を取得する
+- (float)getMpRatio;
+
+// MPが最大値かどうか
+- (BOOL)isMpMax;
+
+// MPをクリアする
+- (void)clearMp;
+
+// MPを増やす
+- (void)addMp:(int)v;
 
 @end

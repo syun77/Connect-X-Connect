@@ -15,6 +15,7 @@ static const int PLAYER_POS_X = 64;
 static const int PLAYER_POS_Y = 480 - 108;
 static const int PLAYER_POS_DAMAGE = PLAYER_POS_Y - 16;
 static const int TIMER_DAMAGE = 30;
+static const int MP_MAX = 100;
 
 /**
  * プレイヤーの実装
@@ -130,10 +131,10 @@ static const int TIMER_DAMAGE = 30;
 /**
  * HPゲージの取得
  */
-//- (HpGauge*)_getGauge {
-//    
-//    return [SceneMain sharedInstance].hpGauge;
-//}
+- (HpGauge*)_getGauge {
+    
+    return [SceneMain sharedInstance].hpGauge;
+}
 
 /**
  * フォント文字の更新
@@ -164,11 +165,11 @@ static const int TIMER_DAMAGE = 30;
     m_Hp = HP_MAX;
     m_HpMax = HP_MAX;
     
-//    HpGauge* hpGauge = [self _getGauge];
-//    [hpGauge initHp:[self getHpRatio]];
+    HpGauge* hpGauge = [self _getGauge];
+    [hpGauge initHp:[self getHpRatio]];
     
     // 描画座標を設定
-//    [hpGauge setPos:32 y:480-128];
+    [hpGauge setPos:32 y:480-128];
     [self _setFont];
 }
 
@@ -257,6 +258,42 @@ static const int TIMER_DAMAGE = 30;
     
     // 非表示にする
     [self setVisible:NO];
+}
+
+/**
+ * MPの割合を取得する
+ */
+- (float)getMpRatio {
+    
+    return 1.0 * m_Mp / m_MpMax;
+}
+
+/**
+ * MPが最大値かどうか
+ */
+- (BOOL)isMpMax {
+    
+    return m_Mp == m_MpMax;
+}
+
+/**
+ * MPをクリアする
+ */
+- (void)clearMp {
+    
+    m_Mp = 0;
+}
+
+/**
+ * MPを増やす
+ */
+- (void)addMp:(int)v {
+    
+    m_Mp += v;
+    if (m_Mp > m_MpMax) {
+        
+        m_Mp = m_MpMax;
+    }
 }
 
 @end
