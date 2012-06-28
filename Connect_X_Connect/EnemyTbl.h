@@ -3,7 +3,7 @@
 //  Connect_X_Connect
 //
 //  Created by OzekiSyunsuke on 12/06/19.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012年 2dgames.jp. All rights reserved.
 //
 
 #ifndef Connect_X_Connect_EnemyTbl_h

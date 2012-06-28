@@ -3,7 +3,7 @@
 //  Connect_X_Connect
 //
 //  Created by OzekiSyunsuke on 12/06/04.
-//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright 2012年 2dgames.jp. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

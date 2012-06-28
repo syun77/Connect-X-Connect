@@ -19,6 +19,7 @@
     int         m_tPast;        // 経過時間
     int         m_nNumber;      // 数値
     int         m_bSkull;       // ドクロかどうか
+    BOOL        m_bSpecial;     // スペシャルブロックかどうか
     int         m_tCursor;      // カーソルタイマー
     int         m_Timer;        // 汎用タイマー
     int         m_State;        // 状態
@@ -49,6 +50,12 @@
 
 // ドクロブロックかどうか
 - (BOOL)isSkull;
+
+// スペシャルブロックの設定をする
+- (void)setSpecial:(BOOL)b;
+
+// スペシャルブロックかどうか
+- (BOOL)isSpecial;
 
 // チップ座標の取得 (X座標)
 - (int)getChipX;

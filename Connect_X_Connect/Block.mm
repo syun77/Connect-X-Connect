@@ -437,6 +437,20 @@ enum eState {
 }
 
 /**
+ * スペシャルブロックの設定をする
+ */
+- (void)setSpecial:(BOOL)b {
+    m_bSpecial = b;
+}
+
+/**
+ * スペシャルブロックかどうか
+ */
+- (BOOL)isSpecial {
+    return m_bSpecial;
+}
+
+/**
  * チップ座標の取得 (X座標)
  */
 - (int)getChipX {

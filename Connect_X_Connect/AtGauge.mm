@@ -3,7 +3,7 @@
 //  Connect_X_Connect
 //
 //  Created by OzekiSyunsuke on 12/06/12.
-//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright 2012年 2dgames.jp. All rights reserved.
 //
 
 #import "AtGauge.h"
@@ -90,7 +90,7 @@ enum eState {
     [super visit];
     
     const int WIDTH = 80;
-    const int HEIGHT = 8;
+    const int HEIGHT = 4;
     
     System_SetBlend(eBlend_Normal);
     
@@ -100,9 +100,9 @@ enum eState {
     glLineWidth(1);
     {
         glColor4f(1, 1, 1, 0.5);
-        [self drawRectLT:x-1 y:y-5 w:WIDTH+2 h:HEIGHT+2 rot:0 scale:1];
+        [self drawRectLT:x-1 y:y-3 w:WIDTH+2 h:HEIGHT+2 rot:0 scale:1];
         glColor4f(0, 0, 0, 0.5);
-        [self fillRectLT:x y:y-4 w:WIDTH h:HEIGHT rot:0 scale:1];
+        [self fillRectLT:x y:y-2 w:WIDTH h:HEIGHT rot:0 scale:1];
     }
     
     
