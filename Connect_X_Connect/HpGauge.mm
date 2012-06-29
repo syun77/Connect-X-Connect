@@ -59,13 +59,22 @@ static const int TIMER_DECREASE = 60;
     [super visit];
     
     const int WIDTH = 80;
-    const int HEIGHT = 8;
+    const int HEIGHT = 4;
     
-    System_SetBlend(eBlend_Add);
     
     int x = m_BaseX;
     int y = m_BaseY;
     
+    System_SetBlend(eBlend_Normal);
+    glLineWidth(1);
+    {
+        glColor4f(1, 1, 1, 1);
+        [self drawRectLT:x-1 y:y-3 w:WIDTH+2 h:HEIGHT+2 rot:0 scale:1];
+        glColor4f(0, 0, 0, 0.5);
+        [self fillRectLT:x y:y-2 w:WIDTH h:HEIGHT rot:0 scale:1];
+    }
+    
+    System_SetBlend(eBlend_Add);
     float c = 0.3 * Math_SinEx(m_tPast%180);
     
     glLineWidth(HEIGHT);
@@ -82,11 +91,6 @@ static const int TIMER_DECREASE = 60;
         CGPoint origin = CGPointMake(x, y);
         CGPoint destination = CGPointMake(x + WIDTH*m_Now, y);
         ccDrawLine(origin, destination);
-    }
-    glLineWidth(1);
-    {
-        glColor4f(1, 1, 1, 1);
-        [self drawRectLT:x y:y-4 w:WIDTH h:HEIGHT rot:0 scale:1];
     }
     
     System_SetBlend(eBlend_Normal);

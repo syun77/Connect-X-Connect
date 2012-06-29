@@ -166,7 +166,7 @@ static const int MP_MAX = 100;
     m_HpMax = HP_MAX;
     
     HpGauge* hpGauge = [self _getGauge];
-    [hpGauge initHp:[self getHpRatio]];
+    [hpGauge initHp:[self getMpRatio]];
     
     // 描画座標を設定
     [hpGauge setPos:32 y:480-128];
