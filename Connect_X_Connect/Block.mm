@@ -397,6 +397,14 @@ enum eState {
 
 // 番号を取得する
 - (int)getNumber {
+    
+    if (m_bSpecial) {
+        return SPECIAL_INDEX;
+    }
+    if (m_bSkull) {
+        return SKULL_INDEX;
+    }
+    
     return m_nNumber;
 }
 
