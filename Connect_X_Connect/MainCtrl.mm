@@ -574,8 +574,6 @@ enum eTouchState {
                 
     }
     
-    NSLog(@"Next=%d,%d,%d", m_Queue.getFromIndex(0), m_Queue.getFromIndex(1), m_Queue.getFromIndex(2));
-    
 }
 
 /**
@@ -661,10 +659,31 @@ enum eTouchState {
         // タッチを離した
         m_TouchState = eTouchState_Standby;
         
-        // 下にブロックがなければ置ける
         // 操作中のブロックを待機状態にする
         Block* b = [BlockMgr getFromIndex:m_BlockHandler1];
         [b changeStandby];
+        
+        m_nSpecial = 0;
+        if ([b isSpecial]) {
+            
+            int i = [b getChipX];
+            // スペシャルブロックの場合、落下先を調べる
+            for (int j = FIELD_BLOCK_COUNT_Y-1; j >= 0; j--) {
+                Block* b = [BlockMgr getFromChip:i chipY:j];
+                int val = [b getNumber];
+                
+                if (val == SPECIAL_INDEX) {
+                    // スペシャルは無視
+                    continue;
+                }
+                
+                if (val != 0) {
+                    // 何かブロックがあった
+                    m_nSpecial = val;
+                    break;
+                }
+            }
+        }
         
         // プレイヤーが置いたフラグを立てる
         [b setPutPlayer:YES];
