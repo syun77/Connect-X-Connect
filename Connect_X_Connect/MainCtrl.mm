@@ -398,7 +398,6 @@ enum eTouchState {
         
         // ブロック発生
         int x = arr.get(i);
-//        int number = Math_RandInt(2, m_nBlockLevel);
         int number = [level getNumber];
         Block* b = [Block addFromChip:number chipX:x chipY:FIELD_BLOCK_COUNT_Y];
         if (m_ReqParam.nShield > 0) {
@@ -467,7 +466,6 @@ enum eTouchState {
             
             for(int i = 0; i < FIELD_BLOCK_COUNT_X; i++)
             {
-//                int number = Math_RandInt(1, m_nBlockLevel);
                 int number = [level getNumberBottom];
                 Block* b = [Block addFromChip:number chipX:i chipY:-1];
                 if (b) {
@@ -518,7 +516,7 @@ enum eTouchState {
     if (m_Timer >= BLOCK_SIZE) {
         
         // 消滅チェック
-        [FieldMgr copyBlockToLayer];
+        [FieldMgr copyBlockToLayer:m_nSpecial];
         [self _changeState:eState_VanishCheck];
     }
 }
@@ -556,8 +554,12 @@ enum eTouchState {
     // 足りない分を積んでおく
     for (int i = 0; i < cnt; i++) {
         
-//        int v = Math_RandInt(2, m_nBlockLevel);
         int v = [level getNumber];
+        
+        // TODO: スペシャルブロック出現
+        if (Math_Rand(3) == 0) {
+            v = SPECIAL_INDEX;
+        }
         
         m_Queue.push(v);
     }
@@ -569,7 +571,10 @@ enum eTouchState {
         BlockNext* next = [self _getNextBlock:i];
         
         [next setParam:i nNumber:v];
+                
     }
+    
+    NSLog(@"Next=%d,%d,%d", m_Queue.getFromIndex(0), m_Queue.getFromIndex(1), m_Queue.getFromIndex(2));
     
 }
 
@@ -612,6 +617,11 @@ enum eTouchState {
     m_ChipXPrev = 0;
     
     Block* b1 = [Block addFromChip:num1 chipX:BLOCK_APPEAR_X chipY:BLOCK_APPEAR_Y1];
+    if (num1 == SPECIAL_INDEX) {
+        
+        // スペシャルブロックにする
+        [b1 setSpecial:YES];
+    }
     
     m_BlockHandler1 = [b1 getIndex];
     
@@ -623,7 +633,7 @@ enum eTouchState {
     // 操作状態にする
     [b1 changeSlide];
     
-    [FieldMgr copyBlockToLayer];
+    [FieldMgr copyBlockToLayer:m_nSpecial];
     
     // タッチ状態をクリア
     m_TouchState = eTouchState_Standby;
@@ -750,12 +760,11 @@ enum eTouchState {
  */
 - (void)_updateVanishCheck {
     
-    [FieldMgr copyBlockToLayer];
+    [FieldMgr copyBlockToLayer:m_nSpecial];
     
     // 消去判定
     [layerVanish clear];
     Layer2D* layer = [FieldMgr getLayer];
-//    Player* player = [self _getPlayer];
     
     // 消去できた数
     int nVanish  = 0;

@@ -36,6 +36,8 @@ int GameCommon_ChipYToScreenY(int chipY);
 // ■ブロック関連
 static const int BLOCK_SIZE = 40;
 static const int BLOCK_INVALID = 0; // 無効なブロック
+static const int SKULL_INDEX = 101; // ドクロブロック
+static const int SPECIAL_INDEX = 110; // スペシャルブロック
 
 // 次に出現するブロックの数
 static const int BLOCK_NEXT_COUNT = 3;

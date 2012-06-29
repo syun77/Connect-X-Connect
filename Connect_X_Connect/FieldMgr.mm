@@ -132,8 +132,9 @@
 
 /**
  * ブロックの情報をレイヤーにコピーする
+ * @param nSpecial スペシャルブロックの数
  */
-+ (void)copyBlockToLayer {
++ (void)copyBlockToLayer:(int)nSpecial {
     
     Layer2D* layer = [FieldMgr getLayer];
     [layer clear];
@@ -148,22 +149,54 @@
         
         int x = [b getChipX];
         int y = [b getChipY];
+        int num = [b getNumber];
         
         if ([b isShield]) {
             
-            // シールド有効時は消せない
-            [layer set:x y:y val:100];
+            if (nSpecial == num) {
+                
+                // スペシャル時は消せる (1扱い)
+                [layer set:x y:y val:1];
+            }
+            else {
+                
+                // シールド有効時は消せない
+                [layer set:x y:y val:100];
+            }
             continue;
         }
         
         if ([b isSkull]) {
             
-            // ドクロはそのままでは消せない
-            [layer set:x y:y val:101];
+            if (nSpecial == SKULL_INDEX) {
+                
+                // スペシャル時は消せる (1扱い)
+                [layer set:x y:y val:1];
+            }
+            else {
+                
+                // ドクロはそのままでは消せない
+                [layer set:x y:y val:SKULL_INDEX];
+            }
             continue;
         }
         
-        [layer set:x y:y val:[b getNumber]];
+        if ([b isSpecial]) {
+            
+            // スペシャルブロックは１扱い
+            [layer set:x y:y val:1];
+            continue;
+        }
+        
+        if (nSpecial == num) {
+            
+            // スペシャル時は消せる (1扱い)
+            [layer set:x y:y val:1];
+        }
+        else {
+            
+            [layer set:x y:y val:[b getNumber]];
+        }
     }
     
 }

@@ -72,6 +72,11 @@ enum eState {
             // ドクロ
             px = 11 * s;
         }
+        else if(m_bSpecial) {
+            
+            // スペシャルブロック
+            px = 9 * s;
+        }
         
         return CGRectMake(px, py, s, s);
     }
@@ -111,6 +116,7 @@ enum eState {
     m_ReqFall       = NO;
     m_ReqVanish     = NO;
     m_bPutPlayer    = NO;
+    m_bSpecial      = NO;
     [self setVisible:YES];
 }
 
@@ -441,6 +447,11 @@ enum eState {
  */
 - (void)setSpecial:(BOOL)b {
     m_bSpecial = b;
+    
+    if (b) {
+        [self setTexRect:[self _getTexRect]];
+    }
+    
 }
 
 /**

@@ -44,6 +44,9 @@
     m_nNumber = nNumber;
     
     float px = (nNumber - 1) * BLOCK_SIZE;
+    if (nNumber == SPECIAL_INDEX) {
+        px = 9 * BLOCK_SIZE;
+    }
     float py = 0;
     CGRect r = CGRectMake(px, py, BLOCK_SIZE, BLOCK_SIZE);
     [self setTexRect:r];

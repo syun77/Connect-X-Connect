@@ -35,7 +35,6 @@
     
     int     m_NumberPrev;       // 出現したブロックの数値
     
-//    int         m_nBlockLevel;      // 出現ブロックレベル
     ReqBlock    m_ReqParam;    // 出現要求のパラメータ
     
     int     m_nLevel;           // 現在のレベル
@@ -54,6 +53,8 @@
     BOOL    m_bChainCheck;      // 連鎖チェックが必要かどうか
     
     int     m_nScore;           // スコア
+    
+    int     m_nSpecial;         // スペシャルブロックの対象となる数
     
 }
 

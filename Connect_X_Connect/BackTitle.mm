@@ -36,6 +36,7 @@ static const float POS_RANK_Y = 240;
     
     // 背景画像を設定
     [self setTexRect:Exerinya_GetRect(eExerinyaRect_Back)];
+//    [self setVisible:NO];
     
     // 変数初期化
     m_tPast = 0;

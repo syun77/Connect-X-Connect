@@ -51,8 +51,9 @@
 
 /**
  * ブロックの情報をレイヤーにコピーする
+ * @param nSpecial スペシャルブロックの数
  */
-+ (void)copyBlockToLayer;
++ (void)copyBlockToLayer:(int)nSpecial;
 
 
 @end

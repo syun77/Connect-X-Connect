@@ -86,9 +86,9 @@ static SceneTitle* scene_ = nil;
     
     self.m_pFont = [AsciiFont node];
     [self.m_pFont createFont:self.baseLayer length:24];
-    [self.m_pFont setScale:2];
+    [self.m_pFont setScale:4];
     [self.m_pFont setPos:3 y:40];
-    [self.m_pFont setText:[NSString stringWithFormat:@"Connect X Connect"]];
+    [self.m_pFont setText:[NSString stringWithFormat:@"KAZUOCHI!"]];
     
     self.fontHiScore = [AsciiFont node];
     [self.fontHiScore createFont:self.baseLayer length:24];
