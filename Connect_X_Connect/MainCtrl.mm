@@ -97,6 +97,9 @@ enum eTouchState {
     m_nScore = 0;
     m_nDamage = 0;
     
+    m_ReqSpecial = NO;
+    m_nSpecial = 0;
+    
     int nSound = GameCommon_LevelToSound(m_nLevel);
     NSString* file = GameCommon_GetSoundFile(nSound);
     Sound_PlayBgm(file);
@@ -556,9 +559,11 @@ enum eTouchState {
         
         int v = [level getNumber];
         
-        // TODO: スペシャルブロック出現
-        if (Math_Rand(3) == 0) {
+        // スペシャルブロック出現
+        if (m_ReqSpecial) {
+            
             v = SPECIAL_INDEX;
+            m_ReqSpecial = NO;
         }
         
         m_Queue.push(v);
@@ -867,6 +872,10 @@ enum eTouchState {
         Combo* combo = [self _getCombo];
         [combo begin:m_nCombo];
         
+        // MPを増やす
+        Player* player = [self _getPlayer];
+        [player addMp:MP_INC_COMBO + m_nChain + m_nCombo];
+        
         // 連鎖チェック開始
         m_bChainCheck = YES;
     }
@@ -958,6 +967,10 @@ enum eTouchState {
         // ダメージあり
         [self _changeState:eState_DamageExec];
         
+        // MPを増やす
+        Player* player = [self _getPlayer];
+        [player addMp:MP_INC_DAMAGE + m_nDamage / 2];
+        
         Sound_PlaySe(@"swing.wav");
         return;
     }
@@ -1025,6 +1038,10 @@ enum eTouchState {
         
         // 敵消滅
         [enemy destroy];
+        
+        // MPを増やす
+        Player* player = [self _getPlayer];
+        [player addMp:MP_INC_DEFEAT];
         
         // レベルアップ演出開始
 //        AsciiFont* font = [self _getFontLevelup];
@@ -1311,6 +1328,20 @@ enum eTouchState {
 - (void)reqestBlock:(ReqBlock)req {
     
     m_ReqParam = req;
+}
+
+/**
+ * スペシャル要求を送る
+ */
+- (void)requestSpecial {
+    
+    Player* player = [self _getPlayer];
+    if([player isMpMax]) {
+        
+        // スペシャル要求成功
+        m_ReqSpecial = YES;
+        [player clearMp];
+    }
 }
 
 /**

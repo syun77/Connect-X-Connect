@@ -275,6 +275,10 @@
                 [BlockMgr requestVanish:px y:py];
                 
                 Sound_PlaySe(@"vanish03.wav");
+                
+                // スペシャル要求を発行
+                MainCtrl* ctrl = [SceneMain sharedInstance].ctrl;
+                [ctrl requestSpecial];
             }
             else {
         

@@ -43,6 +43,7 @@ static const int MP_MAX = 100;
     [self setVisible:NO];
     
     m_Hp = HP_MAX;
+    m_MpMax = MP_MAX;
     
     return self;
 }
@@ -282,6 +283,9 @@ static const int MP_MAX = 100;
 - (void)clearMp {
     
     m_Mp = 0;
+    
+    HpGauge* hpGauge = [self _getGauge];
+    [hpGauge setHpRecover:[self getMpRatio]];
 }
 
 /**
@@ -294,6 +298,9 @@ static const int MP_MAX = 100;
         
         m_Mp = m_MpMax;
     }
+    
+    HpGauge* hpGauge = [self _getGauge];
+    [hpGauge setHpRecover:[self getMpRatio]];
 }
 
 @end

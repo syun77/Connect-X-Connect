@@ -53,6 +53,13 @@ static const int BLOCK_APPEAR_Y2 = 9;  // ２つ目
 static const int BEZIEREFFECT_FRAME = 40; // 出現フレーム数
 static const int BEZIEREFFECT_FRAME_MAX = 80;
 
+// ■MP増加量
+static const int MP_INC_TURN = 1; // ターン経過
+static const int MP_INC_COMBO = 2; // コンボ
+static const int MP_INC_CHAIN = 2; // 連鎖
+static const int MP_INC_DAMAGE = 1; // ダメージを受けた
+static const int MP_INC_DEFEAT = 1; // 敵を倒した
+
 // ■計算式関連
 /**
  * スコアを取得する

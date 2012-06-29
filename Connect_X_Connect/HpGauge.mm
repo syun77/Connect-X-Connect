@@ -127,6 +127,8 @@ static const int TIMER_DECREASE = 60;
 // HPを設定 (回復用)
 - (void)setHpRecover:(float)v {
     
+    m_Now = v;
+    m_Prev = v;
 }
 
 @end

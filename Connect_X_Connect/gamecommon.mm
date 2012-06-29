@@ -85,7 +85,7 @@ int GameCommon_GetScore(int nVanish, int nConnect, int nKind, int nChain, int nC
         ret = 10;
     }
     
-    NSLog(@"\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d", nVanish, nConnect, c, nKind, d, nChain, e, nCombo, f, ret);
+//    NSLog(@"\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d", nVanish, nConnect, c, nKind, d, nChain, e, nCombo, f, ret);
     
     return ret;
 }

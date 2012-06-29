@@ -55,6 +55,7 @@
     int     m_nScore;           // スコア
     
     int     m_nSpecial;         // スペシャルブロックの対象となる数
+    BOOL    m_ReqSpecial;       // スペシャルブロック出現要求
     
 }
 
@@ -66,6 +67,9 @@
 
 // ブロック落下要求を送る
 - (void)reqestBlock:(ReqBlock)req;
+
+// スペシャル要求を送る
+- (void)requestSpecial;
 
 // スコアを加算する
 - (void)addScore:(int)v;
