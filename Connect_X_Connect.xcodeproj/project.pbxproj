@@ -95,6 +95,7 @@
 		C799C4331592249B00856782 /* nu_sunday.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C799C4321592249B00856782 /* nu_sunday.mp3 */; };
 		C799C4381592361400856782 /* pi.wav in Resources */ = {isa = PBXBuildFile; fileRef = C799C4361592361300856782 /* pi.wav */; };
 		C799C4391592361400856782 /* push.wav in Resources */ = {isa = PBXBuildFile; fileRef = C799C4371592361300856782 /* push.wav */; };
+		C79F755C159F5B9700B2856F /* ax.wav in Resources */ = {isa = PBXBuildFile; fileRef = C79F755B159F5B9700B2856F /* ax.wav */; };
 		C79FCD4B1581B795008AA2D6 /* Chain.mm in Sources */ = {isa = PBXBuildFile; fileRef = C79FCD4A1581B795008AA2D6 /* Chain.mm */; };
 		C79FCD4F1582ADD1008AA2D6 /* RedBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = C79FCD4E1582ADD1008AA2D6 /* RedBar.mm */; };
 		C7B9F8EC15759A080023646A /* gamecommon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7B9F8EB15759A080023646A /* gamecommon.mm */; };
@@ -384,6 +385,7 @@
 		C799C4321592249B00856782 /* nu_sunday.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = nu_sunday.mp3; path = Resources/nu_sunday.mp3; sourceTree = "<group>"; };
 		C799C4361592361300856782 /* pi.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pi.wav; path = Resources/pi.wav; sourceTree = "<group>"; };
 		C799C4371592361300856782 /* push.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = push.wav; path = Resources/push.wav; sourceTree = "<group>"; };
+		C79F755B159F5B9700B2856F /* ax.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ax.wav; sourceTree = "<group>"; };
 		C79FCD491581B795008AA2D6 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chain.h; sourceTree = "<group>"; };
 		C79FCD4A1581B795008AA2D6 /* Chain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Chain.mm; sourceTree = "<group>"; };
 		C79FCD4D1582ADD1008AA2D6 /* RedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBar.h; sourceTree = "<group>"; };
@@ -959,6 +961,7 @@
 				C7516FAF158C1B33000C4BD4 /* encount.wav */,
 				C764E22815954AFD001C7B13 /* lock.wav */,
 				C7516F9D158C18D8000C4BD4 /* sa.wav */,
+				C79F755B159F5B9700B2856F /* ax.wav */,
 				C7516F9E158C18D8000C4BD4 /* swing.wav */,
 				C7516F9B158C1754000C4BD4 /* kasya.wav */,
 				C7516FB1158C1D08000C4BD4 /* damage3.wav */,
@@ -1391,6 +1394,7 @@
 				C764E22B15956383001C7B13 /* vanish03.wav in Resources */,
 				C72080B81599442400888F15 /* README.txt in Resources */,
 				C7FC3324159EB64E00742A42 /* key.wav in Resources */,
+				C79F755C159F5B9700B2856F /* ax.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

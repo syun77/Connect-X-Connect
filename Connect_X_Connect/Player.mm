@@ -15,7 +15,8 @@ static const int PLAYER_POS_X = 64;
 static const int PLAYER_POS_Y = 480 - 108;
 static const int PLAYER_POS_DAMAGE = PLAYER_POS_Y - 16;
 static const int TIMER_DAMAGE = 30;
-static const int MP_MAX = 100;
+static const int MP_MAX = 40;
+static const int MP_MAX_INC = 40;
 
 /**
  * プレイヤーの実装
@@ -46,7 +47,8 @@ static const int MP_MAX = 100;
     m_MpMax = MP_MAX;
     
     // TODO:
-    m_Mp = 100;
+    m_Mp = MP_MAX;
+//    m_Mp = 0;
     
     return self;
 }
@@ -127,6 +129,18 @@ static const int MP_MAX = 100;
     else {
         
         [self.m_pFont setColor:ccc3(0xFF, 0xFF, 0xFF)];
+    }
+    
+    if ([self isDead] == NO && [self isMpMax]) {
+        if (m_tPast%16 == 0) {
+            
+            Particle* p = [Particle addBlockAppear:self._x y:self._y];
+            if (p) {
+                
+                // 緑色にする
+                [p setColorType:eColor_Green];
+            }
+        }
     }
 }
 
@@ -287,8 +301,8 @@ static const int MP_MAX = 100;
     
     m_Mp = 0;
     
-    // 最大MPを10増やす
-    m_MpMax += 10;
+    // 最大MPを増やす
+    m_MpMax += MP_MAX_INC;
     
     HpGauge* hpGauge = [self _getGauge];
     [hpGauge setHpRecover:[self getMpRatio]];
@@ -318,7 +332,7 @@ static const int MP_MAX = 100;
         if ([self isMpMax]) {
             
             // MPが最大値に達した
-            Sound_PlaySe(@"lock.wav");
+            Sound_PlaySe(@"key.wav");
             
             Particle* p = [Particle addBlockAppear:self._x y:self._y];
             if (p) {

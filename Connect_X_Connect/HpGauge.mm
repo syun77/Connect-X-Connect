@@ -68,7 +68,13 @@ static const int TIMER_DECREASE = 60;
     System_SetBlend(eBlend_Normal);
     glLineWidth(1);
     {
-        glColor4f(1, 1, 1, 1);
+        if (m_Now == 1.0) {
+            float c = Math_SinEx((m_tPast*4)%180);
+            glColor4f(1, c, c, 1);
+        }
+        else {
+            glColor4f(1, 1, 1, 1);
+        }
         [self drawRectLT:x-1 y:y-3 w:WIDTH+2 h:HEIGHT+2 rot:0 scale:1];
         glColor4f(0, 0, 0, 0.5);
         [self fillRectLT:x y:y-2 w:WIDTH h:HEIGHT rot:0 scale:1];
@@ -79,8 +85,8 @@ static const int TIMER_DECREASE = 60;
     float r = 0;
     float b = 0;
     if (m_Now == 1.0) {
-        r = 0.5 * Math_SinEx((m_tPast*2)%180);
-        b = 0.5 * Math_SinEx((m_tPast*2)%180);
+        r = 1 * Math_SinEx((m_tPast*4)%180);
+        b = 0.5 * Math_SinEx((m_tPast*4)%180);
     }
     
     glLineWidth(HEIGHT);

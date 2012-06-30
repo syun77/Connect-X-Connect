@@ -288,6 +288,12 @@ enum eState {
         m_State = eState_Vanish;
         m_Timer = TIMER_VANISH;
         
+        if (m_bSpecial) {
+            
+            // スペシャルブロックはSEを変える
+            Sound_PlaySe(@"ax.wav");
+        }
+        
         m_ReqVanish = NO;
     }
 }
