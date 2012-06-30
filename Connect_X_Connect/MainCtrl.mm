@@ -100,6 +100,9 @@ enum eTouchState {
     m_ReqSpecial = NO;
     m_nSpecial = 0;
     
+    // BGM音量設定
+    Sound_SetBgmVolume(1);
+    
     int nSound = GameCommon_LevelToSound(m_nLevel);
     NSString* file = GameCommon_GetSoundFile(nSound);
     Sound_PlayBgm(file);
@@ -1253,6 +1256,16 @@ enum eTouchState {
         }
     }
     
+    // BGM音量設定
+    Player* player = [self _getPlayer];
+    if ([player isDanger]) {
+        
+        // 危険時は音量を下げる
+        Sound_SetBgmVolume(0.4);
+    }
+    else {
+        Sound_SetBgmVolume(1);
+    }
     
     switch (m_State) {
             
