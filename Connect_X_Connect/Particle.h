@@ -22,11 +22,17 @@ enum eParticle {
     eParticle_Circle,   // 円
 };
 
+enum eColor {
+    eColor_Red,     // 赤
+    eColor_Green,   // 緑
+};
+
 @interface Particle : Token {
     eParticle   m_Type;     // 種別
     BOOL        m_bBlink;   // 点滅して消える
     int         m_Timer;    // タイマー
     float       m_Val;      // 汎用パラメータ
+    eColor      m_Color;    // 色
 }
 
 // 種別の設定
@@ -34,6 +40,9 @@ enum eParticle {
 
 // タイマーの設定
 - (void)setTimer:(int)timer;
+
+// 色の設定
+- (void)setColorType:(eColor)c;
 
 // 要素の追加
 + (Particle*)add:(eParticle)type x:(float)x y:(float)y rot:(float)rot speed:(float)speed;
@@ -48,6 +57,6 @@ enum eParticle {
 + (void)addShieldBreak:(float)x y:(float)y;
 
 // ブロック出現エフェクトを生成
-+ (void)addBlockAppear:(float)x y:(float)y;
++ (Particle*)addBlockAppear:(float)x y:(float)y;
 
 @end

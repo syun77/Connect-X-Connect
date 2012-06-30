@@ -86,11 +86,11 @@ struct EnemyTbl {
 
 static EnemyTbl s_tbl[] = {
     {eExerinyaRect_Nasu,    50,     400,   20, 5,  11,  8},
-    {eExerinyaRect_Tako,    25,     250,    40, 2,  3,  8},
-    {eExerinyaRect_5Box,    100,    500,   10, 2,  13,  5},
+    {eExerinyaRect_Tako,    25,     250,    40, 2,  5,  8},
+    {eExerinyaRect_5Box,    100,    500,   10, 2,  12,  5},
     {eExerinyaRect_Pudding, 1000,   4900,   15, 3,  3,  4},
     {eExerinyaRect_Milk,    1500,   4500,   15, 4,  7,  8},
-    {eExerinyaRect_XBox,    2000,   3000,  15, 1,  2,  8},
+    {eExerinyaRect_XBox,    2000,   3000,  15, 1,  4,  8},
 };
 
 #endif

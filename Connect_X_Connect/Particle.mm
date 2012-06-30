@@ -155,7 +155,19 @@ static const int TIMER_VANISH = 48;
             System_SetBlend(eBlend_Add);
             float a = ratio;
             float w = 1 + 7 * ratio;
-            glColor4f(1, 0, 0, a);
+            
+            switch (m_Color) {
+                case eColor_Red:
+                    glColor4f(1, 0, 0, a);
+                    break;
+                    
+                case eColor_Green:
+                    glColor4f(0, 1, 0, a);
+                    break;
+                    
+                default:
+                    break;
+            }
             glLineWidth(w);
             [self drawCircle:self._x cy:self._y radius:m_Timer];
             glLineWidth(1);
@@ -205,6 +217,11 @@ static const int TIMER_VANISH = 48;
 // タイマーの設定
 - (void)setTimer:(int)timer {
     m_Timer = timer;
+}
+
+// 色の設定
+- (void)setColorType:(eColor)c {
+    m_Color = c;
 }
 
 /**
@@ -302,13 +319,16 @@ static const int TIMER_VANISH = 48;
 }
 
 // ブロック出現エフェクトを生成
-+ (void)addBlockAppear:(float)x y:(float)y {
++ (Particle*)addBlockAppear:(float)x y:(float)y {
     
     Particle* p = [Particle add:eParticle_Circle x:x y:y rot:0 speed:1];
     
     if (p) {
         [p setAlpha:0xFF];
+        [p setColorType:eColor_Red];
     }
+    
+    return p;
 }
 
 @end

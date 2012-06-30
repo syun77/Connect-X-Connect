@@ -45,6 +45,9 @@ static const int MP_MAX = 100;
     m_Hp = HP_MAX;
     m_MpMax = MP_MAX;
     
+    // TODO:
+    m_Mp = 100;
+    
     return self;
 }
 
@@ -284,6 +287,9 @@ static const int MP_MAX = 100;
     
     m_Mp = 0;
     
+    // 最大MPを10増やす
+    m_MpMax += 10;
+    
     HpGauge* hpGauge = [self _getGauge];
     [hpGauge setHpRecover:[self getMpRatio]];
 }
@@ -293,10 +299,27 @@ static const int MP_MAX = 100;
  */
 - (void)addMp:(int)v {
     
+    BOOL bPrev = [self isMpMax];
+    
     m_Mp += v;
     if (m_Mp > m_MpMax) {
         
         m_Mp = m_MpMax;
+    }
+    
+    if (bPrev == NO) {
+        if ([self isMpMax]) {
+            
+            // MPが最大値に達した
+            Sound_PlaySe(@"lock.wav");
+            
+            Particle* p = [Particle addBlockAppear:self._x y:self._y];
+            if (p) {
+                
+                // 緑色にする
+                [p setColorType:eColor_Green];
+            }
+        }
     }
     
     HpGauge* hpGauge = [self _getGauge];

@@ -118,6 +118,7 @@ enum eState {
     m_bPutPlayer    = NO;
     m_bSpecial      = NO;
     [self setVisible:YES];
+    [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
 }
 
 - (void)vanish {
@@ -346,6 +347,18 @@ enum eState {
             
         default:
             break;
+    }
+    
+    if (m_bSpecial) {
+        
+        // スペシャルブロックは光る
+        int fix = 0x00;
+        int var = 0xFF;
+        int r = fix + Math_Rand(var);
+        int g = fix + Math_Rand(var);
+        int b = fix + Math_Rand(var);
+        
+        [self setColor:ccc3(r, g, b)];
     }
 }
 
