@@ -82,5 +82,8 @@
 // ATゲージの割合を取得する
 - (float)getAtRatio;
 
+// HP回復ボーナスを取得する
+- (int)getHpBonus;
+
 
 @end

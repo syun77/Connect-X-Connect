@@ -593,4 +593,24 @@ enum eState {
     return 1.0 * m_nAT / AT_MAX;
 }
 
+// HP回復ボーナスを取得する
+- (int)getHpBonus {
+    
+    switch (m_Id) {
+        case eEnemy_Nasu:
+            return 3;
+        case eEnemy_Tako:
+            return 2;
+        case eEnemy_5Box:
+            return 5;
+        case eEnemy_Pudding:
+        case eEnemy_Milk:
+            return 10;
+        case eEnemy_XBox:
+            return 15;
+        default:
+            return 0;
+    }
+}
+
 @end

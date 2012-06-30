@@ -1059,7 +1059,7 @@ enum eTouchState {
         [levelUp start];
         
         // HPを増やす
-        [player addHp:10];
+        [player addHp:[enemy getHpBonus]];
         
         int nSoundPrev = GameCommon_LevelToSound(m_nLevel);
         // レベルを増やす
