@@ -352,8 +352,8 @@ enum eState {
     if (m_bSpecial) {
         
         // スペシャルブロックは光る
-        int fix = 0x00;
-        int var = 0xFF;
+        int fix = 0x80;
+        int var = 0x7F;
         int r = fix + Math_Rand(var);
         int g = fix + Math_Rand(var);
         int b = fix + Math_Rand(var);

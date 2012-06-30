@@ -564,6 +564,15 @@ enum eTouchState {
             
             v = SPECIAL_INDEX;
             m_ReqSpecial = NO;
+            
+            Sound_PlaySe(@"key.wav");
+            Particle* p = [Particle addBlockAppear:160 y:400];
+            if (p) {
+                
+                // 出現エフェクト
+                [p setColorType:eColor_Green];
+            }
+            
         }
         
         m_Queue.push(v);

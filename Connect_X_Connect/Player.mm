@@ -292,6 +292,13 @@ static const int MP_MAX = 100;
     
     HpGauge* hpGauge = [self _getGauge];
     [hpGauge setHpRecover:[self getMpRatio]];
+    
+    Particle* p = [Particle addBlockAppear:self._x y:self._y];
+    if (p) {
+        
+        // 緑色にする
+        [p setColorType:eColor_Green];
+    }
 }
 
 /**

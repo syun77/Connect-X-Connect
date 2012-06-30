@@ -219,6 +219,7 @@
 		C7FB304E157289ED00FB3381 /* ZFont.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FB304D157289ED00FB3381 /* ZFont.m */; };
 		C7FB3053157289ED00FB3381 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FB3052157289ED00FB3381 /* main.m */; };
 		C7FB3059157289ED00FB3381 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FB3058157289ED00FB3381 /* RootViewController.m */; };
+		C7FC3324159EB64E00742A42 /* key.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7FC3323159EB64E00742A42 /* key.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -635,6 +636,7 @@
 		C7FB3057157289ED00FB3381 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		C7FB3058157289ED00FB3381 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		C7FB305D157289ED00FB3381 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
+		C7FC3323159EB64E00742A42 /* key.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = key.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -966,6 +968,7 @@
 				C7516F95158C1245000C4BD4 /* hit03.wav */,
 				C7516F99158C1646000C4BD4 /* hit04.wav */,
 				C7516F97158C14C6000C4BD4 /* hit05.wav */,
+				C7FC3323159EB64E00742A42 /* key.wav */,
 				C7516FA2158C19FA000C4BD4 /* alyssum.mp3 */,
 				C7516FA5158C19FA000C4BD4 /* robiopsys.mp3 */,
 				C799C4321592249B00856782 /* nu_sunday.mp3 */,
@@ -1387,6 +1390,7 @@
 				C764E22915954AFD001C7B13 /* lock.wav in Resources */,
 				C764E22B15956383001C7B13 /* vanish03.wav in Resources */,
 				C72080B81599442400888F15 /* README.txt in Resources */,
+				C7FC3324159EB64E00742A42 /* key.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

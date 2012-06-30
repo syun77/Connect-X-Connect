@@ -75,7 +75,13 @@ static const int TIMER_DECREASE = 60;
     }
     
     System_SetBlend(eBlend_Add);
-    float c = 0.3 * Math_SinEx(m_tPast%180);
+    float g = 0.3 * Math_SinEx(m_tPast%180);
+    float r = 0;
+    float b = 0;
+    if (m_Now == 1.0) {
+        r = 0.5 * Math_SinEx((m_tPast*2)%180);
+        b = 0.5 * Math_SinEx((m_tPast*2)%180);
+    }
     
     glLineWidth(HEIGHT);
     {
@@ -87,7 +93,7 @@ static const int TIMER_DECREASE = 60;
         ccDrawLine(origin, destination);
     }
     {
-        glColor4f(0, 1-c, 0, 1);
+        glColor4f(r, 1-g, b, 1);
         CGPoint origin = CGPointMake(x, y);
         CGPoint destination = CGPointMake(x + WIDTH*m_Now, y);
         ccDrawLine(origin, destination);
