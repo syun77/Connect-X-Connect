@@ -24,6 +24,8 @@
     int     m_State;            // 状態
     int     m_Timer;            // タイマー
     
+    int     m_tShake;           // 画面揺れタイマー
+    
     int     m_TouchState;       // タッチしているかどうか
     float   m_TouchStartY;      // タッチ開始座標 (Y)
     float   m_TouchX;           // タッチ座標 (X)

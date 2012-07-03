@@ -16,6 +16,7 @@
 #import "gamecommon.h"
 
 static const int TIMER_ENEMY_VANISH = 30;
+static const int TIMER_SHAKE = 64;
 
 /**
  * 状態
@@ -76,6 +77,7 @@ enum eTouchState {
     m_StatePrev = eState_Init;
     m_State = eState_Init;
     m_Timer = 0;
+    m_tShake = 0;
     m_TouchState = eTouchState_Standby;
     m_TouchStartY = 0;
     m_TouchX = 0;
@@ -195,7 +197,10 @@ enum eTouchState {
     return [SceneMain sharedInstance].gameover;
 }
 - (Caption*)_getCaption {
-    return[SceneMain sharedInstance].caption;
+    return [SceneMain sharedInstance].caption;
+}
+- (CCLayer*)_getBaseLayer {
+    return [SceneMain sharedInstance].baseLayer;
 }
 
 - (void)_initChain {
@@ -1039,6 +1044,10 @@ enum eTouchState {
         // 敗北処理へ
         [self _changeState:eState_Lose];
         [player destroy];
+        
+        // 画面を揺らす
+        m_tShake = TIMER_SHAKE;
+        
         return;
     }
     
@@ -1241,6 +1250,27 @@ enum eTouchState {
  * 更新
  */
 - (void)update:(ccTime)dt {
+    
+    if (m_tShake > 0) {
+        
+        // 画面を揺らす
+        m_tShake *= 0.9f;
+        if (m_tShake < 3) {
+            m_tShake = 0;
+        }
+        
+        float ofsX = 0;
+        if (int(m_tShake)%2 == 0) {
+            ofsX = m_tShake;
+        }
+        else {
+            ofsX = -m_tShake;
+        }
+        float ofsY = Math_RandFloat(-m_tShake, m_tShake);
+        
+        CCLayer* baseLayer = [self _getBaseLayer];
+        baseLayer.position = CGPointMake(ofsX, ofsY);
+    }
     
     {
         Back* back = [self _getBack];

@@ -85,7 +85,7 @@ static const int TIMER_DANGER = 10;
     }
     
     Player* player = [SceneMain sharedInstance].player;
-    if ([player isDanger]) {
+    if ([player isDanger] && [player isDead] == NO) {
         if (m_tDanger < TIMER_DANGER) {
             m_tDanger++;
         }

@@ -48,7 +48,7 @@ static const int MP_MAX_INC = 40;
     
     // TODO:
     m_Mp = MP_MAX;
-//    m_Mp = 0;
+    m_Mp = 0;
     
     return self;
 }
@@ -132,7 +132,7 @@ static const int MP_MAX_INC = 40;
     }
     
     if ([self isDead] == NO && [self isMpMax]) {
-        if (m_tPast%16 == 0) {
+        if (m_tPast%32 == 0) {
             
             Particle* p = [Particle addBlockAppear:self._x y:self._y];
             if (p) {
