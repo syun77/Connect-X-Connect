@@ -11,9 +11,9 @@
 #import "Math.h"
 #import "SceneTitle.h"
 
-static const float POS_RANK_L = 40;
+static const float POS_RANK_L = 36;
 static const float POS_RANK_R = 320-POS_RANK_L;
-static const float POS_RANK_Y = 240;
+static const float POS_RANK_Y = 240-48;
 
 /**
  * タイトル画面用背景
@@ -35,7 +35,10 @@ static const float POS_RANK_Y = 240;
     [self move:0];
     
     // 背景画像を設定
-    [self setTexRect:Exerinya_GetRect(eExerinyaRect_Back)];
+    CGRect r = CGRectMake(0, 545, 308, 468);
+    [self setTexRect:r];
+    [self setScale:1.1];
+//    [self setTexRect:Exerinya_GetRect(eExerinyaRect_Back)];
 //    [self setVisible:NO];
     
     // 変数初期化

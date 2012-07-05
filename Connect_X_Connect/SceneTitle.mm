@@ -92,19 +92,19 @@ static SceneTitle* scene_ = nil;
     
     self.fontHiScore = [AsciiFont node];
     [self.fontHiScore createFont:self.baseLayer length:24];
-    [self.fontHiScore setPos:7 y:31];
+    [self.fontHiScore setPos:7 y:25];
     [self.fontHiScore setScale:2];
     [self.fontHiScore setText:[NSString stringWithFormat:@"HI-SCORE %d", SaveData_GetHiScore()]];
     
     self.fontRank = [AsciiFont node];
     [self.fontRank createFont:self.baseLayer length:24];
-    [self.fontRank setPos:7 y:29];
+    [self.fontRank setPos:7 y:23];
     [self.fontRank setScale:2];
     [self.fontRank setText:[NSString stringWithFormat:@"LEVEL    %d", SaveData_GetRank()]];
     
     self.fontRankMax = [AsciiFont node];
     [self.fontRankMax createFont:self.baseLayer length:24];
-    [self.fontRankMax setPos:7 y:27];
+    [self.fontRankMax setPos:7 y:21];
     [self.fontRankMax setScale:2];
     [self.fontRankMax setText:[NSString stringWithFormat:@"HI-LEVEL %d", SaveData_GetRankMax()]];
     
@@ -117,7 +117,7 @@ static SceneTitle* scene_ = nil;
     
     self.fontStartButton = [AsciiFont node];
     [self.fontStartButton createFont:self.baseLayer length:12];
-    [self.fontStartButton setPos:20 y:18];
+    [self.fontStartButton setPos:20 y:15];
     [self.fontStartButton setAlign:eFontAlign_Center];
     [self.fontStartButton setScale:2];
     [self.fontStartButton setText:@"START"];
