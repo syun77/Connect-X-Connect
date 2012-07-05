@@ -14,7 +14,7 @@
  * タイトルロゴ
  */
 @interface LogoTitle : Token {
-    
+    int m_tFade; 
 }
 
 @end

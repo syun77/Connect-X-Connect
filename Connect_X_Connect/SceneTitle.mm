@@ -30,7 +30,6 @@ static SceneTitle* scene_ = nil;
 
 @synthesize interfaceLayer;
 @synthesize baseLayer;
-@synthesize m_pFont;
 
 @synthesize back;
 @synthesize logo;
@@ -89,12 +88,6 @@ static SceneTitle* scene_ = nil;
     
     self.logo = [LogoTitle node];
     [self.baseLayer addChild:self.logo z:ePrio_Logo];
-    
-    self.m_pFont = [AsciiFont node];
-    [self.m_pFont createFont:self.baseLayer length:24];
-    [self.m_pFont setScale:4];
-    [self.m_pFont setPos:3 y:40];
-    [self.m_pFont setText:[NSString stringWithFormat:@"KAZUOCHI!"]];
     
     self.fontHiScore = [AsciiFont node];
     [self.fontHiScore createFont:self.baseLayer length:24];
@@ -170,7 +163,6 @@ static SceneTitle* scene_ = nil;
     self.logo = nil;
     self.back = nil;
     
-    self.m_pFont = nil;
     self.interfaceLayer = nil;
     self.baseLayer = nil;
     

@@ -44,7 +44,6 @@ static const float SE_BUTTON_RECT_H = 32;
     
     // 描画オブジェクト
     CCLayer*    baseLayer;
-    AsciiFont*  m_pFont;
     
     BackTitle*      back;           // 背景
     LogoTitle*      logo;           // タイトルロゴ
@@ -68,7 +67,6 @@ static const float SE_BUTTON_RECT_H = 32;
 
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
 @property (nonatomic, retain)CCLayer*           baseLayer;
-@property (nonatomic, retain)AsciiFont*         m_pFont;
 
 @property (nonatomic, retain)BackTitle*         back;
 @property (nonatomic, retain)LogoTitle*         logo;
