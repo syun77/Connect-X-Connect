@@ -29,6 +29,7 @@ static const int ENEMY_AT_H = 4;
 // タイマー関連
 static const int TIMER_DAMAGE = 30;
 static const int TIMER_APPEAR = 30;
+static const int TIMER_ATTACK = 30;
 
 // アクティブタイムゲージ関連
 static const int AT_MAX = 100;
@@ -187,6 +188,13 @@ enum eState {
         
         self._x += (m_tPast%8 < 4 ? -1 : 1) * Math_Randf(m_tDamage);
         self._y += (-m_tDamage*0.5 + Math_Randf(m_tDamage));
+    }
+    
+    if (m_tAttack) {
+        m_tAttack--;
+        m_tPast = 0;
+        
+        self._x -= 128 * Math_SinEx(m_tAttack * 180 / TIMER_ATTACK);
     }
 }
 - (void)_updateVanish {
@@ -583,6 +591,9 @@ enum eState {
     
     // AT初期化
     m_nAT = 0;
+    
+    // 攻撃タイマーカウントアップ
+    m_tAttack = TIMER_ATTACK;
 }
 
 /**

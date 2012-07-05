@@ -944,6 +944,10 @@ enum eTouchState {
     
     Sound_PlaySe(@"swing.wav");
     
+    // 攻撃開始
+    Player* player = [self _getPlayer];
+    [player doAttack];
+    
     // 消去演出中
     [self _changeState:eState_VanishExec];
 }

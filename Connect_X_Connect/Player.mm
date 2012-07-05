@@ -15,6 +15,7 @@ static const int PLAYER_POS_X = 64;
 static const int PLAYER_POS_Y = 480 - 108;
 static const int PLAYER_POS_DAMAGE = PLAYER_POS_Y - 16;
 static const int TIMER_DAMAGE = 30;
+static const int TIMER_ATTACK = 30;
 static const int MP_MAX = 40;
 static const int MP_MAX_INC = 40;
 
@@ -84,14 +85,9 @@ static const int MP_MAX_INC = 40;
     [self move:0];
     
     m_tPast++;
-    if (m_tPast%64 < 32) {
-        CGRect r = Exerinya_GetRect(eExerinyaRect_Player1);
-        [self setTexRect:r];
-    }
-    else {
-        CGRect r = Exerinya_GetRect(eExerinyaRect_Player2);
-        [self setTexRect:r];
-    }
+    CGRect r = Exerinya_GetRect(eExerinyaRect_Player2);
+    [self setTexRect:r];
+    [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
     
     self._x = PLAYER_POS_X;
     self._y = PLAYER_POS_Y;
@@ -102,6 +98,11 @@ static const int MP_MAX_INC = 40;
         m_tDamage--;
         CGRect r = Exerinya_GetRect(eExerinyaRect_PlayerDamage);
         [self setTexRect:r];
+        if (m_tDamage%8 < 4) {
+            
+            // ダメージ演出
+            [self setColor:ccc3(0xFF, 0, 0)];
+        }
         
         self._x += (m_tPast%8 < 4 ? -1 : 1) * Math_Randf(m_tDamage * 0.5);
         self._y += -m_tDamage*0.5 + Math_Randf(m_tDamage);
@@ -116,6 +117,20 @@ static const int MP_MAX_INC = 40;
         }
         
     }
+    
+    // 攻撃演出
+    if (m_tAttack > 0) {
+        m_tAttack--;
+        CGRect r = Exerinya_GetRect(eExerinyaRect_Player1);
+        [self setTexRect:r];
+        
+        m_tPast = 0;
+        
+        self._x += 16;
+    }
+    
+    
+    self._y += 2 * Math_SinEx(m_tPast*2);
     
     // HPフォントの色設定
     if ([self getHpRatio] < 0.3) {
@@ -132,7 +147,7 @@ static const int MP_MAX_INC = 40;
     }
     
     if ([self isDead] == NO && [self isMpMax]) {
-        if (m_tPast%32 == 0) {
+        if (m_tPast%32 == 16) {
             
             Particle* p = [Particle addBlockAppear:self._x y:self._y];
             if (p) {
@@ -347,4 +362,8 @@ static const int MP_MAX_INC = 40;
     [hpGauge setHpRecover:[self getMpRatio]];
 }
 
+// 攻撃開始
+- (void)doAttack {
+    m_tAttack = TIMER_ATTACK;
+}
 @end
