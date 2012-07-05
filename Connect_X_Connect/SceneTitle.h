@@ -12,6 +12,7 @@
 #import "AsciiFont.h"
 #import "InterfaceLayer.h"
 #import "BackTitle.h"
+#import "LogoTitle.h"
 
 // ランク選択タッチエリア
 static const float RANK_SELECT_RECT_X = 0;
@@ -46,6 +47,7 @@ static const float SE_BUTTON_RECT_H = 32;
     AsciiFont*  m_pFont;
     
     BackTitle*      back;           // 背景
+    LogoTitle*      logo;           // タイトルロゴ
     AsciiFont*      fontHiScore;    // フォント (ハイスコア)
     AsciiFont*      fontRank;       // フォント (ランク)
     AsciiFont*      fontRankMax;    // フォント (最大ランク)
@@ -69,6 +71,7 @@ static const float SE_BUTTON_RECT_H = 32;
 @property (nonatomic, retain)AsciiFont*         m_pFont;
 
 @property (nonatomic, retain)BackTitle*         back;
+@property (nonatomic, retain)LogoTitle*         logo;
 @property (nonatomic, retain)AsciiFont*         fontHiScore;
 @property (nonatomic, retain)AsciiFont*         fontRank;
 @property (nonatomic, retain)AsciiFont*         fontRankMax;

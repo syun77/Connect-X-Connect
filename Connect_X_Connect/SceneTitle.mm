@@ -15,6 +15,8 @@
  * 描画プライオリティ
  */
 enum ePrio {
+    ePrio_Back,
+    ePrio_Logo,
     ePrio_Font,
 };
 
@@ -31,6 +33,7 @@ static SceneTitle* scene_ = nil;
 @synthesize m_pFont;
 
 @synthesize back;
+@synthesize logo;
 @synthesize fontHiScore;
 @synthesize fontRank;
 @synthesize fontRankMax;
@@ -82,7 +85,10 @@ static SceneTitle* scene_ = nil;
     
     // 描画関連
     self.back = [BackTitle node];
-    [self.baseLayer addChild:self.back];
+    [self.baseLayer addChild:self.back z:ePrio_Back];
+    
+    self.logo = [LogoTitle node];
+    [self.baseLayer addChild:self.logo z:ePrio_Logo];
     
     self.m_pFont = [AsciiFont node];
     [self.m_pFont createFont:self.baseLayer length:24];
@@ -161,6 +167,7 @@ static SceneTitle* scene_ = nil;
     self.fontRankMax = nil;
     self.fontRank = nil;
     self.fontHiScore = nil;
+    self.logo = nil;
     self.back = nil;
     
     self.m_pFont = nil;

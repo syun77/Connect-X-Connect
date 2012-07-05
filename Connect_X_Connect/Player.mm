@@ -226,6 +226,9 @@ static const int MP_MAX_INC = 40;
 //    HpGauge* hpGauge = [self _getGauge];
 //    [hpGauge initHp:[self getHpRatio]];
     [self _setFont];
+    
+    // HPが増えたら音量をもとに戻す
+    Sound_SetBgmVolume(1);
 }
 
 /**
@@ -263,6 +266,13 @@ static const int MP_MAX_INC = 40;
     [Particle addDamage:PLAYER_POS_X y:PLAYER_POS_Y];
     
     Sound_PlaySe(@"hit03.wav");
+    
+    if ([self isDanger]) {
+        
+        // 危険時は音量を下げる
+        Sound_SetBgmVolume(0.4);
+    }
+    
 }
 
 /**
