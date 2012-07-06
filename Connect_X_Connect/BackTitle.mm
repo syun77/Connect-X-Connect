@@ -35,9 +35,9 @@ static const float POS_RANK_Y = 240-48;
     [self move:0];
     
     // 背景画像を設定
-    CGRect r = CGRectMake(0, 545, 308, 468);
+    CGRect r = CGRectMake(0, 545, 320, 480);
     [self setTexRect:r];
-    [self setScale:1.1];
+//    [self setScale:1.1];
 //    [self setTexRect:Exerinya_GetRect(eExerinyaRect_Back)];
 //    [self setVisible:NO];
     
