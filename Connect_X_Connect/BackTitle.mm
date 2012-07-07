@@ -15,6 +15,8 @@ static const float POS_RANK_L = 36;
 static const float POS_RANK_R = 320-POS_RANK_L;
 static const float POS_RANK_Y = 240-48;
 
+static BOOL s_bInit = NO;
+
 /**
  * タイトル画面用背景
  */
@@ -54,6 +56,19 @@ static const float POS_RANK_Y = 240-48;
  */
 - (void)update:(ccTime)dt {
     m_tPast++;
+    
+    if (s_bInit == NO) {
+        int t2 = m_tPast * 3 + 60;
+        if (t2 < 270) {
+            int t = t2 + 270;
+            float scale = 1 + 0.7 * Math_SinEx(t);
+            [self setScale:scale];
+        }
+        else {
+            [self setScale:1];
+            s_bInit = YES;
+        }
+    }
     
     if ([[SceneTitle sharedInstance] isTouchRankSelect]) {
         // タッチセレクト中はタイマーを減衰させる

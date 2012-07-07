@@ -79,6 +79,8 @@
     self._x = x;
     self._y = y;
     
+    [self move:0];
+    
 }
 
 @end
