@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+static const int RANK_START = 0;
+static const int RANK_INTERVAL = 5;
+static const int RANK_DEFAULT = 0;
+
 /**
  * セーブデータを初期化する
  */
@@ -24,20 +28,13 @@ int SaveData_GetHiScore();
  * ハイスコアを設定する
  * @param score ハイスコア
  */
-void SaveData_SetHiScore(int score, BOOL bForce=false);
+void SaveData_SetHiScore(int score, BOOL bForce=NO);
 
 /**
  * タイトル画面で選択した難易度を取得する
  * @return 難易度
  */
 int SaveData_GetRank();
-
-/**
- * ランクを保存する
- * @param rank 難易度
- * @return 成功したら「YES」
- */
-BOOL SaveData_SaveRank(int rank);
 
 /**
  * タイトル画面→メインゲーム用の難易度設定
@@ -81,3 +78,57 @@ BOOL SaveData_IsEnableSe();
  * @param b 有効フラグ
  */
 void SaveData_SetEnableSe(BOOL b);
+
+/**
+ * EASYモードの設定
+ */
+void SaveData_SetEasy(BOOL b);
+
+/**
+ * EASYモードの取得
+ */
+BOOL SaveData_IsEasy();
+
+/**
+ * スコアアタックモードが有効かどうか
+ */
+BOOL SaveData_IsScoreAttack();
+
+/**
+ * スコアアタックモードの設定
+ */
+void SaveData_SetScoreAttack(BOOL b);
+
+/**
+ * ハイスコアを取得する
+ * @return ハイスコア
+ */
+int SaveData2_GetHiScore();
+
+/**
+ * ハイスコアを設定する
+ * @param score ハイスコア
+ */
+void SaveData2_SetHiScore(int score, BOOL bForce=NO);
+
+/**
+ * 到達したことのある最大難易度を取得する
+ * @return 最大難易度
+ */
+int SaveData2_GetRankMax();
+
+/**
+ * 最大難易度を取得する
+ * @param rank 最大難易度
+ */
+void SaveData2_SetRankMax(int rank);
+
+int SaveData2_GetRank();
+
+/**
+ * スコア自動送信設定
+ */
+void SaveData_SetScoreAutoSubmit(BOOL b);
+
+BOOL SaveData_IsScoreAutoSubmit();
+

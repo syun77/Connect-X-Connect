@@ -208,7 +208,7 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
  * 画面外に出たかどうか
  */
 - (BOOL)isOut {
-    CGSize win = [CCDirector sharedDirector].winSize;
+    CGSize win = System_Size();
     
     if (self._x < 0) { return YES; }
     if (self._x > win.width) { return YES; }
@@ -220,7 +220,7 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
 
 // 画面外に出たかどうか (X方向)
 - (BOOL)isOutRectX:(float)w {
-    CGSize win = [CCDirector sharedDirector].winSize;
+    CGSize win = System_Size();
     
     if (self._x < -w) {
         return YES;
@@ -234,7 +234,7 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
 
 // 画面外に出たかどうか (Y方向)
 - (BOOL)isOutRectY:(float)h {
-    CGSize win = [CCDirector sharedDirector].winSize;
+    CGSize win = System_Size();
     
     if (self._y < -h) {
         return YES;
@@ -250,7 +250,7 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
  * 画面外に出たかどうか（矩形）
  */
 - (BOOL)isOutRect:(float)w h:(float)h {
-    CGSize win = [CCDirector sharedDirector].winSize;
+    CGSize win = System_Size();
     
     if (self._x < -w) { return YES; }
     if (self._x > win.width+w) { return YES; }
@@ -265,7 +265,7 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
  * 画面外に出たかどうか（円）
  */
 - (BOOL)isOutCircle:(float)r {
-    CGSize win = [CCDirector sharedDirector].winSize;
+    CGSize win = System_Size();
     
     if (self._x < -r) { return YES; }
     if (self._x > win.width+r) { return YES; }
@@ -280,7 +280,7 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
  * 画面外の跳ね返りチェック（矩形）
  */
 - (BOOL)isBoundRect:(float)w h:(float)h {
-    CGSize win = [CCDirector sharedDirector].winSize;
+    CGSize win = System_Size();
     
     BOOL ret = NO;
     if (self._x < w)
@@ -311,7 +311,7 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
  * 画面外の跳ね返りチェック（矩形）
  */
 - (BOOL)isBoundRectX:(float)w {
-    CGSize win = [CCDirector sharedDirector].winSize;
+    CGSize win = System_Size();
     
     if (self._x < w)
     {
@@ -335,7 +335,7 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
  * 画面外の跳ね返りチェック（矩形）
  */
 - (BOOL)isBoundRectY:(float)h {
-    CGSize win = [CCDirector sharedDirector].winSize;
+    CGSize win = System_Size();
     
     if (self._y < h)
     {
@@ -360,7 +360,7 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
  * 画面外の跳ね返りチェック（円）
  */
 - (BOOL)isBoundCircle:(float)r {
-    CGSize win = [CCDirector sharedDirector].winSize;
+    CGSize win = System_Size();
     
     if (self._x < r) { return YES; }
     if (self._x > win.width-r) { return YES; }
@@ -369,6 +369,28 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
     
     return NO;
     
+}
+
+/**
+ * 指定の座標との当たり判定チェック (点)
+ */
+- (BOOL)isHitPoint:(float)x y:(float)y {
+    
+    float x1 = self._x - self._w;
+    float y1 = self._y - self._h;
+    float x2 = self._x + self._w;
+    float y2 = self._y + self._h;
+    
+    if (x1 <= x && x <= x2) {
+        
+        if (y1 <= y && y <= y2) {
+            
+            // 当たり
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 /**

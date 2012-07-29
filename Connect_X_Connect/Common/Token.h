@@ -80,6 +80,9 @@
 // 画面外の跳ね返りチェック（円）
 - (BOOL)isBoundCircle:(float)r;
 
+// 指定の座標との当たり判定チェック (点)
+- (BOOL)isHitPoint:(float)x y:(float)y;
+
 // 当たり判定チェック (円)
 - (BOOL)isHit2:(Token*)t;
 

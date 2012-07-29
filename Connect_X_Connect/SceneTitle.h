@@ -13,6 +13,7 @@
 #import "InterfaceLayer.h"
 #import "BackTitle.h"
 #import "LogoTitle.h"
+#import "Button.h"
 
 // ランク選択タッチエリア
 static const float RANK_SELECT_RECT_X = 0;
@@ -34,6 +35,33 @@ static const float SE_BUTTON_RECT_X = 320-80-8;
 static const float SE_BUTTON_RECT_Y = 16;
 static const float SE_BUTTON_RECT_W = 80;
 static const float SE_BUTTON_RECT_H = 32;
+
+// ランク選択タッチエリア
+static const float GAMEMODE_BUTTON_CX = 160;
+static const float GAMEMODE_BUTTON_CY = 176;
+static const float GAMEMODE_BUTTON_W  = 96;
+static const float GAMEMODE_BUTTON_H  = 16;
+
+static const float START_BUTTON_CX = 160;
+static const float START_BUTTON_CY = 112;
+static const float START_BUTTON_W  = 96;
+static const float START_BUTTON_H  = 24;
+
+static const float SCORE_BUTTON_CX = 56;
+static const float SCORE_BUTTON_CY = 56;
+static const float SCORE_BUTTON_W  = 48;
+static const float SCORE_BUTTON_H  = 16;
+
+static const float OPTION_BUTTON_CX = 320-56;
+static const float OPTION_BUTTON_CY = 56;
+static const float OPTION_BUTTON_W  = 48;
+static const float OPTION_BUTTON_H  = 16;
+
+static const float COPY_BUTTON_CX = 160;
+static const float COPY_BUTTON_CY = 16;
+static const float COPY_BUTTON_W = 156;
+static const float COPY_BUTTON_H = 12;
+
 /**
  * タイトル画面
  */
@@ -50,19 +78,19 @@ static const float SE_BUTTON_RECT_H = 32;
     AsciiFont*      fontHiScore;    // フォント (ハイスコア)
     AsciiFont*      fontRank;       // フォント (ランク)
     AsciiFont*      fontRankMax;    // フォント (最大ランク)
-    AsciiFont*      fontCopyRight;  // フォント（コピーライト）
-    AsciiFont*      fontStartButton;// フォント（スタートボタン）
-    AsciiFont*      fontBgm;        // フォント（BGM）
-    AsciiFont*      fontSe;         // フォント（SE）
+    
+    Button*         btnStart;       // ボタン（スタート）
+    Button*         btnGamemode;    // ボタン（ゲームモード）
+    Button*         btnScore;       // ボタン（スコア）
+    Button*         btnOption;      // ボタン（オプション）
+    Button*         btnCopyright;   // ボタン（コピーライト）
     
     BOOL            m_bNextScene;   // 次のシーンに進む
+    int             m_NextSceneId;  // 次のシーンの番号
     float           m_TouchStartX;  // タッチ開始座標 (X)
     float           m_TouchStartY;  // タッチ開始座標 (Y)
     int             m_RankPrev;     // タッチ前のランク
     BOOL            m_bRankSelect;  // ランク選択タッチ中
-    BOOL            m_bGameStart;   // ゲームスタートタッチ中
-    BOOL            m_bBgm;         // BGM ON/OFF タッチ中
-    BOOL            m_bSe;          // SE ON/OF タッチ中
 }
 
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
@@ -73,10 +101,13 @@ static const float SE_BUTTON_RECT_H = 32;
 @property (nonatomic, retain)AsciiFont*         fontHiScore;
 @property (nonatomic, retain)AsciiFont*         fontRank;
 @property (nonatomic, retain)AsciiFont*         fontRankMax;
-@property (nonatomic, retain)AsciiFont*         fontCopyRight;
-@property (nonatomic, retain)AsciiFont*         fontStartButton;
-@property (nonatomic, retain)AsciiFont*         fontBgm;
-@property (nonatomic, retain)AsciiFont*         fontSe;
+
+@property (nonatomic, retain)Button*            btnStart;
+@property (nonatomic, retain)Button*            btnGamemode;
+@property (nonatomic, retain)Button*            btnScore;
+@property (nonatomic, retain)Button*            btnOption;
+@property (nonatomic, retain)Button*            btnCopyright;
+
 
 + (SceneTitle*)sharedInstance;
 + (void)releaseInstance;
@@ -84,12 +115,4 @@ static const float SE_BUTTON_RECT_H = 32;
 // ランク選択タッチ中
 - (BOOL)isTouchRankSelect;
 
-// ゲームスタートタッチ中
-- (BOOL)isTouchGameStart;
-
-// BGM ON/OFF タッチ中
-- (BOOL)isTouchBgm;
-
-// SE ON/OFF タッチ中
-- (BOOL)isTouchSe;
 @end

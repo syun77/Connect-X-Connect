@@ -35,6 +35,11 @@ void SaveData_Init() {
     [defaults setBool:YES forKey:@"BGM"];
     [defaults setBool:YES forKey:@"SE"];
     
+    [defaults setBool:NO forKey:@"SCORE_ATTACK"];
+    [defaults setInteger:0 forKey:@"HI_SCORE2"];
+    [defaults setInteger:RANK_DEFAULT forKey:@"RANK_MAX2"];
+    [defaults setBool:YES forKey:@"SCORE_AUTO_SUBMIT"];
+    
     // 保存
     [defaults synchronize];
 }
@@ -234,4 +239,150 @@ void SaveData_SetEnableSe(BOOL b) {
     
     // 保存
     [ix synchronize];
+}
+
+/**
+ * EASYモードの設定
+ */
+void SaveData_SetEasy(BOOL b) {
+    
+    NSUserDefaults* ix = _Get();
+    
+    [ix setBool:b forKey:@"EASY"];
+    
+    // 保存
+    [ix synchronize];
+}
+
+/**
+ * EASYモードの取得
+ */
+BOOL SaveData_IsEasy() {
+    
+    NSUserDefaults* ix = _Get();
+    
+    if (SaveData_IsScoreAttack()) {
+        
+        // スコアアタックモードの時は無効
+        return NO;
+    }
+    
+    return [ix boolForKey:@"EASY"];
+}
+
+/**
+ * スコアアタックモードが有効かどうか
+ */
+BOOL SaveData_IsScoreAttack() {
+    
+    NSUserDefaults* ix = _Get();
+    
+    return [ix boolForKey:@"SCORE_ATTACK"];
+}
+
+/**
+ * スコアアタックモードの設定
+ */
+void SaveData_SetScoreAttack(BOOL b) {
+    
+    NSUserDefaults* ix = _Get();
+    
+    [ix setBool:b forKey:@"SCORE_ATTACK"];
+    
+    // 保存
+    [ix synchronize];
+}
+
+/**
+ * ハイスコアを取得する
+ * @return ハイスコア
+ */
+int SaveData2_GetHiScore() {
+    
+    NSUserDefaults* ix = _Get();
+    
+    return [ix integerForKey:@"HI_SCORE2"];
+}
+
+/**
+ * ハイスコアを設定する
+ * @param score ハイスコア
+ */
+void SaveData2_SetHiScore(int score, BOOL bForce) {
+    
+    NSUserDefaults* ix = _Get();
+    
+    if (bForce == NO) {
+        
+        int max = SaveData2_GetHiScore();
+        if (score < max) {
+            
+            // 更新不要
+            return;
+        }
+    }
+    
+    [ix setInteger:score forKey:@"HI_SCORE2"];
+    
+    // 保存
+    [ix synchronize];
+}
+
+/**
+ * 到達したことのある最大難易度を取得する
+ * @return 最大難易度
+ */
+int SaveData2_GetRankMax() {
+    
+    NSUserDefaults* ix = _Get();
+    
+    return [ix integerForKey:@"RANK_MAX2"];
+}
+
+/**
+ * 最大難易度を取得する
+ * @param rank 最大難易度
+ */
+void SaveData2_SetRankMax(int rank) {
+    
+    NSUserDefaults* ix = _Get();
+    
+    int max = SaveData2_GetRankMax();
+    if (rank < max) {
+        
+        // 更新不要
+        return;
+    }
+    
+    [ix setInteger:rank forKey:@"RANK_MAX2"];
+    
+    // 保存
+    [ix synchronize];
+    
+}
+
+int SaveData2_GetRank()
+{
+    return RANK_DEFAULT;
+}
+
+/**
+ * スコア自動送信設定
+ */
+void SaveData_SetScoreAutoSubmit(BOOL b) {
+    
+    NSUserDefaults* ix = _Get();
+    
+    [ix setBool:b forKey:@"SCORE_AUTO_SUBMIT"];
+    
+    // 保存
+    [ix synchronize];
+    
+}
+
+BOOL SaveData_IsScoreAutoSubmit() {
+    
+    NSUserDefaults* ix = _Get();
+    
+    return [ix integerForKey:@"SCORE_AUTO_SUBMIT"];
 }

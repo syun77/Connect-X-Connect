@@ -10,6 +10,7 @@
 #import "SceneManager.h"
 #import "SaveData.h"
 #import "Math.h"
+#import "GameCenter.h"
 
 /**
  * 描画プライオリティ
@@ -18,6 +19,11 @@ enum ePrio {
     ePrio_Back,
     ePrio_Logo,
     ePrio_Font,
+};
+
+enum eScene {
+    eScene_Main,    // メインゲーム
+    eScene_Option,  // オプション画面
 };
 
 // シングルトン
@@ -36,11 +42,12 @@ static SceneTitle* scene_ = nil;
 @synthesize fontHiScore;
 @synthesize fontRank;
 @synthesize fontRankMax;
-@synthesize fontCopyRight;
-@synthesize fontStartButton;
-@synthesize fontBgm;
-@synthesize fontSe;
 
+@synthesize btnStart;
+@synthesize btnGamemode;
+@synthesize btnScore;
+@synthesize btnOption;
+@synthesize btnCopyright;
 
 // --------------------------------------------------
 // public static
@@ -60,6 +67,115 @@ static SceneTitle* scene_ = nil;
  */
 + (void)releaseInstance {
     scene_ = nil;
+}
+
+/**
+ * ランク選択の表示を切り替える
+ */
+- (void)setRankSelect:(BOOL)b {
+    
+    BackTitle* backTitle = [SceneTitle sharedInstance].back;
+    
+    
+    [backTitle setRankSelect:b];
+}
+
+/**
+ * スタートボタン押したコールバック
+ */
+- (void)cbBtnStart {
+    
+    Sound_PlaySe(@"push.wav");
+    
+    // メインゲーム開始
+    m_bNextScene = YES;
+    m_NextSceneId = eScene_Main;
+}
+
+
+/**
+ * ゲームモードの表示を切り替える
+ */
+- (void)setBtnGamemode {
+    
+    int hiScore = 0;
+    int rank    = 0;
+    int hiRank  = 0;
+    if (SaveData_IsScoreAttack()) {
+        
+        // スコアアタックモード
+        [self.btnGamemode setText:@"SCORE ATTACK"];
+        hiScore = SaveData2_GetHiScore();
+        rank    = SaveData2_GetRank();
+        hiRank  = SaveData2_GetRankMax();
+        [self setRankSelect:NO];
+    }
+    else {
+        
+        [self.btnGamemode setText:@"FREE PLAY"];
+        hiScore = SaveData_GetHiScore();
+        rank    = SaveData_GetRank();
+        hiRank  = SaveData_GetRankMax();
+        [self setRankSelect:YES];
+    }
+    
+    [self.fontHiScore setText:[NSString stringWithFormat:@"HI-SCORE %d", hiScore]];
+    
+    [self.fontRank setText:[NSString stringWithFormat:@"RANK     %d", rank]];
+    [self.fontRankMax setText:[NSString stringWithFormat:@"HI-RANK  %d", hiRank]];
+}
+
+/**
+ * ゲームモードの切り替え
+ */
+- (void)cbBtnGamemove {
+    Sound_PlaySe(@"pi.wav");
+    
+    if (SaveData_IsScoreAttack()) {
+        
+        SaveData_SetScoreAttack(NO);
+    }
+    else {
+        
+        SaveData_SetScoreAttack(YES);
+    }
+    
+    [self setBtnGamemode];
+}
+
+/**
+ * リーダーボード表示
+ */
+- (void)cbBtnScore {
+    Sound_PlaySe(@"pi.wav");
+    
+    if (SaveData_IsScoreAttack()) {
+        
+        GameCenter_ShowLeaderboard(@"02_scoreattack_score");
+    }
+    else {
+        
+        GameCenter_ShowLeaderboard(@"freeplay_score");
+    }
+}
+
+/**
+ * Optionボタン押したコールバック
+ */
+- (void)cbBtnOption {
+    Sound_PlaySe(@"push.wav");
+    
+    m_NextSceneId = eScene_Option;
+    m_bNextScene = YES;
+}
+
+/**
+ * Copyright押した時のコールバック
+ */
+- (void)cbBtnCopyright {
+    
+    // 他のアプリ一覧を開く
+    System_OpenBrowserOtherApp();
 }
 
 // --------------------------------------------------
@@ -107,38 +223,29 @@ static SceneTitle* scene_ = nil;
     [self.fontRankMax setScale:2];
     [self.fontRankMax setText:[NSString stringWithFormat:@"HI-LEVEL %d", SaveData_GetRankMax()]];
     
-    self.fontCopyRight = [AsciiFont node];
-    [self.fontCopyRight createFont:self.baseLayer length:24];
-    [self.fontCopyRight setPos:20 y:1];
-    [self.fontCopyRight setScale:1];
-    [self.fontCopyRight setAlign:eFontAlign_Center];
-    [self.fontCopyRight setText:@"(c) 2dgames.jp 2012"];
+    self.btnStart = [Button node];
+    [self.btnStart initWith:self.interfaceLayer text:@"START" cx:START_BUTTON_CX cy:START_BUTTON_CY w:START_BUTTON_W h:START_BUTTON_H cls:self onDecide:@selector(cbBtnStart)];
     
-    self.fontStartButton = [AsciiFont node];
-    [self.fontStartButton createFont:self.baseLayer length:12];
-    [self.fontStartButton setPos:20 y:15];
-    [self.fontStartButton setAlign:eFontAlign_Center];
-    [self.fontStartButton setScale:2];
-    [self.fontStartButton setText:@"START"];
+    self.btnGamemode = [Button node];
+    [self.btnGamemode initWith:self.interfaceLayer text:@"" cx:GAMEMODE_BUTTON_CX cy:GAMEMODE_BUTTON_CY w:GAMEMODE_BUTTON_W h:GAMEMODE_BUTTON_H cls:self onDecide:@selector(cbBtnGamemove)];
     
-    self.fontBgm = [AsciiFont node];
-    [self.fontBgm createFont:self.baseLayer length:12];
-    [self.fontBgm setPos:34 y:9];
-    [self.fontBgm setAlign:eFontAlign_Center];
-    [self.fontBgm setScale:2];
+    self.btnScore = [Button node];
+    [self.btnScore initWith:self.interfaceLayer text:@"SCORE" cx:SCORE_BUTTON_CX cy:SCORE_BUTTON_CY w:SCORE_BUTTON_W h:SCORE_BUTTON_H cls:self onDecide:@selector(cbBtnScore)];
     
-    self.fontSe = [AsciiFont node];
-    [self.fontSe createFont:self.baseLayer length:12];
-    [self.fontSe setPos:34 y:4];
-    [self.fontSe setAlign:eFontAlign_Center];
-    [self.fontSe setScale:2];
+    self.btnOption = [Button node];
+    [self.btnOption initWith:self.interfaceLayer text:@"OPTION" cx:OPTION_BUTTON_CX cy:OPTION_BUTTON_CY w:OPTION_BUTTON_W h:OPTION_BUTTON_H cls:self onDecide:@selector(cbBtnOption)];
+    
+    self.btnCopyright = [Button node];
+    [self.btnCopyright initWith:self.interfaceLayer text:@"(c) 2012 2dgames.jp" cx:COPY_BUTTON_CX cy:COPY_BUTTON_CY w:COPY_BUTTON_W h:COPY_BUTTON_H cls:self onDecide:@selector(cbBtnCopyright)];
+    [self.btnCopyright setTextScale:1];
+    [self.btnCopyright setBackColor:ccc4f(0.1, 0.1, 0.1, 0.5)];
     
     // 変数初期化
     m_bNextScene = NO;
     m_TouchStartX = 0;
     m_TouchStartY = 0;
     m_bRankSelect = NO;
-    m_bGameStart = NO;
+    m_NextSceneId = eScene_Main;
     
     // 入力コールバック登録
     [self.interfaceLayer addCB:self];
@@ -153,10 +260,12 @@ static SceneTitle* scene_ = nil;
  */
 - (void)dealloc {
     
+    self.btnCopyright = nil;
+    self.btnOption = nil;
+    self.btnScore = nil;
+    self.btnGamemode = nil;
+    self.btnStart = nil;
     
-    self.fontSe = nil;
-    self.fontBgm = nil;
-    self.fontCopyRight = nil;
     self.fontRankMax = nil;
     self.fontRank = nil;
     self.fontHiScore = nil;
@@ -183,9 +292,6 @@ static SceneTitle* scene_ = nil;
         [self.fontRank setColor:ccc3(0xFF, 0xFF, 0xFF)];
         
     }
-    
-    [self.fontBgm setText:[NSString stringWithFormat:@"BGM:%@", Sound_IsEnableBgm() ? @"o" : @"x"]];
-    [self.fontSe setText:[NSString stringWithFormat:@"SE:%@", Sound_IsEnableSe() ? @"o" : @"x"]];
     
     if (m_bNextScene) {
         
@@ -275,42 +381,6 @@ static SceneTitle* scene_ = nil;
         }
     }
     
-    // ■ゲームスタートタッチ判定
-    {
-        
-        if ([self isHitGameStart:x y:y]) {
-            
-            // タッチした
-            Sound_PlaySe(@"pi.wav");
-            
-            m_bGameStart = YES;
-        }
-    }
-    
-    // ■BGMタッチ判定
-    {
-        
-        if ([self isHitBgm :x y:y]) {
-            
-            // タッチした
-            Sound_PlaySe(@"pi.wav");
-            
-            m_bBgm = YES;
-        }
-    }
-    
-    // ■SEタッチ判定
-    {
-        
-        if ([self isHitSe:x y:y]) {
-            
-            // タッチした
-            Sound_PlaySe(@"pi.wav");
-            
-            m_bSe = YES;
-        }
-    }
-    
     // タッチ開始座標を保持
     m_TouchStartX = x;
     m_TouchStartY = y;
@@ -357,58 +427,6 @@ static SceneTitle* scene_ = nil;
         }
     }
     
-    // ゲームスタートタッチ判定
-    {
-        
-        if ([self isHitGameStart:x y:y] == NO) {
-            
-            // フォーカスが外れた
-            m_bGameStart = NO;
-        }
-        if (m_bGameStart == NO) {
-            if ([self isHitGameStart:x y:y]) {
-                
-                // フォーカスに入った
-                Sound_PlaySe(@"pi.wav");
-                m_bGameStart = YES;
-            }
-        }
-    }
-    // BGMタッチ判定
-    {
-        
-        if ([self isHitBgm:x y:y] == NO) {
-            
-            // フォーカスが外れた
-            m_bBgm = NO;
-        }
-        if (m_bBgm == NO) {
-            if ([self isHitBgm:x y:y]) {
-                
-                // フォーカスに入った
-                Sound_PlaySe(@"pi.wav");
-                m_bBgm = YES;
-            }
-        }
-    }
-    // SEタッチ判定
-    {
-        
-        if ([self isHitSe:x y:y] == NO) {
-            
-            // フォーカスが外れた
-            m_bSe = NO;
-        }
-        
-        if (m_bSe == NO) {
-            if ([self isHitSe:x y:y]) {
-                
-                // フォーカスに入った
-                Sound_PlaySe(@"pi.wav");
-                m_bSe = YES;
-            }
-        }
-    }
 }
 
 /**
@@ -416,45 +434,13 @@ static SceneTitle* scene_ = nil;
  */
 - (void)cbTouchEnd:(float)x y:(float)y {
     
-    if (m_bGameStart) {
-        
-        // ゲーム開始
-        Sound_PlaySe(@"push.wav");
-        m_bNextScene = YES;
-    }
-    
-    if (m_bBgm) {
-        Sound_SetEnableBgm(Sound_IsEnableBgm() ? NO : YES);
-    }
-    if (m_bSe) {
-        Sound_SetEnableSe(Sound_IsEnableSe() ? NO : YES);
-    }
-    
     // タッチ終了
     m_bRankSelect = NO;
-    m_bGameStart = NO;
-    m_bBgm = NO;
-    m_bSe = NO;
 }
 
 // ランク選択タッチ中
 - (BOOL)isTouchRankSelect {
     return m_bRankSelect;
-}
-
-// ゲームスタートタッチ中
-- (BOOL)isTouchGameStart {
-    return m_bGameStart;
-}
-
-// BGM ON/OFF タッチ中
-- (BOOL)isTouchBgm {
-    return m_bBgm;
-}
-
-// SE ON/OFF タッチ中
-- (BOOL)isTouchSe {
-    return m_bSe;
 }
 
 @end

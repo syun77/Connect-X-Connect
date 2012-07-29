@@ -47,6 +47,7 @@ static BOOL s_bInit = NO;
     m_tPast = 0;
     m_tCursorL = 0;
     m_tCursorR = 0;
+    m_bRankSelect = YES;
     
     return self;
 }
@@ -116,38 +117,6 @@ static BOOL s_bInit = NO;
     
     System_SetBlend(eBlend_Normal);
     
-    // ■ゲーム開始ボタンの描画
-    glColor4f(0.2, 0.2, 0.2, 0.5);
-    [self fillRectLT:START_BUTTON_RECT_X-2 y:START_BUTTON_RECT_Y-2 w:START_BUTTON_RECT_W+4 h:START_BUTTON_RECT_H+4 rot:0 scale:1];
-    glColor4f(0.5, 0.5, 0.5, 0.5);
-    if ([[SceneTitle sharedInstance] isTouchGameStart]) {
-        
-        // タッチ中
-        glColor4f(0, 0, 0.5, 0.4);
-    }
-    [self fillRectLT:START_BUTTON_RECT_X y:START_BUTTON_RECT_Y w:START_BUTTON_RECT_W h:START_BUTTON_RECT_H rot:0 scale:1];
-    
-    // ■BGM ON/OFF
-    glColor4f(0.2, 0.2, 0.2, 0.5);
-    [self fillRectLT:BGM_BUTTON_RECT_X-2 y:BGM_BUTTON_RECT_Y-2 w:BGM_BUTTON_RECT_W+4 h:BGM_BUTTON_RECT_H+4 rot:0 scale:1];
-    glColor4f(0.5, 0.5, 0.5, 0.5);
-    if ([[SceneTitle sharedInstance] isTouchBgm]) {
-        
-        // タッチ中
-        glColor4f(0, 0, 0.5, 0.4);
-    }
-    [self fillRectLT:BGM_BUTTON_RECT_X y:BGM_BUTTON_RECT_Y w:BGM_BUTTON_RECT_W h:BGM_BUTTON_RECT_H rot:0 scale:1];
-    
-    // ■SE ON/OFF
-    glColor4f(0.2, 0.2, 0.2, 0.5);
-    [self fillRectLT:SE_BUTTON_RECT_X-2 y:SE_BUTTON_RECT_Y-2 w:SE_BUTTON_RECT_W+4 h:SE_BUTTON_RECT_H+4 rot:0 scale:1];
-    glColor4f(0.5, 0.5, 0.5, 0.5);
-    if ([[SceneTitle sharedInstance] isTouchSe]) {
-        
-        // タッチ中
-        glColor4f(0, 0, 0.5, 0.4);
-    }
-    [self fillRectLT:SE_BUTTON_RECT_X y:SE_BUTTON_RECT_Y w:SE_BUTTON_RECT_W h:SE_BUTTON_RECT_H rot:0 scale:1];
 }
 
 
@@ -159,6 +128,16 @@ static BOOL s_bInit = NO;
 // カーソルを動かす（右）
 - (void)moveCursorR {
     m_tCursorR = 90 / 4;
+}
+
+// ランク選択を表示切り替え
+- (void)setRankSelect:(BOOL)b {
+    m_bRankSelect = b;
+}
+
+// ランク選択が有効かどうか
+- (BOOL)isRankSelect {
+    return m_bRankSelect;
 }
 
 @end

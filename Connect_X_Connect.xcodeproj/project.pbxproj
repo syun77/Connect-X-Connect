@@ -25,9 +25,12 @@
 		C7295A9A15831805006A70F8 /* Queue.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7295A9915831805006A70F8 /* Queue.mm */; };
 		C7295A9D15837E6B006A70F8 /* block.png in Resources */ = {isa = PBXBuildFile; fileRef = C7295A9C15837E6A006A70F8 /* block.png */; };
 		C7295AA015843842006A70F8 /* BlockNext.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7295A9F15843842006A70F8 /* BlockNext.mm */; };
+		C72E55A215C5F6AA00AA5DC1 /* GameCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72E55A115C5F6AA00AA5DC1 /* GameCenter.mm */; };
+		C72E55A515C5FBAA00AA5DC1 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C72E55A415C5FBAA00AA5DC1 /* GameKit.framework */; };
 		C7468141157D9A1500A9E70F /* FontEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7468140157D9A1500A9E70F /* FontEffect.mm */; };
 		C74681441580219D00A9E70F /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C74681431580219D00A9E70F /* Particle.mm */; };
 		C746814915802C7A00A9E70F /* Back.mm in Sources */ = {isa = PBXBuildFile; fileRef = C746814815802C7A00A9E70F /* Back.mm */; };
+		C749A2A015C5F36700FEFE71 /* Button.mm in Sources */ = {isa = PBXBuildFile; fileRef = C749A29F15C5F36700FEFE71 /* Button.mm */; };
 		C7516F91158C0DB7000C4BD4 /* destroy4.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7516F90158C0DB7000C4BD4 /* destroy4.wav */; };
 		C7516F94158C10DD000C4BD4 /* hit02.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7516F93158C10DD000C4BD4 /* hit02.wav */; };
 		C7516F96158C1245000C4BD4 /* hit03.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7516F95158C1245000C4BD4 /* hit03.wav */; };
@@ -273,6 +276,9 @@
 		C7295A9C15837E6A006A70F8 /* block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = block.png; path = Resources/block.png; sourceTree = "<group>"; };
 		C7295A9E15843842006A70F8 /* BlockNext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockNext.h; sourceTree = "<group>"; };
 		C7295A9F15843842006A70F8 /* BlockNext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BlockNext.mm; sourceTree = "<group>"; };
+		C72E55A015C5F6AA00AA5DC1 /* GameCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenter.h; sourceTree = "<group>"; };
+		C72E55A115C5F6AA00AA5DC1 /* GameCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameCenter.mm; sourceTree = "<group>"; };
+		C72E55A415C5FBAA00AA5DC1 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		C746813F157D9A1400A9E70F /* FontEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontEffect.h; sourceTree = "<group>"; };
 		C7468140157D9A1500A9E70F /* FontEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FontEffect.mm; sourceTree = "<group>"; };
 		C74681421580219C00A9E70F /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
@@ -280,6 +286,8 @@
 		C746814715802C7900A9E70F /* Back.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Back.h; sourceTree = "<group>"; };
 		C746814815802C7A00A9E70F /* Back.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Back.mm; sourceTree = "<group>"; };
 		C7482A8E1584E422008EF0B9 /* ReqBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReqBlock.h; sourceTree = "<group>"; };
+		C749A29E15C5F36700FEFE71 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
+		C749A29F15C5F36700FEFE71 /* Button.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Button.mm; sourceTree = "<group>"; };
 		C7516F90158C0DB7000C4BD4 /* destroy4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = destroy4.wav; path = Resources/destroy4.wav; sourceTree = "<group>"; };
 		C7516F93158C10DD000C4BD4 /* hit02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit02.wav; sourceTree = "<group>"; };
 		C7516F95158C1245000C4BD4 /* hit03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit03.wav; sourceTree = "<group>"; };
@@ -649,6 +657,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C72E55A515C5FBAA00AA5DC1 /* GameKit.framework in Frameworks */,
 				C7889C61158F398100AAECDE /* SystemConfiguration.framework in Frameworks */,
 				C7889C63158F398B00AAECDE /* MessageUI.framework in Frameworks */,
 				C7FB2EF3157289EB00FB3381 /* QuartzCore.framework in Frameworks */,
@@ -677,6 +686,10 @@
 			children = (
 				C70E3F2615731075009BF0CB /* AsciiFont.h */,
 				C70E3F2715731075009BF0CB /* AsciiFont.mm */,
+				C749A29E15C5F36700FEFE71 /* Button.h */,
+				C749A29F15C5F36700FEFE71 /* Button.mm */,
+				C72E55A015C5F6AA00AA5DC1 /* GameCenter.h */,
+				C72E55A115C5F6AA00AA5DC1 /* GameCenter.mm */,
 				C70E3F2815731075009BF0CB /* InterfaceLayer.h */,
 				C70E3F2915731075009BF0CB /* InterfaceLayer.mm */,
 				C70E3F2A15731075009BF0CB /* IScene.h */,
@@ -908,6 +921,7 @@
 		C7FB2EF1157289EB00FB3381 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C72E55A415C5FBAA00AA5DC1 /* GameKit.framework */,
 				C7889C62158F398B00AAECDE /* MessageUI.framework */,
 				C7889C60158F398000AAECDE /* SystemConfiguration.framework */,
 				C7889C5E158F396500AAECDE /* iAd.framework */,
@@ -1569,6 +1583,8 @@
 				C799C42E159184C100856782 /* GameOver.mm in Sources */,
 				C799C43115921D1800856782 /* Caption.mm in Sources */,
 				C779374315A5E75A0090E236 /* LogoTitle.mm in Sources */,
+				C749A2A015C5F36700FEFE71 /* Button.mm in Sources */,
+				C72E55A215C5F6AA00AA5DC1 /* GameCenter.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

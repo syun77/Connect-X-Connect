@@ -1104,7 +1104,7 @@ enum eTouchState {
         SaveData_SetRankMax(m_nLevel);
         if (m_nLevel%10 == 1) {
             
-            SaveData_SaveRank(m_nLevel);
+            SaveData_SetRank(m_nLevel);
         }
         
         return;
