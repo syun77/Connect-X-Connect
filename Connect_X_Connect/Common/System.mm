@@ -36,7 +36,13 @@ BOOL System_IsRetina()
  */
 CGSize System_Size()
 {
-    return  [CCDirector sharedDirector].winSize;
+//    return  [CCDirector sharedDirector].winSize;
+    CGSize size = [CCDirector sharedDirector].winSize;
+    
+    // 広告バナーの分だけ小さくする
+    CGSize ret = CGSizeMake(size.width, size.height - 50);
+    
+    return ret;
 }
 
 /**
@@ -44,7 +50,7 @@ CGSize System_Size()
  */
 float System_Width()
 {
-    CGSize winSize = [CCDirector sharedDirector].winSize;
+    CGSize winSize = System_Size();
     
     return winSize.width;
 }
@@ -54,7 +60,7 @@ float System_Width()
  */
 float System_Height()
 {
-    CGSize winSize = [CCDirector sharedDirector].winSize;
+    CGSize winSize = System_Size();
     
     return winSize.height;
 }
@@ -143,4 +149,23 @@ float System_GetAvailableBytes()
     return(vm_page_size *vmStats.free_count);
 }
 
+/**
+ * 他のアプリページを開く
+ */
+void System_OpenBrowserOtherApp() {
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://2dgames.jp/iphone/"]];
+    
+}
 
+/**
+ * レビューページを開く
+ */
+void System_OpenBrowserReviewPage() {
+    
+    // アプリケーションID
+    int appleID = 537071214;
+    
+    NSString* pURL = [NSString stringWithFormat:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=%d&mt=8&type=Purple+Software", appleID];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:pURL]];
+}

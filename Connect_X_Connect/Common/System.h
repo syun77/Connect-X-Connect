@@ -19,6 +19,12 @@ enum eBlend {
     eBlend_XOR,     // 排他的論理和
 };
 
+static inline ccColor4F ccc4f(float r, float g, float b, float a)
+{
+    ccColor4F c = {r, g, b, a};
+    return c;
+}
+
 // システムの初期化を行う
 void System_Init();
 
@@ -48,3 +54,9 @@ void System_SetBlend(eBlend mode);
 
 // メモリ残量を取得する (Byte単位)
 float System_GetAvailableBytes();
+
+// 他のアプリページを開く
+void System_OpenBrowserOtherApp();
+
+// レビューページを開く
+void System_OpenBrowserReviewPage();
