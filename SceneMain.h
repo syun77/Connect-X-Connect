@@ -34,6 +34,7 @@
 #import "LevelUp.h"
 #import "GameOver.h"
 #import "Caption.h"
+#import "Button.h"
 
 /**
  * ゲームメインのシーン
@@ -56,6 +57,11 @@
     TokenManager*   mgrBezierEffect;
     TokenManager*   mgrFontEffect;
     TokenManager*   mgrParticle;
+    
+    // ボタン
+    Button*         btnSubmit;      // スコア送信
+    Button*         btnBack;        // タイトルに戻る
+    Button*         btnReview;      // レビューを書く
     
     Cursor*         cursor;
     Grid*           grid;
@@ -99,6 +105,12 @@
 @property (nonatomic, retain)TokenManager*      mgrBezierEffect;
 @property (nonatomic, retain)TokenManager*      mgrFontEffect;
 @property (nonatomic, retain)TokenManager*      mgrParticle;
+
+// ボタン
+@property (nonatomic, retain)Button*            btnSubmit;
+@property (nonatomic, retain)Button*            btnBack;
+@property (nonatomic, retain)Button*            btnReview;
+
 @property (nonatomic, retain)Cursor*            cursor;
 @property (nonatomic, retain)Grid*              grid;
 @property (nonatomic, retain)HpGauge*           hpGauge;

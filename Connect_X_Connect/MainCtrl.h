@@ -76,4 +76,10 @@
 // スコアを加算する
 - (void)addScore:(int)v;
 
+// スコアを取得する
+- (int)getScore;
+
+// ランクを取得する
+- (int)getRank;
+
 @end

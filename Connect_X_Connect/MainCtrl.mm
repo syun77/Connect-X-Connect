@@ -1413,4 +1413,14 @@ enum eTouchState {
     [font setText:[NSString stringWithFormat:@"SCORE:%d", m_nScore]];
 }
 
+// スコアを取得する
+- (int)getScore {
+    return m_nScore;
+}
+
+// ランクを取得する
+- (int)getRank {
+    return m_nLevel;
+}
+
 @end

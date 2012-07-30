@@ -11,6 +11,23 @@
 #import "BlockMgr.h"
 #import "SceneManager.h"
 #import "AppDelegate.h"
+#import "GameCenter.h"
+
+// ボタン配置情報
+static const float BTN_SUBMIT_CX = 160;
+static const float BTN_SUBMIT_CY = 112;
+static const float BTN_SUBMIT_W  = 112;
+static const float BTN_SUBMIT_H  = 24;
+
+static const float BTN_BACK_CX = 160;
+static const float BTN_BACK_CY = 80;
+static const float BTN_BACK_W  = 112;
+static const float BTN_BACK_H  = 24;
+
+static const float BTN_REVIEW_CX = 160;
+static const float BTN_REVIEW_CY = 16;
+static const float BTN_REVIEW_W  = 96;
+static const float BTN_REVIEW_H  = 12;
 
 /**
  * 描画プライオリティ
@@ -56,6 +73,10 @@ static SceneMain* scene_ = nil;
 @synthesize mgrFontEffect;
 @synthesize mgrParticle;
 
+@synthesize btnSubmit;
+@synthesize btnBack;
+@synthesize btnReview;
+
 @synthesize cursor;
 @synthesize grid;
 @synthesize hpGauge;
@@ -95,6 +116,49 @@ static SceneMain* scene_ = nil;
  */
 + (void)releaseInstance {
     scene_ = nil;
+}
+
+/**
+ * スコア送信
+ */
+- (void)cbBtnSubmit {
+    
+    if (GameCenter_IsLogin() == NO) {
+        
+        // ログインしていなければ何もしない
+        return;
+    }
+    
+    int score = [self.ctrl getScore];
+    int rank  = [self.ctrl getRank];
+    
+    if (SaveData_IsScoreAttack()) {
+        
+        // スコアアタックモード
+        GameCenter_Report(@"score03c", score);
+        GameCenter_Report(@"score03d", rank);
+    }
+    else {
+        
+        // フリープレイ
+        GameCenter_Report(@"score03a", score);
+        GameCenter_Report(@"score03b", rank);
+    }
+}
+
+/**
+ * タイトルに戻る
+ */
+- (void)cbBtnBack {
+    [self.ctrl cbBtnBack]; 
+}
+
+/**
+ * レビューページを開く
+ */
+- (void)cbReview {
+    
+    System_OpenBrowserReviewPage();
 }
 
 /**
@@ -170,6 +234,20 @@ static SceneMain* scene_ = nil;
     self.mgrParticle = [TokenManager node];
     [self.mgrParticle setPrio:ePrio_Effect];
     [self.mgrParticle create:self.baseLayer size:512 className:@"Particle"];
+    
+    // ボタン
+    self.btnSubmit = [Button node];
+    [self.btnSubmit initWith:self.interfaceLayer text:@"SUBMIT SCORE" cx:BTN_SUBMIT_CX cy:BTN_SUBMIT_CY w:BTN_SUBMIT_W h:BTN_SUBMIT_H cls:self onDecide:@selector(cbBtnSubmit)];
+    [self.btnSubmit setVisible:NO];
+    
+    self.btnBack = [Button node];
+    [self.btnBack initWith:self.interfaceLayer text:@"BACK TO TITLE" cx:BTN_BACK_CX cy:BTN_BACK_CY w:BTN_BACK_W h:BTN_BACK_H cls:self onDecide:@selector(cbBtnBack)];
+    [self.btnBack setVisible:NO];
+    
+    self.btnReview = [Button node];
+    [self.btnReview initWith:self.interfaceLayer text:@"WRITE REVIEW" cx:BTN_REVIEW_CX cy:BTN_REVIEW_CY w:BTN_BACK_W h:BTN_REVIEW_H cls:self onDecide:@selector(cbReview)];
+    [self.btnReview setTextScale:1];
+    [self.btnReview setVisible:NO];
     
     self.cursor = [Cursor node];
     [self.baseLayer addChild:self.cursor z:ePrio_Cursor];
@@ -289,6 +367,10 @@ static SceneMain* scene_ = nil;
     self.layer = nil;
     
     // ■描画オブジェクト
+    // ボタン
+    self.btnReview = nil;
+    self.btnBack = nil;
+    self.btnSubmit = nil;
     // トークン
     self.mgrParticle = nil;
     self.mgrFontEffect = nil;
