@@ -17,26 +17,10 @@
 
 // ランク選択タッチエリア
 static const float RANK_SELECT_RECT_X = 0;
-static const float RANK_SELECT_RECT_Y = 240-80;
+static const float RANK_SELECT_RECT_Y = 240-48;
 static const float RANK_SELECT_RECT_W = 320;
 static const float RANK_SELECT_RECT_H = 64;
 
-static const float START_BUTTON_RECT_X = 160-96;
-static const float START_BUTTON_RECT_Y = 100;
-static const float START_BUTTON_RECT_W = 96*2;
-static const float START_BUTTON_RECT_H = 48;
-
-static const float BGM_BUTTON_RECT_X = 320-80-8;
-static const float BGM_BUTTON_RECT_Y = 48+8;
-static const float BGM_BUTTON_RECT_W = 80;
-static const float BGM_BUTTON_RECT_H = 32;
-
-static const float SE_BUTTON_RECT_X = 320-80-8;
-static const float SE_BUTTON_RECT_Y = 16;
-static const float SE_BUTTON_RECT_W = 80;
-static const float SE_BUTTON_RECT_H = 32;
-
-// ランク選択タッチエリア
 static const float GAMEMODE_BUTTON_CX = 160;
 static const float GAMEMODE_BUTTON_CY = 176;
 static const float GAMEMODE_BUTTON_W  = 96;
@@ -91,6 +75,8 @@ static const float COPY_BUTTON_H = 12;
     float           m_TouchStartY;  // タッチ開始座標 (Y)
     int             m_RankPrev;     // タッチ前のランク
     BOOL            m_bRankSelect;  // ランク選択タッチ中
+    
+    BOOL            m_bInit;        // 初期化フラグ
 }
 
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;

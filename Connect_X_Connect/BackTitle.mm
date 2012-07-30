@@ -13,7 +13,9 @@
 
 static const float POS_RANK_L = 36;
 static const float POS_RANK_R = 320-POS_RANK_L;
-static const float POS_RANK_Y = 240-48;
+//static const float POS_RANK_Y = 240-48;
+static const float POS_RANK_Y = RANK_SELECT_RECT_Y + 32;
+
 
 static BOOL s_bInit = NO;
 
@@ -34,6 +36,7 @@ static BOOL s_bInit = NO;
     
     self._x = System_CenterX();
     self._y = System_CenterY();
+    self._y += 56;
     [self move:0];
     
     // 背景画像を設定
@@ -49,7 +52,7 @@ static BOOL s_bInit = NO;
     m_tCursorR = 0;
     m_bRankSelect = YES;
     
-    [self setAlpha:0x10];
+    [self setAlpha:0x80];
     
     return self;
 }

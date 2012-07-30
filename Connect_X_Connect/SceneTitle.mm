@@ -128,7 +128,7 @@ static SceneTitle* scene_ = nil;
 /**
  * ゲームモードの切り替え
  */
-- (void)cbBtnGamemove {
+- (void)cbBtnGamemode {
     Sound_PlaySe(@"pi.wav");
     
     if (SaveData_IsScoreAttack()) {
@@ -205,21 +205,22 @@ static SceneTitle* scene_ = nil;
     self.logo = [LogoTitle node];
     [self.baseLayer addChild:self.logo z:ePrio_Logo];
     
+    int dy = 4;
     self.fontHiScore = [AsciiFont node];
     [self.fontHiScore createFont:self.baseLayer length:24];
-    [self.fontHiScore setPos:7 y:25];
+    [self.fontHiScore setPos:7 y:25+dy];
     [self.fontHiScore setScale:2];
     [self.fontHiScore setText:[NSString stringWithFormat:@"HI-SCORE %d", SaveData_GetHiScore()]];
     
     self.fontRank = [AsciiFont node];
     [self.fontRank createFont:self.baseLayer length:24];
-    [self.fontRank setPos:7 y:23];
+    [self.fontRank setPos:7 y:23+dy];
     [self.fontRank setScale:2];
     [self.fontRank setText:[NSString stringWithFormat:@"LEVEL    %d", SaveData_GetRank()]];
     
     self.fontRankMax = [AsciiFont node];
     [self.fontRankMax createFont:self.baseLayer length:24];
-    [self.fontRankMax setPos:7 y:21];
+    [self.fontRankMax setPos:7 y:21+dy];
     [self.fontRankMax setScale:2];
     [self.fontRankMax setText:[NSString stringWithFormat:@"HI-LEVEL %d", SaveData_GetRankMax()]];
     
@@ -227,7 +228,7 @@ static SceneTitle* scene_ = nil;
     [self.btnStart initWith:self.interfaceLayer text:@"START" cx:START_BUTTON_CX cy:START_BUTTON_CY w:START_BUTTON_W h:START_BUTTON_H cls:self onDecide:@selector(cbBtnStart)];
     
     self.btnGamemode = [Button node];
-    [self.btnGamemode initWith:self.interfaceLayer text:@"" cx:GAMEMODE_BUTTON_CX cy:GAMEMODE_BUTTON_CY w:GAMEMODE_BUTTON_W h:GAMEMODE_BUTTON_H cls:self onDecide:@selector(cbBtnGamemove)];
+    [self.btnGamemode initWith:self.interfaceLayer text:@"" cx:GAMEMODE_BUTTON_CX cy:GAMEMODE_BUTTON_CY w:GAMEMODE_BUTTON_W h:GAMEMODE_BUTTON_H cls:self onDecide:@selector(cbBtnGamemode)];
     
     self.btnScore = [Button node];
     [self.btnScore initWith:self.interfaceLayer text:@"SCORE" cx:SCORE_BUTTON_CX cy:SCORE_BUTTON_CY w:SCORE_BUTTON_W h:SCORE_BUTTON_H cls:self onDecide:@selector(cbBtnScore)];
@@ -246,6 +247,8 @@ static SceneTitle* scene_ = nil;
     m_TouchStartY = 0;
     m_bRankSelect = NO;
     m_NextSceneId = eScene_Main;
+    
+    m_bInit = NO;
     
     // 入力コールバック登録
     [self.interfaceLayer addCB:self];
@@ -282,6 +285,14 @@ static SceneTitle* scene_ = nil;
  * 更新
  */
 - (void)update:(ccTime)dt {
+    
+    if (m_bInit == NO) {
+        
+        // ゲームモードの表示を更新
+        [self setBtnGamemode];
+        
+        m_bInit = YES;
+    }
     
     if (m_bRankSelect) {
         
@@ -323,51 +334,6 @@ static SceneTitle* scene_ = nil;
 - (BOOL)isHitRankSelect:(float)x y:(float)y {
     
     CGRect rect = CGRectMake(RANK_SELECT_RECT_X, RANK_SELECT_RECT_Y, RANK_SELECT_RECT_W, RANK_SELECT_RECT_H);
-    CGPoint p = CGPointMake(x, y);
-    
-    if (Math_IsHitRect(rect, p)) {
-        return YES;
-    }
-    
-    return NO;
-}
-
-/**
- * ゲーム開始の矩形にヒットしているかどうか
- */
-- (BOOL)isHitGameStart:(float)x y:(float)y {
-    
-    CGRect rect = CGRectMake(START_BUTTON_RECT_X, START_BUTTON_RECT_Y, START_BUTTON_RECT_W, START_BUTTON_RECT_H);
-    CGPoint p = CGPointMake(x, y);
-    
-    if (Math_IsHitRect(rect, p)) {
-        return YES;
-    }
-    
-    return NO;
-}
-
-/**
- * ゲーム開始の矩形にヒットしているかどうか
- */
-- (BOOL)isHitBgm:(float)x y:(float)y {
-    
-    CGRect rect = CGRectMake(BGM_BUTTON_RECT_X, BGM_BUTTON_RECT_Y, BGM_BUTTON_RECT_W, BGM_BUTTON_RECT_H);
-    CGPoint p = CGPointMake(x, y);
-    
-    if (Math_IsHitRect(rect, p)) {
-        return YES;
-    }
-    
-    return NO;
-}
-
-/**
- * ゲーム開始の矩形にヒットしているかどうか
- */
-- (BOOL)isHitSe:(float)x y:(float)y {
-    
-    CGRect rect = CGRectMake(SE_BUTTON_RECT_X, SE_BUTTON_RECT_Y, SE_BUTTON_RECT_W, SE_BUTTON_RECT_H);
     CGPoint p = CGPointMake(x, y);
     
     if (Math_IsHitRect(rect, p)) {
