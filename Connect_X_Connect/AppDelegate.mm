@@ -16,6 +16,7 @@
 #import "SceneManager.h"
 #import "Sound.h"
 #import "SaveData.h"
+#import "GameCenter.h"
 
 @implementation AppDelegate
 
@@ -134,6 +135,12 @@
     // viewController に登録
     [viewController.view addSubview:self.adWhirlView];
     
+    // GameCenter 初期化
+    GameCenter_Init();
+    
+    // GameCenter ログイン
+    GameCenter_Login();
+    
     // システム初期化
     System_Init();
     
@@ -187,6 +194,8 @@
 }
 
 - (void)dealloc {
+    GameCenter_End();
+    
 	[[CCDirector sharedDirector] end];
 	[window release];
 	[super dealloc];
