@@ -298,8 +298,23 @@ static SceneTitle* scene_ = nil;
         // 登録したコールバックから除去
         [self.interfaceLayer delCB];
         
-        SceneManager_Change(@"SceneMain");
+        switch (m_NextSceneId) {
+            case eScene_Main:
+                
+                // 次のシーンに進む
+                SceneManager_Change(@"SceneMain");
         
+                break;
+                
+            case eScene_Option:
+                
+                // オプション画面に遷移する
+                SceneManager_Change(@"SceneOption");
+                break;
+                
+            default:
+                break;
+        }
     }
 }
 /**

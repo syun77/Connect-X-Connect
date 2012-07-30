@@ -51,6 +51,8 @@
 		C764E22715953D55001C7B13 /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = C764E22615953D55001C7B13 /* enemy.png */; };
 		C764E22915954AFD001C7B13 /* lock.wav in Resources */ = {isa = PBXBuildFile; fileRef = C764E22815954AFD001C7B13 /* lock.wav */; };
 		C764E22B15956383001C7B13 /* vanish03.wav in Resources */ = {isa = PBXBuildFile; fileRef = C764E22A15956383001C7B13 /* vanish03.wav */; };
+		C76BE11015C6A8320032EDBF /* SceneOption.mm in Sources */ = {isa = PBXBuildFile; fileRef = C76BE10F15C6A8320032EDBF /* SceneOption.mm */; };
+		C76BE11415C6A8530032EDBF /* BackOption.mm in Sources */ = {isa = PBXBuildFile; fileRef = C76BE11315C6A8530032EDBF /* BackOption.mm */; };
 		C7750C24157A768C00F78387 /* Vec.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C23157A768C00F78387 /* Vec.mm */; };
 		C7750C28157B1D2100F78387 /* BezierEffect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7750C27157B1D2100F78387 /* BezierEffect.mm */; };
 		C7750C2A157BA9B300F78387 /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7750C29157BA9B300F78387 /* all.png */; };
@@ -309,6 +311,10 @@
 		C764E22615953D55001C7B13 /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = enemy.png; path = Resources/enemy.png; sourceTree = "<group>"; };
 		C764E22815954AFD001C7B13 /* lock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = lock.wav; path = Resources/lock.wav; sourceTree = "<group>"; };
 		C764E22A15956383001C7B13 /* vanish03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = vanish03.wav; path = Resources/vanish03.wav; sourceTree = "<group>"; };
+		C76BE10E15C6A8320032EDBF /* SceneOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneOption.h; sourceTree = "<group>"; };
+		C76BE10F15C6A8320032EDBF /* SceneOption.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SceneOption.mm; sourceTree = "<group>"; };
+		C76BE11215C6A8530032EDBF /* BackOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackOption.h; sourceTree = "<group>"; };
+		C76BE11315C6A8530032EDBF /* BackOption.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BackOption.mm; sourceTree = "<group>"; };
 		C7750C23157A768C00F78387 /* Vec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Vec.mm; sourceTree = "<group>"; };
 		C7750C26157B1D2100F78387 /* BezierEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierEffect.h; sourceTree = "<group>"; };
 		C7750C27157B1D2100F78387 /* BezierEffect.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BezierEffect.mm; sourceTree = "<group>"; };
@@ -960,6 +966,10 @@
 				C799C4271590375000856782 /* BackTitle.mm */,
 				C779374115A5E75A0090E236 /* LogoTitle.h */,
 				C779374215A5E75A0090E236 /* LogoTitle.mm */,
+				C76BE10E15C6A8320032EDBF /* SceneOption.h */,
+				C76BE10F15C6A8320032EDBF /* SceneOption.mm */,
+				C76BE11215C6A8530032EDBF /* BackOption.h */,
+				C76BE11315C6A8530032EDBF /* BackOption.mm */,
 				C7B9F8E9157488C30023646A /* gamecommon.h */,
 				C7B9F8EB15759A080023646A /* gamecommon.mm */,
 				C7FB2F03157289EB00FB3381 /* Resources */,
@@ -1585,6 +1595,8 @@
 				C779374315A5E75A0090E236 /* LogoTitle.mm in Sources */,
 				C749A2A015C5F36700FEFE71 /* Button.mm in Sources */,
 				C72E55A215C5F6AA00AA5DC1 /* GameCenter.mm in Sources */,
+				C76BE11015C6A8320032EDBF /* SceneOption.mm in Sources */,
+				C76BE11415C6A8530032EDBF /* BackOption.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
