@@ -14,6 +14,7 @@
 #import "FixedArray.h"
 #import "SaveData.h"
 #import "gamecommon.h"
+#import "GameCenter.h"
 
 static const int TIMER_ENEMY_VANISH = 30;
 static const int TIMER_SHAKE = 64;
@@ -202,6 +203,15 @@ enum eTouchState {
 - (CCLayer*)_getBaseLayer {
     return [SceneMain sharedInstance].baseLayer;
 }
+- (Button*)_getBtnSubmit {
+    return [SceneMain sharedInstance].btnBack;
+}
+- (Button*)_getBtnBack {
+    return [SceneMain sharedInstance].btnBack;
+}
+- (Button*)_getBtnReview {
+    return [SceneMain sharedInstance].btnReview;
+}
 
 - (void)_initChain {
     m_nChain  = 0;
@@ -265,9 +275,9 @@ enum eTouchState {
             [self setTouchPos:x y:y];
             break;
             
-        case eState_Gameover:
-            m_TouchState = eTouchState_Press;
-            break;
+//        case eState_Gameover:
+//            m_TouchState = eTouchState_Press;
+//            break;
             
         default:
             break;
@@ -311,17 +321,26 @@ enum eTouchState {
             [self setTouchPos:x y:y];
             break;
             
-        case eState_Gameover:
-            if (m_TouchState == eTouchState_Press) {
-                
-                m_TouchState = eTouchState_Release;
-            }
-            break;
+//        case eState_Gameover:
+//            if (m_TouchState == eTouchState_Press) {
+//                
+//                m_TouchState = eTouchState_Release;
+//            }
+//            break;
             
         default:
             break;
     }
 
+}
+
+/**
+ * タイトルへ戻る
+ */
+- (void)cbBtnBack {
+    
+    // 終了状態にする
+    m_State = eState_End;
 }
 
 /**
@@ -1101,11 +1120,26 @@ enum eTouchState {
         [level setLevel:m_nLevel];
         
         // オートセーブ
-        SaveData_SetRankMax(m_nLevel);
-        if (m_nLevel%10 == 1) {
+        if (SaveData_IsScoreAttack()) {
             
-            SaveData_SetRank(m_nLevel);
+            // スコアアタック
+            SaveData2_SetRankMax(m_nLevel);
         }
+        else {
+            
+            // フリープレイモード
+            SaveData_SetRankMax(m_nLevel);
+            if (m_nLevel%10 == 1) {
+                
+                // 続きからランクを保存
+                SaveData_SetRank(m_nLevel);
+            }
+        }
+//        SaveData_SetRankMax(m_nLevel);
+//        if (m_nLevel%10 == 1) {
+//            
+//            SaveData_SetRank(m_nLevel);
+//        }
         
         return;
     }
@@ -1194,6 +1228,18 @@ enum eTouchState {
     GameOver* gameover = [self _getGameOver];
     [gameover start];
     
+    // ボタンの表示
+    Button* btnReview = [self _getBtnReview];
+    [btnReview setVisible:YES];
+    Button* btnBack   = [self _getBtnBack];
+    [btnBack setVisible:YES];
+    
+    if (SaveData_IsScoreAutoSubmit()) {
+        
+        // スコア送信
+        [[SceneMain sharedInstance] cbBtnSubmit];
+    }
+    
     Sound_StopBgm();
     
     [self _changeState:eState_Gameover];
@@ -1204,48 +1250,42 @@ enum eTouchState {
  */
 - (void)_updateGameover {
     
-    if (m_TouchState == eTouchState_Release) {
-        
-        // おしまい
-        [self _changeState:eState_End];
-        
-        /*
-        // TODO: テスト用に無限プレイ
-        [[SceneMain sharedInstance].fontGameover setVisible:NO];
-        
-        // すべて消す
-        TokenManager* mgrBlock = [self _getManagerBlock];
-        [mgrBlock vanishAll];
-        
-        // HPの初期化
-        Player* player = [self _getPlayer];
-        [player initialize];
-        
-        // 初期化に戻る
-        Layer2D* layer = [FieldMgr getLayer];
-        
-        // ブロック生成テスト
-        [layer random:6];
-        
-        for (int i = 0; i < FIELD_BLOCK_COUNT_MAX; i++) {
-            int v = [layer getFromIdx:i];
-            if (v > 0) {
-                Block* b = [Block addFromIdx:v idx:i];
-                
-                if (Math_Rand(5) == 0) {
-                    [b setShield:2];
-                }
-            }
-        }
-        
-        // 落下要求を送る
-        [BlockMgr requestFall];
-        
-        
-        // 落下状態へ遷移
-        [self _changeState:eState_Fall];
-        */
+    Button* btnSubmit = [self _getBtnSubmit];
+    Button* btnBack   = [self _getBtnBack];
+    
+    [btnSubmit setEnable:NO];
+    [btnBack setEnable:NO];
+    
+    if (m_Timer > 0) {
+        m_Timer--;
+        return;
     }
+    
+    
+    if (GameCenter_IsEndReportConnect() == NO) {
+        
+        // 通信中
+        return;
+    }
+    
+    [btnSubmit setEnable:YES];
+    [btnBack setEnable:YES];
+    if (GameCenter_IsReportError()) {
+        
+        // 通信エラー
+        [btnSubmit setVisible:YES];
+    }
+    else {
+        
+        // 通信完了。ボタンを消す
+        [btnSubmit setVisible:NO];
+    }
+    //    if (m_TouchState == eTouchState_Release) {
+//        
+//        // おしまい
+//        [self _changeState:eState_End];
+//        
+//    }
 }
 
 // -----------------------------------------------------
@@ -1407,7 +1447,16 @@ enum eTouchState {
     
     m_nScore += v;
     
-    SaveData_SetHiScore(m_nScore);
+    if (SaveData_IsScoreAttack()) {
+        
+        // スコアアタックモード
+        SaveData2_SetHiScore(m_nScore);
+    }
+    else {
+        
+        // フリープレイモード
+        SaveData_SetHiScore(m_nScore);
+    }
     
     AsciiFont* font = [SceneMain sharedInstance].fontScore;
     [font setText:[NSString stringWithFormat:@"SCORE:%d", m_nScore]];

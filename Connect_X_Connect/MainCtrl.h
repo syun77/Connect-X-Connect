@@ -82,4 +82,7 @@
 // ランクを取得する
 - (int)getRank;
 
+// タイトルへ戻る
+- (void)cbBtnBack;
+
 @end

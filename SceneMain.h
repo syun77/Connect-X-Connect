@@ -137,4 +137,6 @@
 + (SceneMain*)sharedInstance;
 + (void)releaseInstance;
 
+- (void)cbBtnSubmit;
+
 @end

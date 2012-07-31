@@ -12,10 +12,11 @@
 #import "SceneManager.h"
 #import "AppDelegate.h"
 #import "GameCenter.h"
+#import "SaveData.h"
 
 // ボタン配置情報
 static const float BTN_SUBMIT_CX = 160;
-static const float BTN_SUBMIT_CY = 112;
+static const float BTN_SUBMIT_CY = 136;
 static const float BTN_SUBMIT_W  = 112;
 static const float BTN_SUBMIT_H  = 24;
 
