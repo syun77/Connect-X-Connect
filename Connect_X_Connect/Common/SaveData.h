@@ -13,6 +13,9 @@ static const int RANK_START = 0;
 static const int RANK_INTERVAL = 5;
 static const int RANK_DEFAULT = 0;
 
+// 制限バージョンかどうか
+#define VERSION_LIMITED
+
 /**
  * セーブデータを初期化する
  */

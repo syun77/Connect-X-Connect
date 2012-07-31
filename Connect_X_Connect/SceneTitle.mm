@@ -229,9 +229,19 @@ static SceneTitle* scene_ = nil;
     
     self.btnGamemode = [Button node];
     [self.btnGamemode initWith:self.interfaceLayer text:@"" cx:GAMEMODE_BUTTON_CX cy:GAMEMODE_BUTTON_CY w:GAMEMODE_BUTTON_W h:GAMEMODE_BUTTON_H cls:self onDecide:@selector(cbBtnGamemode)];
+
+#ifdef VERSION_LIMITED
+    
+    // 制限バージョンはゲームモードを選べない
+    [self.btnGamemode setVisible:NO];
+#endif
     
     self.btnScore = [Button node];
     [self.btnScore initWith:self.interfaceLayer text:@"SCORE" cx:SCORE_BUTTON_CX cy:SCORE_BUTTON_CY w:SCORE_BUTTON_W h:SCORE_BUTTON_H cls:self onDecide:@selector(cbBtnScore)];
+#ifdef VERSION_LIMITED
+    
+    // 制限バージョンはスコアボタンがない
+#endif
     
     self.btnOption = [Button node];
     [self.btnOption initWith:self.interfaceLayer text:@"OPTION" cx:OPTION_BUTTON_CX cy:OPTION_BUTTON_CY w:OPTION_BUTTON_W h:OPTION_BUTTON_H cls:self onDecide:@selector(cbBtnOption)];

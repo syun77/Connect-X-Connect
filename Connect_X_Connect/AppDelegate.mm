@@ -135,11 +135,17 @@
     // viewController に登録
     [viewController.view addSubview:self.adWhirlView];
     
+#ifdef VERSION_LIMITED
+    
+    // 制限バージョンは GameCenter にログインできない
+    
     // GameCenter 初期化
     GameCenter_Init();
     
     // GameCenter ログイン
     GameCenter_Login();
+    
+#endif
     
     // システム初期化
     System_Init();

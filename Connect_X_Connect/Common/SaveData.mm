@@ -363,7 +363,7 @@ void SaveData2_SetRankMax(int rank) {
 
 int SaveData2_GetRank()
 {
-    return RANK_DEFAULT;
+    return 1;
 }
 
 /**
