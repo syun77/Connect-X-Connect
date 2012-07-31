@@ -16,17 +16,17 @@
 
 // ボタン配置情報
 static const float BTN_SUBMIT_CX = 160;
-static const float BTN_SUBMIT_CY = 136;
+static const float BTN_SUBMIT_CY = 160;
 static const float BTN_SUBMIT_W  = 112;
 static const float BTN_SUBMIT_H  = 24;
 
 static const float BTN_BACK_CX = 160;
-static const float BTN_BACK_CY = 80;
+static const float BTN_BACK_CY = 112;
 static const float BTN_BACK_W  = 112;
 static const float BTN_BACK_H  = 24;
 
 static const float BTN_REVIEW_CX = 160;
-static const float BTN_REVIEW_CY = 16;
+static const float BTN_REVIEW_CY = 48;
 static const float BTN_REVIEW_W  = 96;
 static const float BTN_REVIEW_H  = 12;
 
@@ -240,15 +240,18 @@ static SceneMain* scene_ = nil;
     self.btnSubmit = [Button node];
     [self.btnSubmit initWith:self.interfaceLayer text:@"SUBMIT SCORE" cx:BTN_SUBMIT_CX cy:BTN_SUBMIT_CY w:BTN_SUBMIT_W h:BTN_SUBMIT_H cls:self onDecide:@selector(cbBtnSubmit)];
     [self.btnSubmit setVisible:NO];
+    [self.btnSubmit setBackColor:ccc4f(0.5, 0.5, 0.5, 0.8)];
     
     self.btnBack = [Button node];
     [self.btnBack initWith:self.interfaceLayer text:@"BACK TO TITLE" cx:BTN_BACK_CX cy:BTN_BACK_CY w:BTN_BACK_W h:BTN_BACK_H cls:self onDecide:@selector(cbBtnBack)];
     [self.btnBack setVisible:NO];
+    [self.btnBack setBackColor:ccc4f(0.5, 0.5, 0.5, 0.8)];
     
     self.btnReview = [Button node];
     [self.btnReview initWith:self.interfaceLayer text:@"WRITE REVIEW" cx:BTN_REVIEW_CX cy:BTN_REVIEW_CY w:BTN_BACK_W h:BTN_REVIEW_H cls:self onDecide:@selector(cbReview)];
     [self.btnReview setTextScale:1];
     [self.btnReview setVisible:NO];
+    [self.btnReview setBackColor:ccc4f(0.5, 0.5, 0.5, 0.8)];
     
     self.cursor = [Cursor node];
     [self.baseLayer addChild:self.cursor z:ePrio_Cursor];

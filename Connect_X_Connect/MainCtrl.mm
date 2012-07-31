@@ -204,7 +204,7 @@ enum eTouchState {
     return [SceneMain sharedInstance].baseLayer;
 }
 - (Button*)_getBtnSubmit {
-    return [SceneMain sharedInstance].btnBack;
+    return [SceneMain sharedInstance].btnSubmit;
 }
 - (Button*)_getBtnBack {
     return [SceneMain sharedInstance].btnBack;

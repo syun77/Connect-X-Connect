@@ -121,6 +121,7 @@
     [self.m_Text setAlign:eFontAlign_Center];
     [self.m_Text setText:pText];
     
+    // デフォルト背景色
     m_ColorBack = ccc4f(0.5, 0.5, 0.5, 0.5);
     
 }
