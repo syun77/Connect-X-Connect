@@ -26,6 +26,7 @@
     int m_tDamage;  // ダメージタイマー
     BOOL m_bStun;   // スタンフラグ
     int m_tAttack;  // 攻撃用タイマー
+    int m_tAttackEffect;
     
     int m_Hp;       // HP
     int m_HpMax;    // 最大HP

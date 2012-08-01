@@ -91,6 +91,8 @@ enum eState {
     m_nAT = 0;
     m_dAT = 20;
     
+    m_tAttackEffect = 0;
+    
     m_State = eState_None;
     
     return self;
@@ -195,6 +197,13 @@ enum eState {
         m_tPast = 0;
         
         self._x -= 128 * Math_SinEx(m_tAttack * 180 / TIMER_ATTACK);
+    }
+    else {
+        m_tAttackEffect++;
+        if ([self isAttack] && m_tAttackEffect%32 == 0) {
+            
+            [Particle addBlockAppear:self._x y:self._y];
+        }
     }
 }
 - (void)_updateVanish {
@@ -505,6 +514,7 @@ enum eState {
             m_nAT = AT_MAX;
             
             [Particle addBlockAppear:self._x y:self._y];
+            m_tAttackEffect = 0;
         }
         
         AtGauge* gauge = [self _getAtGauge];
