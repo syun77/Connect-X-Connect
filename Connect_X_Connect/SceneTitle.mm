@@ -155,11 +155,11 @@ static SceneTitle* scene_ = nil;
     
     if (SaveData_IsScoreAttack()) {
         
-        GameCenter_ShowLeaderboard(@"02_scoreattack_score");
+        GameCenter_ShowLeaderboard(@"score04c");
     }
     else {
         
-        GameCenter_ShowLeaderboard(@"freeplay_score");
+        GameCenter_ShowLeaderboard(@"score04a");
     }
 }
 

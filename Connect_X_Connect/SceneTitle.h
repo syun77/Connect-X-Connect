@@ -22,7 +22,7 @@ static const float RANK_SELECT_RECT_W = 320;
 static const float RANK_SELECT_RECT_H = 64;
 
 static const float GAMEMODE_BUTTON_CX = 160;
-static const float GAMEMODE_BUTTON_CY = 176;
+static const float GAMEMODE_BUTTON_CY = 168;
 static const float GAMEMODE_BUTTON_W  = 96;
 static const float GAMEMODE_BUTTON_H  = 16;
 
