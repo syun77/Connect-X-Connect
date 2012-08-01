@@ -125,8 +125,8 @@ static SceneTitle* scene_ = nil;
     
     [self.fontHiScore setText:[NSString stringWithFormat:@"HI-SCORE %d", hiScore]];
     
-    [self.fontRank setText:[NSString stringWithFormat:@"RANK     %d", rank]];
-    [self.fontRankMax setText:[NSString stringWithFormat:@"HI-RANK  %d", hiRank]];
+    [self.fontRank setText:[NSString stringWithFormat:@"LEVEL    %d", rank]];
+    [self.fontRankMax setText:[NSString stringWithFormat:@"HI-LEVEL %d", hiRank]];
 }
 
 /**
