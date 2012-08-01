@@ -91,6 +91,12 @@ void SaveData_SetHiScore(int score, BOOL bForce) {
  */
 int SaveData_GetRank() {
     
+    if (SaveData_IsScoreAttack()) {
+        
+        // スコアアタックモードは1固定
+        return 1;
+    }
+    
     NSUserDefaults* defaults = _Get();
     
     return [defaults integerForKey:@"RANK"];

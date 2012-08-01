@@ -1088,6 +1088,10 @@ enum eTouchState {
         int nSoundPrev = GameCommon_LevelToSound(m_nLevel);
         // レベルを増やす
         m_nLevel++;
+        if (SaveData_IsScoreAttack()) {
+            // スコアアタックモードは6増やす
+            m_nLevel += 6;
+        }
         
         // BGM再生
         int nSound = GameCommon_LevelToSound(m_nLevel);
