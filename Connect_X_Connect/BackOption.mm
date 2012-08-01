@@ -20,12 +20,14 @@
     [self load:@"all.png"];
     [self create];
     
-    CGRect r = Exerinya_GetRect(eExerinyaRect_Back);
+    CGRect r = CGRectMake(0, 545, 320, 480);
     [self setTexRect:r];
     
     self._x = System_CenterX();
     self._y = System_CenterY();
+    self._y += 56;
     [self move:0];
+    [self setAlpha:0x80];
     
     return self;
 }

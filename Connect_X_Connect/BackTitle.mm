@@ -52,7 +52,7 @@ static BOOL s_bInit = NO;
     m_tCursorR = 0;
     m_bRankSelect = YES;
     
-    [self setAlpha:0x80];
+//    [self setAlpha:0x80];
     
     return self;
 }

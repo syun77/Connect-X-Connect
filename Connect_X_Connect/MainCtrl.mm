@@ -275,10 +275,6 @@ enum eTouchState {
             [self setTouchPos:x y:y];
             break;
             
-//        case eState_Gameover:
-//            m_TouchState = eTouchState_Press;
-//            break;
-            
         default:
             break;
     }
@@ -320,13 +316,6 @@ enum eTouchState {
             
             [self setTouchPos:x y:y];
             break;
-            
-//        case eState_Gameover:
-//            if (m_TouchState == eTouchState_Press) {
-//                
-//                m_TouchState = eTouchState_Release;
-//            }
-//            break;
             
         default:
             break;
@@ -1234,11 +1223,13 @@ enum eTouchState {
     Button* btnBack   = [self _getBtnBack];
     [btnBack setVisible:YES];
     
+#ifndef VERSION_LIMITED
     if (SaveData_IsScoreAutoSubmit()) {
         
         // スコア送信
         [[SceneMain sharedInstance] cbBtnSubmit];
     }
+#endif
     
     Sound_StopBgm();
     
@@ -1250,6 +1241,7 @@ enum eTouchState {
  */
 - (void)_updateGameover {
     
+#ifndef VERSION_LIMITED
     Button* btnSubmit = [self _getBtnSubmit];
     Button* btnBack   = [self _getBtnBack];
     
@@ -1280,12 +1272,8 @@ enum eTouchState {
         // 通信完了。ボタンを消す
         [btnSubmit setVisible:NO];
     }
-    //    if (m_TouchState == eTouchState_Release) {
-//        
-//        // おしまい
-//        [self _changeState:eState_End];
-//        
-//    }
+#endif
+    
 }
 
 // -----------------------------------------------------

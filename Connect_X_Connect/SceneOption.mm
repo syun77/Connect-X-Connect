@@ -231,6 +231,11 @@ static SceneOption* scene_ = nil;
     [self.fontSubmit3 setPosScreen:SUBMIT_FONT_X y:SUBMIT_FONT_Y-32];
     [self.fontSubmit3 setScale:2];
     [self.fontSubmit3 setText:@"SUBMISSION"];
+#ifdef VERSION_LIMITED
+    [self.fontSubmit setVisible:NO];
+    [self.fontSubmit2 setVisible:NO];
+    [self.fontSubmit3 setVisible:NO];
+#endif
     
     self.btnBgm = [Button node];
     [self.btnBgm initWith:self.interfaceLayer text:@"BGM" cx:BGM_BUTTON_CX cy:BGM_BUTTON_CY w:BGM_BUTTON_W h:BGM_BUTTON_H cls:self onDecide:@selector(cbBtnBgm)];
@@ -248,6 +253,9 @@ static SceneOption* scene_ = nil;
     self.btnSubmit = [Button node];
     [self.btnSubmit initWith:self.interfaceLayer text:@"" cx:SUBMIT_BUTTON_CX cy:SUBMIT_BUTTON_CY-8 w:SUBMIT_BUTTON_W h:SUBMIT_BUTTON_H cls:self onDecide:@selector(cbBtnSubmit)];
     [self setBtnSubmit];
+#ifdef VERSION_LIMITED
+    [self.btnSubmit setVisible:NO];
+#endif
     
     self.btnBack = [Button node];
     [self.btnBack initWith:self.interfaceLayer text:@"BACK" cx:BACK_BUTTON_CX cy:BACK_BUTTON_CY w:BACK_BUTTON_W h:BACK_BUTTON_H cls:self onDecide:@selector(cbBtnBack)];

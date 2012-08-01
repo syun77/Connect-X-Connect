@@ -135,7 +135,7 @@
     // viewController に登録
     [viewController.view addSubview:self.adWhirlView];
     
-#ifdef VERSION_LIMITED
+#ifndef VERSION_LIMITED
     
     // 制限バージョンは GameCenter にログインできない
     

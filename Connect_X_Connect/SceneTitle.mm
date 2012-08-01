@@ -98,6 +98,10 @@ static SceneTitle* scene_ = nil;
  */
 - (void)setBtnGamemode {
     
+#ifdef VERSION_LIMITED
+    return;
+#endif
+    
     int hiScore = 0;
     int rank    = 0;
     int hiRank  = 0;
@@ -241,6 +245,7 @@ static SceneTitle* scene_ = nil;
 #ifdef VERSION_LIMITED
     
     // 制限バージョンはスコアボタンがない
+    [self.btnScore setVisible:NO];
 #endif
     
     self.btnOption = [Button node];
